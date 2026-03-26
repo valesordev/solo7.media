@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '@valesordev/ui/SiteHeader.astro';
+import SiteFooter from '@valesordev/ui/SiteFooter.astro';
+
+const year = new Date().getFullYear();
+---
+
+<Layout title="About">
+  <SiteHeader id="site-header" class="bg-transparent">
+    <div slot="logo">
+      <a href="/" class="text-xl font-bold">Site Name</a>
+    </div>
+    <ul slot="nav" class="flex space-x-6">
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </SiteHeader>
+
+  <main class="pt-24 px-4 container mx-auto">
+    <h1 class="text-4xl font-bold">About</h1>
+    <p class="mt-4 text-lg">Replace this with your about content.</p>
+  </main>
+
+  <SiteFooter>
+    <p class="text-sm">&copy; {year} Your Name</p>
+  </SiteFooter>
+</Layout>

@@ -1,0 +1,7 @@
+@import '@valesordev/ui/styles/base.css';
+
+/* Site-specific overrides */
+:root {
+  /* --color-bg: #0a0a0a; */
+  /* --color-text: #ededed; */
+}

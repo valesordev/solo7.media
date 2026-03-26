@@ -1,0 +1,15 @@
+---
+import BaseLayout from '@valesordev/ui/BaseLayout.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = 'Site Title', description } = Astro.props;
+---
+
+<BaseLayout {title} {description} favicon="/favicon.svg">
+  <slot />
+</BaseLayout>
