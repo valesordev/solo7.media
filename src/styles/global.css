@@ -1,7 +1,23 @@
 @import '@valesordev/ui/styles/base.css';
 
-/* Site-specific overrides */
 :root {
-  /* --color-bg: #0a0a0a; */
-  /* --color-text: #ededed; */
+  --color-bg: #0c0c0c;
+  --color-text: #f0ece6;
+  --color-accent: #c9a96e;
+  --color-accent-hover: #b8924f;
+  --color-surface: #161412;
+  --color-border: #2a2623;
+  --color-muted: #7a7570;
+  --color-header-bg: #0c0c0cee;
 }
+
+body {
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.text-accent  { color: var(--color-accent); }
+.text-muted   { color: var(--color-muted); }
+.border-border { border-color: var(--color-border); }
+.bg-surface   { background: var(--color-surface); }

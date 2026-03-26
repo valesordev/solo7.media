@@ -1,0 +1,140 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SiteHeader from '@valesordev/ui/SiteHeader.astro';
+import SiteFooter from '@valesordev/ui/SiteFooter.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const artwork = await getCollection('artwork');
+  return artwork.map((piece) => ({
+    params: { slug: piece.slug },
+    props: { piece },
+  }));
+}
+
+const { piece } = Astro.props;
+const { Content } = await piece.render();
+const year = new Date().getFullYear();
+
+const categoryLabel: Record<string, string> = {
+  photos:     'Photography',
+  drawings:   'Drawing',
+  generative: 'Generative Art',
+  other:      'Other',
+};
+---
+
+<Layout title={`${piece.data.title} — Solo7 Media`} description={piece.data.description}>
+  <SiteHeader id="site-header">
+    <div slot="logo">
+      <a href="/" class="logo-link text-xl font-semibold tracking-tight">Solo7 Media</a>
+    </div>
+    <ul slot="nav" class="flex space-x-8 text-sm">
+      <li><a href="/work" class="nav-link">Work</a></li>
+      <li><a href="/work#photos" class="nav-link">Photos</a></li>
+      <li><a href="/work#drawings" class="nav-link">Drawings</a></li>
+      <li><a href="/work#generative" class="nav-link">Generative</a></li>
+    </ul>
+  </SiteHeader>
+
+  <main class="pt-24 pb-24 px-4 max-w-5xl mx-auto">
+    <a href="/work" class="back-link">&larr; All work</a>
+
+    <!-- Full image -->
+    <div class="piece-image-wrap">
+      <img
+        src={piece.data.image}
+        alt={piece.data.title}
+        class="piece-image"
+      />
+    </div>
+
+    <!-- Meta + notes -->
+    <div class="piece-meta">
+      <div>
+        <h1 class="text-3xl font-bold text-white tracking-tight">{piece.data.title}</h1>
+        <p class="text-muted mt-1 text-sm">
+          {categoryLabel[piece.data.category]} &middot; {piece.data.date.toISOString().slice(0, 10)}
+        </p>
+        <p class="mt-4 leading-relaxed" style="color: var(--color-text);">{piece.data.description}</p>
+
+        {piece.data.tags.length > 0 && (
+          <div class="tag-list">
+            {piece.data.tags.map((tag) => (
+              <span class="tag">#{tag}</span>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+
+    <!-- Notes / prose from markdown body -->
+    <div class="piece-notes">
+      <Content />
+    </div>
+  </main>
+
+  <SiteFooter>
+    <div class="text-center text-sm text-muted">
+      <p>&copy; {year} Brian &middot; solo7.media</p>
+    </div>
+  </SiteFooter>
+</Layout>
+
+<style>
+  .logo-link { color: var(--color-accent); text-decoration: none; }
+  .nav-link { color: var(--color-muted); text-decoration: none; transition: color 0.15s; }
+  .nav-link:hover { color: #fff; }
+  .text-muted { color: var(--color-muted); }
+
+  .back-link {
+    display: inline-block;
+    color: var(--color-muted);
+    text-decoration: none;
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+    transition: color 0.15s;
+  }
+  .back-link:hover { color: #fff; }
+
+  .piece-image-wrap {
+    width: 100%;
+    max-height: 75vh;
+    overflow: hidden;
+    border-radius: 2px;
+    background: var(--color-surface);
+    margin-bottom: 2rem;
+  }
+  .piece-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .piece-meta {
+    max-width: 42rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .tag-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+  .tag {
+    font-size: 0.75rem;
+    font-family: ui-monospace, monospace;
+    color: var(--color-muted);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    padding: 0.125rem 0.5rem;
+    border-radius: 2px;
+  }
+
+  .piece-notes {
+    max-width: 42rem;
+    color: var(--color-muted);
+    font-size: 0.9375rem;
+    line-height: 1.75;
+    border-top: 1px solid var(--color-border);
+    padding-top: 1.5rem;
+  }
+  .piece-notes :global(p) { margin-bottom: 1em; }
+  .piece-notes :global(a) { color: var(--color-accent); }
+</style>

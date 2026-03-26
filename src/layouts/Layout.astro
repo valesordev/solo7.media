@@ -7,9 +7,9 @@ interface Props {
   description?: string;
 }
 
-const { title = 'Site Title', description } = Astro.props;
+const { title = 'Solo7 Media', description } = Astro.props;
 ---
 
-<BaseLayout {title} {description} favicon="/favicon.svg">
+<BaseLayout {title} {description} favicon="/favicon.ico">
   <slot />
 </BaseLayout>

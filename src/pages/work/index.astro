@@ -1,0 +1,119 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SiteHeader from '@valesordev/ui/SiteHeader.astro';
+import SiteFooter from '@valesordev/ui/SiteFooter.astro';
+import { getCollection } from 'astro:content';
+
+const year = new Date().getFullYear();
+
+const allArtwork = await getCollection('artwork');
+const sorted = allArtwork.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const categories: { key: string; label: string }[] = [
+  { key: 'photos',     label: 'Photography' },
+  { key: 'drawings',   label: 'Drawing' },
+  { key: 'generative', label: 'Generative Art' },
+  { key: 'other',      label: 'Other' },
+];
+
+const byCategory = Object.fromEntries(
+  categories.map(({ key }) => [key, sorted.filter((a) => a.data.category === key)])
+);
+---
+
+<Layout title="Work — Solo7 Media" description="All artwork: photography, drawing, and generative art.">
+  <SiteHeader id="site-header">
+    <div slot="logo">
+      <a href="/" class="logo-link text-xl font-semibold tracking-tight">Solo7 Media</a>
+    </div>
+    <ul slot="nav" class="flex space-x-8 text-sm">
+      <li><a href="/work" class="nav-link nav-active">Work</a></li>
+      <li><a href="/work#photos" class="nav-link">Photos</a></li>
+      <li><a href="/work#drawings" class="nav-link">Drawings</a></li>
+      <li><a href="/work#generative" class="nav-link">Generative</a></li>
+    </ul>
+  </SiteHeader>
+
+  <main class="pt-32 pb-24 px-4 max-w-6xl mx-auto">
+    <h1 class="text-4xl font-bold text-white mb-16 tracking-tight">Work</h1>
+
+    {categories.map(({ key, label }) => {
+      const pieces = byCategory[key];
+      if (!pieces || pieces.length === 0) return null;
+      return (
+        <section id={key} class="category-section">
+          <h2 class="category-heading">{label}</h2>
+          <div class="artwork-grid">
+            {pieces.map((piece) => (
+              <a href={`/work/${piece.slug}`} class="artwork-card group">
+                <div class="artwork-thumb">
+                  <img
+                    src={piece.data.image}
+                    alt={piece.data.title}
+                    class="artwork-img"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="artwork-meta">
+                  <p class="text-white text-sm font-medium">{piece.data.title}</p>
+                  <p class="text-xs text-muted mt-0.5">{piece.data.date.toISOString().slice(0, 10)}</p>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+      );
+    })}
+
+    {allArtwork.length === 0 && (
+      <p class="text-muted">No work yet. Coming soon.</p>
+    )}
+  </main>
+
+  <SiteFooter>
+    <div class="text-center text-sm text-muted">
+      <p>&copy; {year} Brian &middot; solo7.media</p>
+    </div>
+  </SiteFooter>
+</Layout>
+
+<style>
+  .logo-link { color: var(--color-accent); text-decoration: none; }
+  .nav-link { color: var(--color-muted); text-decoration: none; transition: color 0.15s; }
+  .nav-link:hover, .nav-active { color: #fff; }
+  .text-muted { color: var(--color-muted); }
+
+  .category-section { margin-bottom: 5rem; }
+  .category-heading {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-muted);
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .artwork-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .artwork-card { text-decoration: none; }
+  .artwork-thumb {
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 2px;
+    background: var(--color-surface);
+  }
+  .artwork-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .artwork-card:hover .artwork-img { transform: scale(1.04); }
+  .artwork-meta { margin-top: 0.625rem; }
+</style>
