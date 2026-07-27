@@ -45,11 +45,19 @@ Add Faro to `package.json` dependencies:
 - [ ] Set the custom domain under Settings → Pages → Custom domain
 - [ ] Mark as **Template repository** if using this as the canonical template: Settings → check "Template repository"
 
+## Design
+
+- [ ] Add `design/look-and-feel.md` — brand positioning, current tokens, and open questions. This is the doc
+      handed to a design tool (Claude Design or similar) when working on visual direction. Copy the structure
+      from an existing site, e.g. `bashburn.com/design/look-and-feel.md`
+- [ ] Keep image sources (XCF/AI) in `design/`, exports in `public/`
+
 ## life.solo7.media
 
-- [ ] Register as a submodule: `git submodule add git@github.com:valesordev/<repo>.git valesor/www.<domain>`
-- [ ] Update `valesor/web-infrastructure.md` status table
-- [ ] Commit the `.gitmodules` and submodule pointer
+`life.solo7.media` is a documentation-only repo and carries **no submodules**. Do not run `git submodule add`.
+
+- [ ] Clone the site repo to `/data/dev/projects/valesordev/<repo>`
+- [ ] Add the domain row to the registry table in `valesor/web-infrastructure.md`
 
 ## DNS (Terraform)
 
