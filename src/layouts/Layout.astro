@@ -8,8 +8,53 @@ interface Props {
 }
 
 const { title = 'Solo7 Media', description } = Astro.props;
+
+// Faro app keys keyed by the hostname the page is served from.
+//
+// This build runs in two places — GitHub Pages and the local kind cluster at
+// <site>.solo7.valesordev.com — and each has its own Grafana Frontend
+// Observability app whose CORS origin is locked to its own URL. Baking a single
+// key would mean either two different builds (defeating the point of testing the
+// artifact that actually ships) or telemetry rejected by the collector.
+//
+// Both keys are injected at build time; the right one is chosen at runtime. The
+// keys ship to the browser and are not secrets, but they stay out of source.
+let faroApps = {};
+try {
+  faroApps = JSON.parse(import.meta.env.PUBLIC_FARO_APPS ?? '{}');
+} catch {
+  faroApps = {}; // malformed config behaves like absent config: no-op
+}
+
+const faro = {
+  appVersion: import.meta.env.PUBLIC_FARO_APP_VERSION ?? '',
+  endpoint: import.meta.env.PUBLIC_FARO_ENDPOINT ?? '',
+  apps: faroApps,
+};
 ---
 
 <BaseLayout {title} {description} favicon="/favicon.ico">
   <slot />
+
+  <script define:vars={{ faro }}>
+    // The Grafana app names match the URLs they serve, so the hostname is both
+    // the lookup key and the app name. An unknown host (a preview deploy, a
+    // local dev server) finds no key and stays uninstrumented, which is the
+    // theme's required graceful no-op. The 95KB SDK is only fetched when a key
+    // is actually present.
+    const appName = location.hostname;
+    const appKey = faro.apps && faro.apps[appName];
+    if (appName && appKey && faro.endpoint) {
+      import('/vendor/solo7-theme/solo7.mjs')
+        .then((m) =>
+          m.initFaro({
+            appName,
+            appVersion: faro.appVersion,
+            endpoint: faro.endpoint,
+            appKey,
+          }),
+        )
+        .catch(() => {});
+    }
+  </script>
 </BaseLayout>

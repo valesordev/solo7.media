@@ -13,5 +13,9 @@ permissions:
 jobs:
   deploy:
     uses: valesordev/ui/.github/workflows/astro-pages.yml@main
+    with:
+      # Hostname -> Faro app key. Kept in a repo variable, not here: the keys
+      # ship to the browser and are not secrets, but they stay out of source.
+      faro-apps: ${{ vars.FARO_APPS }}
     secrets:
       NODE_AUTH_TOKEN: ${{ secrets.PACKAGES_READ_TOKEN }}
