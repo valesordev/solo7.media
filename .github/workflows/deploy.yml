@@ -9,6 +9,10 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  # The shared workflow requests packages: read to install @valesordev/ui. A
+  # called workflow cannot hold more permissions than its caller, so without
+  # this the run is refused before it starts — a startup_failure with no log.
+  packages: read
 
 jobs:
   deploy:
