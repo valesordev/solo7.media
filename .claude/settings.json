@@ -1,0 +1,60 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${CLAUDE_PROJECT_DIR}/.claude/bin/role\" hook-session-start"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${CLAUDE_PROJECT_DIR}/.claude/bin/role\" hook-pre-tool-use"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${CLAUDE_PROJECT_DIR}/.claude/bin/role\" hook-pre-bash"
+          }
+        ]
+      }
+    ]
+  },
+  "permissions": {
+    "allow": [
+      "Bash(make help)",
+      "Bash(make check)",
+      "Bash(make test)",
+      "Bash(make build)",
+      "Bash(npm test)",
+      "Bash(npm run build)",
+      "Bash(npx wrangler --version)",
+      "Bash(npx wrangler whoami)",
+      "Bash(.claude/bin/role show:*)",
+      "Bash(.claude/bin/role list)",
+      "Bash(.claude/bin/role owners:*)",
+      "Bash(.claude/bin/role check-cmd)",
+      "Bash(.claude/bin/sprint-state:*)",
+      "Bash(.claude/bin/story show:*)",
+      "Bash(.claude/bin/story list:*)"
+    ],
+    "ask": [
+      "Bash(make deploy:*)",
+      "Bash(npx wrangler deploy:*)",
+      "Bash(npx wrangler secret:*)",
+      "Bash(gh workflow run:*)"
+    ]
+  }
+}
