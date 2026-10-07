@@ -13,9 +13,10 @@ Brian can hand any builder the Valesor kit and get a page that is recognizably V
 colour, font, or spacing value in code.
 
 ## Success signal
-In the R1 demo, Brian opens the kit and finds: the brand docs, tokens built to `dist/tokens.css` by `make`, the
-illustration system, the hero art with provenance, and `qa.md`. `/brand-qa` passes the homepage against `qa.md`
-(visual-designer runs it; Brian approves the kit by merging its PRs).
+In the R1 demo, Brian opens the kit on `main` and finds: the brand docs, tokens built to `dist/tokens.css` by
+`make`, the illustration system, the hero art with provenance, and `qa.md`; `/brand-qa` runs against `qa.md` and
+the frozen target (visual-designer). Brian approves the kit by merging its PRs. The check that the built homepage
+passes `/brand-qa` is FEAT-02's and counts once.
 
 ## Scope
 - In: the kit named in the Valesor Notion "Brand Kit Project Direction" first milestone: foundation, voice,
@@ -24,21 +25,22 @@ illustration system, the hero art with provenance, and `qa.md`. `/brand-qa` pass
 - Out: project detail page, README template, social card, documentation landing page (later reference
   implementations; the vision says project pages aren't planned yet).
 - Out: anything carried over from `valesordev/brand-kit` or solo7-theme (the kits start from scratch).
+- In: the brand docs cover the `/privacy` page template and the footer link to it (built under FEAT-04).
 - Out: how the kit looks. That is visual-designer's, approved by Brian.
 
 ## Dependencies
 | Need | Owner | State |
 |---|---|---|
-| Brand docs, audit, tokens, art direction, `qa.md`, `brand.mk` | visual-designer | needs visual-designer stories; target brief is the Valesor Notion page below |
+| Brand docs, audit, tokens, art direction, `qa.md`, `brand.mk` (the token build rule) | visual-designer | needs visual-designer stories; target brief is the Valesor Notion page below |
 | Frozen `references/target-homepage.png` | visual-designer | `/brand-audit` freezes it from Notion |
 | Audit classifications (core / candidate / hero-specific) | Brian | decided at the audit's PR review; no tokens until it merges |
 | Typeface licences | visual-designer | needs visual-designer; the Notion brief says confirm before locking tokens |
 | Generated hero art with provenance | visual-designer, Brian (ChatGPT project) | needs `/art-slot` |
-| `make` build of tokens | sre | `brands/*/brand.mk` is included by the root `Makefile` |
+| Wiring the brand build into `make check` and CI | sre | root `Makefile` already includes `brands/*/brand.mk` |
 
 ## Decisions
 - The homepage is the specimen, not a style guide on its own. Reason: the Notion brief calls the layout system and
-  illustration language the brand; a quiet mark is fine.
+  illustration language the brand; the mark's weight is visual-designer's call.
 - Only the homepage's needs are in R1. Reason: R1 proves the workflow, not the whole kit surface.
 
 ## Open for Brian
