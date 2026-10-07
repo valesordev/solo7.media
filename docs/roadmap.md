@@ -6,7 +6,7 @@ sprint boundary.
 
 ## R1 — Valesor Development, end to end
 
-#### M1 — Valesor kit decided *(gate: audit, brand docs, tokens, illustration system, hero art, and `qa.md` merged, no `[PROPOSED]` left)*
+#### M1 — Valesor kit decided *(gate: audit, brand docs, tokens, illustration system, hero art, marks, and `qa.md` merged, no `[PROPOSED]` left)*
 Release: R1 — FEAT-01
 Needs: none
 Stories: S7M-VAL-002, S7M-VAL-003 (docs); tokens, art, and `qa.md` stories follow
@@ -23,12 +23,12 @@ Release: R1 — FEAT-02
 Needs: M1, M2
 Visitor-visible: none: enables FEAT-03's cutover; Brian sees the target homepage at a preview URL
 
-#### M4 — Instrumented, not tracked *(gate: Faro per `CLAUDE.md` §7 and an approved `/privacy` page on the preview; SLO before alert)*
+#### M4 — Instrumented, not tracked *(gate: Faro per `CLAUDE.md` §7 and an approved `/privacy` page on the preview; SLO before alert; a captured page-view request shows no user identifier or personal data; a build without Faro config sends nothing; a page view and a forced error appear in Grafana with no user attributes)*
 Release: R1 — FEAT-04
 Needs: M3
 Visitor-visible: `/privacy` states what is and isn't measured
 
-#### M5 — Production cutover *(gate: apex and `www` serve the new site with valid TLS; old URLs return the page or a redirect; rollback rehearsed before and drilled after Brian's go)*
+#### M5 — Production cutover *(gate: apex and `www` serve the new site with valid TLS; a merge to `main` deploys production through `make` targets; old URLs return the page or a redirect; rollback rehearsed before and drilled after Brian's go)*
 Release: R1 — FEAT-03 (cutover)
 Needs: M3, M4
 Visitor-visible: valesordev.com is the new site
