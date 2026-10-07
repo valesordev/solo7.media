@@ -22,15 +22,15 @@ Bet: one imprint can go from Notion brief to a live Cloudflare site through the 
 with no branding decided in code. If that holds, the same workflow serves the other imprints; if it doesn't, the
 process gets fixed before R2 starts.
 Features:
-- FEAT-?? — Valesor brand kit v1 (must): foundation, voice, visual language, tokens, illustration system, hero
+- FEAT-01 — Valesor brand kit v1 (must): foundation, voice, visual language, tokens, illustration system, hero
   art and marks, `qa.md`; the target homepage is the specimen. Enables the homepage below; no visitor-visible
   change of its own.
-- FEAT-?? — valesordev.com homepage (must): the target homepage, with the project list drawn from released
+- FEAT-02 — valesordev.com homepage (must): the target homepage, with the project list drawn from released
   projects and every project row linking to its source.
-- FEAT-?? — Site deploys and cutover (must): preview on every PR, production on merge, valesordev.com DNS
+- FEAT-03 — Site deploys and cutover (must): preview on every PR, production on merge, valesordev.com DNS
   moved to Cloudflare (`[ASSUMED]` from the old repo's hosting; the production cutover is Brian's call). Visitor-
   visible effect: the site is up at its permanent address.
-- FEAT-?? — Instrumented, not tracked (must): Faro per `CLAUDE.md` §7 and the `/privacy` page, which changes only
+- FEAT-04 — Instrumented, not tracked (must): Faro per `CLAUDE.md` §7 and the `/privacy` page, which changes only
   with Brian. Visitor-visible effect: the `/privacy` page states what is and isn't measured.
 - FEAT-?? — Link-preview card (cut-first): an Open Graph image for valesordev.com. `[ASSUMED]` Visitors often
   arrive from a shared link.
@@ -102,3 +102,4 @@ Delivered by: not yet planned.
 - 2026-10-07: first plan, three releases in Brian's sequence (Valesor, then System 9 and Solo7 Productions, then
   bashburn.com; solo7.media waits). R2 pairs System 9 and Solo7 Productions because they credit each other and
   must not converge, so one release tests both. Awaiting Brian's review in the PR.
+- 2026-10-07: briefs written for R1's four `must` features (FEAT-01 to FEAT-04).
