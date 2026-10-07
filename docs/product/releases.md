@@ -1,9 +1,10 @@
 # Releases — solo7.media sites
 
-Today: a visitor can use only the legacy solo7.media site, served from `sites/solo7.media/` on GitHub Pages.
-valesordev.com, system9studios.com, solo7productions.com and bashburn.com are served from their old repos. The
-monorepo has the skeleton and `make check-layout`; no brand kit, site build or Cloudflare deploy exists yet
-(repo state at `origin/main` 8199926; no sprint demo exists yet; no `docs/roadmap.md` yet).
+Today: the legacy solo7.media site is the only site served from this repo (`sites/solo7.media/`, GitHub Pages).
+Per `CLAUDE.md` §1 the other four are served from their old repos; `[ASSUMED]` each is live there. The monorepo has
+the skeleton and `make check-layout`; no brand kit, site build or Cloudflare deploy exists yet. No sprint demo and
+no `docs/roadmap.md` exist, so there are no milestones to map: every `must` feature below is unmapped until pm
+cuts the roadmap.
 
 Sources: `docs/product/vision.md`; `.claude/roles/product.md` (sequencing, Brian 2026-10-07); Notion › "Sites
 monorepo (solo7.media)" (phases, R1 = pipeline + Valesor end to end); Notion › Valesor Development › "Brand Kit
@@ -13,7 +14,8 @@ Project Direction" (first milestone, build sequence, component list). Lines mark
 For: visitors to valesordev.com (developers reading the code and licenses). Brian, as publisher: R1 also proves
 the workflow every later release reuses.
 Promise: a visitor lands on valesordev.com, sees plainly that Valesor Development is the imprint for publicly
-released software, sees each released project with its stack and license, and follows a link to the source.
+released software, sees each released project, and follows a link to the source. `[ASSUMED]` The row also shows stack and license;
+the Valesor brand docs decide the row's contents.
 The page is the one in the Valesor target image, built from the new brand kit, readable with JavaScript off, and
 the site measures itself, never the reader.
 Bet: one imprint can go from Notion brief to a live Cloudflare site through the roles and `make` targets alone,
@@ -21,13 +23,15 @@ with no branding decided in code. If that holds, the same workflow serves the ot
 process gets fixed before R2 starts.
 Features:
 - FEAT-?? — Valesor brand kit v1 (must): foundation, voice, visual language, tokens, illustration system, hero
-  art and marks, `qa.md`; the target homepage is the specimen.
+  art and marks, `qa.md`; the target homepage is the specimen. Enables the homepage below; no visitor-visible
+  change of its own.
 - FEAT-?? — valesordev.com homepage (must): the target homepage, with the project list drawn from released
   projects and every project row linking to its source.
 - FEAT-?? — Site deploys and cutover (must): preview on every PR, production on merge, valesordev.com DNS
-  moved from the old repo's hosting. Visitor-visible effect: the site is up and fast at its permanent address.
+  moved to Cloudflare (`[ASSUMED]` from the old repo's hosting; the production cutover is Brian's call). Visitor-
+  visible effect: the site is up at its permanent address.
 - FEAT-?? — Instrumented, not tracked (must): Faro per `CLAUDE.md` §7 and the `/privacy` page, which changes only
-  with Brian.
+  with Brian. Visitor-visible effect: the `/privacy` page states what is and isn't measured.
 - FEAT-?? — Link-preview card (cut-first): an Open Graph image for valesordev.com. `[ASSUMED]` Visitors often
   arrive from a shared link.
 Cut line: no project detail pages, README template, or documentation landing page (the Notion brief lists them as
@@ -40,15 +44,16 @@ Success signals:
 - A PR to the site gets a preview URL, and merging deploys production, using only `make` targets (sre).
 - Faro shows web vitals and errors for the site with no user identification, and `/privacy` matches
   `CLAUDE.md` §7 (sre verifies; Brian approves the text).
-- A short process-fixes list from R1 exists in the sprint closeout, with each item fixed or ticketed before R2
-  starts (pm).
+- R2 starts only after every process fix named in R1's sprint closeout is closed or ticketed (pm checks at the
+  closeout).
 Delivered by: not yet planned.
 
 ## R2 — System 9 Studios and Solo7 Productions *(status: proposed)*
 For: visitors who want to know what the creative studio and the producer org are, and what they have made.
 Promise: system9studios.com and solo7productions.com are live from their own brand kits and target homepages,
-each recognizable on its own, with the credit line ("Soft Disclosure — produced by Solo7 Productions. Written and
-animated by System 9 Studios. Tooling by Valesor Development.") shown the same way on both.
+each recognizable on its own. `[ASSUMED]` Both show the credit line from `CLAUDE.md` §1 ("Soft Disclosure —
+produced by Solo7 Productions. Written and animated by System 9 Studios. Tooling by Valesor Development.");
+visual-designer decides where and how.
 Bet: the R1 workflow repeats for a different imprint at a fraction of the effort, and two related brands can ship
 side by side without converging (Solo7 Productions' brief asks that the three organizations not converge).
 Features:
@@ -64,13 +69,14 @@ Success signals:
 - Brian can tell the two apart and the Valesor site from either with the brand marks hidden (Brian's review at the
   R2 go/no-go). `[ASSUMED]` This is the observable form of "don't converge".
 - The credit line text appears identically on both from the one `packages/` source (architecture).
-- Net effort per site is below R1's, from the sprint closeouts (pm).
+- Stories from first story to production deploy per site are fewer than R1's, from the sprint closeouts (pm).
 Delivered by: not yet planned.
 
 ## R3 — bashburn.com *(status: proposed)*
-For: readers of Brian's field journal, and RSS-reading peers.
-Promise: bashburn.com is live from the monorepo with its existing posts and talks, readable with JavaScript off,
-with a working feed, and every existing URL still resolves (`CLAUDE.md` §5, permanent URLs).
+For: readers of Brian's field journal. `[ASSUMED]` Including RSS-reading peers.
+Promise: bashburn.com is live from the monorepo with its existing posts and talks (named in the Notion "Sites
+monorepo" page), readable with JavaScript off, `[ASSUMED]` with a working feed, and every existing URL still
+resolves (`CLAUDE.md` §5, permanent URLs).
 Bet: the workflow also carries a content-heavy site where the content, not the layout, is the point.
 Features:
 - FEAT-?? — bashburn.com brand kit and site (must)
@@ -80,14 +86,14 @@ Features:
 Cut line: no comments, newsletter, social feeds or analytics (`CLAUDE.md` §10). No new writing; carrying over what
 exists is the job.
 Success signals:
-- Every pre-cutover URL returns the page or a redirect (check against the old site's sitemap; sre).
-- The feed validates and an RSS reader shows the latest post (demo step, Brian).
+- Every pre-cutover URL returns the page or a redirect (checked against the URLs the old repo publishes; sre).
+- `[ASSUMED]` The feed validates (sre picks the validator) and an RSS reader shows the latest post (demo, Brian).
 - `/brand-qa` passes against `brands/bashburn/qa.md` (visual-designer).
 Delivered by: not yet planned.
 
 ## Not scheduled
 - **solo7.media**: waits for Brian's homepage design (Brian, 2026-10-07). The legacy site keeps deploying from
-  `sites/solo7.media/` and retires when its replacement is on Cloudflare. It joins a release when the design
+  `sites/solo7.media/` and retires when its replacement is on Cloudflare `[ASSUMED]`, per the vision. It joins a release when the design
   exists; that is Brian's call, so no release names it yet.
 - Project detail pages, a README template, and a documentation landing page for Valesor. Revisit after R1's
   review.
