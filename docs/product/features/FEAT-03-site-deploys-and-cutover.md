@@ -5,8 +5,8 @@ Release: R1 (must)
 ## Problem
 `[ASSUMED]` A live valesordev.com exists, served from its old repo. Nothing in this repo deploys to
 Cloudflare: `make check` runs only layout checks (`Makefile`), and the only deploying site is the legacy
-solo7.media on GitHub Pages. Without a pipeline the homepage never reaches a
-visitor, and Brian can't review a change at a URL before it goes live.
+solo7.media on GitHub Pages. Without a pipeline the homepage never reaches a visitor, and Brian can't review a
+change at a URL before it goes live.
 
 ## Outcome
 A visitor reaches the new valesordev.com at its permanent address, and every URL that worked before still
@@ -21,7 +21,7 @@ In the R1 demo, run by sre and watched by Brian:
    sitemap or build output; sre confirms the source);
 4. before cutover, a non-production rehearsal confirms the old endpoint is intact and the rollback steps are
    written and walked through; after Brian's approved cutover, the rollback is drilled once, with the old hosting
-   still available.
+   still available. Brian approves the drill with the cutover, because it changes DNS twice.
 
 ## Scope
 - In: Cloudflare Workers static assets for `sites/valesordev.com`, preview on PRs, production on merge, DNS and TLS
@@ -49,8 +49,7 @@ In the R1 demo, run by sre and watched by Brian:
 ## Open for Brian
 - The go for the production cutover (outward-facing). Recommendation: approve after the FEAT-02 preview passes and
   the rollback rehearsal (signal 4) is done, because both are observable; the live rollback drill follows the
-  cutover. If no: the pipeline ships and the old site stays
-  live until you say.
+  cutover, and your approval covers it. If no: the pipeline ships and the old site stays live until you say.
 
 ## Sources
 Notion › "Sites monorepo (solo7.media)" (hosting decision, open items); `CLAUDE.md` §5, §8, §9; `Makefile`.

@@ -22,11 +22,11 @@ check that the built homepage passes `/brand-qa` is FEAT-02's and counts once.
 - In: the kit named in the Valesor Notion "Brand Kit Project Direction" first milestone: foundation, voice,
   visual language, tokens, illustration system, hero art and marks, and `qa.md`; the frozen target homepage and
   its approved visual audit as the specimen.
+- In: the brand docs cover the `/privacy` page template and the footer link to it (built under FEAT-04).
 - Out: project detail page, README template, social card, documentation landing page (later reference
   implementations; the vision says project pages aren't planned yet).
 - Out: anything carried over from `valesordev/brand-kit` or solo7-theme (the kits start from scratch).
-- In: the brand docs cover the `/privacy` page template and the footer link to it (built under FEAT-04).
-- Out: how the kit looks. That is visual-designer's, approved by Brian.
+- Out: deciding how the kit looks. That is visual-designer's, approved by Brian.
 
 ## Dependencies
 | Need | Owner | State |

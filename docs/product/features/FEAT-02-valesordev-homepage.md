@@ -11,10 +11,11 @@ A visitor lands on valesordev.com, sees plainly that Valesor Development is the 
 software, sees each released project, and follows a link to its source. It reads the same with JavaScript off.
 
 ## Success signal
-In the R1 demo, Brian opens the production site on mobile and desktop, JavaScript off, and:
+Checked first on a preview URL (this gates FEAT-03's cutover), then confirmed on production in the R1 demo. Brian
+opens the site on mobile and desktop, JavaScript off, and:
 1. sees the target homepage, built from the kit's tokens and components, light and dark if the kit has both
    (`/brand-qa` passes; visual-designer);
-2. compares the rendered rows with the approved project list: the same projects, none missing, none extra;
+2. compares the rendered rows with the project list Brian approved: the same projects, none missing, none extra;
 3. follows every project row to its source repository, each of which resolves (Brian);
 4. passes a WCAG 2.1 AA check on the page (implementation, recorded on the story).
 

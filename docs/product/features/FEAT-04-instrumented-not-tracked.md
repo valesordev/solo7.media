@@ -9,7 +9,7 @@ that they aren't tracked.
 
 ## Outcome
 A visitor can read a `/privacy` page that says what is and isn't measured. The site's web vitals, performance, and
-frontend errors are measured without identifying them.
+frontend errors are measured without identifying the visitor.
 
 ## Success signal
 In the R1 demo, sre shows, and Brian approves:

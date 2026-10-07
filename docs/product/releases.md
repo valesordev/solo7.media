@@ -38,10 +38,14 @@ Cut line: no project detail pages, README template, or documentation landing pag
 later reference implementations; the vision says project pages aren't planned yet). No other imprint's work. No
 new copy beyond what the homepage target shows. Why: R1 must prove the workflow, not widen the site.
 Success signals:
-- Brian opens valesordev.com on the production Cloudflare URL and sees the target homepage, light and dark if
-  the kit has both, mobile and desktop, JavaScript off (demo step, run by Brian).
+- Brian opens valesordev.com (apex and `www`, both with valid TLS) and sees the target homepage, light and dark
+  if the kit has both, mobile and desktop, JavaScript off (demo step, run by Brian; sre verifies the hostnames).
+  The same check passes on a preview URL before cutover.
+- The rendered project rows match the project list Brian approved, and each links to its source (Brian).
 - `/brand-qa` passes against `brands/valesordev/qa.md` on that page (visual-designer).
 - A PR to the site gets a preview URL, and merging deploys production, using only `make` targets (sre).
+- Every URL the old site published returns the page or a redirect, and the rollback is rehearsed before cutover
+  and drilled after Brian approves it (sre).
 - Faro shows web vitals and errors for the site with no user identification, and `/privacy` matches
   `CLAUDE.md` §7 (sre verifies; Brian approves the text).
 - R2 starts only after every process fix named in R1's sprint closeout is closed or ticketed (pm checks at the
