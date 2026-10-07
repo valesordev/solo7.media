@@ -1,17 +1,9 @@
 {
-  "name": "solo7.media",
-  "version": "0.1.0",
+  "name": "solo7.media-monorepo",
   "private": true,
-  "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview"
-  },
-  "dependencies": {
-    "@tailwindcss/vite": "^4.0.0",
-    "@valesordev/ui": "^0.1.0",
-    "astro": "^5.0.0",
-    "sharp": "^0.35.4",
-    "tailwindcss": "^4.0.0"
-  }
+  "description": "Brand kits and sites for Valesor Development, System 9 Studios, Solo7 Productions, solo7.media, and bashburn.com.",
+  "workspaces": [
+    "packages/*",
+    "brands/*"
+  ]
 }

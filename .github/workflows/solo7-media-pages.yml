@@ -1,0 +1,64 @@
+# Legacy solo7.media site → GitHub Pages. It keeps serving solo7.media until
+# the rebuilt site ships on Cloudflare (targets/solo7-media bootstrap); then sre
+# retires this workflow. Inlined from valesordev/ui's astro-pages.yml, which
+# can't build from a subdirectory and is being archived.
+name: solo7.media (legacy) → GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - sites/solo7.media/**
+      - .github/workflows/solo7-media-pages.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+  # @valesordev/ui comes from GitHub Packages.
+  packages: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+defaults:
+  run:
+    working-directory: sites/solo7.media
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          registry-url: https://npm.pkg.github.com
+          scope: '@valesordev'
+      # setup-node writes //npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}; an
+      # empty token gets a 401 even for a public package, so always pass one.
+      - run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ github.token }}
+      - run: npm run build
+        env:
+          # Hostname -> Faro app key, from a repo variable. Absent config makes
+          # the site's Faro init a no-op.
+          PUBLIC_FARO_APPS: ${{ vars.FARO_APPS }}
+          PUBLIC_FARO_ENDPOINT: https://faro-collector-prod-us-central-0.grafana.net/collect
+          PUBLIC_FARO_APP_VERSION: ${{ github.sha }}
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: sites/solo7.media/dist/
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v4
+        id: deployment
