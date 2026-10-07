@@ -1,9 +1,9 @@
 # Vision — solo7.media sites
 
 Sources: repo `CLAUDE.md` §1/§5/§7/§10 and `.claude/roles/product.md`; Notion › "Sites monorepo (solo7.media)";
-the "Brand Kit Project Direction" pages for Valesor Development, System 9 Studios, and Solo7 Productions; and
-the "Website Redesign Project Plan" for bashburn.com. Lines marked `[ASSUMED]` are my inference, not something a source states. Brian confirms or corrects each in
-review.
+the "Brand Kit Project Direction" pages for Valesor Development, System 9 Studios, and Solo7 Productions;
+the "Website Redesign Project Plan" for bashburn.com; Brian's hosting decision in session, 2026-10-07. Lines
+marked `[ASSUMED]` are my inference, not something a source states. Brian confirms or corrects each in review.
 
 ## For
 - **Visitors** who want to know what an imprint is, what it has released, and where the source, writing, or
@@ -26,7 +26,8 @@ plainly related to the others; Solo7 Productions' brand page asks that the three
 ## Is / isn't
 - Is: five static sites (valesordev.com, system9studios.com, solo7productions.com, solo7.media,
   bashburn.com), each built from its own brand kit in one monorepo and deployed to Cloudflare. The legacy
-  solo7.media site on GitHub Pages is retired once its replacement deploys there (Brian, 2026-10-07).
+  solo7.media site on GitHub Pages will be retired (Brian, 2026-10-07). `[ASSUMED]` It retires when its
+  replacement deploys to Cloudflare; until then it stays up.
 - Is: a record of published work. `[ASSUMED]` The imprint is the byline; voice rules (for example whether
   first-person singular is used) are each brand's `voice.md`.
 - Is: observed, not tracking. Grafana Faro measures the site (web vitals, performance, frontend errors), never
@@ -41,16 +42,17 @@ plainly related to the others; Solo7 Productions' brand page asks that the three
 
 ## Principles
 Ordered tie-breakers for product calls.
-1. **Visitor first, then Brian.** If a feature serves only Brian's workflow, it ships only as the means to a
+1. `[ASSUMED]` **Visitor first, then Brian.** If a feature serves only Brian's workflow, it ships only as the means to a
    visitor-facing release.
 2. **Brand decisions live in brand docs.** A look not cited in a brand doc doesn't ship (`CLAUDE.md` §5).
 3. **One imprint, finished, beats five imprints begun.** Prove the workflow on Valesor Development, fix the
    process, then repeat.
-4. **Describe, don't sell.** Copy says what the software or work is, its source and license; it does not
+4. `[ASSUMED]` **Describe, don't sell.** Copy says what the software or work is, its source and license; it does not
    persuade.
 5. **Permanent and readable.** The floor is `CLAUDE.md` §5: permanent URLs, no JavaScript required, WCAG 2.1 AA.
 6. `[ASSUMED]` **Fewer things, done in the brand's grammar** over many variants.
 
 ## Log
 - 2026-10-07: drafted from the sources above (awaiting Brian's approval in PR).
-- 2026-10-07: all sites deploy to Cloudflare; the legacy solo7.media site is retired (Brian, this session).
+- 2026-10-07: all sites deploy to Cloudflare; the legacy solo7.media site will be retired (decided by Brian in
+  session; confirmation in PR #5).
