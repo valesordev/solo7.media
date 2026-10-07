@@ -22,15 +22,15 @@ Bet: one imprint can go from Notion brief to a live Cloudflare site through the 
 with no branding decided in code. If that holds, the same workflow serves the other imprints; if it doesn't, the
 process gets fixed before R2 starts.
 Features:
-- FEAT-?? — Valesor brand kit v1 (must): foundation, voice, visual language, tokens, illustration system, hero
+- FEAT-01 — Valesor brand kit v1 (must): foundation, voice, visual language, tokens, illustration system, hero
   art and marks, `qa.md`; the target homepage is the specimen. Enables the homepage below; no visitor-visible
   change of its own.
-- FEAT-?? — valesordev.com homepage (must): the target homepage, with the project list drawn from released
+- FEAT-02 — valesordev.com homepage (must): the target homepage, with the project list drawn from released
   projects and every project row linking to its source.
-- FEAT-?? — Site deploys and cutover (must): preview on every PR, production on merge, valesordev.com DNS
+- FEAT-03 — Site deploys and cutover (must): preview on every PR, production on merge, valesordev.com DNS
   moved to Cloudflare (`[ASSUMED]` from the old repo's hosting; the production cutover is Brian's call). Visitor-
   visible effect: the site is up at its permanent address.
-- FEAT-?? — Instrumented, not tracked (must): Faro per `CLAUDE.md` §7 and the `/privacy` page, which changes only
+- FEAT-04 — Instrumented, not tracked (must): Faro per `CLAUDE.md` §7 and the `/privacy` page, which changes only
   with Brian. Visitor-visible effect: the `/privacy` page states what is and isn't measured.
 - FEAT-?? — Link-preview card (cut-first): an Open Graph image for valesordev.com. `[ASSUMED]` Visitors often
   arrive from a shared link.
@@ -38,10 +38,14 @@ Cut line: no project detail pages, README template, or documentation landing pag
 later reference implementations; the vision says project pages aren't planned yet). No other imprint's work. No
 new copy beyond what the homepage target shows. Why: R1 must prove the workflow, not widen the site.
 Success signals:
-- Brian opens valesordev.com on the production Cloudflare URL and sees the target homepage, light and dark if
-  the kit has both, mobile and desktop, JavaScript off (demo step, run by Brian).
+- Brian opens valesordev.com (apex and `www`, both with valid TLS) and sees the target homepage, light and dark
+  if the kit has both, mobile and desktop, JavaScript off (demo step, run by Brian; sre verifies the hostnames).
+  The same check passes on a preview URL before cutover.
+- The rendered project rows match the project list Brian approved, and each links to its source (Brian).
 - `/brand-qa` passes against `brands/valesordev/qa.md` on that page (visual-designer).
 - A PR to the site gets a preview URL, and merging deploys production, using only `make` targets (sre).
+- Every URL the old site published returns the page or a redirect, and the rollback is rehearsed before cutover
+  and drilled after Brian approves it (sre).
 - Faro shows web vitals and errors for the site with no user identification, and `/privacy` matches
   `CLAUDE.md` §7 (sre verifies; Brian approves the text).
 - R2 starts only after every process fix named in R1's sprint closeout is closed or ticketed (pm checks at the
@@ -102,3 +106,4 @@ Delivered by: not yet planned.
 - 2026-10-07: first plan, three releases in Brian's sequence (Valesor, then System 9 and Solo7 Productions, then
   bashburn.com; solo7.media waits). R2 pairs System 9 and Solo7 Productions because they credit each other and
   must not converge, so one release tests both. Awaiting Brian's review in the PR.
+- 2026-10-07: briefs written for R1's four `must` features (FEAT-01 to FEAT-04).
