@@ -15,14 +15,17 @@ works or redirects. Brian sees any change at a preview URL before merge.
 ## Success signal
 In the R1 demo, run by sre and watched by Brian:
 1. a PR to the site gets a preview URL and merging deploys production, using only `make` targets (`CLAUDE.md` §9);
-2. valesordev.com serves the new site over HTTPS;
+2. `valesordev.com` and `www.valesordev.com` both resolve and serve the new site with valid TLS (sre verifies
+   each after the change; a green Actions run doesn't count);
 3. every URL the old site published returns the page or a redirect (checked against the old repo's published
    sitemap or build output; sre confirms the source);
-4. the rollback to the old hosting has been run once before cutover and works.
+4. before cutover, a non-production rehearsal confirms the old endpoint is intact and the rollback steps are
+   written and walked through; after Brian's approved cutover, the rollback is drilled once, with the old hosting
+   still available.
 
 ## Scope
 - In: Cloudflare Workers static assets for `sites/valesordev.com`, preview on PRs, production on merge, DNS and TLS
-  for valesordev.com, redirects for moved URLs, a rollback runbook.
+  for the apex and `www` of valesordev.com, redirects for moved URLs, a rollback runbook.
 - Out: other domains (R2, R3). The legacy solo7.media GitHub Pages deploy stays as is until its replacement exists.
 - Out: observability (FEAT-04).
 
@@ -45,7 +48,8 @@ In the R1 demo, run by sre and watched by Brian:
 
 ## Open for Brian
 - The go for the production cutover (outward-facing). Recommendation: approve after the FEAT-02 preview passes and
-  the rollback has been tested, because both are observable. If no: the pipeline ships and the old site stays
+  the rollback rehearsal (signal 4) is done, because both are observable; the live rollback drill follows the
+  cutover. If no: the pipeline ships and the old site stays
   live until you say.
 
 ## Sources

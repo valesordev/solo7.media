@@ -13,10 +13,10 @@ Brian can hand any builder the Valesor kit and get a page that is recognizably V
 colour, font, or spacing value in code.
 
 ## Success signal
-In the R1 demo, Brian opens the kit on `main` and finds: the brand docs, tokens built to `dist/tokens.css` by
-`make`, the illustration system, the hero art with provenance, and `qa.md`; `/brand-qa` runs against `qa.md` and
-the frozen target (visual-designer). Brian approves the kit by merging its PRs. The check that the built homepage
-passes `/brand-qa` is FEAT-02's and counts once.
+In the R1 demo, Brian opens the kit on `main` and finds: the approved `/brand-audit` of the frozen target, the
+brand docs, tokens built to `dist/tokens.css` by `make`, the illustration system, the hero art with provenance,
+and a `qa.md` with no `[PROPOSED]` items left (visual-designer). Brian approves the kit by merging its PRs. The
+check that the built homepage passes `/brand-qa` is FEAT-02's and counts once.
 
 ## Scope
 - In: the kit named in the Valesor Notion "Brand Kit Project Direction" first milestone: foundation, voice,

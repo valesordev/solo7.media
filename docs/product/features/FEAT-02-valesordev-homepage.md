@@ -12,9 +12,11 @@ software, sees each released project, and follows a link to its source. It reads
 
 ## Success signal
 In the R1 demo, Brian opens the production site on mobile and desktop, JavaScript off, and:
-1. sees the target homepage, built from the kit's tokens and components (`/brand-qa` passes; visual-designer);
-2. follows every project row to its source repository, each of which resolves (Brian);
-3. passes a WCAG 2.1 AA check on the page (implementation, recorded on the story).
+1. sees the target homepage, built from the kit's tokens and components, light and dark if the kit has both
+   (`/brand-qa` passes; visual-designer);
+2. compares the rendered rows with the approved project list: the same projects, none missing, none extra;
+3. follows every project row to its source repository, each of which resolves (Brian);
+4. passes a WCAG 2.1 AA check on the page (implementation, recorded on the story).
 
 ## Scope
 - In: the homepage from the target image, with the project list as rows. `[ASSUMED]` Stack and license appear on
