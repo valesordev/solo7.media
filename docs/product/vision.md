@@ -25,8 +25,8 @@ plainly related to the others; Solo7 Productions' brand page asks that the three
 
 ## Is / isn't
 - Is: five static sites (valesordev.com, system9studios.com, solo7productions.com, solo7.media,
-  bashburn.com), each built from its own brand kit in one monorepo. Where each is hosted, and the legacy
-  solo7.media site's current deploy, are in `CLAUDE.md` §1.
+  bashburn.com), each built from its own brand kit in one monorepo and deployed to Cloudflare. The legacy
+  solo7.media site on GitHub Pages is retired once its replacement deploys there (Brian, 2026-10-07).
 - Is: a record of published work. `[ASSUMED]` The imprint is the byline; voice rules (for example whether
   first-person singular is used) are each brand's `voice.md`.
 - Is: observed, not tracking. Grafana Faro measures the site (web vitals, performance, frontend errors), never
@@ -53,3 +53,4 @@ Ordered tie-breakers for product calls.
 
 ## Log
 - 2026-10-07: drafted from the sources above (awaiting Brian's approval in PR).
+- 2026-10-07: all sites deploy to Cloudflare; the legacy solo7.media site is retired (Brian, this session).
