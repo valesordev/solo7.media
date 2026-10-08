@@ -8,7 +8,9 @@ Derived from the approved audit (`../references/visual-audit.md`, core rows deci
 brief (Brand Kit Project Direction, Valesor Development).
 
 Status marks: `[DECIDED <date>]` is Brian's. `[PROPOSED]` is visual-designer's recommendation awaiting Brian at
-PR review. Nothing `[PROPOSED]` may be cited by a story as binding.
+PR review. Nothing `[PROPOSED]` may be cited by a story as binding. Open at 2026-10-08: the Apache-2.0 default
+(`voice.md#the-imprints-own-sentences`) and the footer license line that depends on it, the rewritten homepage copy
+(`voice.md`), and the long-form reading font (`visual-language.md#typography`).
 
 ## Identity
 Valesor Development is the engineering imprint: the banner applied to software that is complete enough to be
@@ -91,14 +93,14 @@ Valesor shares an owner and a repo with four other properties (`CLAUDE.md` §1).
 | bashburn.com | Brian's personal blog | first-person voice there is Brian's; Valesor's first person is also Brian but speaks about released software only |
 
 Shared between imprints: only non-visual code (`packages/`). The serif plus mono pairing, the vermilion accent,
-and the engraving language stay Valesor's alone. `[PROPOSED]` (audit, Distinctness: flagged for later audits;
+and the engraving language stay Valesor's alone. `[DECIDED 2026-10-08]` (audit, Distinctness: flagged for later audits;
 confirm when the second imprint's audit exists)
 
 ## Scope of the kit
 The R1 kit covers the homepage and the `/privacy` page (FEAT-01); a 404 recipe is visual-designer's addition for
 the route `docs/adr/0001-site-structure.md` lists. Project detail pages, README template, and
 social card are later (FEAT-01). The brief's `Callout` component is not in R1: nothing on the specimen uses it.
-`[PROPOSED]` (specify it when a page needs it; the audit shows no instance)
+`[DECIDED 2026-10-08]` (specify it when a page needs it; the audit shows no instance)
 
 ## Differences from the Notion brief
 Where the brief and the decided audit disagree, the audit wins and the difference is recorded here.
