@@ -15,9 +15,13 @@ Each section is a stable anchor: cite `usage.md#<section>`.
 
 Never introduce, unless Brian asks in the session: new colors, new font families, rounded or card-heavy UI,
 gradients, shadows, marketing copy, decorative diagrams, or additional illustration styles. `[DECIDED 2026-10-08]`
-(brief, section 6 CLAUDE.md example)
+(brief, the "never introduce" example in the brief's section 6)
 
 ## brandheader
+
+The wordmark, the rule, and the absence of nav arrows are `[DECIDED 2026-10-08]`. The nav row, serif nav, and narrow
+stacking below are `[PROPOSED]` (`visual-language.md#brandheader`); until Brian approves them, don't cite them as binding.
+Nav lists only destinations that ship; there is no About link (decided).
 
 **Correct**
 - Serif "Valesor Development" at left, linking to `/`; serif Projects and GitHub at right; a 1px rule under.

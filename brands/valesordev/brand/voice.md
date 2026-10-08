@@ -17,7 +17,7 @@ When a person is needed, it is "I". Never "we", "our team", or "us". There is no
 |---|---|
 | I built this to run offline. | We built this to run offline. |
 | <Project> stores notes as plain files. | Our platform stores your notes. |
-| I release it under Apache-2.0. | We're proud to open-source it. |
+| I release it under <license>. | We're proud to open-source it. |
 
 Prefer the project as subject ("<Project> does X") over "I" when the sentence is about the software.
 Use "I" only when a decision, a reason, or an opinion needs an owner. `[DECIDED 2026-10-08]`

@@ -1,8 +1,8 @@
 # Valesor Development: visual language
 
 The look of Valesor, as rules. Identity is in `foundation.md`, words in `voice.md`, and correct and incorrect
-usage of each component in `usage.md`. This file does not hold values: color, type, and spacing values live in
-`tokens/tokens.json` (a later story). It names roles and states the rules those tokens must satisfy. A component
+usage of each component in `usage.md`. This file does not hold token values: color, type, and spacing values live in
+`tokens/tokens.json` (a later story); the numbers here are the audit's measurements or proposed limits. It names roles and states the rules those tokens must satisfy. A component
 uses a token or asks visual-designer; it never carries a hex, font name, or spacing literal (`CLAUDE.md` §5).
 
 Status marks as in `foundation.md`. The audit's decided rows are cited by name (`audit: <section>`).
@@ -230,7 +230,7 @@ Anatomy is decided; rules below that the audit doesn't state (counts, markup, li
 - **Primary:** `accent` text, underline, and arrow. At most one primary CTA per band (the Hero CTA, or a
   `SectionRule`'s link). The vermilion `->` on a `ProjectRow` is that row's direction mark, not a `TextLink`, so
   a list of rows doesn't break the rule.
-- **Secondary:** `ink` text, 1px grey underline (token chosen in the tokens story; at least 3:1 on `paper` so the link is findable without color), `ink` arrow. For an action that isn't the main one
+- **Secondary:** `ink` text, 1px grey underline (token chosen in the tokens story; at least 3:1 on `paper` so the link is findable without color, `[PROPOSED]`; the audit's sampled grey is about 2.2:1, so the token must be darker than the sample), `ink` arrow. For an action that isn't the main one
   ("Read the license ->").
 - The arrow is part of the link text and typed. It appears on CTAs and action links only: not on nav links, not
   on the wordmark, and not on inline links in prose (which are underlined `ink`, no arrow). `[DECIDED 2026-10-08]`
