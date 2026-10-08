@@ -18,9 +18,9 @@ Brief: the Notion page's character (quiet, durable, precise, independent, open, 
 | ink (illustration) | #000000 | ~6% of pixels at L < 100 (mostly the illustration) | engraving line | core | [DECIDED 2026-10-08] | the engraving is pure black, as the brief's "pure black ink on pure white" asks |
 | ink (display type) | #000000 as sampled | small | wordmark, H1, section/row titles | core: #111111 for type, #000000 only in the engraving | [DECIDED 2026-10-08] | the target renders it pure black; the brief says #111111 |
 | ink-muted | ≈ #555555 | small text | mono body, descriptions, metadata values | core | [DECIDED 2026-10-08] | a single mid grey carries all secondary text; matches the brief's `ink-muted #545454` |
-| ink-faint | ≈ #808080 | tiny | metadata labels (STACK / LICENSE / REPO) | candidate | [DECIDED 2026-10-08] | could be ink-muted at a smaller size; anti-aliasing makes it unclear whether it is a third grey |
+| ink-faint | ≈ #808080 | tiny | metadata labels (STACK / LICENSE / REPO) | candidate | [DECIDED 2026-10-08] | could be ink-muted at a smaller size; anti-aliasing makes it unclear whether it is a third grey. Decided: folded into ink-muted |
 | rule (light) | ≈ #CCCCCC–#D6D6D6 | 1px lines | row dividers, vertical column dividers, header rule's first pixel | core | [DECIDED 2026-10-08] | hairlines carry the layout; the hex is a sample, the token set fixes the value |
-| rule (strong) | ≈ #A6A6A8–#B1B2B3 | 1px lines | header rule, section rules above/below "Projects" block | candidate | [DECIDED 2026-10-08] | two rule weights may be intended (structure vs. row) or one rule rendered unevenly; it is a decision for the token set |
+| rule (strong) | ≈ #A6A6A8–#B1B2B3 | 1px lines | header rule, section rules above/below "Projects" block | candidate | [DECIDED 2026-10-08] | two rule weights may be intended (structure vs. row) or one rule rendered unevenly; it is a decision for the token set. Decided: one rule weight |
 | accent | ≈ #C8202A (darkest sampled #CA0F18; mid-stroke #C62A24) | ~0.03% | primary CTA text and underline, "View all projects ->" (target shows →; see Decisions item 6), row arrows | core | [DECIDED 2026-10-08] | the only chroma in the page (about 0.1–0.15% of pixels have a channel spread above 15); direction and primary action only |
 
 Artefacts (not colours): the "white" ground varies #FCFCFC–#FFFFFF with a faint, even grain (generator noise, not
@@ -42,7 +42,7 @@ Arrow glyphs (`→`) in this section are observations of the target. The kit use
 | Column / row title | "License", "Andara's World" | same serif | ≈ 1.2× (column) / ≈ 1.7× (row) | regular · title case | core | [DECIDED 2026-10-08] |
 | Body / descriptions | hero blurb, column text, row descriptions | monospace, humanist, dotted-or-slashed zero (IBM Plex Mono–like) | 1× (≈ 14–15px) | regular · sentence case · normal | core | [DECIDED 2026-10-08] |
 | Metadata | STACK / LICENSE / REPO + values | same mono, labels uppercase | ≈ 0.85× | regular · labels uppercase, spaced · values as written | core | [DECIDED 2026-10-08] |
-| Nav | Projects, GitHub, About | serif, small | ≈ 1× | regular | candidate | [DECIDED 2026-10-08] |
+| Nav | Projects, GitHub, About (kit: Projects, GitHub; About dropped, Decisions item 9) | serif, small | ≈ 1× | regular | candidate | [DECIDED 2026-10-08] |
 | Links / CTAs | "Browse the source →", "Read the license →" | mono, underlined, trailing arrow (CTAs and action links only, not nav) | 1× | regular · sentence case | core | [DECIDED 2026-10-08] |
 
 Pairing: serif for names and headings, mono for everything that explains or measures. No sans-serif appears. The

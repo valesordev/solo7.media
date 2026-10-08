@@ -156,7 +156,7 @@ incorrect examples, is in `usage.md#<component>`. `Callout` is out of R1 (`found
 
 ### BrandHeader
 `[DECIDED 2026-10-08]` (audit: BrandHeader, Mark)
-Anatomy is decided; rules below that the audit doesn't state (counts, markup, limits, data format) are `[DECIDED 2026-10-08]`.
+Rules the audit doesn't state (counts, markup, limits, data format) are decided with the anatomy.
 
 - The first element of every page. Serif wordmark "Valesor Development" at left; serif text links at
   right (the target shows Projects, GitHub, About; the kit drops About, see below; the nav row itself is `[DECIDED 2026-10-08]`); a 1px `rule` below, on the content column.
@@ -173,7 +173,7 @@ Anatomy is decided; rules below that the audit doesn't state (counts, markup, li
 
 ### Hero
 `[DECIDED 2026-10-08]` (audit: Hero)
-Anatomy is decided; rules below that the audit doesn't state (counts, markup, limits, data format) are `[DECIDED 2026-10-08]`.
+Rules the audit doesn't state (counts, markup, limits, data format) are decided with the anatomy.
 
 - A block over the illustration's empty zone: H1, subhead, a two-line mono blurb, and one primary `TextLink`.
   Type is left aligned to the content column edge and stays in the left part of the frame.
@@ -184,7 +184,7 @@ Anatomy is decided; rules below that the audit doesn't state (counts, markup, li
 
 ### SectionRule
 `[DECIDED 2026-10-08]` (audit: SectionRule)
-Anatomy is decided; rules below that the audit doesn't state (counts, markup, limits, data format) are `[DECIDED 2026-10-08]`.
+Rules the audit doesn't state (counts, markup, limits, data format) are decided with the anatomy.
 
 - A full-column 1px `rule`, with optional content under it: a serif section title at left and a right aligned
   `TextLink` (the target: "Projects" and "View all projects ->").
@@ -195,7 +195,7 @@ Anatomy is decided; rules below that the audit doesn't state (counts, markup, li
 
 ### ProjectRow
 The signature component. `[DECIDED 2026-10-08]` (audit: ProjectRow)
-Anatomy is decided; rules below that the audit doesn't state (counts, markup, limits, data format) are `[DECIDED 2026-10-08]`.
+Rules the audit doesn't state (counts, markup, limits, data format) are decided with the anatomy.
 
 - A four-part row between two 1px `rule`s: (1) serif name with the mono tagline beneath; (2) mono description;
   (3) `TechnicalMetadata`; (4) a vermilion `->` at the far right. Row pitch is constant: every row has the same
@@ -209,7 +209,7 @@ Anatomy is decided; rules below that the audit doesn't state (counts, markup, li
 
 ### TechnicalMetadata
 `[DECIDED 2026-10-08]` (audit: TechnicalMetadata; items 7)
-Anatomy is decided; rules below that the audit doesn't state (counts, markup, limits, data format) are `[DECIDED 2026-10-08]`.
+Rules the audit doesn't state (counts, markup, limits, data format) are decided with the anatomy.
 
 - A two-column label and value list. Labels uppercase mono, spaced, `ink-muted` at the label size. Values mono.
 - Three fields, in this order: STACK, LICENSE, REPO. STACK values are separated by commas
@@ -223,7 +223,7 @@ Anatomy is decided; rules below that the audit doesn't state (counts, markup, li
 
 ### TextLink
 `[DECIDED 2026-10-08]` (audit: TextLink, both rows)
-Anatomy is decided; rules below that the audit doesn't state (counts, markup, limits, data format) are `[DECIDED 2026-10-08]`.
+Rules the audit doesn't state (counts, markup, limits, data format) are decided with the anatomy.
 
 - Mono, 1px underline, trailing typed `->`.
 - **Primary:** `accent` text, underline, and arrow. At most one primary CTA per band (the Hero CTA, or a
