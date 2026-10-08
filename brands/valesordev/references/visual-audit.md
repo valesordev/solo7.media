@@ -78,10 +78,10 @@ Choosing is Brian's.
 Arrow glyphs (`→`) in this section are observations of the target. The kit uses a typed `->` (Decisions item 6).
 | Pattern | Parts | Class | Status | Why |
 |---|---|---|---|---|
-| `BrandHeader` | serif wordmark left, three serif text links right, 1px rule below; no button, no logo glyph. Nav links carry no arrow. | core | [PROPOSED] | every page frame starts here; the quiet header is the brief's "not a startup nav" |
+| `BrandHeader` | serif wordmark left, three serif text links right, 1px rule below; no button, no logo glyph. Nav links carry no arrow. | core | [PROPOSED] | every page frame starts here; a plain text header fits the brief's "Not Valesor" ban on startup and SaaS branding |
 | Mark | the wordmark is the only mark; no symbol is visible | core | [PROPOSED] | the brief says the mark "can remain relatively quiet"; the target shows no glyph |
 | `Hero` | H1, subhead, mono blurb, red CTA over the illustration | core | [PROPOSED] | the brief makes the hero art the primary recognizable element, with type in its empty zone |
-| `TextLink` (primary) | mono, vermilion, 1px vermilion underline, trailing `->` (target shows `→`) | core | [PROPOSED] | the one place colour appears for action |
+| `TextLink` (primary) | mono, vermilion, 1px vermilion underline, trailing `->` (target shows `→`) | core | [PROPOSED] | colour appears only on primary actions |
 | `TextLink` (secondary) | mono, ink, 1px grey underline, trailing `->` (target shows `→`; "Read the license →") | core | [PROPOSED] | quiet counterpart so only the main action is red |
 | `SectionRule` | 1px full-width rule, optionally with a serif title and a right-aligned red link ("Projects" / "View all projects ->") | core | [PROPOSED] | rules carry the layout, per the brief's QA list |
 | Info column | serif title, mono text, optional secondary link, vertical hairline divider | candidate | [PROPOSED] | appears once, with uneven widths; test on a second page before adopting |
