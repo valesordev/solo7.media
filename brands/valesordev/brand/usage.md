@@ -15,7 +15,7 @@ Each section is a stable anchor: cite `usage.md#<section>`.
 
 Never introduce, unless Brian asks in the session: new colors, new font families, rounded or card-heavy UI,
 gradients, shadows, marketing copy, decorative diagrams, or additional illustration styles. `[DECIDED 2026-10-08]`
-(brief, CLAUDE.md guidance)
+(brief, section 6 CLAUDE.md example)
 
 ## brandheader
 
@@ -64,11 +64,11 @@ gradients, shadows, marketing copy, decorative diagrams, or additional illustrat
 
 ## projectrow
 
-**Correct**
+**Correct** (structure specimen; the data is placeholder, not content)
 ```
 Andara's World          Tools, generators, and systems     STACK    Python, TypeScript         ->
 A living world for      for building and exploring a       LICENSE  Apache-2.0
-fiction, built with     coherent fictional world.          REPO     github.com/valesordev/...
+fiction, built with     coherent fictional world.          REPO     github.com/<org>/<repo>
 code.
 -------------------------------------------------------------------------------------------------
 ```
@@ -89,11 +89,11 @@ code.
 
 ## technicalmetadata
 
-**Correct**
+**Correct** (structure specimen; the values are placeholders)
 ```
-STACK    TypeScript, SQLite, Tauri
+STACK    Python, TypeScript
 LICENSE  Apache-2.0
-REPO     github.com/valesordev/vagabond
+REPO     github.com/<org>/<repo>
 ```
 - Uppercase mono labels in `ink-muted`; values in mono; comma-separated stack; SPDX license; repository path
   without scheme.
@@ -122,14 +122,14 @@ REPO     github.com/valesordev/vagabond
 - Vermilion for anything but a primary action or direction (decoration, emphasis, headings).
 - Button styling: fill, border, radius, or padding that makes the link a box.
 - A hover color or a removed focus outline.
-- A second primary link in the same band.
+- A second primary CTA in the same band (a `ProjectRow` arrow isn't a CTA).
 
 ## footer
 
 `[PROPOSED]` (see `visual-language.md#footer`)
 
 **Correct**
-- A rule, then "Valesor Development" with "Released under Apache-2.0 by default." at left; GitHub, About,
+- A rule, then "Valesor Development" with a one-line license statement (text `[PROPOSED]`, Brian approves) at left; GitHub, About,
   Privacy at right, as plain mono links.
 - The Privacy link on every page.
 - Narrow: stacked, left aligned.

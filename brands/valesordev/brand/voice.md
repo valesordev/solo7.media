@@ -16,10 +16,10 @@ When a person is needed, it is "I". Never "we", "our team", or "us". There is no
 | Write | Not |
 |---|---|
 | I built this to run offline. | We built this to run offline. |
-| Vagabond stores notes as plain files. | Our platform stores your notes. |
+| <Project> stores notes as plain files. | Our platform stores your notes. |
 | I release it under Apache-2.0. | We're proud to open-source it. |
 
-Prefer the project as subject ("Vagabond does X") over "I" when the sentence is about the software.
+Prefer the project as subject ("<Project> does X") over "I" when the sentence is about the software.
 Use "I" only when a decision, a reason, or an opinion needs an owner. `[DECIDED 2026-10-08]`
 
 Valesor Development is always an imprint, never "a company", "a studio", "a team", "a firm", or "a brand".
@@ -113,12 +113,14 @@ Each project is described by what it is made of and what it does. `[PROPOSED]` (
 Never write a feature list, a benefit, or a comparison with a named product.
 
 ## The imprint's own sentences
-Fixed lines, decided in the audit. Treat them as the voice's reference text. `[DECIDED 2026-10-08]` (audit copy
-rows; characters rule above applies)
+Reference lines. The first two are decided in the audit (copy rows; the characters rule above applies):
 
 - "The engineering imprint."
 - "Not a company. No clients. No products. Just work in the open."
-- "Released under Apache-2.0 by default."
+
+Proposed, not in the audit: "Released under Apache-2.0 by default." `[PROPOSED]` (the target's blurb says it;
+whether Apache-2.0 is the imprint's stated default is Brian's to confirm).
+
 
 The subhead and the "What belongs here?" column of the target lose their dashes under the characters rule. The
 rewritten sentences are copy for Brian's approval with the homepage story, not decided here. `[PROPOSED]`

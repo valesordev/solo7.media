@@ -95,7 +95,8 @@ and the engraving language stay Valesor's alone. `[PROPOSED]` (audit, Distinctne
 confirm when the second imprint's audit exists)
 
 ## Scope of the kit
-The R1 kit covers the homepage, the `/privacy` page, and the 404. Project detail pages, README template, and
+The R1 kit covers the homepage and the `/privacy` page (FEAT-01); a 404 recipe is visual-designer's addition for
+the route `docs/adr/0001-site-structure.md` lists. Project detail pages, README template, and
 social card are later (FEAT-01). The brief's `Callout` component is not in R1: nothing on the specimen uses it.
 `[PROPOSED]` (specify it when a page needs it; the audit shows no instance)
 

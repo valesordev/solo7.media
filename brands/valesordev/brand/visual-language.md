@@ -40,7 +40,8 @@ Rules:
 ## Typography
 Two families, one job each. `[DECIDED 2026-10-08]` (audit: Typography; Q2)
 
-- **Display serif** names things: wordmark, H1, subhead, section titles, project names, column titles, nav.
+- **Display serif** names things: wordmark, H1, subhead, section titles, project names, column titles. Nav is
+  serif too, but that is `[PROPOSED]` (below).
 - **Monospace** explains and measures: body text, descriptions, taglines, metadata, links and CTAs, footer.
 - No sans-serif, anywhere. No third family, no italic display, no bold display. Weight is regular throughout.
   `[DECIDED 2026-10-08]`
@@ -54,14 +55,14 @@ Roles. Sizes are relative to body (`1x`) as measured in the audit; the token sto
 |---|---|---|---|---|---|
 | Wordmark | serif | 1.6x | title case | slightly tight | Valesor Development |
 | Display (H1) | serif | 4x | sentence case | tight, about -1% | The engineering imprint. |
-| Subhead | serif | 1.7x | sentence case | normal | Software, tools, and systems, released in the open. |
+| Subhead | serif | 1.7x | sentence case | normal | (placeholder: the target's subhead, rewritten without its dash) |
 | Section title | serif | 2.4x | sentence case | normal | Projects |
 | Row title | serif | 1.7x | title case | normal | Andara's World |
 | Column title | serif | 1.2x | title case | normal | License |
-| Body, descriptions, taglines | mono | 1x (about 14 to 15px in the target) | sentence case | normal | Tools, generators, and systems for... |
+| Body, descriptions, taglines | mono | 1x (about 14 to 15px in the target) | sentence case | normal | Tools and systems for building a fictional world. |
 | Metadata label | mono | 0.85x | uppercase | spaced | STACK |
 | Metadata value | mono | 0.85x to 1x | as written | normal | Apache-2.0 |
-| Nav | serif | 1x | as written | normal | Projects, GitHub, About |
+| Nav `[PROPOSED]` | serif | 1x | as written | normal | Projects, GitHub, About |
 | Link, CTA | mono | 1x | sentence case | normal | Browse the source -> |
 
 Notes:
@@ -99,7 +100,8 @@ the audit measured one 1586px frame and no responsive evidence.
   hold name, description, and metadata side by side. Rejected: three breakpoints (more states than the homepage
   has parts).
 
-### Narrow layout (mobile) `[PROPOSED]`
+### Narrow layout (mobile)
+`[PROPOSED]`
 Everything stacks in reading order, left aligned, the same column inset, the same rules.
 
 1. `BrandHeader`: wordmark on the first line, nav links on the second, rule below. Nav stays visible; no menu
@@ -123,7 +125,7 @@ Rules that bind layout:
 - The hero illustration runs full-bleed, left to right. Its bottom edge is ragged, not cut, and sits just above
   the rule beneath. `[DECIDED 2026-10-08]`
 - Type is never set on the engraved area. It sits in the empty sky. `[DECIDED 2026-10-08]`
-- Art never carries text. `[DECIDED 2026-10-08]` (role charter)
+- Art never carries text. `[DECIDED 2026-10-08]` (`.claude/roles/visual-designer.md`: no text in rasters)
 - A hero has alt text only if it carries information; the homepage hero is decorative (`alt=""`).
   `[PROPOSED]` (the engraving adds mood, not facts)
 - Hero aspect ratio: the audit saw about 3.7:1 as cropped; the brief names `hero-wide` as 2.4:1. Resolved in the
@@ -136,7 +138,8 @@ Almost none. `[DECIDED 2026-10-08]` (brief: no excessive animation)
 - State changes are instant. `[PROPOSED]`
 - Respect `prefers-reduced-motion`; with nothing animated, there is nothing to turn off.
 
-## Interaction states `[PROPOSED]`
+## Interaction states
+`[PROPOSED]`
 The target shows only rest states. Recommendation, with the alternatives rejected:
 
 - **Hover** on a link: the 1px underline becomes 2px. No color change. Rejected: a second red (the audit and
@@ -154,11 +157,13 @@ incorrect examples, is in `usage.md#<component>`. `Callout` is out of R1 (`found
 
 ### BrandHeader
 `[DECIDED 2026-10-08]` (audit: BrandHeader, Mark)
+Anatomy is decided; rules below that the audit doesn't state (counts, markup, limits, data format) are `[PROPOSED]`.
 
-- The first element of every page. Serif wordmark "Valesor Development" at left; three serif text links at
-  right: Projects, GitHub, About; a 1px `rule` below, on the content column.
-- The wordmark is plain text and links to `/`. It is the only mark. No glyph, no logo image, no tagline.
-- Nav links carry no arrow, no button, no pill, no underline at rest. `[DECIDED 2026-10-08]`
+- The first element of every page. Serif wordmark "Valesor Development" at left; serif text links at
+  right (the target shows Projects, GitHub, About; the nav row itself is `[PROPOSED]`); a 1px `rule` below, on the content column.
+- The wordmark is the only mark: no glyph, no logo image, no tagline (decided). It is plain text and links to `/`
+  `[PROPOSED]`.
+- Nav links carry no arrow, `[DECIDED 2026-10-08]`; no button, pill, or underline at rest `[PROPOSED]`.
 - Current page: a 1px underline on the current link. `[PROPOSED]` (the audit shows no current-page state.
   Rejected: bold, because regular is the only weight; a color change, because the accent is for action.)
 - Nav labels: Projects, GitHub, About. `GitHub` is an external link to the `valesordev` organization.
@@ -168,16 +173,18 @@ incorrect examples, is in `usage.md#<component>`. `Callout` is out of R1 (`found
 
 ### Hero
 `[DECIDED 2026-10-08]` (audit: Hero)
+Anatomy is decided; rules below that the audit doesn't state (counts, markup, limits, data format) are `[PROPOSED]`.
 
 - A block over the illustration's empty zone: H1, subhead, a two-line mono blurb, and one primary `TextLink`.
   Type is left aligned to the content column edge and stays in the left part of the frame.
 - One H1 per page. The subhead is a single line. The blurb is at most two short lines. One CTA, vermilion.
-- The illustration is full-bleed, behind the type's zone but never under it (the type sits in clear sky).
+- The illustration is full-bleed; the type sits in its empty sky, never on engraved ground.
 - No second CTA, no badge, no counter, no scroll cue, no overlay or gradient scrim.
 - Tokens: `ink` (H1, subhead), `ink-muted` (blurb), `accent` (CTA), display serif and mono roles.
 
 ### SectionRule
 `[DECIDED 2026-10-08]` (audit: SectionRule)
+Anatomy is decided; rules below that the audit doesn't state (counts, markup, limits, data format) are `[PROPOSED]`.
 
 - A full-column 1px `rule`, with optional content under it: a serif section title at left and a right aligned
   `TextLink` (the target: "Projects" and "View all projects ->").
@@ -188,6 +195,7 @@ incorrect examples, is in `usage.md#<component>`. `Callout` is out of R1 (`found
 
 ### ProjectRow
 The signature component. `[DECIDED 2026-10-08]` (audit: ProjectRow)
+Anatomy is decided; rules below that the audit doesn't state (counts, markup, limits, data format) are `[PROPOSED]`.
 
 - A four-part row between two 1px `rule`s: (1) serif name with the mono tagline beneath; (2) mono description;
   (3) `TechnicalMetadata`; (4) a vermilion `->` at the far right. Row pitch is constant: every row has the same
@@ -201,11 +209,12 @@ The signature component. `[DECIDED 2026-10-08]` (audit: ProjectRow)
 
 ### TechnicalMetadata
 `[DECIDED 2026-10-08]` (audit: TechnicalMetadata; items 7)
+Anatomy is decided; rules below that the audit doesn't state (counts, markup, limits, data format) are `[PROPOSED]`.
 
 - A two-column label and value list. Labels uppercase mono, spaced, `ink-muted` at the label size. Values mono.
 - Three fields, in this order: STACK, LICENSE, REPO. STACK values are separated by commas
-  ("TypeScript, SQLite, Tauri"). LICENSE is an SPDX identifier ("Apache-2.0"). REPO is the repository path
-  without scheme ("github.com/valesordev/vagabond").
+  ("Python, TypeScript"). LICENSE is an SPDX identifier ("Apache-2.0"). REPO is the repository path
+  without scheme ("github.com/<org>/<repo>").
 - A `dl` in markup. Values are real text, selectable.
 - Order and labels never vary between rows. A missing field is a data defect to fix, not a blank to hide.
   `[PROPOSED]`
@@ -214,11 +223,13 @@ The signature component. `[DECIDED 2026-10-08]` (audit: ProjectRow)
 
 ### TextLink
 `[DECIDED 2026-10-08]` (audit: TextLink, both rows)
+Anatomy is decided; rules below that the audit doesn't state (counts, markup, limits, data format) are `[PROPOSED]`.
 
 - Mono, 1px underline, trailing typed `->`.
-- **Primary:** `accent` text, underline, and arrow. One per band, for the main action only (Hero CTA, a
-  `SectionRule`'s link, the row arrow).
-- **Secondary:** `ink` text, `rule`-grey 1px underline, `ink` arrow. For an action that isn't the main one
+- **Primary:** `accent` text, underline, and arrow. At most one primary CTA per band (the Hero CTA, or a
+  `SectionRule`'s link). The vermilion `->` on a `ProjectRow` is that row's direction mark, not a `TextLink`, so
+  a list of rows doesn't break the rule.
+- **Secondary:** `ink` text, 1px grey underline (token chosen in the tokens story; at least 3:1 on `paper` so the link is findable without color), `ink` arrow. For an action that isn't the main one
   ("Read the license ->").
 - The arrow is part of the link text and typed. It appears on CTAs and action links only: not on nav links, not
   on the wordmark, and not on inline links in prose (which are underlined `ink`, no arrow). `[DECIDED 2026-10-08]`
@@ -231,7 +242,7 @@ Not in the target. `[PROPOSED]` (the brief lists a Footer; the audit has no inst
 `/privacy` from the footer.)
 
 - A `SectionRule` above, then one row in two groups: at left, "Valesor Development" in serif and a one-line mono
-  statement in `ink-muted` ("Released under Apache-2.0 by default."); at right, three mono links: GitHub,
+  statement in `ink-muted` (license line, text `[PROPOSED]`, Brian approves); at right, three mono links: GitHub,
   About, Privacy. No arrow on footer links (they are navigation).
 - Link order: GitHub, About, Privacy. Privacy is present on every page.
 - No copyright symbol or year (a published "(c)" line implies a company; the license is stated instead). No
@@ -239,7 +250,8 @@ Not in the target. `[PROPOSED]` (the brief lists a Footer; the audit has no inst
 - Narrow: stacks, left aligned.
 - Tokens: `rule`, `ink`, `ink-muted`, wordmark role at the small end, nav role.
 
-## `/privacy` page template `[PROPOSED]`
+## `/privacy` page template
+`[PROPOSED]`
 Built under FEAT-04. The text is Brian's and changes only with him (`CLAUDE.md` §7); this specifies the frame.
 
 - The standard frame: `BrandHeader`, then a text page, then `Footer`. No hero, no illustration.
