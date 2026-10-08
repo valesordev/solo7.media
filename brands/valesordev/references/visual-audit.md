@@ -16,8 +16,8 @@ Brief: the Notion page's character (quiet, durable, precise, independent, open, 
 |---|---|---|---|---|---|---|
 | paper | ≈ #FEFEFE median (range #FCFCFC–#FFFFFF) | ~83% of pixels at L ≥ 240 | page ground, whole page | core | [DECIDED 2026-10-08] | neutral, not warm (Q1); the surface is near-white; everything else sits on it |
 | ink (illustration) | #000000 | ~6% of pixels at L < 100 (mostly the illustration) | engraving line | core | [DECIDED 2026-10-08] | the engraving is pure black, as the brief's "pure black ink on pure white" asks |
-| ink (display type) | #000000 as sampled | small | wordmark, H1, section/row titles | core: #111111 for type, #000000 only in the illustration (Q1) | [DECIDED 2026-10-08] | the target renders it pure black; the brief says #111111 |
-| ink-muted | ≈ #555555 | small text | mono body, descriptions, metadata values | core | [DECIDED 2026-10-08] | a single mid grey carries all secondary text; matches the brief's `ink-muted #545454` |
+| ink (display type) | #000000 as sampled | small | wordmark, H1, section/row titles | core as near-black serif display; recommend #111111 for type, #000000 only in the engraving (confirm) | [PROPOSED] | the target renders it pure black; the brief says #111111 |
+| ink-muted | ≈ #555555 | small text | mono body, descriptions, metadata values | core | [PROPOSED] | a single mid grey carries all secondary text; matches the brief's `ink-muted #545454` |
 | ink-faint | ≈ #808080 | tiny | metadata labels (STACK / LICENSE / REPO) | candidate | [PROPOSED] | could be ink-muted at a smaller size; anti-aliasing makes it unclear whether it is a third grey |
 | rule (light) | ≈ #CCCCCC–#D6D6D6 | 1px lines | row dividers, vertical column dividers, header rule's first pixel | core | [DECIDED 2026-10-08] | hairlines carry the layout |
 | rule (strong) | ≈ #A6A6A8–#B1B2B3 | 1px lines | header rule, section rules above/below "Projects" block | candidate | [PROPOSED] | two rule weights may be intended (structure vs. row) or one rule rendered unevenly; it is a decision for the token set |
@@ -28,7 +28,7 @@ a warm paper tone); text edges carry grey fringing and some JPEG-like softness; 
 because they are 1px anti-aliased.
 
 **Drift from the brief:** the Notion page lists `paper #FAFAF7` (warm) and `rule #CFCFC8` (warm), `ink #111111`.
-The target is neutral: no warm cast in the ground or rules, and its ink is pure #000. Brian decides which wins (Q1).
+The target is neutral: no warm cast in the ground or rules, and its ink is pure #000. Q1 answered 2026-10-08: neutral paper and rules (see Decisions); the ink value for type is still to confirm.
 
 ## Typography
 | Role | Sample | Class/family guess | Size vs body | Weight · case · tracking | Class | Status |
@@ -94,7 +94,7 @@ Choosing is Brian's.
 ## Copy and voice signals
 - H1 "The engineering imprint." and the line "Not a company. No clients. No products. Just work in the open." match the brief's voice. **core** `[PROPOSED]`.
 - CTA wording "Browse the source →", "Read the license →", "About this project →", "View all projects →": all on the brief's preferred list or its style. **core** `[PROPOSED]`.
-- Subhead uses a spaced em dash ("— released in the open"); the "What belongs here?" column also uses one. Decided 2026-10-08: no em dashes, and no characters off a standard keyboard, in copy (Decisions).
+- Subhead uses a spaced em dash ("— released in the open"); the "What belongs here?" column also uses one. `[DECIDED 2026-10-08]` no em dashes, and no characters off a standard keyboard, in copy (Decisions).
 
 ## Not evidenced by the target
 No class applies; these need a brand decision, not an observation. Mobile crop and stacking (Q4); max content width (Q4); `Callout` and `Footer` components, which the brief lists but the image does not show; first-person voice, since nothing in the frame says "I" or "we".
@@ -111,7 +111,7 @@ No sibling imprint has an approved audit yet (Valesor goes first), so there is n
 for the next audit: the paper, ink, and hairline-rule items are core here and will probably recur in other imprints;
 the serif + mono pairing, the vermilion accent, and the engraving language should stay Valesor's alone.
 
-## Open questions for Brian
+## Open questions for Brian (answered 2026-10-08, see Decisions)
 1. Paper and ink: the target is neutral (#FDFDFD ground, #000 ink, grey rules) but the brief says warm (#FAFAF7 paper, #111 ink, #CFCFC8 rule). Recommend the target's neutral values for paper and rules, because the hero is "pure black ink on pure white" and a warm ground would tint the engraving's whites; keep ink at #111 on UI text and use #000 only in the illustration, because pure black type at this weight is harsh on a bright ground. Rejected: adopting the brief's warm paper (the illustration would sit on a visible tint).
 2. Body typeface class: the target sets all running text in monospace. Recommend keeping mono as body for the home page and metadata but leaving long-form reading (project pages, README-style content) to a decision when the docs are written, because the image only proves it works for short passages.
 3. Accent: the target's red is ≈ #C8202A. Recommend a single vermilion near that value, derived at token time against 4.5:1 on paper (it is ≈ 5.5:1 as sampled), and used only for primary action and direction. Rejected: a second, muted red for hover.
@@ -119,10 +119,11 @@ the serif + mono pairing, the vermilion accent, and the engraving language shoul
 5. Em dashes in copy (subhead, "What belongs here?"): allow, or avoid in the voice doc? Recommend avoid, because the brief's copy rules are plain and short and a spaced dash reads as generated.
 
 ## Decisions
-- 2026-10-08 Brian, on the open questions (the checkbox classifications are still `[PROPOSED]` until PR review):
-  1. "Neutral". Taken as accepting the recommendation: neutral paper and rules from the target, not the brief's warm values; #111111 for text and #000000 only in the illustration. Paper, ink, ink-muted, and light-rule rows are `[DECIDED 2026-10-08]`.
-  2. "Mono is good". Mono stays as the body and metadata face (rows `[DECIDED 2026-10-08]`). Whether long-form reading uses it too is not yet decided; I take it as yes unless he says otherwise when the docs are written.
+- 2026-10-08 Brian, on the open questions (rows marked `[DECIDED]` are the ones his answers cover; every other row awaits his PR review):
+  1. "Neutral". Decided: neutral paper and rules from the target, not the brief's warm values (paper, illustration-ink, and light-rule rows are `[DECIDED 2026-10-08]`). My reading, to confirm: #111111 for type and #000000 only in the engraving, as recommended; the display-ink and ink-muted rows stay `[PROPOSED]`.
+  2. "Mono is good". Mono stays as the body and metadata face (rows `[DECIDED 2026-10-08]`). Whether long-form reading also uses it is still open; the recommendation (decide when the docs are written) stands. I read "Mono is good" as covering the home page and metadata.
   3. "agree". One vermilion near #C8202A, action and direction only; accent row `[DECIDED 2026-10-08]`.
   4. "agree". I specify max content width, mobile crop, and breakpoints in `brand/visual-language.md` after the audit is decided.
-  5. "avoid em dashes and other characters not on a human keyboard". Voice rule for `brand/voice.md`: copy uses only characters typed on a standard keyboard, so no em or en dashes, no curly quotes or apostrophes, no ellipsis character. This changes the target copy: the subhead and "What belongs here?" lose their dashes, "Andara's World" uses a straight apostrophe, and the `→` arrow on links and rows is a character outside the keyboard (open, see below).
-- Open after these answers: the trailing `→` is a core motif in the target but is not on a keyboard. Recommend keeping it as a drawn glyph (inline SVG or icon in the kit), not a typed character, so the copy stays keyboard-only. The alternative is a typed `->`, which looks weaker in the mono face.
+  5. "avoid em dashes and other characters not on a human keyboard". Voice rule for `brand/voice.md`. My reading of "other characters": copy uses only characters typed on a standard keyboard, so no em or en dashes, no curly quotes or apostrophes, no ellipsis character. This changes the target copy: the subhead and "What belongs here?" lose their dashes, "Andara's World" uses a straight apostrophe, and the `→` arrow on links and rows becomes a typed `->` (item 6).
+  6. "use the typed ->". Decided: link and row arrows are typed `->` in copy and CTAs, not the `→` glyph the target shows. The target's `→` is an observation; the kit's arrow is `->`. The arrow rows stay `[PROPOSED]` as to colour and placement.
+- Open after these answers: the `·` stack separator in `TechnicalMetadata` is also off a keyboard. Recommend a comma ("TypeScript, SQLite, Tauri"), because the labels already name the field; the alternative is " / ".
