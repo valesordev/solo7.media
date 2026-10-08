@@ -89,7 +89,7 @@ Prefer:
 - `See how it works ->`
 - `View all projects ->`
 
-All but `View source ->` and `Read the license ->` are in the target or the brief. Others follow the same shape: a verb that is
+All of these are in the target or the brief. Others follow the same shape: a verb that is
 literally what the link does, then the object. New CTAs not on this list are proposed to visual-designer on the
 story.
 
