@@ -1,6 +1,7 @@
 node_modules/
 dist/
 .astro/
+.envrc
 
 # Brand art candidates are never committed
 brands/*/assets/candidates/
