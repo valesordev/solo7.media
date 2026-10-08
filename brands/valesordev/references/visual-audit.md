@@ -14,14 +14,14 @@ Brief: the Notion page's character (quiet, durable, precise, independent, open, 
 ## Palette
 | Role (observed) | Hex | Area ≈ | Where | Class | Status | Why |
 |---|---|---|---|---|---|---|
-| paper | ≈ #FEFEFE median (range #FCFCFC–#FFFFFF) | ~83% of pixels at L ≥ 240 | page ground, whole page | core | [PROPOSED] | the surface is near-white and neutral; everything else sits on it |
-| ink (illustration) | #000000 | ~6% of pixels at L < 100 (mostly the illustration) | engraving line | core | [PROPOSED] | the engraving is pure black, as the brief's "pure black ink on pure white" asks |
-| ink (display type) | #000000 as sampled | small | wordmark, H1, section/row titles | core as "near-black serif display"; exact value open (Q1) | [PROPOSED] | the target renders it pure black; the brief says #111111 |
-| ink-muted | ≈ #555555 | small text | mono body, descriptions, metadata values | core | [PROPOSED] | a single mid grey carries all secondary text; matches the brief's `ink-muted #545454` |
+| paper | ≈ #FEFEFE median (range #FCFCFC–#FFFFFF) | ~83% of pixels at L ≥ 240 | page ground, whole page | core | [DECIDED 2026-10-08] | neutral, not warm (Q1); the surface is near-white; everything else sits on it |
+| ink (illustration) | #000000 | ~6% of pixels at L < 100 (mostly the illustration) | engraving line | core | [DECIDED 2026-10-08] | the engraving is pure black, as the brief's "pure black ink on pure white" asks |
+| ink (display type) | #000000 as sampled | small | wordmark, H1, section/row titles | core: #111111 for type, #000000 only in the illustration (Q1) | [DECIDED 2026-10-08] | the target renders it pure black; the brief says #111111 |
+| ink-muted | ≈ #555555 | small text | mono body, descriptions, metadata values | core | [DECIDED 2026-10-08] | a single mid grey carries all secondary text; matches the brief's `ink-muted #545454` |
 | ink-faint | ≈ #808080 | tiny | metadata labels (STACK / LICENSE / REPO) | candidate | [PROPOSED] | could be ink-muted at a smaller size; anti-aliasing makes it unclear whether it is a third grey |
-| rule (light) | ≈ #CCCCCC–#D6D6D6 | 1px lines | row dividers, vertical column dividers, header rule's first pixel | core | [PROPOSED] | hairlines carry the layout |
+| rule (light) | ≈ #CCCCCC–#D6D6D6 | 1px lines | row dividers, vertical column dividers, header rule's first pixel | core | [DECIDED 2026-10-08] | hairlines carry the layout |
 | rule (strong) | ≈ #A6A6A8–#B1B2B3 | 1px lines | header rule, section rules above/below "Projects" block | candidate | [PROPOSED] | two rule weights may be intended (structure vs. row) or one rule rendered unevenly; it is a decision for the token set |
-| accent | ≈ #C8202A (darkest sampled #CA0F18; mid-stroke #C62A24) | ~0.03% | primary CTA text and underline, "View all projects →", row arrows | core | [PROPOSED] | the only chroma in the page (about 0.1–0.15% of pixels have a channel spread above 15); direction and primary action only |
+| accent | ≈ #C8202A (darkest sampled #CA0F18; mid-stroke #C62A24) | ~0.03% | primary CTA text and underline, "View all projects →", row arrows | core | [DECIDED 2026-10-08] | the only chroma in the page (about 0.1–0.15% of pixels have a channel spread above 15); direction and primary action only |
 
 Artefacts (not colours): the "white" ground varies #FCFCFC–#FFFFFF with a faint, even grain (generator noise, not
 a warm paper tone); text edges carry grey fringing and some JPEG-like softness; link underlines read #AEAEAF only
@@ -38,8 +38,8 @@ The target is neutral: no warm cast in the ground or rules, and its ink is pure 
 | Subhead | "Software, tools, and systems — released in the open." | same serif | ≈ 1.7× | regular · sentence case | core | [PROPOSED] |
 | Section title | "Projects" | same serif | ≈ 2.4× | regular · sentence case | core | [PROPOSED] |
 | Column / row title | "License", "Andara's World" | same serif | ≈ 1.2× (column) / ≈ 1.7× (row) | regular · title case | core | [PROPOSED] |
-| Body / descriptions | hero blurb, column text, row descriptions | monospace, humanist, dotted-or-slashed zero (IBM Plex Mono–like) | 1× (≈ 14–15px) | regular · sentence case · normal | core | [PROPOSED] |
-| Metadata | STACK / LICENSE / REPO + values | same mono, labels uppercase | ≈ 0.85× | regular · labels uppercase, spaced · values as written | core | [PROPOSED] |
+| Body / descriptions | hero blurb, column text, row descriptions | monospace, humanist, dotted-or-slashed zero (IBM Plex Mono–like) | 1× (≈ 14–15px) | regular · sentence case · normal | core | [DECIDED 2026-10-08] |
+| Metadata | STACK / LICENSE / REPO + values | same mono, labels uppercase | ≈ 0.85× | regular · labels uppercase, spaced · values as written | core | [DECIDED 2026-10-08] |
 | Nav | Projects, GitHub, About | serif, small | ≈ 1× | regular | candidate | [PROPOSED] |
 | Links / CTAs | "Browse the source →", "Read the license →" | mono, underlined, trailing arrow | 1× | regular · sentence case | core | [PROPOSED] |
 
@@ -94,7 +94,7 @@ Choosing is Brian's.
 ## Copy and voice signals
 - H1 "The engineering imprint." and the line "Not a company. No clients. No products. Just work in the open." match the brief's voice. **core** `[PROPOSED]`.
 - CTA wording "Browse the source →", "Read the license →", "About this project →", "View all projects →": all on the brief's preferred list or its style. **core** `[PROPOSED]`.
-- Subhead uses a spaced em dash ("— released in the open"); the "What belongs here?" column also uses one. Whether em dashes are allowed is a voice decision. **candidate** `[PROPOSED]`.
+- Subhead uses a spaced em dash ("— released in the open"); the "What belongs here?" column also uses one. Decided 2026-10-08: no em dashes, and no characters off a standard keyboard, in copy (Decisions).
 
 ## Not evidenced by the target
 No class applies; these need a brand decision, not an observation. Mobile crop and stacking (Q4); max content width (Q4); `Callout` and `Footer` components, which the brief lists but the image does not show; first-person voice, since nothing in the frame says "I" or "we".
@@ -119,4 +119,10 @@ the serif + mono pairing, the vermilion accent, and the engraving language shoul
 5. Em dashes in copy (subhead, "What belongs here?"): allow, or avoid in the voice doc? Recommend avoid, because the brief's copy rules are plain and short and a spaced dash reads as generated.
 
 ## Decisions
-- (none yet; Brian decides at PR review)
+- 2026-10-08 Brian, on the open questions (the checkbox classifications are still `[PROPOSED]` until PR review):
+  1. "Neutral". Taken as accepting the recommendation: neutral paper and rules from the target, not the brief's warm values; #111111 for text and #000000 only in the illustration. Paper, ink, ink-muted, and light-rule rows are `[DECIDED 2026-10-08]`.
+  2. "Mono is good". Mono stays as the body and metadata face (rows `[DECIDED 2026-10-08]`). Whether long-form reading uses it too is not yet decided; I take it as yes unless he says otherwise when the docs are written.
+  3. "agree". One vermilion near #C8202A, action and direction only; accent row `[DECIDED 2026-10-08]`.
+  4. "agree". I specify max content width, mobile crop, and breakpoints in `brand/visual-language.md` after the audit is decided.
+  5. "avoid em dashes and other characters not on a human keyboard". Voice rule for `brand/voice.md`: copy uses only characters typed on a standard keyboard, so no em or en dashes, no curly quotes or apostrophes, no ellipsis character. This changes the target copy: the subhead and "What belongs here?" lose their dashes, "Andara's World" uses a straight apostrophe, and the `→` arrow on links and rows is a character outside the keyboard (open, see below).
+- Open after these answers: the trailing `→` is a core motif in the target but is not on a keyboard. Recommend keeping it as a drawn glyph (inline SVG or icon in the kit), not a typed character, so the copy stays keyboard-only. The alternative is a typed `->`, which looks weaker in the mono face.
