@@ -62,7 +62,7 @@ Roles. Sizes are relative to body (`1x`) as measured in the audit; the token sto
 | Body, descriptions, taglines | mono | 1x (about 14 to 15px in the target) | sentence case | normal | Tools and systems for building a fictional world. |
 | Metadata label | mono | 0.85x | uppercase | spaced | STACK |
 | Metadata value | mono | 0.85x to 1x | as written | normal | Apache-2.0 |
-| Nav `[PROPOSED]` | serif | 1x | as written | normal | Projects, GitHub, About |
+| Nav `[PROPOSED]` | serif | 1x | as written | normal | Projects, GitHub |
 | Link, CTA | mono | 1x | sentence case | normal | Browse the source -> |
 
 Notes:
@@ -160,15 +160,16 @@ incorrect examples, is in `usage.md#<component>`. `Callout` is out of R1 (`found
 Anatomy is decided; rules below that the audit doesn't state (counts, markup, limits, data format) are `[PROPOSED]`.
 
 - The first element of every page. Serif wordmark "Valesor Development" at left; serif text links at
-  right (the target shows Projects, GitHub, About; the nav row itself is `[PROPOSED]`); a 1px `rule` below, on the content column.
+  right (the target shows Projects, GitHub, About; the kit drops About, see below; the nav row itself is `[PROPOSED]`); a 1px `rule` below, on the content column.
 - The wordmark is the only mark: no glyph, no logo image, no tagline (decided). It is plain text and links to `/`
   `[PROPOSED]`.
 - Nav links carry no arrow, `[DECIDED 2026-10-08]`; no button, pill, or underline at rest `[PROPOSED]`.
 - Current page: a 1px underline on the current link. `[PROPOSED]` (the audit shows no current-page state.
   Rejected: bold, because regular is the only weight; a color change, because the accent is for action.)
-- Nav labels: Projects, GitHub, About. `GitHub` is an external link to the `valesordev` organization.
-  `[PROPOSED]` (the About page is not in R1's route list; the label stays only if the page ships, and the
-  homepage story decides what it links to)
+- Nav labels: Projects, GitHub. `Projects` goes to the project list on the home page; `GitHub` is an external link
+  to the `valesordev` organization. `[PROPOSED]` labels and destinations.
+- No About page or link. `[DECIDED 2026-10-08]` (Brian: it is described on the homepage; the target's About nav
+  link and "About this project ->" link are dropped)
 - Tokens: `ink`, `rule`, display serif, wordmark and nav roles.
 
 ### Hero
@@ -242,9 +243,9 @@ Not in the target. `[PROPOSED]` (the brief lists a Footer; the audit has no inst
 `/privacy` from the footer.)
 
 - A `SectionRule` above, then one row in two groups: at left, "Valesor Development" in serif and a one-line mono
-  statement in `ink-muted` (license line, text `[PROPOSED]`, Brian approves); at right, three mono links: GitHub,
-  About, Privacy. No arrow on footer links (they are navigation).
-- Link order: GitHub, About, Privacy. Privacy is present on every page.
+  statement in `ink-muted` (license line, text `[PROPOSED]`, Brian approves); at right, two mono links: GitHub,
+  Privacy. No arrow on footer links (they are navigation).
+- Link order: GitHub, Privacy. Privacy is present on every page.
 - No copyright symbol or year (a published "(c)" line implies a company; the license is stated instead). No
   social icons, no sitemap, no newsletter, no back-to-top.
 - Narrow: stacks, left aligned.

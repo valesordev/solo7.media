@@ -87,10 +87,9 @@ Prefer:
 - `Read the license ->`
 - `Open the repository ->`
 - `See how it works ->`
-- `About this project ->`
 - `View all projects ->`
 
-The first four and the last two are in the target or the brief. Others follow the same shape: a verb that is
+All but `View source ->` and `Read the license ->` are in the target or the brief. Others follow the same shape: a verb that is
 literally what the link does, then the object. New CTAs not on this list are proposed to visual-designer on the
 story.
 

@@ -20,7 +20,7 @@ gradients, shadows, marketing copy, decorative diagrams, or additional illustrat
 ## brandheader
 
 **Correct**
-- Serif "Valesor Development" at left, linking to `/`; serif Projects, GitHub, About at right; a 1px rule under.
+- Serif "Valesor Development" at left, linking to `/`; serif Projects and GitHub at right; a 1px rule under.
 - Narrow: wordmark on one line, links on the next, rule below; nothing collapses behind an icon.
 
 **Incorrect**
@@ -129,7 +129,7 @@ REPO     github.com/<org>/<repo>
 `[PROPOSED]` (see `visual-language.md#footer`)
 
 **Correct**
-- A rule, then "Valesor Development" with a one-line license statement (text `[PROPOSED]`, Brian approves) at left; GitHub, About,
+- A rule, then "Valesor Development" with a one-line license statement (text `[PROPOSED]`, Brian approves) at left; GitHub and
   Privacy at right, as plain mono links.
 - The Privacy link on every page.
 - Narrow: stacked, left aligned.
