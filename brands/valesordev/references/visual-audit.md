@@ -14,13 +14,14 @@ Brief: the Notion page's character (quiet, durable, precise, independent, open, 
 ## Palette
 | Role (observed) | Hex | Area ≈ | Where | Class | Status | Why |
 |---|---|---|---|---|---|---|
-| paper | ≈ #FDFDFD (range #FCFCFC–#FFFFFF) | ~83% of pixels at L ≥ 240 | page ground, whole page | core | [PROPOSED] | the surface is near-white and neutral; everything else sits on it |
-| ink | #000000 | ~6% of pixels at L < 100 (mostly the illustration) | wordmark, H1, section/row titles, illustration line | core | [PROPOSED] | serif display and the engraving are pure black, as the brief's "pure black ink on pure white" asks |
+| paper | ≈ #FEFEFE median (range #FCFCFC–#FFFFFF) | ~83% of pixels at L ≥ 240 | page ground, whole page | core | [PROPOSED] | the surface is near-white and neutral; everything else sits on it |
+| ink (illustration) | #000000 | ~6% of pixels at L < 100 (mostly the illustration) | engraving line | core | [PROPOSED] | the engraving is pure black, as the brief's "pure black ink on pure white" asks |
+| ink (display type) | #000000 as sampled | small | wordmark, H1, section/row titles | core as "near-black serif display"; exact value open (Q1) | [PROPOSED] | the target renders it pure black; the brief says #111111 |
 | ink-muted | ≈ #555555 | small text | mono body, descriptions, metadata values | core | [PROPOSED] | a single mid grey carries all secondary text; matches the brief's `ink-muted #545454` |
 | ink-faint | ≈ #808080 | tiny | metadata labels (STACK / LICENSE / REPO) | candidate | [PROPOSED] | could be ink-muted at a smaller size; anti-aliasing makes it unclear whether it is a third grey |
 | rule (light) | ≈ #CCCCCC–#D6D6D6 | 1px lines | row dividers, vertical column dividers, header rule's first pixel | core | [PROPOSED] | hairlines carry the layout |
 | rule (strong) | ≈ #A6A6A8–#B1B2B3 | 1px lines | header rule, section rules above/below "Projects" block | candidate | [PROPOSED] | two rule weights may be intended (structure vs. row) or one rule rendered unevenly; it is a decision for the token set |
-| accent | ≈ #C8202A (darkest sampled #CA0F18; mid-stroke #C62A24) | ~0.03% | primary CTA text and underline, "View all projects →", row arrows | core | [PROPOSED] | the only chroma in the page (0.22% of pixels are non-neutral at all); direction and primary action only |
+| accent | ≈ #C8202A (darkest sampled #CA0F18; mid-stroke #C62A24) | ~0.03% | primary CTA text and underline, "View all projects →", row arrows | core | [PROPOSED] | the only chroma in the page (about 0.1–0.15% of pixels have a channel spread above 15); direction and primary action only |
 
 Artefacts (not colours): the "white" ground varies #FCFCFC–#FFFFFF with a faint, even grain (generator noise, not
 a warm paper tone); text edges carry grey fringing and some JPEG-like softness; link underlines read #AEAEAF only
@@ -54,23 +55,21 @@ Choosing is Brian's.
 ## Layout
 | Observation | Class | Status | Why |
 |---|---|---|---|
-| Single content column inset ≈ 60px each side (x 60–1528 of 1586, ≈ 3.8%), full-bleed only for the illustration | core | [PROPOSED] | a constant frame the rules hang from |
+| Single content column inset ≈ 60px each side (x 60–1528 of 1586, ≈ 3.8%; the header rule and "View all projects" run ≈ 3px past it, probably generator slop), full-bleed only for the illustration | core | [PROPOSED] | a constant frame the rules hang from |
 | 1px horizontal rules separate every band: under header (y 60), under hero (y 511), above "Projects" (y 682), under its title (y 745), between rows (y 824, 907). Rules do the layout, not boxes or fills | core | [PROPOSED] | the brief: "rules and typography doing most of the layout work" |
 | Three-column info band with 1px vertical dividers at x 531 and 1052 (columns ≈ 471 / 520 / 476), text inset ≈ 60px from each divider | candidate | [PROPOSED] | strong component, but column widths are uneven and may be generator rounding |
 | ProjectRow is a 4-part grid: title+tagline (x ≈ 67), description (x ≈ 572), metadata block (x ≈ 1102), arrow (x ≈ 1517); row pitch ≈ 80px | core | [PROPOSED] | the brief's signature component |
 | Generous vertical space: header 60px; ≈ 70px above the H1; ≈ 30px between hero and info band | candidate | [PROPOSED] | rhythm is clear but only one frame shows it |
 | No cards, no shadows, no radii, no filled panels, no background bands | core | [PROPOSED] | direct match to "Not Valesor" |
-| Max-width: the frame is fluid at 1586px; no readable-measure cap is visible | hero | [PROPOSED] | one viewport cannot show a cap; implementation needs a brand decision (Q4) |
 
 ## Composition and image behavior
 | Observation | Class | Status | Why |
 |---|---|---|---|
 | Hero art is full-bleed left to right, bottom edge ragged and sitting ≈ 20px above the rule at y 511 | core | [PROPOSED] | the illustration is the brief's "primary recognizable element" |
 | Aspect ≈ 3.7:1 as cropped here (1586 × ≈ 355 of art); the brief names `hero-wide` as 2.4:1 | candidate | [PROPOSED] | the target is shorter than the brief's ratio; the slot spec resolves it |
-| H1, subhead, blurb, CTA sit in the upper-left empty sky; the tree rises behind the right end of the text block (≈ x 650) | core | [PROPOSED] | "large intentional negative-space zones": type lives in the art's empty zone |
+| H1, subhead, blurb, CTA sit in the upper-left empty sky; the tree crown (≈ x 650–870) rises beside the right end of the subhead (ends ≈ x 602) | core | [PROPOSED] | "large intentional negative-space zones": type lives in the art's empty zone |
 | Subject: wind-shaped juniper on a rocky crest, scrub, a layered ridge falling to a basin, mountains at right, a large moon at upper right (≈ x 1290–1395, y 135–235) | hero | [PROPOSED] | this subject belongs to this slot; the *language* is core, below |
 | Moon: stippled disc with a thin dotted outline, no fill | candidate | [PROPOSED] | recurring "large moon" is in the brief; test it in other compositions before making it a mark |
-| Mobile crop behaviour | n/a | [PROPOSED] | not shown; the slot brief must specify (the type zone likely moves above the art) |
 
 ## Navigation, mark, components
 | Pattern | Parts | Class | Status |
@@ -84,7 +83,6 @@ Choosing is Brian's.
 | Info column | serif title, mono text, optional secondary link, vertical hairline divider | candidate | [PROPOSED] |
 | `ProjectRow` | serif name, mono tagline under it, mono description, `TechnicalMetadata`, vermilion arrow `→` | core | [PROPOSED] |
 | `TechnicalMetadata` | uppercase mono label, two-column label/value list: STACK (with `·` separators), LICENSE, REPO | core | [PROPOSED] |
-| `Callout`, `Footer` | not visible in the target | n/a | [PROPOSED] (the brief lists them; they need specs from the brief, not the image) |
 
 ## Line, texture, hierarchy, motifs
 - Line weights: UI rules and underlines are 1px hairlines; the illustration uses heavy contour with fine hatching and stipple. **core** `[PROPOSED]`: the contrast between hairline UI and engraved art is the look.
@@ -97,7 +95,9 @@ Choosing is Brian's.
 - H1 "The engineering imprint." and the line "Not a company. No clients. No products. Just work in the open." match the brief's voice. **core** `[PROPOSED]`.
 - CTA wording "Browse the source →", "Read the license →", "About this project →", "View all projects →": all on the brief's preferred list or its style. **core** `[PROPOSED]`.
 - Subhead uses a spaced em dash ("— released in the open"); the "What belongs here?" column also uses one. Whether em dashes are allowed is a voice decision. **candidate** `[PROPOSED]`.
-- First-person singular is not shown; nothing says "we".
+
+## Not evidenced by the target
+No class applies; these need a brand decision, not an observation. Mobile crop and stacking (Q4); max content width (Q4); `Callout` and `Footer` components, which the brief lists but the image does not show; first-person voice, since nothing in the frame says "I" or "we".
 
 ## Tells (never core)
 - **Typo:** "A living world for fction, built with code." Row 1's tagline drops the "i" in "fiction". The same row's description spells it correctly.
@@ -115,7 +115,7 @@ the serif + mono pairing, the vermilion accent, and the engraving language shoul
 1. Paper and ink: the target is neutral (#FDFDFD ground, #000 ink, grey rules) but the brief says warm (#FAFAF7 paper, #111 ink, #CFCFC8 rule). Recommend the target's neutral values for paper and rules, because the hero is "pure black ink on pure white" and a warm ground would tint the engraving's whites; keep ink at #111 on UI text and use #000 only in the illustration, because pure black type at this weight is harsh on a bright ground. Rejected: adopting the brief's warm paper (the illustration would sit on a visible tint).
 2. Body typeface class: the target sets all running text in monospace. Recommend keeping mono as body for the home page and metadata but leaving long-form reading (project pages, README-style content) to a decision when the docs are written, because the image only proves it works for short passages.
 3. Accent: the target's red is ≈ #C8202A. Recommend a single vermilion near that value, derived at token time against 4.5:1 on paper (it is ≈ 5.5:1 as sampled), and used only for primary action and direction. Rejected: a second, muted red for hover.
-4. Reading measure and breakpoints: the target is one 1586px frame. Recommend I specify a max content width and the mobile stacking order in `visual-language.md` once the audit is decided, rather than inferring them here.
+4. Reading measure, mobile crop, and breakpoints: the target is one 1586px frame. Recommend I specify a max content width and the mobile stacking order in `visual-language.md` once the audit is decided, rather than inferring them here.
 5. Em dashes in copy (subhead, "What belongs here?"): allow, or avoid in the voice doc? Recommend avoid, because the brief's copy rules are plain and short and a spaced dash reads as generated.
 
 ## Decisions
