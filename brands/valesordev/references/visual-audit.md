@@ -4,7 +4,7 @@
 **Status:** draft
 
 Classes: **core** (persists across the brand) · **candidate** (test before adopting) · **hero** (this composition only).
-Every line is `[PROPOSED]` until Brian decides it at PR review, then `[DECIDED <date>]`.
+Every line is `[PROPOSED]` until Brian decides it, then `[DECIDED <date>]`; Decisions lists what he has decided so far.
 
 Measurements are in target pixels (1586 × 992, one frame, no responsive evidence). Colours were sampled from named
 regions; text colours are anti-aliased at small sizes, so they are estimates of the intended value, not exact.
@@ -19,7 +19,7 @@ Brief: the Notion page's character (quiet, durable, precise, independent, open, 
 | ink (display type) | #000000 as sampled | small | wordmark, H1, section/row titles | core as near-black serif display; recommend #111111 for type, #000000 only in the engraving (confirm) | [PROPOSED] | the target renders it pure black; the brief says #111111 |
 | ink-muted | ≈ #555555 | small text | mono body, descriptions, metadata values | core | [PROPOSED] | a single mid grey carries all secondary text; matches the brief's `ink-muted #545454` |
 | ink-faint | ≈ #808080 | tiny | metadata labels (STACK / LICENSE / REPO) | candidate | [PROPOSED] | could be ink-muted at a smaller size; anti-aliasing makes it unclear whether it is a third grey |
-| rule (light) | ≈ #CCCCCC–#D6D6D6 | 1px lines | row dividers, vertical column dividers, header rule's first pixel | core | [DECIDED 2026-10-08] | hairlines carry the layout |
+| rule (light) | ≈ #CCCCCC–#D6D6D6 | 1px lines | row dividers, vertical column dividers, header rule's first pixel | core | [DECIDED 2026-10-08] | hairlines carry the layout; the hex is a sample, the token set fixes the value |
 | rule (strong) | ≈ #A6A6A8–#B1B2B3 | 1px lines | header rule, section rules above/below "Projects" block | candidate | [PROPOSED] | two rule weights may be intended (structure vs. row) or one rule rendered unevenly; it is a decision for the token set |
 | accent | ≈ #C8202A (darkest sampled #CA0F18; mid-stroke #C62A24) | ~0.03% | primary CTA text and underline, "View all projects ->" (target shows →; see Decisions item 6), row arrows | core | [DECIDED 2026-10-08] | the only chroma in the page (about 0.1–0.15% of pixels have a channel spread above 15); direction and primary action only |
 
@@ -31,6 +31,8 @@ because they are 1px anti-aliased.
 The target is neutral: no warm cast in the ground or rules, and its ink is pure #000. Q1 answered 2026-10-08: neutral paper and rules (see Decisions); the ink value for type is still to confirm.
 
 ## Typography
+
+Arrow glyphs (`→`) in this section are observations of the target. The kit uses a typed `->` (Decisions item 6).
 | Role | Sample | Class/family guess | Size vs body | Weight · case · tracking | Class | Status |
 |---|---|---|---|---|---|---|
 | Wordmark | "Valesor Development" | serif, Times-like transitional/old-style with sharp serifs | ≈ 1.6× | regular · title case · slightly tight | core | [PROPOSED] |
@@ -72,6 +74,8 @@ Choosing is Brian's.
 | Moon: stippled disc with a thin dotted outline, no fill | candidate | [PROPOSED] | recurring "large moon" is in the brief; test it in other compositions before making it a mark |
 
 ## Navigation, mark, components
+
+Arrow glyphs (`→`) in this section are observations of the target. The kit uses a typed `->` (Decisions item 6).
 | Pattern | Parts | Class | Status |
 |---|---|---|---|
 | `BrandHeader` | serif wordmark left, three serif text links right, 1px rule below; no button, no logo glyph | core | [PROPOSED] |
@@ -125,5 +129,5 @@ the serif + mono pairing, the vermilion accent, and the engraving language shoul
   3. "agree". One vermilion near #C8202A, action and direction only; accent row `[DECIDED 2026-10-08]`.
   4. "agree". I specify max content width, mobile crop, and breakpoints in `brand/visual-language.md` after the audit is decided.
   5. "avoid em dashes and other characters not on a human keyboard". Voice rule for `brand/voice.md`. My reading of "other characters": copy uses only characters typed on a standard keyboard, so no em or en dashes, no curly quotes or apostrophes, no ellipsis character. This changes the target copy: the subhead and "What belongs here?" lose their dashes, "Andara's World" uses a straight apostrophe, and the `→` arrow on links and rows becomes a typed `->` (item 6).
-  6. "use the typed ->". Decided: link and row arrows are typed `->` in copy and CTAs, not the `→` glyph the target shows. The target's `→` is an observation; the kit's arrow is `->`. The arrow rows stay `[PROPOSED]` as to colour and placement.
+  6. "use the typed ->". Decided: link and row arrows are typed `->` in copy and CTAs, not the `→` glyph the target shows. The target's `→` is an observation; the kit's arrow is `->`. Primary and row arrows are vermilion per item 3; the ink-coloured secondary link arrow and the placement rows stay `[PROPOSED]`.
 - Open after these answers: the `·` stack separator in `TechnicalMetadata` is also off a keyboard. Recommend a comma ("TypeScript, SQLite, Tauri"), because the labels already name the field; the alternative is " / ".
