@@ -43,7 +43,7 @@ Arrow glyphs (`→`) in this section are observations of the target. The kit use
 | Body / descriptions | hero blurb, column text, row descriptions | monospace, humanist, dotted-or-slashed zero (IBM Plex Mono–like) | 1× (≈ 14–15px) | regular · sentence case · normal | core | [DECIDED 2026-10-08] (mono face only; size, case, tracking [PROPOSED]) |
 | Metadata | STACK / LICENSE / REPO + values | same mono, labels uppercase | ≈ 0.85× | regular · labels uppercase, spaced · values as written | core | [DECIDED 2026-10-08] (mono face only; size, case, tracking [PROPOSED]) |
 | Nav | Projects, GitHub, About | serif, small | ≈ 1× | regular | candidate | [PROPOSED] |
-| Links / CTAs | "Browse the source →", "Read the license →" | mono, underlined, trailing arrow | 1× | regular · sentence case | core | [PROPOSED] |
+| Links / CTAs | "Browse the source →", "Read the license →" | mono, underlined, trailing arrow (CTAs and action links only, not nav) | 1× | regular · sentence case | core | [PROPOSED] |
 
 Pairing: serif for names and headings, mono for everything that explains or measures. No sans-serif appears. The
 Notion page allows "body serif or restrained sans"; the target chose mono for body, which is a stronger and less
@@ -76,23 +76,23 @@ Choosing is Brian's.
 ## Navigation, mark, components
 
 Arrow glyphs (`→`) in this section are observations of the target. The kit uses a typed `->` (Decisions item 6).
-| Pattern | Parts | Class | Status |
-|---|---|---|---|
-| `BrandHeader` | serif wordmark left, three serif text links right, 1px rule below; no button, no logo glyph | core | [PROPOSED] |
-| Mark | the wordmark is the only mark; no symbol is visible | core | [PROPOSED] |
-| `Hero` | H1, subhead, mono blurb, red CTA over the illustration | core | [PROPOSED] |
-| `TextLink` (primary) | mono, vermilion, 1px vermilion underline, trailing `→` | core | [PROPOSED] |
-| `TextLink` (secondary) | mono, ink, 1px grey underline, trailing `→` ("Read the license →") | core | [PROPOSED] |
-| `SectionRule` | 1px full-width rule, optionally with a serif title and a right-aligned red link ("Projects" / "View all projects →") | core | [PROPOSED] |
-| Info column | serif title, mono text, optional secondary link, vertical hairline divider | candidate | [PROPOSED] |
-| `ProjectRow` | serif name, mono tagline under it, mono description, `TechnicalMetadata`, vermilion arrow `→` | core | [PROPOSED] |
-| `TechnicalMetadata` | uppercase mono label, two-column label/value list: STACK (with `·` separators), LICENSE, REPO | core | [PROPOSED] |
+| Pattern | Parts | Class | Status | Why |
+|---|---|---|---|---|
+| `BrandHeader` | serif wordmark left, three serif text links right, 1px rule below; no button, no logo glyph. Nav links carry no arrow. | core | [PROPOSED] | every page frame starts here; the quiet header is the brief's "not a startup nav" |
+| Mark | the wordmark is the only mark; no symbol is visible | core | [PROPOSED] | the brief says the mark "can remain relatively quiet"; the target shows no glyph |
+| `Hero` | H1, subhead, mono blurb, red CTA over the illustration | core | [PROPOSED] | the brief makes the hero art the primary recognizable element, with type in its empty zone |
+| `TextLink` (primary) | mono, vermilion, 1px vermilion underline, trailing `->` (target shows `→`) | core | [PROPOSED] | the one place colour appears for action |
+| `TextLink` (secondary) | mono, ink, 1px grey underline, trailing `->` (target shows `→`; "Read the license →") | core | [PROPOSED] | quiet counterpart so only the main action is red |
+| `SectionRule` | 1px full-width rule, optionally with a serif title and a right-aligned red link ("Projects" / "View all projects ->") | core | [PROPOSED] | rules carry the layout, per the brief's QA list |
+| Info column | serif title, mono text, optional secondary link, vertical hairline divider | candidate | [PROPOSED] | appears once, with uneven widths; test on a second page before adopting |
+| `ProjectRow` | serif name, mono tagline under it, mono description, `TechnicalMetadata`, vermilion arrow (`->` in the kit) | core | [PROPOSED] | the brief calls it a strong candidate for the signature component |
+| `TechnicalMetadata` | uppercase mono label, two-column label/value list: STACK (separator open, see Decisions), LICENSE, REPO | core | [PROPOSED] | source, license and repo visible is a brand QA item and the brief's "technical metadata in mono" |
 
 ## Line, texture, hierarchy, motifs
 - Line weights: UI rules and underlines are 1px hairlines; the illustration uses heavy contour with fine hatching and stipple. **core** `[PROPOSED]`: the contrast between hairline UI and engraved art is the look.
 - Texture: none on the page; the only texture is the engraving. No grain, noise, or paper effect was added deliberately. **core** `[PROPOSED]` (matches "no gradients").
 - Hierarchy and read order: wordmark → H1 → subhead → blurb → red CTA → art → three facts → "Projects" → rows. Black serif carries rank; the only colour is the action. **core** `[PROPOSED]`.
-- Motifs: trailing `→` on every link; the arrow appears in vermilion for primary actions and in ink for secondary. **core** `[PROPOSED]`. The ` · ` separator in stacks. **candidate** `[PROPOSED]`.
+- Motifs: a trailing arrow on call-to-action and action links (typed `->` in the kit; the target shows `→`); navigation links in the header carry no arrow. The arrow appears in vermilion for primary actions and in ink for secondary. **core** `[PROPOSED]`. The ` · ` separator in stacks. **candidate** `[PROPOSED]`.
 - Illustration language (not this subject): pure black on white, no grey wash, no gradients, flat light, heavy contours with hatch and stipple. **core** `[PROPOSED]`, to be written up in `art-direction/illustration-system.md`.
 
 ## Copy and voice signals
