@@ -1,5 +1,5 @@
 {
-  "source": "automate.bashburn.com@973a342-dirty",
+  "source": "automate.bashburn.com@e3e9746-dirty",
   "target": "solo7-media",
   "files": {
     ".claude/skills/arch-start-sprint/SKILL.md": "94489be54f36d507c373fa734901625e137da6ae00f8d9c258c3513ce2914640",
@@ -36,7 +36,7 @@
     ".claude/skills/pr-comments/SKILL.md": "085756a79d1610e63cb23519a4a05b56ee4f933a4af4d5a7779ce8381bceff5c",
     ".claude/skills/pr-comments/references/examples.md": "c0042c30866debcc38047d4b3c32969456cc1419fb3d3b912f0323fa3d81bda2",
     ".claude/skills/pre-pr/SKILL.md": "e20d91d8a05f7a11aec103f57253bcd5c10d47dd9857935ab7f5218ef56cfd22",
-    ".claude/skills/pre-pr/references/checklist.md": "550e0037bc3bd28ac136a582926e59dd53e9e4e669d6879ba00a5a13220e0e0f",
+    ".claude/skills/pre-pr/references/checklist.md": "2380bfa10a2a9546a1b1f92a9ad8704c2676abf8d81409e1064eee174a857ced",
     ".claude/skills/pre-pr/references/examples.md": "94001bd7eb298306d028bda995936e382c1b132a4cfcc8dc9717f9451e4dfa7d",
     ".claude/skills/pre-pr/references/reviewer.md": "2c350f996822f1bca02a6efc7c2108d8fb3e8b55ce68d9d4717d54af56f5e025",
     ".claude/skills/project-sync/SKILL.md": "f54a9778e36cfed4bba29bec7539192caa8b6d23cb716b9f3070a17ccccae6de",
