@@ -28,8 +28,8 @@ The root `package.json` lists workspaces explicitly: `packages/*`, `brands/*`, a
 | `sites/<domain>/` | `@solo7/site-<domain with dots as dashes>` | the Astro app, `wrangler.jsonc`, nothing visual of its own |
 | `packages/site-core/` | `@solo7/site-core` | non-visual code shared by sites (Faro bootstrap, credit line, `/privacy` text in R2) |
 
-One root `package-lock.json` (generated). `tsconfig.base.json` is the shared TypeScript base; each site and
-package extends it.
+One root `package-lock.json` (generated). `tsconfig.base.json` (new in this change) is the shared TypeScript base; each site and
+package extends it. It extends Astro's `strict` preset, so the first site must depend on `astro`.
 
 ### 2. How a site consumes its brand
 A site depends on `@solo7/brand-<slug>` (workspace dependency) and imports only through that package's
@@ -57,7 +57,8 @@ Rules:
 Each site is an Astro app with `output: 'static'`, no SSR adapter, and no client framework in R1. Client JS is
 optional enhancement only: every page's content and navigation work with it off. `astro.config.mjs` sets `site`
 to the production origin and `trailingSlash: 'always'`, so each page builds to `<route>/index.html` and a URL has
-one spelling. Redirects for moved URLs are out of scope here and get their own ADR before cutover.
+one spelling. This spelling (for example `/privacy/`, which the legacy site serves as `/privacy`) is provisional
+until the redirect ADR. Redirects for moved URLs are out of scope here and get their own ADR before cutover.
 
 ### 4. Cloudflare Workers static assets, per site
 - Build output: `sites/<domain>/dist/`, the Astro default. Generated, never hand-edited.
@@ -102,12 +103,17 @@ reproducible. Changes:
   recommendation there (public repo with a license) is a filter on this same query and does not change the
   structure. The generator must drop any repo without a license, so the data can't include a project the site
   would have to describe as unlicensed.
-- Row content is checked by `make check`: the file parses, and every entry has `name`, `url`, `spdx`.
+- Row content is checked by `make check`: the file parses, is a non-empty array, and every entry has `name`, `url`,
+  `spdx`. An empty list fails the gate; Brian decides if a launch with no projects is ever valid.
 - Refresh is a manual `make projects-valesordev` plus a PR. A scheduled refresh is a later sre decision.
 
 ### 7. Page and route conventions
 `src/pages/` holds routes only, with one `.astro` file per URL. Routes: `/`, `/privacy/`, and a `404.astro`.
 Content that is data (the project list) lives in `src/data/`. R1 has no content collections.
+
+## Open for the builder
+Astro compiling `.astro` files from a linked workspace package may need config (for example
+`vite.ssr.noExternal`). The skeleton story proves it in its build and records what was needed here by amendment.
 
 ## Consequences
 - Implementation can build the skeleton (S7M-VAL-004) and brand components against a fixed import contract;
@@ -130,14 +136,17 @@ Content that is data (the project list) lives in `src/data/`. R1 has no content 
   the build would not be reproducible.
 
 ## Follow-on stories (for PM to cut)
-1. **brand package contract (visual-designer):** `brands/valesordev/package.json` (`@solo7/brand-valesordev`
+1. **brand package contract (visual-designer), ordered before or with S7M-VAL-004 (the site's workspace dependency
+   and `build-site-valesordev` need it; PM adds it as a blocker):** `brands/valesordev/package.json` (`@solo7/brand-valesordev`
    with the `exports` map above) and `brand.mk` targets `build-brand-valesordev`. Needs the audit and brand docs
    first for anything visual; the package shell does not.
-2. **`site-core` package with the Faro bootstrap (sre or implementation; PM routes to whoever owns
-   `packages/site-core/`):** `initFaro`, with tests for the no-op and the fixed posture. FEAT-04.
+2. **`site-core`, two stories because ownership is split:** (a) implementation creates the `@solo7/site-core`
+   package shell and exports; (b) sre writes `packages/site-core/instrumentation/` (`initFaro`) with tests for the
+   no-op and the fixed posture. FEAT-04.
 3. **Site skeleton (S7M-VAL-004), amended:** `@solo7/site-valesordev-com`, workspace entry, `tsconfig`
    extending the base, `build-site-valesordev`, wired into `make check`.
-4. **Brand-import lint (implementation, with sre for `make check`):** the rule in decision 2.
+4. **Brand-import lint, two stories:** (a) implementation adds the ESLint rule in the site package; (b) sre
+   hooks it into `make check`. The rule is in decision 2.
 5. **Projects generator (sre owns the Makefile, implementation owns the site data):** `projects-valesordev` and
    its `make check` validation. FEAT-02.
 6. **Preview and production deploy (S7M-INF-001, then a production story, sre):** `preview-site-valesordev`,
