@@ -4,6 +4,7 @@
   "description": "Brand kits and sites for Valesor Development, System 9 Studios, Solo7 Productions, solo7.media, and bashburn.com.",
   "workspaces": [
     "packages/*",
-    "brands/*"
+    "brands/*",
+    "sites/valesordev.com"
   ]
 }
