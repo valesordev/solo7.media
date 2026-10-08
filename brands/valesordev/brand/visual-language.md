@@ -2,7 +2,7 @@
 
 The look of Valesor, as rules. Identity is in `foundation.md`, words in `voice.md`, and correct and incorrect
 usage of each component in `usage.md`. This file does not hold token values: color, type, and spacing values live in
-`tokens/tokens.json` (a later story); the numbers here are the audit's measurements or proposed limits. It names roles and states the rules those tokens must satisfy. A component
+`tokens/tokens.json` (a later story); the numbers here are the audit's measurements or decided limits. It names roles and states the rules those tokens must satisfy. A component
 uses a token or asks visual-designer; it never carries a hex, font name, or spacing literal (`CLAUDE.md` §5).
 
 Status marks as in `foundation.md`. The audit's decided rows are cited by name (`audit: <section>`).
@@ -66,8 +66,8 @@ Roles. Sizes are relative to body (`1x`) as measured in the audit; the token sto
 | Link, CTA | mono | 1x | sentence case | normal | Browse the source -> |
 
 Notes:
-- Nav `[DECIDED 2026-10-08]`: serif at body size, no arrow. This is the audit's candidate row; the alternative is mono, which
-  would make the header read as a toolbar. Recommend serif.
+- Nav `[DECIDED 2026-10-08]`: serif at body size, no arrow. The alternative, mono, would make the header read as a
+  toolbar.
 - The subhead line in the target contains a spaced em dash; the copy is rewritten under `voice.md#characters`.
 - Line height and measure are set at token time. Rules: body line height at least 1.5; running text measure at
   most 72 characters in a text page (`/privacy`). `[DECIDED 2026-10-08]`
@@ -77,13 +77,12 @@ Notes:
 - Text is always real text, never part of an image. `[DECIDED 2026-10-08]` (art rules)
 
 ## Layout
-`[DECIDED 2026-10-08]` for the frame, rules, and absence of boxes. The numbers below are `[DECIDED 2026-10-08]` where noted;
-the audit measured one 1586px frame and no responsive evidence.
+`[DECIDED 2026-10-08]` for the frame, rules, absence of boxes, and the numbers below; the audit measured one 1586px frame and no responsive evidence.
 
 - **One content column**, centered, inset from both edges by a constant margin. The header rule, section rules,
   and row rules hang from that column. Only the hero illustration runs full-bleed. `[DECIDED 2026-10-08]`
 - **Max content width:** `[DECIDED 2026-10-08]` the column stops growing at a width where the four-part `ProjectRow` still
-  reads as one line; recommend 1200px (75rem) and let the token story confirm. Reason: the target's 1468px
+  reads as one line, at 1200px (75rem); the tokens story records the value. Reason: the target's 1468px
   column on a 1586px frame is a generator crop; a fixed ceiling keeps the lines short and the rows legible on
   wide screens. Rejected: fluid to any width (rows lose their grouping), 960px (the metadata block crowds the
   description).
@@ -108,7 +107,7 @@ Everything stacks in reading order, left aligned, the same column inset, the sam
    icon, no drawer.
 2. `Hero`: H1, subhead, blurb, then the primary `TextLink`, then the illustration full-bleed beneath. The type
    no longer sits over the art's empty zone because the zone is too small; the art is a separate band below.
-3. Info columns (a candidate component, not specified here) stack with a horizontal rule between them.
+3. Info columns (an audit candidate, not in the decided kit) stack with a horizontal rule between them.
 4. `SectionRule` title and its link: title above, link below, both left aligned.
 5. `ProjectRow`: name and tagline; description; `TechnicalMetadata`; the arrow stays on the right of the name
    line. Row rules stay.
@@ -140,7 +139,7 @@ Almost none. `[DECIDED 2026-10-08]` (brief: no excessive animation)
 
 ## Interaction states
 `[DECIDED 2026-10-08]`
-The target shows only rest states. Recommendation, with the alternatives rejected:
+The target shows only rest states. Decided, with the alternatives rejected:
 
 - **Hover** on a link: the 1px underline becomes 2px. No color change. Rejected: a second red (the audit and
   Brian's Q3 answer reject a hover red), underline removal (loses the affordance).
@@ -230,8 +229,8 @@ Anatomy is decided; rules below that the audit doesn't state (counts, markup, li
 - **Primary:** `accent` text, underline, and arrow. At most one primary CTA per band (the Hero CTA, or a
   `SectionRule`'s link). The vermilion `->` on a `ProjectRow` is that row's direction mark, not a `TextLink`, so
   a list of rows doesn't break the rule.
-- **Secondary:** `ink` text, 1px grey underline (token chosen in the tokens story; at least 3:1 on `paper` so the link is findable without color, `[DECIDED 2026-10-08]`; the audit's sampled grey is about 2.2:1, so the token must be darker than the sample), `ink` arrow. For an action that isn't the main one
-  ("Read the license ->").
+- **Secondary:** `ink` text, 1px grey underline (token chosen in the tokens story; at least 3:1 on `paper` so the link is findable without color; the sampled grey is lighter than that, so the token is not the sample), `ink` arrow. For an action that isn't the main one
+  ("Read the license ->"). `[DECIDED 2026-10-08]`
 - The arrow is part of the link text and typed. It appears on CTAs and action links only: not on nav links, not
   on the wordmark, and not on inline links in prose (which are underlined `ink`, no arrow). `[DECIDED 2026-10-08]`
 - Link text follows `voice.md#cta-vocabulary`. External destinations are not marked with an icon.

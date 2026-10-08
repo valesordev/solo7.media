@@ -93,8 +93,8 @@ Valesor shares an owner and a repo with four other properties (`CLAUDE.md` §1).
 | bashburn.com | Brian's personal blog | first-person voice there is Brian's; Valesor's first person is also Brian but speaks about released software only |
 
 Shared between imprints: only non-visual code (`packages/`). The serif plus mono pairing, the vermilion accent,
-and the engraving language stay Valesor's alone. `[DECIDED 2026-10-08]` (audit, Distinctness: flagged for later audits;
-confirm when the second imprint's audit exists)
+and the engraving language stay Valesor's alone. `[DECIDED 2026-10-08]` (audit, Distinctness; revisit when the second
+imprint's audit exists)
 
 ## Scope of the kit
 The R1 kit covers the homepage and the `/privacy` page (FEAT-01); a 404 recipe is visual-designer's addition for

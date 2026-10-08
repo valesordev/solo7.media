@@ -19,8 +19,7 @@ gradients, shadows, marketing copy, decorative diagrams, or additional illustrat
 
 ## brandheader
 
-`[DECIDED 2026-10-08]` (`visual-language.md#brandheader`). Nav lists only destinations that ship; there is no About
-link.
+`[DECIDED 2026-10-08]` (`visual-language.md#brandheader`). Nav is Projects and GitHub; there is no About link.
 
 **Correct**
 - Serif "Valesor Development" at left, linking to `/`; serif Projects and GitHub at right; a 1px rule under.
@@ -166,7 +165,7 @@ How the components combine. `[DECIDED 2026-10-08]`: the homepage is the specimen
 ### homepage
 `BrandHeader`, `Hero` over the engraving, a rule, then a `SectionRule` "Projects" with its link, `ProjectRow`s,
 and the `Footer`. The target's three-column info band (What is Valesor Development? / License / What belongs
-here?) is the audit's candidate. It is not specified here. If the homepage story needs it, visual-designer
+here?) is the audit's candidate and is not in the decided kit. If the homepage story needs it, visual-designer
 specifies it on the story with this file's rules (serif column titles, mono text, a secondary `TextLink`,
 hairline dividers, stacking when narrow). `[DECIDED 2026-10-08]`
 
