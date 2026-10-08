@@ -15,13 +15,13 @@ Brief: the Notion page's character (quiet, durable, precise, independent, open, 
 | Role (observed) | Hex | Area ≈ | Where | Class | Status | Why |
 |---|---|---|---|---|---|---|
 | paper | ≈ #FEFEFE median (range #FCFCFC–#FFFFFF) | ~83% of pixels at L ≥ 240 | page ground, whole page | core | [DECIDED 2026-10-08] | neutral, not warm (Q1); the surface is near-white; everything else sits on it |
-| ink (illustration) | #000000 | ~6% of pixels at L < 100 (mostly the illustration) | engraving line | core | [DECIDED 2026-10-08] | the engraving is pure black, as the brief's "pure black ink on pure white" asks |
+| ink (illustration) | #000000 | ~6% of pixels at L < 100 (mostly the illustration) | engraving line | core | [PROPOSED] | the engraving is pure black, as the brief's "pure black ink on pure white" asks |
 | ink (display type) | #000000 as sampled | small | wordmark, H1, section/row titles | core as near-black serif display; recommend #111111 for type, #000000 only in the engraving (confirm) | [PROPOSED] | the target renders it pure black; the brief says #111111 |
 | ink-muted | ≈ #555555 | small text | mono body, descriptions, metadata values | core | [PROPOSED] | a single mid grey carries all secondary text; matches the brief's `ink-muted #545454` |
 | ink-faint | ≈ #808080 | tiny | metadata labels (STACK / LICENSE / REPO) | candidate | [PROPOSED] | could be ink-muted at a smaller size; anti-aliasing makes it unclear whether it is a third grey |
 | rule (light) | ≈ #CCCCCC–#D6D6D6 | 1px lines | row dividers, vertical column dividers, header rule's first pixel | core | [DECIDED 2026-10-08] | hairlines carry the layout |
 | rule (strong) | ≈ #A6A6A8–#B1B2B3 | 1px lines | header rule, section rules above/below "Projects" block | candidate | [PROPOSED] | two rule weights may be intended (structure vs. row) or one rule rendered unevenly; it is a decision for the token set |
-| accent | ≈ #C8202A (darkest sampled #CA0F18; mid-stroke #C62A24) | ~0.03% | primary CTA text and underline, "View all projects →", row arrows | core | [DECIDED 2026-10-08] | the only chroma in the page (about 0.1–0.15% of pixels have a channel spread above 15); direction and primary action only |
+| accent | ≈ #C8202A (darkest sampled #CA0F18; mid-stroke #C62A24) | ~0.03% | primary CTA text and underline, "View all projects ->" (target shows →; see Decisions item 6), row arrows | core | [DECIDED 2026-10-08] | the only chroma in the page (about 0.1–0.15% of pixels have a channel spread above 15); direction and primary action only |
 
 Artefacts (not colours): the "white" ground varies #FCFCFC–#FFFFFF with a faint, even grain (generator noise, not
 a warm paper tone); text edges carry grey fringing and some JPEG-like softness; link underlines read #AEAEAF only
@@ -38,8 +38,8 @@ The target is neutral: no warm cast in the ground or rules, and its ink is pure 
 | Subhead | "Software, tools, and systems — released in the open." | same serif | ≈ 1.7× | regular · sentence case | core | [PROPOSED] |
 | Section title | "Projects" | same serif | ≈ 2.4× | regular · sentence case | core | [PROPOSED] |
 | Column / row title | "License", "Andara's World" | same serif | ≈ 1.2× (column) / ≈ 1.7× (row) | regular · title case | core | [PROPOSED] |
-| Body / descriptions | hero blurb, column text, row descriptions | monospace, humanist, dotted-or-slashed zero (IBM Plex Mono–like) | 1× (≈ 14–15px) | regular · sentence case · normal | core | [DECIDED 2026-10-08] |
-| Metadata | STACK / LICENSE / REPO + values | same mono, labels uppercase | ≈ 0.85× | regular · labels uppercase, spaced · values as written | core | [DECIDED 2026-10-08] |
+| Body / descriptions | hero blurb, column text, row descriptions | monospace, humanist, dotted-or-slashed zero (IBM Plex Mono–like) | 1× (≈ 14–15px) | regular · sentence case · normal | core | [DECIDED 2026-10-08] (mono face only; size, case, tracking [PROPOSED]) |
+| Metadata | STACK / LICENSE / REPO + values | same mono, labels uppercase | ≈ 0.85× | regular · labels uppercase, spaced · values as written | core | [DECIDED 2026-10-08] (mono face only; size, case, tracking [PROPOSED]) |
 | Nav | Projects, GitHub, About | serif, small | ≈ 1× | regular | candidate | [PROPOSED] |
 | Links / CTAs | "Browse the source →", "Read the license →" | mono, underlined, trailing arrow | 1× | regular · sentence case | core | [PROPOSED] |
 
@@ -112,7 +112,7 @@ for the next audit: the paper, ink, and hairline-rule items are core here and wi
 the serif + mono pairing, the vermilion accent, and the engraving language should stay Valesor's alone.
 
 ## Open questions for Brian (answered 2026-10-08, see Decisions)
-1. Paper and ink: the target is neutral (#FDFDFD ground, #000 ink, grey rules) but the brief says warm (#FAFAF7 paper, #111 ink, #CFCFC8 rule). Recommend the target's neutral values for paper and rules, because the hero is "pure black ink on pure white" and a warm ground would tint the engraving's whites; keep ink at #111 on UI text and use #000 only in the illustration, because pure black type at this weight is harsh on a bright ground. Rejected: adopting the brief's warm paper (the illustration would sit on a visible tint).
+1. Paper and ink: the target is neutral (≈ #FEFEFE ground, #000 ink, grey rules) but the brief says warm (#FAFAF7 paper, #111 ink, #CFCFC8 rule). Recommend the target's neutral values for paper and rules, because the hero is "pure black ink on pure white" and a warm ground would tint the engraving's whites; keep ink at #111 on UI text and use #000 only in the illustration, because pure black type at this weight is harsh on a bright ground. Rejected: adopting the brief's warm paper (the illustration would sit on a visible tint).
 2. Body typeface class: the target sets all running text in monospace. Recommend keeping mono as body for the home page and metadata but leaving long-form reading (project pages, README-style content) to a decision when the docs are written, because the image only proves it works for short passages.
 3. Accent: the target's red is ≈ #C8202A. Recommend a single vermilion near that value, derived at token time against 4.5:1 on paper (it is ≈ 5.5:1 as sampled), and used only for primary action and direction. Rejected: a second, muted red for hover.
 4. Reading measure, mobile crop, and breakpoints: the target is one 1586px frame. Recommend I specify a max content width and the mobile stacking order in `visual-language.md` once the audit is decided, rather than inferring them here.
@@ -120,8 +120,8 @@ the serif + mono pairing, the vermilion accent, and the engraving language shoul
 
 ## Decisions
 - 2026-10-08 Brian, on the open questions (rows marked `[DECIDED]` are the ones his answers cover; every other row awaits his PR review):
-  1. "Neutral". Decided: neutral paper and rules from the target, not the brief's warm values (paper, illustration-ink, and light-rule rows are `[DECIDED 2026-10-08]`). My reading, to confirm: #111111 for type and #000000 only in the engraving, as recommended; the display-ink and ink-muted rows stay `[PROPOSED]`.
-  2. "Mono is good". Mono stays as the body and metadata face (rows `[DECIDED 2026-10-08]`). Whether long-form reading also uses it is still open; the recommendation (decide when the docs are written) stands. I read "Mono is good" as covering the home page and metadata.
+  1. "Neutral". Decided: neutral paper and rules from the target, not the brief's warm values (paper and light-rule rows are `[DECIDED 2026-10-08]`). My reading, to confirm: #111111 for type and #000000 only in the engraving, as recommended; the illustration-ink, display-ink, and ink-muted rows stay `[PROPOSED]`.
+  2. "Mono is good". Mono stays as the body and metadata face (the face only, in the body and metadata rows `[DECIDED 2026-10-08]`; sizes, case, and tracking stay `[PROPOSED]`). Whether long-form reading also uses it is still open; the recommendation (decide when the docs are written) stands. I read "Mono is good" as covering the home page and metadata.
   3. "agree". One vermilion near #C8202A, action and direction only; accent row `[DECIDED 2026-10-08]`.
   4. "agree". I specify max content width, mobile crop, and breakpoints in `brand/visual-language.md` after the audit is decided.
   5. "avoid em dashes and other characters not on a human keyboard". Voice rule for `brand/voice.md`. My reading of "other characters": copy uses only characters typed on a standard keyboard, so no em or en dashes, no curly quotes or apostrophes, no ellipsis character. This changes the target copy: the subhead and "What belongs here?" lose their dashes, "Andara's World" uses a straight apostrophe, and the `→` arrow on links and rows becomes a typed `->` (item 6).
