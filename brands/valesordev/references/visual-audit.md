@@ -14,14 +14,14 @@ Brief: the Notion page's character (quiet, durable, precise, independent, open, 
 ## Palette
 | Role (observed) | Hex | Area ≈ | Where | Class | Status | Why |
 |---|---|---|---|---|---|---|
-| paper | ≈ #FEFEFE median (range #FCFCFC–#FFFFFF) | ~83% of pixels at L ≥ 240 | page ground, whole page | core | [DECIDED 2026-10-08]| neutral, not warm (Q1); the surface is near-white; everything else sits on it |
+| paper | ≈ #FEFEFE median (range #FCFCFC–#FFFFFF) | ~83% of pixels at L ≥ 240 | page ground, whole page | core | [DECIDED 2026-10-08] | neutral, not warm (Q1); the surface is near-white; everything else sits on it |
 | ink (illustration) | #000000 | ~6% of pixels at L < 100 (mostly the illustration) | engraving line | core | [DECIDED 2026-10-08] | the engraving is pure black, as the brief's "pure black ink on pure white" asks |
-| ink (display type) | #000000 as sampled | small | wordmark, H1, section/row titles | core: #111111 for type, #000000 only in the engraving | [DECIDED 2026-10-08]| the target renders it pure black; the brief says #111111 |
+| ink (display type) | #000000 as sampled | small | wordmark, H1, section/row titles | core: #111111 for type, #000000 only in the engraving | [DECIDED 2026-10-08] | the target renders it pure black; the brief says #111111 |
 | ink-muted | ≈ #555555 | small text | mono body, descriptions, metadata values | core | [DECIDED 2026-10-08] | a single mid grey carries all secondary text; matches the brief's `ink-muted #545454` |
 | ink-faint | ≈ #808080 | tiny | metadata labels (STACK / LICENSE / REPO) | candidate | [PROPOSED] | could be ink-muted at a smaller size; anti-aliasing makes it unclear whether it is a third grey |
-| rule (light) | ≈ #CCCCCC–#D6D6D6 | 1px lines | row dividers, vertical column dividers, header rule's first pixel | core | [DECIDED 2026-10-08]| hairlines carry the layout; the hex is a sample, the token set fixes the value |
+| rule (light) | ≈ #CCCCCC–#D6D6D6 | 1px lines | row dividers, vertical column dividers, header rule's first pixel | core | [DECIDED 2026-10-08] | hairlines carry the layout; the hex is a sample, the token set fixes the value |
 | rule (strong) | ≈ #A6A6A8–#B1B2B3 | 1px lines | header rule, section rules above/below "Projects" block | candidate | [PROPOSED] | two rule weights may be intended (structure vs. row) or one rule rendered unevenly; it is a decision for the token set |
-| accent | ≈ #C8202A (darkest sampled #CA0F18; mid-stroke #C62A24) | ~0.03% | primary CTA text and underline, "View all projects ->" (target shows →; see Decisions item 6), row arrows | core | [DECIDED 2026-10-08]| the only chroma in the page (about 0.1–0.15% of pixels have a channel spread above 15); direction and primary action only |
+| accent | ≈ #C8202A (darkest sampled #CA0F18; mid-stroke #C62A24) | ~0.03% | primary CTA text and underline, "View all projects ->" (target shows →; see Decisions item 6), row arrows | core | [DECIDED 2026-10-08] | the only chroma in the page (about 0.1–0.15% of pixels have a channel spread above 15); direction and primary action only |
 
 Artefacts (not colours): the "white" ground varies #FCFCFC–#FFFFFF with a faint, even grain (generator noise, not
 a warm paper tone); text edges carry grey fringing and some JPEG-like softness; link underlines read #AEAEAF only
@@ -106,7 +106,7 @@ No class applies; these need a brand decision, not an observation. Mobile crop a
 ## Tells (never core)
 - **Typo:** "A living world for fction, built with code." Row 1's tagline drops the "i" in "fiction". The same row's description spells it correctly.
 - **Invented URLs:** `github.com/valesor/andaras-world`, `…/vagabond`, `…/project-sites`. The GitHub organisation here is `valesordev`; nothing confirms these repos or a `valesor` org.
-- **Invented stack and project data:** stack lists (e.g. "TypeScript · SQLite · Tauri") and the "Project Sites" project are placeholder content unless Brian confirms them.
+- **Invented stack and project data:** stack lists (e.g. "TypeScript · SQLite · Tauri"; the kit uses commas, item 7) and the "Project Sites" project are placeholder content unless Brian confirms them.
 - **Image softness:** low-resolution, slightly blurred text edges and faint speckle on the paper, so letterforms cannot be read as a font specimen.
 - **Apparent apostrophe style:** "Andara’s World" uses a typographic apostrophe in the row title but straight quotes appear nowhere else to compare; not a tell, noted for the type spec.
 
@@ -131,4 +131,4 @@ the serif + mono pairing, the vermilion accent, and the engraving language shoul
   5. "avoid em dashes and other characters not on a human keyboard". Voice rule for `brand/voice.md`. My reading of "other characters": copy uses only characters typed on a standard keyboard, so no em or en dashes, no curly quotes or apostrophes, no ellipsis character. This changes the target copy: the subhead and "What belongs here?" lose their dashes, "Andara's World" uses a straight apostrophe, and the `→` arrow on links and rows becomes a typed `->` (item 6).
   6. "use the typed ->". Decided: link and row arrows are typed `->` in copy and CTAs, not the `→` glyph the target shows. The target's `→` is an observation; the kit's arrow is `->`. Primary and row arrows are vermilion per item 3; the ink secondary link arrow is decided with the core TextLink row (item 8).
   7. "#111 for type, comma for the separator". Decided: type ink #111111, #000000 only in the engraving; stack lists use a comma ("TypeScript, SQLite, Tauri"), not `·`.
-  8. All 18 core checkboxes on PR #20 checked, so every core row is `[DECIDED 2026-10-08]`. One checkbox still reads "trailing `→` on every link"; the audit row governs: arrows on call-to-action and action links only (Codex review, e46d97c), typed `->` (item 6). Candidate and hero rows were not on the checklist and stay `[PROPOSED]`.
+  8. All 18 checkboxes on PR #20 checked. The PR asked him to strike or reclassify "core proposals", with the checkboxes grouping them, so I read this as approving every core row (about 28 rows and bullets), including the texture and hierarchy bullets that have no box of their own; all are `[DECIDED 2026-10-08]`. One checkbox still reads "trailing `→` on every link"; the audit row governs: arrows on call-to-action and action links only (Codex review, e46d97c), typed `->` (item 6). Candidate and hero rows were not on the checklist and stay `[PROPOSED]`.
