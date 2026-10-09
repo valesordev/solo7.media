@@ -95,6 +95,10 @@ Amended 2026-10-09 (issue #39): nothing is released yet, so the R1 list is the t
 (FEAT-02), one with no repository. The legacy approach (`gh repo list --topic released`, drop unlicensed) cannot
 produce that list, so R1 does not use it. The `released` topic selection is dropped until a project is released.
 
+Amended again 2026-10-09 (Brian, issue #39 follow-up from S7M-VAL-013): every project with a repository carries a
+license, Apache-2.0 by default. `spdx` is therefore required whenever `url` is present. `tagline` and `stack` stay
+out of the R1 schema; a later amendment adds them if a row needs them.
+
 - Source: `sites/valesordev.com/src/data/projects.json`, committed and **hand-curated** (implementation's). Array
   order is display order. The build reads the file and never calls `gh`, so builds stay offline and reproducible.
 - Schema, one object per project:
@@ -105,24 +109,26 @@ produce that list, so R1 does not use it. The `released` topic selection is drop
   | `status` | yes | `"in-progress"` or `"concept"`. `"released"` is added by an ADR amendment with the first release |
   | `description` | yes | non-empty string |
   | `url` | no | the public repository, `https://github.com/valesordev/<repo>`. Absent when no repository exists; never a placeholder, empty string, or `null` |
-  | `spdx` | no | the repository's SPDX license id. Absent when `url` is absent; may be absent with a `url` if the repo has no license |
+  | `spdx` | when `url` is present | the repository's SPDX license id (Apache-2.0 unless Brian decides otherwise for a project). Absent exactly when `url` is absent |
 
   Which fields a row shows, the status words, and how a linkless row looks are the brand docs' call. A future
-  `"released"` entry must have `url` and `spdx`.
-- The first three entries, in order: Andara's World (`in-progress`, `url`), Vagabond (`in-progress`, `url`),
-  System 9 Studios Pipeline (`concept`, no `url`, no `spdx`). The `status` value is stored as data; the words a
-  visitor reads are the voice doc's, so `"in-progress"` is a data value, not display text. The two repositories
-  are `https://github.com/valesordev/andara.valesordev.com` and `https://github.com/valesordev/vagabond.valesordev.com`
+  `"released"` entry must have `url` and `spdx`, as every entry with a `url` now must.
+- The first three entries, in order: Andara's World (`in-progress`, `url`, `spdx`), Vagabond (`in-progress`,
+  `url`, `spdx`), System 9 Studios Pipeline (`concept`, no `url`, no `spdx`). The `status` value is stored as
+  data; the words a visitor reads are the voice doc's, so `"in-progress"` is a data value, not display text.
+  The two repositories are `https://github.com/valesordev/andara.valesordev.com` and
+  `https://github.com/valesordev/vagabond.valesordev.com`
   (public; `andara.solo7.media` is private and must never be linked). The `released` topic is not an R1 input.
 - Offline check (`make check`, sre's target `check-projects-valesordev`): the file parses; is a non-empty array; every
-  entry meets the schema, with no unknown fields; names are unique; an entry with `spdx` has `url`; every `url`
-  matches the pattern above.
+  entry meets the schema, with no unknown fields; names are unique; `url` and `spdx` are both present or both
+  absent; every `url` matches the pattern above.
 - The offline check is structural by design. Which projects appear, and in what order, is Brian's call at PR review
   (FEAT-02 signal 2), so adding a project needs no ADR change.
 - Online verification, `make projects-valesordev` (sre's; not part of `make check`, since it needs network and
-  `gh`): for each entry with a `url`, confirms the repository exists and is public, and prints any difference
-  between the repository's license and the entry's `spdx`. It writes nothing. A person updates the file and
-  opens a PR. The author runs it before opening the PR and pastes its output into the PR; no gate checks that it ran.
+  `gh`): for each entry with a `url`, confirms the repository exists and is public, and reports any
+  repository with no license and any difference between the repository's license and the entry's `spdx`. It
+  writes nothing. A person updates the file and opens a PR. The author runs it before opening the PR and pastes
+  its output into the PR; no gate checks that it ran.
   This is what keeps the list from inventing links: a link enters only through a PR that passed
   verification, and the offline check fails the gate on a malformed one.
 - Refresh is manual. A scheduled verification is a later sre decision.
