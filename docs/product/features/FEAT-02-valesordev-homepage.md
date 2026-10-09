@@ -58,8 +58,9 @@ opens the site on mobile and desktop, JavaScript off, and:
   shows what is in development until the first release. Reason: the definition is Brian's and the brand's, and
   nothing here needs it moved. If the "released" wording on the page reads as untrue, that is a copy decision for
   visual-designer, not a change to the vision.
-- An entry in the project list may have no link and no license, and carries its status. Reason: the Pipeline has no
-  repository yet. How the list is stored and checked is architecture's call (#39).
+- An entry in the project list carries its status, and an entry with no repository has no link and no license.
+  Reason: the Pipeline has no repository yet. Whether a repository entry may be unlicensed, and how the list is
+  stored and checked, is architecture's call (#39).
 - The legacy valesordev projects generator is a candidate to reuse, not a requirement. Reason: the Notion
   monorepo page says to salvage what's worth keeping; architecture decides.
 
