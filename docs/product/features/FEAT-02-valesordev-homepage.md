@@ -15,7 +15,7 @@ link to the source where one exists. It reads the same with JavaScript off.
 ## Success signal
 Checked first on a preview URL (this gates FEAT-03's cutover), then confirmed on production in the R1 demo. Brian
 opens the site on mobile and desktop, JavaScript off, and:
-1. sees the target homepage, built from the kit's tokens and components, light and dark if the kit has both
+1. sees the target homepage layout with the three rows below, built from the kit's tokens and components, light and dark if the kit has both
    (`/brand-qa` passes; visual-designer);
 2. sees exactly three project rows, in this order: Andara's World (in progress), Vagabond (in progress), System 9
    Studios Pipeline (concept), each with its status in words, none missing, none extra;
@@ -24,9 +24,8 @@ opens the site on mobile and desktop, JavaScript off, and:
 4. passes a WCAG 2.1 AA check on the page (implementation, recorded on the story).
 
 ## Scope
-- In: the homepage from the target image, with the project list as rows, each row stating its status.
-  `[ASSUMED]` Stack and license appear on a row where the repository gives them; the brand docs decide the row's
-  contents.
+- In: the homepage from the target image, with the project list as rows, each row stating its status. The brand
+  docs decide the row's other parts, including for a row with no repository.
 - In: a row for a project with no repository, which has no link.
 - Out: project detail pages, README template, documentation landing page (not planned yet, per the vision).
 - Out: contact forms, newsletter, "get started" calls to action (`CLAUDE.md` §10).
@@ -37,7 +36,7 @@ opens the site on mobile and desktop, JavaScript off, and:
 | Need | Owner | State |
 |---|---|---|
 | Brand docs, tokens, components spec for the homepage | visual-designer | FEAT-01 |
-| `ProjectRow` for in-development work: a status part, and a row with no link or repository data. `brands/valesordev/brand/usage.md` today forbids a status badge, rows with different parts, and a missing value shown as a blank, and says one link per row to the source repository | visual-designer | needs visual-designer: amend the brand docs before the row is built; the look is theirs |
+| `ProjectRow` for in-development work: a status part, and a row with no link or repository data. `brands/valesordev/brand/usage.md` today forbids a status badge, rows with different parts, and a missing value shown as a blank, and says one link per row to the source repository | visual-designer | needs visual-designer: amend the brand docs before the row is built; the look is theirs. The amendment reopens M1's gate in `docs/roadmap.md` and holds M3, so pm re-cuts both |
 | Whether the homepage copy that says "released" ("Software, tools, and systems, released in the open." `voice.md`, `visual-language.md`) still holds while nothing is released | visual-designer | needs visual-designer; see Decisions |
 | Site structure: how `sites/valesordev.com` consumes `brands/valesordev`, workspaces | architecture | needs architecture (ADR or spec; none in `docs/adr/` yet) |
 | Components and page | implementation | needs stories citing FEAT-01's brand docs |
@@ -53,7 +52,7 @@ opens the site on mobile and desktop, JavaScript off, and:
 - Andara's World and Vagabond rows link to their public repositories, not to a Valesor-hosted page. Reason: the
   vision ("next step is always a link to the thing itself") and no project pages in R1.
 - The System 9 Studios Pipeline is listed under Valesor because Brian develops it here for the studio to use.
-  Reason: Brian (2026-10-09). Its row says it is tooling; the wording is the voice doc's.
+  Reason: Brian (2026-10-09). The wording of its row is the voice doc's.
 - The imprint's definition does not change. Valesor is still the imprint for publicly released software; the page
   shows what is in development until the first release. Reason: the definition is Brian's and the brand's, and
   nothing here needs it moved. If the "released" wording on the page reads as untrue, that is a copy decision for

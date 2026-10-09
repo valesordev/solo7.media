@@ -16,8 +16,7 @@ the workflow every later release reuses.
 Promise: a visitor lands on valesordev.com, sees plainly that Valesor Development is the imprint for publicly
 released software, sees the projects it is developing now with each one's status (in progress or concept), and
 follows a link to the source where a repository exists. Nothing is released yet (Brian, 2026-10-09), so no row
-claims it is. `[ASSUMED]` A row also shows stack and license where the repository gives them; the Valesor brand docs
-decide the row's contents.
+claims it is. The Valesor brand docs decide the row's contents.
 The page is the one in the Valesor target image, built from the new brand kit, readable with JavaScript off, and
 the site measures itself, never the reader.
 Bet: one imprint can go from Notion brief to a live Cloudflare site through the roles and `make` targets alone,
@@ -40,11 +39,12 @@ Features:
 Cut line: no "released" project rows until a project is released; no statuses beyond in progress and concept. No
 project detail pages, README template, or documentation landing page (the Notion brief lists them as
 later reference implementations; the vision says project pages aren't planned yet). No other imprint's work. No
-new copy beyond what the homepage target shows. Why: R1 must prove the workflow, not widen the site.
+new copy beyond what the homepage target shows, except the status words and the three rows' text, which
+visual-designer owns. Why: R1 must prove the workflow, not widen the site.
 Success signals:
-- Brian opens valesordev.com (apex and `www`, both with valid TLS) and sees the target homepage, light and dark
-  if the kit has both, mobile and desktop, JavaScript off (demo step, run by Brian; sre verifies the hostnames).
-  The same check passes on a preview URL before cutover.
+- Brian opens valesordev.com (apex and `www`, both with valid TLS) and sees the target homepage layout with the three
+  rows below, light and dark if the kit has both, mobile and desktop, JavaScript off (demo step, run by Brian; sre
+  verifies the hostnames). The same check passes on a preview URL before cutover.
 - The page shows exactly Andara's World (in progress), Vagabond (in progress), and System 9 Studios Pipeline
   (concept), each with its status in words; the first two link to their public repositories and resolve, and the
   third has no link (Brian).
@@ -116,4 +116,5 @@ Delivered by: not yet planned.
 - 2026-10-09: R1 re-cut per Brian: no project is released yet, so the homepage lists three projects in development
   with statuses instead of released ones. Promise, FEAT-02, cut line, and success signals changed; the bet, the other
   features, and the imprint's definition did not. FEAT-02 needs a visual-designer amendment for a status part and a
-  linkless row (the brand docs forbid both today).
+  linkless row (the brand docs forbid both today). That amendment reopens M1's gate in `docs/roadmap.md` (brand docs
+  merged, none `[PROPOSED]`) and M3 cannot pass until it lands; pm re-cuts M1 and M3 after this merges.
