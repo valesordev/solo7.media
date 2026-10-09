@@ -20,7 +20,7 @@ Visitor-visible: none: enables FEAT-03's cutover; Brian sees the stub at a previ
 
 #### M3 — Homepage on preview *(gate: FEAT-02's whole success signal passes on a preview URL, `/brand-qa` included: the target homepage layout with its three rows, their statuses and links, and WCAG 2.1 AA)*
 Release: R1 — FEAT-02
-Needs: M1 (including S7M-VAL-013), M2, and architecture's answer on the project-list data source (#39)
+Needs: M1 (including S7M-VAL-013) and M2
 Visitor-visible: none: enables FEAT-03's cutover; Brian sees the target homepage at a preview URL
 
 #### M4 — Instrumented, not tracked *(gate: Faro per `CLAUDE.md` §7 and an approved `/privacy` page on the preview; SLO before alert; a captured page-view request shows no user identifier or personal data; a build without Faro config sends nothing; a page view and a forced error appear in Grafana with no user attributes)*
@@ -39,3 +39,6 @@ Visitor-visible: valesordev.com is the new site
   include S7M-VAL-013, the brand-docs amendment for a status part and a linkless `ProjectRow`, with the subhead question
   for visual-designer. M3's gate keeps FEAT-02's whole success signal and names its three rows, and M3 also waits on #39. M3's visitor-visible change is
   unchanged. Added to SPRINT-01, which still targets M2 and the start of M1.
+- 2026-10-09: product's PR #46 closed FEAT-02's project-list dependency (#39, ADR 0001 §6: a hand-curated
+  `sites/valesordev.com/src/data/projects.json`) and the site-structure row (ADR 0001 §1-§3, §7). M3 no longer needs #39;
+  it still needs M1 (S7M-VAL-013) and M2. Gates, releases, and visitor-visible changes are unchanged.
