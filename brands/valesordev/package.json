@@ -1,0 +1,11 @@
+{
+  "name": "@solo7/brand-valesordev",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Valesor Development brand kit: tokens, components, and treated assets. Sites reach the brand only through these exports.",
+  "exports": {
+    "./tokens.css": "./dist/tokens.css",
+    "./components/*": "./components/*",
+    "./assets/*": "./dist/assets/*"
+  }
+}
