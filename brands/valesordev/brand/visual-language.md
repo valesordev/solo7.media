@@ -206,8 +206,8 @@ Rules the audit doesn't state (counts, markup, limits, data format) are decided 
   status alone. `[PROPOSED]` Reason: Brian's terms (FEAT-02), the brand's refusal of badges, and WCAG 1.4.1.
   Rejected: a badge or pill (a second visual idiom the target doesn't have); a vermilion status (vermilion marks
   direction, not state).
-- **A row with no repository.** It has no link and no arrow. Parts 1 to 3 remain; `TechnicalMetadata` shows STATUS
-  only, because LICENSE and REPO belong to a repository. Part 4 draws nothing, and the column keeps its width so
+- **A row with no repository.** It has no link and no arrow. Parts 1 to 3 remain; `TechnicalMetadata` shows STATUS,
+  plus STACK when the list carries it, and no LICENSE or REPO, because LICENSE and REPO belong to a repository. Part 4 draws nothing, and the column keeps its width so
   the other rows stay aligned. The row is not dimmed, not marked "unavailable", and carries no placeholder.
   `[PROPOSED]` Reason: Brian, "a row with no link is fine"; an invented link or a blank would be invented data.
   Rejected: an ink or muted `->` (it would still promise a destination); collapsing the column (rows would
@@ -234,8 +234,7 @@ Rules the audit doesn't state (counts, markup, limits, data format) are decided 
   without scheme ("github.com/<org>/<repo>").
 - A `dl` in markup. Values are real text, selectable.
 - Order and labels never vary between rows. STATUS is on every row. REPO is on a row exactly when the project has a
-  repository; for a project that has one, a missing REPO or STACK the list should carry is a data defect to fix,
-  not a blank to hide. LICENSE is also left out, never empty, when a repository has no `spdx` in the list. A project with no
+  repository; for a project that has one, a missing REPO is a data defect to fix, not a blank to hide. LICENSE is also left out, never empty, when a repository has no `spdx` in the list. A project with no
   repository leaves REPO and LICENSE out. `[PROPOSED]` (was `[DECIDED 2026-10-08]`:
   "a missing field is a data defect")
 - Appears wherever a project is named with a claim about its source (the row; later, a project page).

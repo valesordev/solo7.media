@@ -66,7 +66,8 @@ gradients, shadows, marketing copy, decorative diagrams, or additional illustrat
 
 ## projectrow
 
-**Correct** (structure specimen; the data is placeholder, not content)
+**Correct** (structure specimen; the data is placeholder, not content; the tagline and STACK appear only when the
+project list carries them)
 ```
 Andara's World          Tools, generators, and systems     STATUS   In progress                ->
 A living world for      for building and exploring a       STACK    Python, TypeScript
@@ -86,10 +87,11 @@ code.                                                      REPO     github.com/<
   `spdx` where there is one. The tagline and STACK appear when the project list carries them; the list does not
   carry them yet (see `voice.md#describing-a-project`). `[PROPOSED]`
 
-**Correct: a row with no repository** (structure specimen; the data is placeholder, not content) `[PROPOSED]`
+**Correct: a row with no repository** (structure specimen; the data is placeholder, not content; the tagline
+and STACK, which the specimens show, appear only when the project list carries them) `[PROPOSED]`
 ```
-Pipeline                Software in development for       STATUS   Concept
-A tool for the studio.  the studio to use.
+System 9 Studios        Software in development here      STATUS   Concept
+Pipeline                for System 9 Studios to use.
 -------------------------------------------------------------------------------------------------
 ```
 - No link, no `->`, no placeholder, no blank, no "coming soon". The arrow column keeps its width and draws

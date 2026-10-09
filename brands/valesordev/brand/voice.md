@@ -125,8 +125,8 @@ README text where it exists. The voice rules here are mine; the facts are his. N
 
 | Name | Status | Description | Source of the facts |
 |---|---|---|---|
-| Andara's World | In progress | Tools, generators, and systems for building and exploring a coherent fictional world. | The description in the target image's row (`references/visual-audit.md`) |
-| Vagabond | In progress | An app for trips and maps. | Notion: "the Vagabond app is a Valesor Development project"; trip and map work in the Vagabond planning notes |
+| Andara's World | In progress | Tools, generators, and systems for building and exploring a coherent fictional world. | Mockup copy from the target image's row (`references/target-homepage.png`), not a verified fact. Brian confirms it or replaces it with the repository's README text |
+| Vagabond | In progress | An app for trips and maps. | Inferred from Notion planning notes (trip and map work; "the Vagabond app is a Valesor Development project"). Not a stated description. Brian confirms or replaces it |
 | System 9 Studios Pipeline | Concept | Software in development here for System 9 Studios to use. It has no repository yet. | FEAT-02 decisions, 2026-10-09 |
 
 - The Pipeline is listed under Valesor because Brian develops it here for the studio. Its row says so in one
