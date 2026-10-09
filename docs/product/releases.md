@@ -118,3 +118,5 @@ Delivered by: not yet planned.
   features, and the imprint's definition did not. FEAT-02 needs a visual-designer amendment for a status part and a
   linkless row (the brand docs forbid both today). That amendment reopens M1's gate in `docs/roadmap.md` (brand docs
   merged, none `[PROPOSED]`) and M3 cannot pass until it lands; pm re-cuts M1 and M3 after this merges.
+- 2026-10-09: ADR 0001 §6 (released topic, licence and `url` required, non-empty list) cannot hold the launch list; FEAT-02
+  names architecture as an owner (issue #39), found in review of PR #37.

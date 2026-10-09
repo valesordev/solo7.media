@@ -38,6 +38,7 @@ opens the site on mobile and desktop, JavaScript off, and:
 | Brand docs, tokens, components spec for the homepage | visual-designer | FEAT-01 |
 | `ProjectRow` for in-development work: a status part, and a row with no link or repository data. `brands/valesordev/brand/usage.md` today forbids a status badge, rows with different parts, and a missing value shown as a blank, and says one link per row to the source repository | visual-designer | needs visual-designer: amend the brand docs before the row is built; the look is theirs. The amendment reopens M1's gate in `docs/roadmap.md` and holds M3, so pm re-cuts both |
 | Whether the homepage copy that says "released" ("Software, tools, and systems, released in the open." `voice.md`, `visual-language.md`) still holds while nothing is released | visual-designer | needs visual-designer; see Decisions |
+| Project-list data source and schema: ADR 0001 §6 selects the `released` topic, drops repos without a license, and `make check` needs a non-empty list of entries with `url` and `spdx`, so it cannot hold three in-development projects, one with no repo | architecture | needs architecture: issue #39 |
 | Site structure: how `sites/valesordev.com` consumes `brands/valesordev`, workspaces | architecture | needs architecture (ADR or spec; none in `docs/adr/` yet) |
 | Components and page | implementation | needs stories citing FEAT-01's brand docs |
 | Project list and statuses | Brian | decided 2026-10-09, see Decisions |
@@ -57,6 +58,8 @@ opens the site on mobile and desktop, JavaScript off, and:
   shows what is in development until the first release. Reason: the definition is Brian's and the brand's, and
   nothing here needs it moved. If the "released" wording on the page reads as untrue, that is a copy decision for
   visual-designer, not a change to the vision.
+- An entry in the project list may have no link and no license, and carries its status. Reason: the Pipeline has no
+  repository yet. How the list is stored and checked is architecture's call (#39).
 - The legacy valesordev projects generator is a candidate to reuse, not a requirement. Reason: the Notion
   monorepo page says to salvage what's worth keeping; architecture decides.
 
