@@ -18,7 +18,7 @@ Needs: none
 Stories: S7M-VAL-001, S7M-VAL-004, S7M-INF-001
 Visitor-visible: none: enables FEAT-03's cutover; Brian sees the stub at a preview URL
 
-#### M3 — Homepage on preview *(gate: the target homepage layout with the three rows in FEAT-02's success signal passes on a preview URL, `/brand-qa` included)*
+#### M3 — Homepage on preview *(gate: FEAT-02's whole success signal passes on a preview URL, `/brand-qa` included: the target homepage layout with its three rows, their statuses and links, and WCAG 2.1 AA)*
 Release: R1 — FEAT-02
 Needs: M1 (including S7M-VAL-013), M2, and architecture's answer on the project-list data source (#39)
 Visitor-visible: none: enables FEAT-03's cutover; Brian sees the target homepage at a preview URL
@@ -35,7 +35,7 @@ Visitor-visible: valesordev.com is the new site
 
 ## Log
 - 2026-10-07: first roadmap, answering the `release-change` issue #7. SPRINT-01 targets M2 and the start of M1.
-- 2026-10-09: answering `release-change` issue #40 (R1's homepage lists projects in development). M1 reopened: its gate
-  includes S7M-VAL-013, the brand-docs amendment for a status part and a linkless `ProjectRow`, with the subhead question
-  for visual-designer. M3's gate now names FEAT-02's three rows, and M3 also waits on #39. M3's visitor-visible change is
+- 2026-10-09: answering `release-change` issue #40 (R1's homepage lists projects in development). M1 reopened: its stories
+  include S7M-VAL-013, the brand-docs amendment for a status part and a linkless `ProjectRow`, with the subhead question
+  for visual-designer. M3's gate keeps FEAT-02's whole success signal and names its three rows, and M3 also waits on #39. M3's visitor-visible change is
   unchanged. Added to SPRINT-01, which still targets M2 and the start of M1.
