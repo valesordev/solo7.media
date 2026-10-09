@@ -109,8 +109,8 @@ Everything stacks in reading order, left aligned, the same column inset, the sam
    no longer sits over the art's empty zone because the zone is too small; the art is a separate band below.
 3. Info columns (an audit candidate, not in the decided kit) stack with a horizontal rule between them.
 4. `SectionRule` title and its link: title above, link below, both left aligned.
-5. `ProjectRow`: name and tagline; description; `TechnicalMetadata`; the arrow stays on the right of the name
-   line. Row rules stay.
+5. `ProjectRow`: name and tagline (if the list carries one); description; `TechnicalMetadata`; the arrow stays on
+   the right of the name line, and a row with no repository has no arrow. Row rules stay. `[PROPOSED]`
 6. `Footer`: links stack, left aligned.
 
 ## Illustration
@@ -202,7 +202,7 @@ Rules the audit doesn't state (counts, markup, limits, data format) are decided 
   parts in the same columns, except as the next two bullets say. The tagline is shown when the project list
   carries one (it does not yet; see `voice.md#describing-a-project`). `[PROPOSED]`
 - **Status.** Every row states its status in words as the first `TechnicalMetadata` field: "In progress" or
-  "Concept". No other status is defined. The words are mono `ink` text; colour, weight, and position never carry the
+  "Concept". No other status is defined. The words are mono `ink-muted` text, like every metadata value; colour, weight, and position never carry the
   status alone. `[PROPOSED]` Reason: Brian's terms (FEAT-02), the brand's refusal of badges, and WCAG 1.4.1.
   Rejected: a badge or pill (a second visual idiom the target doesn't have); a vermilion status (vermilion marks
   direction, not state).
