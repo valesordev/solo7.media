@@ -122,12 +122,13 @@ Each project is described by what it is made of and what it does. `[DECIDED 2026
 availability: describe, don't sell. A third status needs Brian and an amendment here.
 
 ### The three launch rows
-`[DECIDED 2026-10-09]` Draft descriptions, each limited to what a source states. Brian replaces them with the project's own
-README text where it exists. The voice rules here are mine; the facts are his. Names are the repository's spelling, or for a project with no repository, the project list's (Brian's approved name).
+`[DECIDED 2026-10-09]` The R1 wording, each description limited to what a source states. Brian may later swap in a
+project's own README text. Names are the repository's spelling, or for a project with no repository, the project
+list's (Brian's approved name).
 
 | Name | Status | Description | Source of the facts |
 |---|---|---|---|
-| Andara's World | In progress | Tools, generators, and systems for building and exploring a coherent fictional world. | Mockup copy from the target image's row (`references/target-homepage.png`), not a verified fact. Brian confirms it or replaces it with the repository's README text |
+| Andara's World | In progress | Tools, generators, and systems for building and exploring a coherent fictional world. | Copy from the target image's row (`references/target-homepage.png`), approved for R1 by Brian (2026-10-09). A later README swap is his call |
 | Vagabond | In progress | An app for planning and managing the vagabond lifestyle. `[DECIDED 2026-10-09]` | Brian, in session. The target mockup's Vagabond row (a personal knowledge system) is superseded |
 | System 9 Studios Pipeline | Concept | Software in development here for System 9 Studios to use. It has no repository yet. | FEAT-02 decisions, 2026-10-09 |
 
