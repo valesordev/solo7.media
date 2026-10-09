@@ -90,22 +90,37 @@ This matches `packages/README.md`. `@solo7/site-core` exports an `initFaro(confi
 Sites call it from one layout script. Nothing visual lives in `site-core`. The `/privacy` text moves to
 `site-core` in R2 (FEAT-04); in R1 it is a page in `sites/valesordev.com`, linked from the footer component.
 
-### 6. The legacy projects generator: reuse the approach, re-home the rule
-The old `valesordev.com` repo's `make projects` runs `gh repo list valesordev --topic released --no-archived`
-and writes a **committed** `src/data/projects.json`. Yes, it is reused (FEAT-02), because it is the part of that
-site worth keeping: the list can't decay between bursts of work, and the committed output keeps builds offline and
-reproducible. Changes:
-- Target `projects-valesordev` in the root `Makefile` writes `sites/valesordev.com/src/data/projects.json`. It
-  is generated, committed, and never hand-edited. The build reads the file and never calls `gh`.
-- Field set carries over (`name`, `description`, `url`, `language`, `updatedAt`, `stars`, `spdx`). Which fields a
-  row shows is the brand docs' call, not the data's.
-- Selection stays the `released` topic. FEAT-02's open question (which projects launch) is Brian's; the
-  recommendation there (public repo with a license) is a filter on this same query and does not change the
-  structure. The generator must drop any repo without a license, so the data can't include a project the site
-  would have to describe as unlicensed.
-- Row content is checked by `make check`: the file parses, is a non-empty array, and every entry has `name`, `url`,
-  `spdx`. An empty list fails the gate; Brian decides if a launch with no projects is ever valid.
-- Refresh is a manual `make projects-valesordev` plus a PR. A scheduled refresh is a later sre decision.
+### 6. The project list: a curated committed file, checked offline, verified online
+Amended 2026-10-09 (issue #39): nothing is released yet, so the R1 list is the three projects in development
+(FEAT-02), one with no repository. The legacy approach (`gh repo list --topic released`, drop unlicensed) cannot
+produce that list, so R1 does not use it. The `released` topic selection is dropped until a project is released.
+
+- Source: `sites/valesordev.com/src/data/projects.json`, committed and **hand-curated** (implementation's). Array
+  order is display order. The build reads the file and never calls `gh`, so builds stay offline and reproducible.
+- Schema, one object per project:
+
+  | Field | Required | Rule |
+  |---|---|---|
+  | `name` | yes | non-empty string |
+  | `status` | yes | `"in-progress"` or `"concept"`. `"released"` is added by an ADR amendment with the first release |
+  | `description` | yes | non-empty string |
+  | `url` | no | the public repository, `https://github.com/valesordev/<repo>`. Absent when no repository exists; never a placeholder, empty string, or `null` |
+  | `spdx` | no | the repository's SPDX license id. Absent when `url` is absent; may be absent with a `url` if the repo has no license |
+
+  Which fields a row shows, the status words, and how a linkless row looks are the brand docs' call. A future
+  `"released"` entry must have `url` and `spdx`.
+- The first three entries, in order: Andara's World (`in-progress`, `url`), Vagabond (`in-progress`, `url`),
+  System 9 Studios Pipeline (`concept`, no `url`, no `spdx`). The `status` value is stored as data; the words a
+  visitor reads are the voice doc's.
+- Offline check (`make check`, sre's target `check-projects-valesordev`): the file parses; is a non-empty array; every
+  entry meets the schema, with no unknown fields; names are unique; an entry with `spdx` has `url`; every `url`
+  matches the pattern above.
+- Online verification, `make projects-valesordev` (sre's; not part of `make check`, since it needs network and
+  `gh`): for each entry with a `url`, confirms the repository exists and is public, and prints any difference
+  between the repository's license and the entry's `spdx`. It writes nothing. A person updates the file and
+  opens a PR. This is what keeps the list from inventing links: a link enters only through a PR that passed
+  verification, and the offline check fails the gate on a malformed one.
+- Refresh is manual. A scheduled verification is a later sre decision.
 
 ### 7. Page and route conventions
 `src/pages/` holds routes only, with one `.astro` file per URL. Routes: `/`, `/privacy/`, and a `404.astro`.
@@ -134,6 +149,9 @@ Astro compiling `.astro` files from a linked workspace package may need config (
 - **A shared `ui` package**: rejected by §5 (imprints never share visual components).
 - **Generating the project list at build time**: rejected; a GitHub or `gh` outage would be a build failure, and
   the build would not be reproducible.
+- **Keeping the generator and adding non-released entries to its output** (#39): rejected. The Pipeline has no
+  repository, so the generator would need a second, hand-written source anyway; one curated file with an offline
+  check and an online verify is simpler.
 
 ## Follow-on stories (for PM to cut)
 1. **brand package contract (visual-designer), ordered before or with S7M-VAL-004 (the site's workspace dependency
@@ -147,8 +165,9 @@ Astro compiling `.astro` files from a linked workspace package may need config (
    extending the base, `build-site-valesordev`, wired into `make check`.
 4. **Brand-import lint, two stories:** (a) implementation adds the ESLint rule in the site package; (b) sre
    hooks it into `make check`. The rule is in decision 2.
-5. **Projects generator (sre owns the Makefile, implementation owns the site data):** `projects-valesordev` and
-   its `make check` validation. FEAT-02.
+5. **Project list (amended 2026-10-09, see decision 6; sre owns the Makefile, implementation owns the site data):**
+   implementation writes `projects.json` with the three entries; sre writes `check-projects-valesordev` (in
+   `make check`) and `projects-valesordev` (online verification). FEAT-02.
 6. **Preview and production deploy (S7M-INF-001, then a production story, sre):** `preview-site-valesordev`,
    `deploy-site-valesordev`, `wrangler.jsonc`.
 7. **Redirect scheme / URL permanence ADR (architecture), before cutover.** Not blocked by this ADR; it needs the
