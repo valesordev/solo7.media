@@ -131,8 +131,9 @@ REPO     github.com/<org>/<repo>
 - Uppercase mono labels in `ink-muted`; values in mono; the status in words; comma-separated stack; SPDX
   license; repository path without scheme. `[PROPOSED]`
 - Always the fields in this order. STATUS is on every row. REPO is on a row only when the project has a
-  repository, and LICENSE only when the list carries an `spdx` (a repository can exist without a license; the
-  line is then left out, not shown empty). `[PROPOSED]`
+  repository, and then LICENSE is on the row too: every project has a license (Apache-2.0 by default,
+  `voice.md#the-imprints-own-sentences`). An entry with a repository and no `spdx` is a data defect to bring to
+  Brian, never a hidden or blank line. `[PROPOSED]`
 
 **Incorrect**
 - A middle dot as the separator ("TypeScript · SQLite").

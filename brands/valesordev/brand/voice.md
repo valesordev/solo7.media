@@ -109,8 +109,9 @@ Each project is described by what it is made of and what it does. `[DECIDED 2026
 - **Description:** one or two sentences of what it does, in plain nouns.
 - **Metadata:** status, stack, license, and repository. Status, license (`spdx`), and repository (`url`) come
   from the project list (ADR 0001 section 6), which is checked against the repository before a PR. Nothing in them
-  is invented. A repository URL that doesn't resolve is a defect, not a placeholder. A project with no repository
-  has no license or repository line. `[PROPOSED]`
+  is invented. A repository URL that doesn't resolve is a defect, not a placeholder. Every project has a license,
+  Apache-2.0 by default, so a project with a repository and no `spdx` is a defect to bring to Brian. A project with
+  no repository has no license or repository line yet. `[PROPOSED]`
 - **Gap:** the project list has no tagline or stack field, so until it does, a row shows neither. Whether to add
   them is a schema question for architecture (#39 amendment), raised on the story. `[PROPOSED]`
 
@@ -127,7 +128,7 @@ README text where it exists. The voice rules here are mine; the facts are his. N
 | Name | Status | Description | Source of the facts |
 |---|---|---|---|
 | Andara's World | In progress | Tools, generators, and systems for building and exploring a coherent fictional world. | Mockup copy from the target image's row (`references/target-homepage.png`), not a verified fact. Brian confirms it or replaces it with the repository's README text |
-| Vagabond | In progress | An app for trips and maps. | Inferred from Notion planning notes (trip and map work; "the Vagabond app is a Valesor Development project"). Not a stated description. Brian confirms or replaces it |
+| Vagabond | In progress | An app for planning and managing the vagabond lifestyle. `[DECIDED 2026-10-09]` | Brian, in session. The target mockup's Vagabond row (a personal knowledge system) is superseded |
 | System 9 Studios Pipeline | Concept | Software in development here for System 9 Studios to use. It has no repository yet. | FEAT-02 decisions, 2026-10-09 |
 
 - The Pipeline is listed under Valesor because Brian develops it here for the studio. Its row says so in one
@@ -148,10 +149,10 @@ Reference lines. The first two are decided in the audit (copy rows; the characte
 The subhead and the "What belongs here?" column of the target lose their dashes under the characters rule.
 `[DECIDED 2026-10-08]` The rewritten sentences:
 
-- Subhead: `[PROPOSED]` "Software, tools, and systems, in development." Was "Software, tools, and systems,
-  released in the open." (`[DECIDED 2026-10-08]`), which says released work exists while nothing is released.
-  Revert to the original in the amendment that adds the first "released" row. The imprint's definition
-  ("publicly released software") is unchanged.
+- Subhead: "Software, tools, and systems, developed in the open." `[DECIDED 2026-10-09]` (Brian, in session).
+  It replaces "Software, tools, and systems, released in the open." (`[DECIDED 2026-10-08]`), which says released
+  work exists while nothing is released. Whether to restore the original with the first "released" row is decided
+  then. The imprint's definition ("publicly released software") is unchanged.
 - What belongs here?: "If the primary artifact is software (code, tools, systems, or infrastructure), it belongs
   in Valesor. Everything else lives elsewhere."
 

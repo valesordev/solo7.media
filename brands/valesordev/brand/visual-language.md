@@ -56,7 +56,7 @@ Roles. Sizes are relative to body (`1x`) as measured in the audit; the token sto
 |---|---|---|---|---|---|
 | Wordmark | serif | 1.6x | title case | slightly tight | Valesor Development |
 | Display (H1) | serif | 4x | sentence case | tight, about -1% | The engineering imprint. |
-| Subhead | serif | 1.7x | sentence case | normal | Software, tools, and systems, in development. `[PROPOSED]` |
+| Subhead | serif | 1.7x | sentence case | normal | Software, tools, and systems, developed in the open. `[DECIDED 2026-10-09]` |
 | Section title | serif | 2.4x | sentence case | normal | Projects |
 | Row title | serif | 1.7x | title case | normal | Andara's World |
 | Column title | serif | 1.2x | title case | normal | License |
@@ -234,8 +234,9 @@ Rules the audit doesn't state (counts, markup, limits, data format) are decided 
   without scheme ("github.com/<org>/<repo>").
 - A `dl` in markup. Values are real text, selectable.
 - Order and labels never vary between rows. STATUS is on every row. REPO is on a row exactly when the project has a
-  repository; for a project that has one, a missing REPO is a data defect to fix, not a blank to hide. LICENSE is also left out, never empty, when a repository has no `spdx` in the list. A project with no
-  repository leaves REPO and LICENSE out. `[PROPOSED]` (was `[DECIDED 2026-10-08]`:
+  repository; for a project that has one, a missing REPO is a data defect to fix, not a blank to hide. LICENSE is on every row that has a repository: every project has a license, Apache-2.0 by default
+  (`voice.md#the-imprints-own-sentences`), so an entry with a repository and no `spdx` is a data defect to bring to
+  Brian, not a blank to hide. A project with no repository leaves REPO and LICENSE out. `[PROPOSED]` (was `[DECIDED 2026-10-08]`:
   "a missing field is a data defect")
 - Appears wherever a project is named with a claim about its source (the row; later, a project page).
 - Tokens: `ink-muted`, `ink`, metadata label and value roles.
