@@ -120,3 +120,5 @@ Delivered by: not yet planned.
   merged, none `[PROPOSED]`) and M3 cannot pass until it lands; pm re-cuts M1 and M3 after this merges.
 - 2026-10-09: ADR 0001 §6 (released topic, license and `url` required, non-empty list) cannot hold the launch list; FEAT-02
   names architecture as an owner (issue #39), found in review of PR #37.
+- 2026-10-09: issue #39 resolved. ADR 0001 §6 now uses a static, hand-curated project list, so FEAT-02 no longer waits
+  on architecture. Scope, promise, and cut line did not change.

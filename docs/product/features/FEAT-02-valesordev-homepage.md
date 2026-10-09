@@ -38,7 +38,7 @@ opens the site on mobile and desktop, JavaScript off, and:
 | Brand docs, tokens, components spec for the homepage | visual-designer | FEAT-01 |
 | `ProjectRow` for in-development work: a status part, and a row with no link or repository data. `brands/valesordev/brand/usage.md` today forbids a status badge, rows with different parts, and a missing value shown as a blank, and says one link per row to the source repository | visual-designer | needs visual-designer: amend the brand docs before the row is built; the look is theirs. The amendment reopens M1's gate in `docs/roadmap.md` and holds M3, so pm re-cuts both |
 | Whether the homepage copy that says "released" ("Software, tools, and systems, released in the open." `voice.md`, `visual-language.md`) still holds while nothing is released | visual-designer | needs visual-designer; see Decisions |
-| Project-list data source and schema: ADR 0001 §6 selects the `released` topic, drops repos without a license, and `make check` needs a non-empty list of entries with `url` and `spdx`, so it cannot hold three in-development projects, one with no repo | architecture | needs architecture: issue #39 |
+| Project-list data source and schema | architecture | resolved 2026-10-09 (issue #39): ADR 0001 §6 is a hand-curated committed file, `sites/valesordev.com/src/data/projects.json`, with `status` and optional `url` and `spdx` |
 | Site structure: how `sites/valesordev.com` consumes `brands/valesordev`, workspaces | architecture | needs architecture (ADR or spec; none in `docs/adr/` yet) |
 | Components and page | implementation | needs stories citing FEAT-01's brand docs |
 | Project list and statuses | Brian | decided 2026-10-09, see Decisions |
@@ -59,10 +59,10 @@ opens the site on mobile and desktop, JavaScript off, and:
   nothing here needs it moved. If the "released" wording on the page reads as untrue, that is a copy decision for
   visual-designer, not a change to the vision.
 - An entry in the project list carries its status, and an entry with no repository has no link and no license.
-  Reason: the Pipeline has no repository yet. Whether a repository entry may be unlicensed, and how the list is
-  stored and checked, is architecture's call (#39).
-- The legacy valesordev projects generator is a candidate to reuse, not a requirement. Reason: the Notion
-  monorepo page says to salvage what's worth keeping; architecture decides.
+  Reason: the Pipeline has no repository yet. Architecture settled the storage in ADR 0001 §6 (#39): a static,
+  hand-curated list, checked offline and verified online before a PR.
+- The legacy valesordev projects generator is not reused in R1. Reason: ADR 0001 §6 replaces it with the static
+  list, since the generator selects released repositories and none exist yet.
 
 ## Open for Brian
 - None. Replaced the question "which projects appear at launch" with the list above.
