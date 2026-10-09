@@ -31,7 +31,7 @@ What each word asks of a page:
 | Durable | plain type and rules that will still read in ten years; no trend effects |
 | Precise | hairlines on a constant frame; facts stated exactly (stack, license, repo) |
 | Independent | no partner logos, testimonials, or platform badges |
-| Open | source, license, and repository are visible wherever a project is named, for a project that has a repository (a project with none says its status instead) `[PROPOSED]` |
+| Open | source, license, and repository are visible wherever a project is named, for a project that has a repository (a project with none says its status instead) `[DECIDED 2026-10-09]` |
 | Technical | monospace for anything that is measured or named in code |
 | Field-tested | words describe what the software does, as a field manual would |
 
@@ -59,7 +59,7 @@ Everything below is decided in the audit's core rows and specified in `visual-la
 6. **The project row.** Name, tagline, description, technical metadata, and an arrow, between hairlines. The
    brand's signature component. `[DECIDED 2026-10-08]` The tagline shows when the project list carries one, and a
    project with no repository has no arrow, link, license, or repository line; every row states its status.
-   `[PROPOSED]` (`visual-language.md#projectrow`)
+   `[DECIDED 2026-10-09]` (`visual-language.md#projectrow`)
 7. **Plain voice.** First person singular, nouns for things that exist, no sales language. See `voice.md`.
    `[DECIDED 2026-10-08]`
 

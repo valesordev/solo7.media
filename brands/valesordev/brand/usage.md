@@ -76,19 +76,19 @@ code.                                                      REPO     github.com/<
 -------------------------------------------------------------------------------------------------
 ```
 - Serif name, mono tagline under it, mono description, `TechnicalMetadata` (it opens with the STATUS field),
-  vermilion `->` at the right. `[PROPOSED]`
-- One link for the whole row, to the source repository, named by the project. `[PROPOSED]` Only a row with a
+  vermilion `->` at the right. `[DECIDED 2026-10-09]`
+- One link for the whole row, to the source repository, named by the project. `[DECIDED 2026-10-09]` Only a row with a
   repository is a link.
 - The same four parts in the same columns in every row, in a list, with one exception: a row with no repository
-  (below). `[PROPOSED]`
+  (below). `[DECIDED 2026-10-09]`
 - Status is stated in words, "In progress" or "Concept", as the STATUS value in `TechnicalMetadata`. Colour,
-  weight, and position never carry it alone. `[PROPOSED]`
+  weight, and position never carry it alone. `[DECIDED 2026-10-09]`
 - Data from the project list (ADR 0001 section 6): name, description, status, and the repository `url` and
   `spdx` where there is one. The tagline and STACK appear when the project list carries them; the list does not
-  carry them yet (see `voice.md#describing-a-project`). `[PROPOSED]`
+  carry them yet (see `voice.md#describing-a-project`). `[DECIDED 2026-10-09]`
 
 **Correct: a row with no repository** (structure specimen; the data is placeholder, not content; the tagline
-and STACK, which the specimens show, appear only when the project list carries them) `[PROPOSED]`
+and STACK, which the specimens show, appear only when the project list carries them) `[DECIDED 2026-10-09]`
 ```
 System 9 Studios        Software in development here      STATUS   Concept
 Pipeline                for System 9 Studios to use.
@@ -103,20 +103,20 @@ Pipeline                for System 9 Studios to use.
   struck: nothing in it is disabled.
 - The row is a list item with no interactive element: no `<a>` without an `href`, no `role="link"`, no
   `aria-disabled`, no `tabindex`. Its text is read as text, and the empty arrow column is not exposed to
-  assistive technology (nothing is in it). `[PROPOSED]`
+  assistive technology (nothing is in it). `[DECIDED 2026-10-09]`
 
 **Incorrect**
 - A card with a border, shadow, radius, or fill.
 - A thumbnail, icon, language dot, star count, or a status badge (a pill, chip, dot, or coloured tag; status is
-  the STATUS field, in words). `[PROPOSED]`
+  the STATUS field, in words). `[DECIDED 2026-10-09]`
 - Tag chips instead of comma-separated stack.
 - A hover card or reveal.
 - Placeholder or invented data (the target's repository URLs and the typo "fction" are tells, not content).
 - An arrow in ink, or a glyph `→` instead of the typed `->`.
 - Rows that differ in parts for any reason other than having no repository, or a missing LICENSE or REPO shown
-  as a blank on a row that has a repository. `[PROPOSED]`
-- A row with no repository that has a link, an arrow, a "#" or empty href, or a placeholder in REPO. `[PROPOSED]`
-- A status word other than "In progress" or "Concept", or a status shown only by colour. `[PROPOSED]`
+  as a blank on a row that has a repository. `[DECIDED 2026-10-09]`
+- A row with no repository that has a link, an arrow, a "#" or empty href, or a placeholder in REPO. `[DECIDED 2026-10-09]`
+- A status word other than "In progress" or "Concept", or a status shown only by colour. `[DECIDED 2026-10-09]`
 - A "Learn more" link inside the row.
 
 ## technicalmetadata
@@ -129,11 +129,11 @@ LICENSE  Apache-2.0
 REPO     github.com/<org>/<repo>
 ```
 - Uppercase mono labels in `ink-muted`; values in mono; the status in words; comma-separated stack; SPDX
-  license; repository path without scheme. `[PROPOSED]`
+  license; repository path without scheme. `[DECIDED 2026-10-09]`
 - Always the fields in this order. STATUS is on every row. REPO is on a row only when the project has a
   repository, and then LICENSE is on the row too: every project has a license (Apache-2.0 by default,
   `voice.md#the-imprints-own-sentences`). An entry with a repository and no `spdx` is a data defect to bring to
-  Brian, never a hidden or blank line. `[PROPOSED]`
+  Brian, never a hidden or blank line. `[DECIDED 2026-10-09]`
 
 **Incorrect**
 - A middle dot as the separator ("TypeScript · SQLite").
@@ -141,7 +141,7 @@ REPO     github.com/<org>/<repo>
 - A full `https://` URL, or a repository that doesn't resolve.
 - Colored badges, shields, or icons for the license or language.
 - Reordering fields per project, or showing a field with no value as a blank or a dash.
-- A repository field on a project that has no repository. `[PROPOSED]`
+- A repository field on a project that has no repository. `[DECIDED 2026-10-09]`
 - Metadata in a table with borders or filled header cells.
 
 ## textlink
