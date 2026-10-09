@@ -10,7 +10,9 @@ brief (Brand Kit Project Direction, Valesor Development).
 Status marks: `[DECIDED <date>]` is Brian's. `[PROPOSED]` is visual-designer's recommendation awaiting Brian at
 PR review. Nothing `[PROPOSED]` may be cited by a story as binding. Open at 2026-10-08: the Apache-2.0 default
 (`voice.md#the-imprints-own-sentences`) and the footer license line that depends on it, the rewritten homepage copy
-(`voice.md`), and the long-form reading font (`visual-language.md#typography`).
+(`voice.md`), the long-form reading font (`visual-language.md#typography`), and the audit's unresolved rows (the
+info band and its vertical spacing, the hero subject, the moon). `references/visual-audit.md` is the authority for
+which audit rows are still `[PROPOSED]`; this list is a summary.
 
 ## Identity
 Valesor Development is the engineering imprint: the banner applied to software that is complete enough to be

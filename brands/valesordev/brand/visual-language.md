@@ -24,8 +24,9 @@ Roles only. Values are set at token time against the contrast rules below.
 | `ink-muted` | descriptions, taglines, metadata values, footer text | mid grey near `#545454`, `[DECIDED 2026-10-08]` | the single secondary grey |
 | `rule` | every 1px hairline and divider | light neutral grey, `[DECIDED 2026-10-08]` | not warm |
 | `accent` | primary action text and underline, row arrows, "View all projects" | one vermilion near `#C8202A`, `[DECIDED 2026-10-08]` | direction and primary action only |
-| `ink-faint` | metadata labels (STACK, LICENSE, REPO) | `[DECIDED 2026-10-08]` use `ink-muted` at the label size instead of a third grey | audit candidate; one fewer grey |
-| `rule-strong` | header rule, section rules | `[DECIDED 2026-10-08]` one `rule` weight everywhere | audit candidate; two rule values aren't evidenced as intent |
+
+Not roles `[DECIDED 2026-10-08]` (audit Decisions item 9): the audit's `ink-faint` is `ink-muted` at the label size, not a
+third grey, and its `rule (strong)` is `rule`, one weight everywhere. The tokens story creates neither.
 
 Rules:
 - Contrast: text on `paper` is at least 4.5:1 (WCAG 2.1 AA), including `ink-muted` at the smallest size and
