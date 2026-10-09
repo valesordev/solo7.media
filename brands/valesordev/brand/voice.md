@@ -103,26 +103,26 @@ Each project is described by what it is made of and what it does. `[DECIDED 2026
 `ProjectRow` decision)
 
 - **Name:** the project's own name, exactly as the repository spells it. For a project with no repository, the
-  spelling in the project list, as Brian approved it. `[PROPOSED]`
+  spelling in the project list, as Brian approved it. `[DECIDED 2026-10-09]`
 - **Tagline:** one short sentence of what it is, no verbs of marketing ("A personal knowledge system, built for
   movement.").
 - **Description:** one or two sentences of what it does, in plain nouns.
 - **Metadata:** status, stack, license, and repository. Status, license (`spdx`), and repository (`url`) come
   from the project list (ADR 0001 section 6), which is checked against the repository before a PR. Nothing in them
   is invented. A repository URL that doesn't resolve is a defect, not a placeholder. Every project has a license,
-  Apache-2.0 by default, so a project with a repository and no `spdx` is a defect to bring to Brian. A project with
-  no repository has no license or repository line yet. `[PROPOSED]`
-- **Gap:** the project list has no tagline or stack field, so until it does, a row shows neither. Whether to add
-  them is a schema question for architecture (#39 amendment), raised on the story. `[PROPOSED]`
+  Apache-2.0 by default, so the schema requires `spdx` whenever `url` is present (ADR 0001 section 6, PR #51). A
+  project with no repository has no license or repository line yet. `[DECIDED 2026-10-09]`
+- **Tagline and stack:** the project list's R1 schema has neither field (ADR 0001 section 6, amended in PR #51), so
+  an R1 row shows neither. They appear if a later schema amendment adds them. `[DECIDED 2026-10-09]`
 
 ### Status words
-`[PROPOSED]` Exactly two, in sentence case, as the STATUS value: "In progress" and "Concept". The data values
+`[DECIDED 2026-10-09]` Exactly two, in sentence case, as the STATUS value: "In progress" and "Concept". The data values
 `in-progress` and `concept` (ADR 0001 §6) are never displayed. No other word stands in for them ("Alpha", "Beta",
 "Coming soon", "Soon", "Early access", "WIP"), and nothing on a row says or implies a release, a launch date, or
 availability: describe, don't sell. A third status needs Brian and an amendment here.
 
 ### The three launch rows
-`[PROPOSED]` Draft descriptions, each limited to what a source states. Brian replaces them with the project's own
+`[DECIDED 2026-10-09]` Draft descriptions, each limited to what a source states. Brian replaces them with the project's own
 README text where it exists. The voice rules here are mine; the facts are his. Names are the repository's spelling, or for a project with no repository, the project list's (Brian's approved name).
 
 | Name | Status | Description | Source of the facts |
