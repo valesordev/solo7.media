@@ -68,10 +68,10 @@ gradients, shadows, marketing copy, decorative diagrams, or additional illustrat
 
 **Correct** (structure specimen; the data is placeholder, not content)
 ```
-Andara's World          Tools, generators, and systems     STACK    Python, TypeScript         ->
-A living world for      for building and exploring a       LICENSE  Apache-2.0
-fiction, built with     coherent fictional world.          REPO     github.com/<org>/<repo>
-code.
+Andara's World          Tools, generators, and systems     STATUS   In progress                ->
+A living world for      for building and exploring a       STACK    Python, TypeScript
+fiction, built with     coherent fictional world.          LICENSE  Apache-2.0
+code.                                                      REPO     github.com/<org>/<repo>
 -------------------------------------------------------------------------------------------------
 ```
 - Serif name, mono tagline under it, mono description, `TechnicalMetadata` (it opens with the STATUS field),
@@ -82,7 +82,9 @@ code.
   (below). `[PROPOSED]`
 - Status is stated in words, "In progress" or "Concept", as the STATUS value in `TechnicalMetadata`. Colour,
   weight, and position never carry it alone. `[PROPOSED]`
-- Data from the repository itself, and from the project list for status.
+- Data from the project list (ADR 0001 section 6): name, description, status, and the repository `url` and
+  `spdx` where there is one. The tagline and STACK appear when the project list carries them; the list does not
+  carry them yet (see `voice.md#describing-a-project`). `[PROPOSED]`
 
 **Correct: a row with no repository** (structure specimen; the data is placeholder, not content) `[PROPOSED]`
 ```
@@ -92,11 +94,14 @@ A tool for the studio.  the studio to use.
 ```
 - No link, no `->`, no placeholder, no blank, no "coming soon". The arrow column keeps its width and draws
   nothing, so the other columns stay aligned with the rows above and below.
-- It keeps the name, tagline, description, and `TechnicalMetadata` with STATUS only. LICENSE and REPO are
-  left out, not shown empty: a project with no repository has neither.
+- It keeps the name, the tagline if the list carries one, the description, and `TechnicalMetadata` with STATUS
+  (and STACK if the list carries it). LICENSE and REPO are left out, not shown empty: a project with no
+  repository has neither.
 - Name and text stay in `ink` and `ink-muted` exactly as in a linked row. A row with no link is not dimmed or
   struck: nothing in it is disabled.
-- The row is a list item with no interactive element. Its text is read as text.
+- The row is a list item with no interactive element: no `<a>` without an `href`, no `role="link"`, no
+  `aria-disabled`, no `tabindex`. Its text is read as text, and the empty arrow column is not exposed to
+  assistive technology (nothing is in it). `[PROPOSED]`
 
 **Incorrect**
 - A card with a border, shadow, radius, or fill.
@@ -123,8 +128,9 @@ REPO     github.com/<org>/<repo>
 ```
 - Uppercase mono labels in `ink-muted`; values in mono; the status in words; comma-separated stack; SPDX
   license; repository path without scheme. `[PROPOSED]`
-- Always the fields in this order. STATUS is on every row. LICENSE and REPO are on a row only when the project
-  has a repository. `[PROPOSED]`
+- Always the fields in this order. STATUS is on every row. REPO is on a row only when the project has a
+  repository, and LICENSE only when the list carries an `spdx` (a repository can exist without a license; the
+  line is then left out, not shown empty). `[PROPOSED]`
 
 **Incorrect**
 - A middle dot as the separator ("TypeScript · SQLite").

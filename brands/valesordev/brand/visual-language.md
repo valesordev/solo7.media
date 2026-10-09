@@ -197,9 +197,10 @@ Rules the audit doesn't state (counts, markup, limits, data format) are decided 
 The signature component. `[DECIDED 2026-10-08]` (audit: ProjectRow)
 Rules the audit doesn't state (counts, markup, limits, data format) are decided with the anatomy.
 
-- A four-part row between two 1px `rule`s: (1) serif name with the mono tagline beneath; (2) mono description;
+- A row of up to four parts between two 1px `rule`s: (1) serif name with the mono tagline beneath; (2) mono description;
   (3) `TechnicalMetadata`; (4) a vermilion `->` at the far right. Row pitch is constant: every row has the same
-  parts in the same columns, except as the next two bullets say. `[PROPOSED]`
+  parts in the same columns, except as the next two bullets say. The tagline is shown when the project list
+  carries one (it does not yet; see `voice.md#describing-a-project`). `[PROPOSED]`
 - **Status.** Every row states its status in words as the first `TechnicalMetadata` field: "In progress" or
   "Concept". No other status is defined. The words are mono `ink` text; colour, weight, and position never carry the
   status alone. `[PROPOSED]` Reason: Brian's terms (FEAT-02), the brand's refusal of badges, and WCAG 1.4.1.
@@ -210,7 +211,9 @@ Rules the audit doesn't state (counts, markup, limits, data format) are decided 
   the other rows stay aligned. The row is not dimmed, not marked "unavailable", and carries no placeholder.
   `[PROPOSED]` Reason: Brian, "a row with no link is fine"; an invented link or a blank would be invented data.
   Rejected: an ink or muted `->` (it would still promise a destination); collapsing the column (rows would
-  jump).
+  jump). When the layout stacks on a narrow screen there is no arrow to keep on the name line, and the name line
+  is the name alone. The row is plain list-item text: no `<a>` without `href`, no `aria-disabled`, nothing for
+  assistive technology to announce as a control.
 - A row with a repository is one link to it. `[DECIDED 2026-10-08]` (FEAT-02: rows link to the repository, not
   to a Valesor-hosted page). Its accessible name is the project name. The arrow is decoration inside the link.
   A row with no repository has no link. `[PROPOSED]`
@@ -230,9 +233,10 @@ Rules the audit doesn't state (counts, markup, limits, data format) are decided 
   ("Python, TypeScript"). LICENSE is an SPDX identifier ("Apache-2.0"). REPO is the repository path
   without scheme ("github.com/<org>/<repo>").
 - A `dl` in markup. Values are real text, selectable.
-- Order and labels never vary between rows. STATUS is on every row. LICENSE and REPO are on a row exactly when the
-  project has a repository; for a project that has one, a missing value is a data defect to fix, not a blank to
-  hide. A project with no repository leaves both out, never empty. `[PROPOSED]` (was `[DECIDED 2026-10-08]`:
+- Order and labels never vary between rows. STATUS is on every row. REPO is on a row exactly when the project has a
+  repository; for a project that has one, a missing REPO or STACK the list should carry is a data defect to fix,
+  not a blank to hide. LICENSE is also left out, never empty, when a repository has no `spdx` in the list. A project with no
+  repository leaves REPO and LICENSE out. `[PROPOSED]` (was `[DECIDED 2026-10-08]`:
   "a missing field is a data defect")
 - Appears wherever a project is named with a claim about its source (the row; later, a project page).
 - Tokens: `ink-muted`, `ink`, metadata label and value roles.

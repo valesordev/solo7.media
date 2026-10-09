@@ -106,9 +106,12 @@ Each project is described by what it is made of and what it does. `[DECIDED 2026
 - **Tagline:** one short sentence of what it is, no verbs of marketing ("A personal knowledge system, built for
   movement.").
 - **Description:** one or two sentences of what it does, in plain nouns.
-- **Metadata:** status, stack, license, and repository. Stack, license, and repository come from the repository
-  itself; status comes from the project list. Nothing in them is invented. A repository URL that doesn't resolve
-  is a defect, not a placeholder. A project with no repository has no license or repository line. `[PROPOSED]`
+- **Metadata:** status, stack, license, and repository. Status, license (`spdx`), and repository (`url`) come
+  from the project list (ADR 0001 section 6), which is checked against the repository before a PR. Nothing in them
+  is invented. A repository URL that doesn't resolve is a defect, not a placeholder. A project with no repository
+  has no license or repository line. `[PROPOSED]`
+- **Gap:** the project list has no tagline or stack field, so until it does, a row shows neither. Whether to add
+  them is a schema question for architecture (#39 amendment), raised on the story. `[PROPOSED]`
 
 ### Status words
 `[PROPOSED]` Exactly two, in sentence case, as the STATUS value: "In progress" and "Concept". The data values
@@ -117,19 +120,17 @@ Each project is described by what it is made of and what it does. `[DECIDED 2026
 availability: describe, don't sell. A third status needs Brian and an amendment here.
 
 ### The three launch rows
-`[PROPOSED]` Draft wording for Brian to correct. The facts about each project are his, and I have not verified
-them against the repositories; the voice rules are mine. Names are the repository's spelling. Where a project's
-real tagline or description exists in its repository, that text replaces the draft.
+`[PROPOSED]` Draft descriptions, each limited to what a source states. Brian replaces them with the project's own
+README text where it exists. The voice rules here are mine; the facts are his. Names are the repository's spelling.
 
-| Name | Status | Tagline | Description |
+| Name | Status | Description | Source of the facts |
 |---|---|---|---|
-| Andara's World | In progress | A fictional world, built with code. | Tools, generators, and systems for building and exploring a coherent fictional world. |
-| Vagabond | In progress | A field app for trips and maps. | An app for planning trips and reading maps away from a signal. |
-| System 9 Studios Pipeline | Concept | Software for the studio to use. | Production software I plan to build for System 9 Studios. It has no repository yet. |
+| Andara's World | In progress | Tools, generators, and systems for building and exploring a coherent fictional world. | The description in the target image's row (`references/visual-audit.md`) |
+| Vagabond | In progress | An app for trips and maps. | Notion: "the Vagabond app is a Valesor Development project"; trip and map work in the Vagabond planning notes |
+| System 9 Studios Pipeline | Concept | Software in development here for System 9 Studios to use. It has no repository yet. | FEAT-02 decisions, 2026-10-09 |
 
 - The Pipeline is listed under Valesor because Brian develops it here for the studio. Its row says so in one
   plain sentence and doesn't describe the studio's work.
-- "I plan to build" is the one first-person line: it is a decision with an owner (see First person singular).
 - Never "launching", "coming", "soon", "powerful", "seamless", or a feature list.
 
 Never write a feature list, a benefit, or a comparison with a named product.
