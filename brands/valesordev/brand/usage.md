@@ -131,7 +131,7 @@ REPO     github.com/<org>/<repo>
 `[DECIDED 2026-10-08]` (see `visual-language.md#footer`)
 
 **Correct**
-- A rule, then "Valesor Development" with a one-line license statement (text `[PROPOSED]`, Brian approves) at left; GitHub and
+- A rule, then "Valesor Development" with a one-line license statement ("Released under Apache-2.0 by default." `[DECIDED 2026-10-08]`) at left; GitHub and
   Privacy at right, as plain mono links.
 - The Privacy link on every page.
 - Narrow: stacked, left aligned.
