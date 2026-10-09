@@ -102,12 +102,38 @@ The brief writes `View source →` and the rest with the `→` glyph. The kit us
 Each project is described by what it is made of and what it does. `[DECIDED 2026-10-08]` (derived from the brief and the
 `ProjectRow` decision)
 
-- **Name:** the project's own name, exactly as the repository spells it.
+- **Name:** the project's own name, exactly as the repository spells it. For a project with no repository, the
+  spelling in the project list, as Brian approved it. `[PROPOSED]`
 - **Tagline:** one short sentence of what it is, no verbs of marketing ("A personal knowledge system, built for
   movement.").
 - **Description:** one or two sentences of what it does, in plain nouns.
-- **Metadata:** stack, license, and repository, from the repository itself. Nothing in them is invented. A
-  repository URL that doesn't resolve is a defect, not a placeholder.
+- **Metadata:** status, stack, license, and repository. Status, license (`spdx`), and repository (`url`) come
+  from the project list (ADR 0001 section 6), which is checked against the repository before a PR. Nothing in them
+  is invented. A repository URL that doesn't resolve is a defect, not a placeholder. Every project has a license,
+  Apache-2.0 by default, so a project with a repository and no `spdx` is a defect to bring to Brian. A project with
+  no repository has no license or repository line yet. `[PROPOSED]`
+- **Gap:** the project list has no tagline or stack field, so until it does, a row shows neither. Whether to add
+  them is a schema question for architecture (#39 amendment), raised on the story. `[PROPOSED]`
+
+### Status words
+`[PROPOSED]` Exactly two, in sentence case, as the STATUS value: "In progress" and "Concept". The data values
+`in-progress` and `concept` (ADR 0001 §6) are never displayed. No other word stands in for them ("Alpha", "Beta",
+"Coming soon", "Soon", "Early access", "WIP"), and nothing on a row says or implies a release, a launch date, or
+availability: describe, don't sell. A third status needs Brian and an amendment here.
+
+### The three launch rows
+`[PROPOSED]` Draft descriptions, each limited to what a source states. Brian replaces them with the project's own
+README text where it exists. The voice rules here are mine; the facts are his. Names are the repository's spelling, or for a project with no repository, the project list's (Brian's approved name).
+
+| Name | Status | Description | Source of the facts |
+|---|---|---|---|
+| Andara's World | In progress | Tools, generators, and systems for building and exploring a coherent fictional world. | Mockup copy from the target image's row (`references/target-homepage.png`), not a verified fact. Brian confirms it or replaces it with the repository's README text |
+| Vagabond | In progress | An app for planning and managing the vagabond lifestyle. `[DECIDED 2026-10-09]` | Brian, in session. The target mockup's Vagabond row (a personal knowledge system) is superseded |
+| System 9 Studios Pipeline | Concept | Software in development here for System 9 Studios to use. It has no repository yet. | FEAT-02 decisions, 2026-10-09 |
+
+- The Pipeline is listed under Valesor because Brian develops it here for the studio. Its row says so in one
+  plain sentence and doesn't describe the studio's work.
+- Never "launching", "coming", "soon", "powerful", "seamless", or a feature list.
 
 Never write a feature list, a benefit, or a comparison with a named product.
 
@@ -123,7 +149,10 @@ Reference lines. The first two are decided in the audit (copy rows; the characte
 The subhead and the "What belongs here?" column of the target lose their dashes under the characters rule.
 `[DECIDED 2026-10-08]` The rewritten sentences:
 
-- Subhead: "Software, tools, and systems, released in the open."
+- Subhead: "Software, tools, and systems, developed in the open." `[DECIDED 2026-10-09]` (Brian, in session).
+  It replaces "Software, tools, and systems, released in the open." (`[DECIDED 2026-10-08]`), which says released
+  work exists while nothing is released. Whether to restore the original with the first "released" row is decided
+  then. The imprint's definition ("publicly released software") is unchanged.
 - What belongs here?: "If the primary artifact is software (code, tools, systems, or infrastructure), it belongs
   in Valesor. Everything else lives elsewhere."
 
