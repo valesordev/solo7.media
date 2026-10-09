@@ -106,8 +106,31 @@ Each project is described by what it is made of and what it does. `[DECIDED 2026
 - **Tagline:** one short sentence of what it is, no verbs of marketing ("A personal knowledge system, built for
   movement.").
 - **Description:** one or two sentences of what it does, in plain nouns.
-- **Metadata:** stack, license, and repository, from the repository itself. Nothing in them is invented. A
-  repository URL that doesn't resolve is a defect, not a placeholder.
+- **Metadata:** status, stack, license, and repository. Stack, license, and repository come from the repository
+  itself; status comes from the project list. Nothing in them is invented. A repository URL that doesn't resolve
+  is a defect, not a placeholder. A project with no repository has no license or repository line. `[PROPOSED]`
+
+### Status words
+`[PROPOSED]` Exactly two, in sentence case, as the STATUS value: "In progress" and "Concept". The data values
+`in-progress` and `concept` (ADR 0001 §6) are never displayed. No other word stands in for them ("Alpha", "Beta",
+"Coming soon", "Soon", "Early access", "WIP"), and nothing on a row says or implies a release, a launch date, or
+availability: describe, don't sell. A third status needs Brian and an amendment here.
+
+### The three launch rows
+`[PROPOSED]` Draft wording for Brian to correct. The facts about each project are his, and I have not verified
+them against the repositories; the voice rules are mine. Names are the repository's spelling. Where a project's
+real tagline or description exists in its repository, that text replaces the draft.
+
+| Name | Status | Tagline | Description |
+|---|---|---|---|
+| Andara's World | In progress | A fictional world, built with code. | Tools, generators, and systems for building and exploring a coherent fictional world. |
+| Vagabond | In progress | A field app for trips and maps. | An app for planning trips and reading maps away from a signal. |
+| System 9 Studios Pipeline | Concept | Software for the studio to use. | Production software I plan to build for System 9 Studios. It has no repository yet. |
+
+- The Pipeline is listed under Valesor because Brian develops it here for the studio. Its row says so in one
+  plain sentence and doesn't describe the studio's work.
+- "I plan to build" is the one first-person line: it is a decision with an owner (see First person singular).
+- Never "launching", "coming", "soon", "powerful", "seamless", or a feature list.
 
 Never write a feature list, a benefit, or a comparison with a named product.
 
@@ -123,7 +146,10 @@ Reference lines. The first two are decided in the audit (copy rows; the characte
 The subhead and the "What belongs here?" column of the target lose their dashes under the characters rule.
 `[DECIDED 2026-10-08]` The rewritten sentences:
 
-- Subhead: "Software, tools, and systems, released in the open."
+- Subhead: `[PROPOSED]` "Software, tools, and systems, in development." Was "Software, tools, and systems,
+  released in the open." (`[DECIDED 2026-10-08]`), which says released work exists while nothing is released.
+  Revert to the original in the amendment that adds the first "released" row. The imprint's definition
+  ("publicly released software") is unchanged.
 - What belongs here?: "If the primary artifact is software (code, tools, systems, or infrastructure), it belongs
   in Valesor. Everything else lives elsewhere."
 

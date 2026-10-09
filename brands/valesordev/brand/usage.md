@@ -74,39 +74,65 @@ fiction, built with     coherent fictional world.          REPO     github.com/<
 code.
 -------------------------------------------------------------------------------------------------
 ```
-- Serif name, mono tagline under it, mono description, `TechnicalMetadata`, vermilion `->` at the right.
-- One link for the whole row, to the source repository, named by the project.
-- Same four parts in the same columns in every row, in a list.
-- Data from the repository itself.
+- Serif name, mono tagline under it, mono description, `TechnicalMetadata` (it opens with the STATUS field),
+  vermilion `->` at the right. `[PROPOSED]`
+- One link for the whole row, to the source repository, named by the project. `[PROPOSED]` Only a row with a
+  repository is a link.
+- The same four parts in the same columns in every row, in a list, with one exception: a row with no repository
+  (below). `[PROPOSED]`
+- Status is stated in words, "In progress" or "Concept", as the STATUS value in `TechnicalMetadata`. Colour,
+  weight, and position never carry it alone. `[PROPOSED]`
+- Data from the repository itself, and from the project list for status.
+
+**Correct: a row with no repository** (structure specimen; the data is placeholder, not content) `[PROPOSED]`
+```
+Pipeline                Software in development for       STATUS   Concept
+A tool for the studio.  the studio to use.
+-------------------------------------------------------------------------------------------------
+```
+- No link, no `->`, no placeholder, no blank, no "coming soon". The arrow column keeps its width and draws
+  nothing, so the other columns stay aligned with the rows above and below.
+- It keeps the name, tagline, description, and `TechnicalMetadata` with STATUS only. LICENSE and REPO are
+  left out, not shown empty: a project with no repository has neither.
+- Name and text stay in `ink` and `ink-muted` exactly as in a linked row. A row with no link is not dimmed or
+  struck: nothing in it is disabled.
+- The row is a list item with no interactive element. Its text is read as text.
 
 **Incorrect**
 - A card with a border, shadow, radius, or fill.
-- A thumbnail, icon, language dot, star count, or status badge.
+- A thumbnail, icon, language dot, star count, or a status badge (a pill, chip, dot, or coloured tag; status is
+  the STATUS field, in words). `[PROPOSED]`
 - Tag chips instead of comma-separated stack.
 - A hover card or reveal.
 - Placeholder or invented data (the target's repository URLs and the typo "fction" are tells, not content).
 - An arrow in ink, or a glyph `→` instead of the typed `->`.
-- Rows with different parts, or a missing LICENSE shown as a blank.
+- Rows that differ in parts for any reason other than having no repository, or a missing LICENSE or REPO shown
+  as a blank on a row that has a repository. `[PROPOSED]`
+- A row with no repository that has a link, an arrow, a "#" or empty href, or a placeholder in REPO. `[PROPOSED]`
+- A status word other than "In progress" or "Concept", or a status shown only by colour. `[PROPOSED]`
 - A "Learn more" link inside the row.
 
 ## technicalmetadata
 
 **Correct** (structure specimen; the values are placeholders)
 ```
+STATUS   In progress
 STACK    Python, TypeScript
 LICENSE  Apache-2.0
 REPO     github.com/<org>/<repo>
 ```
-- Uppercase mono labels in `ink-muted`; values in mono; comma-separated stack; SPDX license; repository path
-  without scheme.
-- Always the three fields in this order.
+- Uppercase mono labels in `ink-muted`; values in mono; the status in words; comma-separated stack; SPDX
+  license; repository path without scheme. `[PROPOSED]`
+- Always the fields in this order. STATUS is on every row. LICENSE and REPO are on a row only when the project
+  has a repository. `[PROPOSED]`
 
 **Incorrect**
 - A middle dot as the separator ("TypeScript · SQLite").
 - "Apache 2" or "Open source" in place of the identifier.
 - A full `https://` URL, or a repository that doesn't resolve.
 - Colored badges, shields, or icons for the license or language.
-- Reordering fields per project, or hiding a field with no value.
+- Reordering fields per project, or showing a field with no value as a blank or a dash.
+- A repository field on a project that has no repository. `[PROPOSED]`
 - Metadata in a table with borders or filled header cells.
 
 ## textlink

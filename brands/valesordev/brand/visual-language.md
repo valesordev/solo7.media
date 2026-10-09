@@ -56,7 +56,7 @@ Roles. Sizes are relative to body (`1x`) as measured in the audit; the token sto
 |---|---|---|---|---|---|
 | Wordmark | serif | 1.6x | title case | slightly tight | Valesor Development |
 | Display (H1) | serif | 4x | sentence case | tight, about -1% | The engineering imprint. |
-| Subhead | serif | 1.7x | sentence case | normal | Software, tools, and systems, released in the open. |
+| Subhead | serif | 1.7x | sentence case | normal | Software, tools, and systems, in development. `[PROPOSED]` |
 | Section title | serif | 2.4x | sentence case | normal | Projects |
 | Row title | serif | 1.7x | title case | normal | Andara's World |
 | Column title | serif | 1.2x | title case | normal | License |
@@ -199,11 +199,24 @@ Rules the audit doesn't state (counts, markup, limits, data format) are decided 
 
 - A four-part row between two 1px `rule`s: (1) serif name with the mono tagline beneath; (2) mono description;
   (3) `TechnicalMetadata`; (4) a vermilion `->` at the far right. Row pitch is constant: every row has the same
-  parts in the same columns.
-- The row is one link to the project's source repository. `[DECIDED 2026-10-08]` (FEAT-02: rows link to the repository, not
+  parts in the same columns, except as the next two bullets say. `[PROPOSED]`
+- **Status.** Every row states its status in words as the first `TechnicalMetadata` field: "In progress" or
+  "Concept". No other status is defined. The words are mono `ink` text; colour, weight, and position never carry the
+  status alone. `[PROPOSED]` Reason: Brian's terms (FEAT-02), the brand's refusal of badges, and WCAG 1.4.1.
+  Rejected: a badge or pill (a second visual idiom the target doesn't have); a vermilion status (vermilion marks
+  direction, not state).
+- **A row with no repository.** It has no link and no arrow. Parts 1 to 3 remain; `TechnicalMetadata` shows STATUS
+  only, because LICENSE and REPO belong to a repository. Part 4 draws nothing, and the column keeps its width so
+  the other rows stay aligned. The row is not dimmed, not marked "unavailable", and carries no placeholder.
+  `[PROPOSED]` Reason: Brian, "a row with no link is fine"; an invented link or a blank would be invented data.
+  Rejected: an ink or muted `->` (it would still promise a destination); collapsing the column (rows would
+  jump).
+- A row with a repository is one link to it. `[DECIDED 2026-10-08]` (FEAT-02: rows link to the repository, not
   to a Valesor-hosted page). Its accessible name is the project name. The arrow is decoration inside the link.
+  A row with no repository has no link. `[PROPOSED]`
 - Name is the project's own spelling. Tagline is one sentence. Description is one or two.
-- No icon, thumbnail, status badge, tag chips, star count, or hover card.
+- No icon, thumbnail, status badge (status is the STATUS field, in words), tag chips, star count, or hover card.
+  `[PROPOSED]`
 - Rows are a list: `<ul>` of rows, so a screen reader announces the count.
 - Tokens: `ink`, `ink-muted`, `rule`, `accent`, row title role, body role.
 
@@ -212,12 +225,15 @@ Rules the audit doesn't state (counts, markup, limits, data format) are decided 
 Rules the audit doesn't state (counts, markup, limits, data format) are decided with the anatomy.
 
 - A two-column label and value list. Labels uppercase mono, spaced, `ink-muted` at the label size. Values mono.
-- Three fields, in this order: STACK, LICENSE, REPO. STACK values are separated by commas
+- Up to four fields, in this order: STATUS, STACK, LICENSE, REPO. STATUS is "In progress" or "Concept".
+  `[PROPOSED]` STACK values are separated by commas
   ("Python, TypeScript"). LICENSE is an SPDX identifier ("Apache-2.0"). REPO is the repository path
   without scheme ("github.com/<org>/<repo>").
 - A `dl` in markup. Values are real text, selectable.
-- Order and labels never vary between rows. A missing field is a data defect to fix, not a blank to hide.
-  `[DECIDED 2026-10-08]`
+- Order and labels never vary between rows. STATUS is on every row. LICENSE and REPO are on a row exactly when the
+  project has a repository; for a project that has one, a missing value is a data defect to fix, not a blank to
+  hide. A project with no repository leaves both out, never empty. `[PROPOSED]` (was `[DECIDED 2026-10-08]`:
+  "a missing field is a data defect")
 - Appears wherever a project is named with a claim about its source (the row; later, a project page).
 - Tokens: `ink-muted`, `ink`, metadata label and value roles.
 
