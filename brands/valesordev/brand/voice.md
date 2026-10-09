@@ -102,7 +102,8 @@ The brief writes `View source →` and the rest with the `→` glyph. The kit us
 Each project is described by what it is made of and what it does. `[DECIDED 2026-10-08]` (derived from the brief and the
 `ProjectRow` decision)
 
-- **Name:** the project's own name, exactly as the repository spells it.
+- **Name:** the project's own name, exactly as the repository spells it. For a project with no repository, the
+  spelling in the project list, as Brian approved it. `[PROPOSED]`
 - **Tagline:** one short sentence of what it is, no verbs of marketing ("A personal knowledge system, built for
   movement.").
 - **Description:** one or two sentences of what it does, in plain nouns.
@@ -121,7 +122,7 @@ availability: describe, don't sell. A third status needs Brian and an amendment 
 
 ### The three launch rows
 `[PROPOSED]` Draft descriptions, each limited to what a source states. Brian replaces them with the project's own
-README text where it exists. The voice rules here are mine; the facts are his. Names are the repository's spelling.
+README text where it exists. The voice rules here are mine; the facts are his. Names are the repository's spelling, or for a project with no repository, the project list's (Brian's approved name).
 
 | Name | Status | Description | Source of the facts |
 |---|---|---|---|

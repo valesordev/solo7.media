@@ -31,7 +31,7 @@ What each word asks of a page:
 | Durable | plain type and rules that will still read in ten years; no trend effects |
 | Precise | hairlines on a constant frame; facts stated exactly (stack, license, repo) |
 | Independent | no partner logos, testimonials, or platform badges |
-| Open | source, license, and repository are visible wherever a project is named, for a project that has a repository (a project with none says its status instead) `[PROPOSED]` |
+| Open | source, license, and repository are visible wherever a project is named, for a project that has a repository, and the license when the project list carries one (a project with no repository says its status instead) `[PROPOSED]` |
 | Technical | monospace for anything that is measured or named in code |
 | Field-tested | words describe what the software does, as a field manual would |
 
