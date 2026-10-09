@@ -1,6 +1,6 @@
 # 0001. Site structure: how a site consumes its brand, and how it deploys
 
-Status: proposed (Brian rules at PR review)
+Status: accepted (Brian, 2026-10-09)
 Date: 2026-10-07
 Story: S7M-VAL-001
 Serves: R1; FEAT-02, FEAT-03, FEAT-04
