@@ -20,7 +20,7 @@ check-layout: ## Every brand has its folder and README; package.json parses
 
 build-site-valesordev: build-brand-valesordev ## Build sites/valesordev.com/dist/ (installs workspace packages first)
 	npm ci
-	npm run build --workspace sites/valesordev.com
+	ASTRO_TELEMETRY_DISABLED=1 DO_NOT_TRACK=1 npm run build --workspace sites/valesordev.com
 
 legacy-solo7-media: ## Build the legacy solo7.media site (needs NODE_AUTH_TOKEN for GitHub Packages)
 	cd sites/solo7.media && npm ci && npm run build
