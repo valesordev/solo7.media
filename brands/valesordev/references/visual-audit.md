@@ -1,7 +1,7 @@
 # Valesor Development — visual audit
 
 **Target:** references/target-homepage.png (sha256 b67f5adac546) · frozen 2026-10-08 from https://app.notion.com/p/3f26a339c86181249193d3b987def934
-**Status:** core rows approved 2026-10-08 (PR #20); `ink-faint`, `rule (strong)`, Nav, and hero aspect decided 2026-10-08 (Decisions item 9); other candidate and hero rows still `[PROPOSED]`
+**Status:** core rows approved 2026-10-08 (PR #20); `ink-faint`, `rule (strong)`, Nav, and hero aspect decided 2026-10-08 (Decisions item 9); remaining candidate and hero rows decided 2026-10-08 (Decisions item 11); none are `[PROPOSED]`
 
 Classes: **core** (persists across the brand) · **candidate** (test before adopting) · **hero** (this composition only).
 Every line is `[PROPOSED]` until Brian decides it, then `[DECIDED <date>]`; Decisions lists what he has decided so far.
@@ -59,9 +59,9 @@ Choosing is Brian's.
 |---|---|---|---|
 | Single content column inset ≈ 60px each side (x 60–1528 of 1586, ≈ 3.8%; the header rule and "View all projects" run ≈ 3px past it, probably generator slop), full-bleed only for the illustration | core | [DECIDED 2026-10-08] | a constant frame the rules hang from |
 | 1px horizontal rules separate every band: under header (y 60), under hero (y 511), above "Projects" (y 682), under its title (y 745), between rows (y 824, 907). Rules do the layout, not boxes or fills | core | [DECIDED 2026-10-08] | the brief: "rules and typography doing most of the layout work" |
-| Three-column info band with 1px vertical dividers at x 531 and 1052 (columns ≈ 471 / 520 / 476), text inset ≈ 60px from each divider | candidate | [PROPOSED] | strong component, but column widths are uneven and may be generator rounding |
+| Three-column info band with 1px vertical dividers at x 531 and 1052 (columns ≈ 471 / 520 / 476), text inset ≈ 60px from each divider | candidate | [DECIDED 2026-10-08] not adopted; specified on a story only if the homepage needs it | strong component, but column widths are uneven and may be generator rounding |
 | ProjectRow is a 4-part grid: title+tagline (x ≈ 67), description (x ≈ 572), metadata block (x ≈ 1102), arrow (x ≈ 1517); row pitch ≈ 80px | core | [DECIDED 2026-10-08] | the brief's signature component |
-| Generous vertical space: header 60px; ≈ 70px above the H1; ≈ 30px between hero and info band | candidate | [PROPOSED] | rhythm is clear but only one frame shows it |
+| Generous vertical space: header 60px; ≈ 70px above the H1; ≈ 30px between hero and info band | candidate | [DECIDED 2026-10-08] not adopted as measured; spacing is set at token time | rhythm is clear but only one frame shows it |
 | No cards, no shadows, no radii, no filled panels, no background bands | core | [DECIDED 2026-10-08] | direct match to "Not Valesor" |
 
 ## Composition and image behavior
@@ -70,8 +70,8 @@ Choosing is Brian's.
 | Hero art is full-bleed left to right, bottom edge ragged and sitting ≈ 20px above the rule at y 511 | core | [DECIDED 2026-10-08] | the illustration is the brief's "primary recognizable element" |
 | Aspect ≈ 3.7:1 as cropped here (1586 × ≈ 355 of art); the brief names `hero-wide` as 2.4:1 | candidate | [DECIDED 2026-10-08] | the target is shorter than the brief's ratio; the slot spec resolves it |
 | H1, subhead, blurb, CTA sit in the upper-left empty sky; the tree crown (≈ x 650–870) rises beside the right end of the subhead (ends ≈ x 602) | core | [DECIDED 2026-10-08] | "large intentional negative-space zones": type lives in the art's empty zone |
-| Subject: wind-shaped juniper on a rocky crest, scrub, a layered ridge falling to a basin, mountains at right, a large moon at upper right (≈ x 1290–1395, y 135–235) | hero | [PROPOSED] | this subject belongs to this slot; the *language* is core, below |
-| Moon: stippled disc with a thin dotted outline, no fill | candidate | [PROPOSED] | recurring "large moon" is in the brief; test it in other compositions before making it a mark |
+| Subject: wind-shaped juniper on a rocky crest, scrub, a layered ridge falling to a basin, mountains at right, a large moon at upper right (≈ x 1290–1395, y 135–235) | hero | [DECIDED 2026-10-08] this slot's subject only | this subject belongs to this slot; the *language* is core, below |
+| Moon: stippled disc with a thin dotted outline, no fill | candidate | [DECIDED 2026-10-08] kept as a candidate motif, not a mark, until a second composition uses it | recurring "large moon" is in the brief; test it in other compositions before making it a mark |
 
 ## Navigation, mark, components
 
@@ -84,7 +84,7 @@ Arrow glyphs (`→`) in this section are observations of the target. The kit use
 | `TextLink` (primary) | mono, vermilion, 1px vermilion underline, trailing `->` (target shows `→`) | core | [DECIDED 2026-10-08] | colour appears only on primary actions |
 | `TextLink` (secondary) | mono, ink, 1px grey underline, trailing `->` (target shows `→`; "Read the license →") | core | [DECIDED 2026-10-08] | quiet counterpart so only the main action is red |
 | `SectionRule` | 1px full-width rule, optionally with a serif title and a right-aligned red link ("Projects" / "View all projects ->") | core | [DECIDED 2026-10-08] | rules carry the layout, per the brief's QA list |
-| Info column | serif title, mono text, optional secondary link, vertical hairline divider | candidate | [PROPOSED] | appears once, with uneven widths; test on a second page before adopting |
+| Info column | serif title, mono text, optional secondary link, vertical hairline divider | candidate | [DECIDED 2026-10-08] not adopted | appears once, with uneven widths; test on a second page before adopting |
 | `ProjectRow` | serif name, mono tagline under it, mono description, `TechnicalMetadata`, vermilion arrow (`->` in the kit) | core | [DECIDED 2026-10-08] | the brief calls it a strong candidate for the signature component |
 | `TechnicalMetadata` | uppercase mono label, two-column label/value list: STACK (comma-separated, Decisions item 7), LICENSE, REPO | core | [DECIDED 2026-10-08] | source, license and repo visible is a brand QA item and the brief's "technical metadata in mono" |
 
@@ -133,3 +133,5 @@ the serif + mono pairing, the vermilion accent, and the engraving language shoul
   7. "#111 for type, comma for the separator". Decided: type ink #111111, #000000 only in the engraving; stack lists use a comma ("TypeScript, SQLite, Tauri"), not `·`.
   8. All 18 checkboxes on PR #20 checked. The PR asked him to strike or reclassify "core proposals", with the checkboxes grouping them, so I read this as approving every core row (about 28 rows and bullets), including the texture and hierarchy bullets that have no box of their own; all are `[DECIDED 2026-10-08]`. One checkbox still reads "trailing `→` on every link"; the audit row governs: arrows on call-to-action and action links only (Codex review, e46d97c), typed `->` (item 6). Candidate and hero rows were not on the checklist and stay `[PROPOSED]`.
   9. 2026-10-08 Brian, on the S7M-VAL-003 follow-up (architecture's §8 review): "Option 1, but leave the Apache-2.0 default and the reading font open". Decided: the brand docs' recommendations on PR #21, including `ink-faint` folded into `ink-muted`, one `rule` weight (no `rule-strong`), serif Nav (Projects, GitHub; no About), and the hero aspect resolved in the hero slot spec. Still open: the Apache-2.0 default and the footer license line, the rewritten homepage copy, long-form reading font. The info band, moon, and hero subject rows stay `[PROPOSED]`.
+  10. 2026-10-08 Brian closed the items item 9 left open: "I approve the apache-2.0 default, the reading font, and the homepage copy". Decided: Apache-2.0 is the stated default and the footer license line reads "Released under Apache-2.0 by default."; long-form reading uses the body role (mono) at the 72-character measure; the rewritten subhead and "What belongs here?" copy in `voice.md#the-imprints-own-sentences`. I took "the reading font" as approving the docs' recommendation (mono, no third family) and "the homepage copy" as the dash-free rewrites I drafted. The info band, its vertical spacing, the moon, and the hero subject rows stay `[PROPOSED]`.
+  11. 2026-10-08 Brian, on the three rows left proposed ("1. agree; 2. agree; 3. agree"). Decided: the info band, its column, and its vertical spacing are not adopted (specified on a story only if the homepage needs the band; spacing comes from the token scale); the moon stays a candidate motif, not a mark, until a second composition uses it; the juniper subject belongs to the hero slot only. No audit row is `[PROPOSED]` now.

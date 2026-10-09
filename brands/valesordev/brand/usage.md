@@ -131,7 +131,7 @@ REPO     github.com/<org>/<repo>
 `[DECIDED 2026-10-08]` (see `visual-language.md#footer`)
 
 **Correct**
-- A rule, then "Valesor Development" with a one-line license statement (text `[PROPOSED]`, Brian approves) at left; GitHub and
+- A rule, then "Valesor Development" with a one-line license statement ("Released under Apache-2.0 by default." `[DECIDED 2026-10-08]`) at left; GitHub and
   Privacy at right, as plain mono links.
 - The Privacy link on every page.
 - Narrow: stacked, left aligned.
@@ -165,9 +165,9 @@ How the components combine. `[DECIDED 2026-10-08]`: the homepage is the specimen
 ### homepage
 `BrandHeader`, `Hero` over the engraving, a rule, then a `SectionRule` "Projects" with its link, `ProjectRow`s,
 and the `Footer`. The target's three-column info band (What is Valesor Development? / License / What belongs
-here?) is the audit's candidate and is not in the decided kit. If the homepage story needs it, visual-designer
+here?) is the audit's candidate, decided not adopted 2026-10-08. If the homepage story needs it, visual-designer
 specifies it on the story with this file's rules (serif column titles, mono text, a secondary `TextLink`,
-hairline dividers, stacking when narrow). The band stays `[PROPOSED]` (audit, Navigation, mark, components).
+hairline dividers, stacking when narrow). Not adopted: `[DECIDED 2026-10-08]` (audit, Navigation, mark, components).
 
 ### text page
 `BrandHeader`, `SectionRule`, H1, subhead, sections at the reading measure, `Footer`. For `/privacy` and the 404.

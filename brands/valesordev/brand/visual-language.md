@@ -56,7 +56,7 @@ Roles. Sizes are relative to body (`1x`) as measured in the audit; the token sto
 |---|---|---|---|---|---|
 | Wordmark | serif | 1.6x | title case | slightly tight | Valesor Development |
 | Display (H1) | serif | 4x | sentence case | tight, about -1% | The engineering imprint. |
-| Subhead | serif | 1.7x | sentence case | normal | (placeholder: the target's subhead, rewritten without its dash) |
+| Subhead | serif | 1.7x | sentence case | normal | Software, tools, and systems, released in the open. |
 | Section title | serif | 2.4x | sentence case | normal | Projects |
 | Row title | serif | 1.7x | title case | normal | Andara's World |
 | Column title | serif | 1.2x | title case | normal | License |
@@ -72,9 +72,8 @@ Notes:
 - The subhead line in the target contains a spaced em dash; the copy is rewritten under `voice.md#characters`.
 - Line height and measure are set at token time. Rules: body line height at least 1.5; running text measure at
   most 72 characters in a text page (`/privacy`). `[DECIDED 2026-10-08]`
-- Long-form reading (project pages, README-style content): not decided. The audit shows mono carrying short
-  passages only. Decide with the first long-form story; until then, text pages use the body role at the measure
-  above. `[PROPOSED]`
+- Long-form reading (project pages, README-style content, text pages): the body role (mono) at the measure above.
+  No third family. `[DECIDED 2026-10-08]` Revisit only if a real long-form page fails readability in `/brand-qa`.
 - Text is always real text, never part of an image. `[DECIDED 2026-10-08]` (art rules)
 
 ## Layout
@@ -243,7 +242,7 @@ Not in the target. `[DECIDED 2026-10-08]` (the brief lists a Footer; the audit h
 `/privacy` from the footer.)
 
 - A `SectionRule` above, then one row in two groups: at left, "Valesor Development" in serif and a one-line mono
-  statement in `ink-muted` (license line, text `[PROPOSED]`, Brian approves); at right, two mono links: GitHub,
+  statement in `ink-muted` (license line: "Released under Apache-2.0 by default." `[DECIDED 2026-10-08]`); at right, two mono links: GitHub,
   Privacy. No arrow on footer links (they are navigation).
 - Link order: GitHub, Privacy. Privacy is present on every page.
 - No copyright symbol or year (a published "(c)" line implies a company; the license is stated instead). No

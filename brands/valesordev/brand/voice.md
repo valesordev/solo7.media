@@ -117,12 +117,15 @@ Reference lines. The first two are decided in the audit (copy rows; the characte
 - "The engineering imprint."
 - "Not a company. No clients. No products. Just work in the open."
 
-Proposed, not in the audit: "Released under Apache-2.0 by default." `[PROPOSED]` (the target's blurb says it;
-whether Apache-2.0 is the imprint's stated default is Brian's to confirm).
+- "Released under Apache-2.0 by default." `[DECIDED 2026-10-08]` Apache-2.0 is the imprint's stated default
+  license; a project that differs says so on its own row.
 
+The subhead and the "What belongs here?" column of the target lose their dashes under the characters rule.
+`[DECIDED 2026-10-08]` The rewritten sentences:
 
-The subhead and the "What belongs here?" column of the target lose their dashes under the characters rule. The
-rewritten sentences are copy for Brian's approval with the homepage story, not decided here. `[PROPOSED]`
+- Subhead: "Software, tools, and systems, released in the open."
+- What belongs here?: "If the primary artifact is software (code, tools, systems, or infrastructure), it belongs
+  in Valesor. Everything else lives elsewhere."
 
 ## Errors, empty states, and the 404
 Say what happened and what is available, in one or two plain sentences, then give one link. `[DECIDED 2026-10-08]`
