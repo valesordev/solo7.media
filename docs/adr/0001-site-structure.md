@@ -111,14 +111,19 @@ produce that list, so R1 does not use it. The `released` topic selection is drop
   `"released"` entry must have `url` and `spdx`.
 - The first three entries, in order: Andara's World (`in-progress`, `url`), Vagabond (`in-progress`, `url`),
   System 9 Studios Pipeline (`concept`, no `url`, no `spdx`). The `status` value is stored as data; the words a
-  visitor reads are the voice doc's.
+  visitor reads are the voice doc's, so `"in-progress"` is a data value, not display text. The two repositories
+  are `https://github.com/valesordev/andara.valesordev.com` and `https://github.com/valesordev/vagabond.valesordev.com`
+  (public; `andara.solo7.media` is private and must never be linked). The `released` topic is not an R1 input.
 - Offline check (`make check`, sre's target `check-projects-valesordev`): the file parses; is a non-empty array; every
   entry meets the schema, with no unknown fields; names are unique; an entry with `spdx` has `url`; every `url`
   matches the pattern above.
+- The offline check is structural by design. Which projects appear, and in what order, is Brian's call at PR review
+  (FEAT-02 signal 2), so adding a project needs no ADR change.
 - Online verification, `make projects-valesordev` (sre's; not part of `make check`, since it needs network and
   `gh`): for each entry with a `url`, confirms the repository exists and is public, and prints any difference
   between the repository's license and the entry's `spdx`. It writes nothing. A person updates the file and
-  opens a PR. This is what keeps the list from inventing links: a link enters only through a PR that passed
+  opens a PR. The author runs it before opening the PR and pastes its output into the PR; no gate checks that it ran.
+  This is what keeps the list from inventing links: a link enters only through a PR that passed
   verification, and the offline check fails the gate on a malformed one.
 - Refresh is manual. A scheduled verification is a later sre decision.
 
