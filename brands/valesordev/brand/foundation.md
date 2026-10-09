@@ -8,10 +8,9 @@ Derived from the approved audit (`../references/visual-audit.md`, core rows deci
 brief (Brand Kit Project Direction, Valesor Development).
 
 Status marks: `[DECIDED <date>]` is Brian's. `[PROPOSED]` is visual-designer's recommendation awaiting Brian at
-PR review. Nothing `[PROPOSED]` may be cited by a story as binding. Open at 2026-10-08: only the audit's unresolved
-rows (the info band and its vertical spacing, the hero subject, the moon). The Apache-2.0 default, footer license
-line, homepage copy, and long-form reading font are decided. `references/visual-audit.md` is the authority for
-which audit rows are still `[PROPOSED]`; this list is a summary.
+PR review. Nothing `[PROPOSED]` may be cited by a story as binding. Nothing is open at 2026-10-08: the Apache-2.0 default,
+footer license line, homepage copy, long-form reading font, and every audit row are decided.
+`references/visual-audit.md` is the authority for any row marked `[PROPOSED]` later.
 
 ## Identity
 Valesor Development is the engineering imprint: the banner applied to software that is complete enough to be
