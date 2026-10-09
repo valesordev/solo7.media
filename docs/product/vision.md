@@ -28,7 +28,8 @@ plainly related to the others; Solo7 Productions' brand page asks that the three
   bashburn.com), each built from its own brand kit in one monorepo and deployed to Cloudflare. The legacy
   solo7.media site on GitHub Pages will be retired (Brian, 2026-10-07). `[ASSUMED]` It retires when its
   replacement deploys to Cloudflare; until then it stays up.
-- Is: a record of published work. `[ASSUMED]` The imprint is the byline; voice rules (for example whether
+- Is: a record of published work. On valesordev.com, until its first release, the record is the projects in
+  development, each labelled with its status. `[ASSUMED]` The imprint is the byline; voice rules (for example whether
   first-person singular is used) are each brand's `voice.md`.
 - Is: observed, not tracking. Grafana Faro measures the site (web vitals, performance, frontend errors), never
   the reader. The "instrumented, not tracked" claim and `/privacy` text change only with Brian.
@@ -56,3 +57,5 @@ Ordered tie-breakers for product calls.
 - 2026-10-07: drafted from the sources above (awaiting Brian's approval in PR).
 - 2026-10-07: all sites deploy to Cloudflare; the legacy solo7.media site will be retired (decided by Brian in
   session; confirmation in PR #5).
+- 2026-10-09: nothing is released yet, so valesordev.com lists projects in development with their status (Brian, in
+  session). The imprint's definition (publicly released software) is unchanged.
