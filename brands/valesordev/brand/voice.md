@@ -17,7 +17,7 @@ When a person is needed, it is "I". Never "we", "our team", or "us". There is no
 |---|---|
 | I built this to run offline. | We built this to run offline. |
 | <Project> stores notes as plain files. | Our platform stores your notes. |
-| I release it under Apache-2.0. | We're proud to open-source it. |
+| I release it under <license>. | We're proud to open-source it. |
 
 Prefer the project as subject ("<Project> does X") over "I" when the sentence is about the software.
 Use "I" only when a decision, a reason, or an opinion needs an owner. `[DECIDED 2026-10-08]`
@@ -50,7 +50,7 @@ It may say what it is not: "Not a company. No clients. No products." `[DECIDED 2
 | project site | product site |
 
 Also: "license" (US spelling, as in the target), "open source" as an adjective phrase, "imprint".
-`[PROPOSED]` (the brief's list doesn't cover these; spelling follows the target)
+`[DECIDED 2026-10-08]` (the brief's list doesn't cover these; spelling follows the target)
 
 ## Characters
 Copy uses only characters typed on a standard keyboard. `[DECIDED 2026-10-08]` (audit Decisions, item 5)
@@ -66,7 +66,7 @@ The target image breaks these rules (its subhead has a spaced em dash, its arrow
 middle dot). The image is evidence, not a spec; this section governs.
 
 ## Case and punctuation
-`[PROPOSED]` (derived from the target's copy; confirm at review)
+`[DECIDED 2026-10-08]` (derived from the target's copy)
 
 - Sentence case for headings, subheads, and links: "The engineering imprint.", "Read the license ->".
 - Title case for names only: Valesor Development, Andara's World.
@@ -99,7 +99,7 @@ Avoid: `Get started`, `Learn more`, `Start building`, `Contact us`, `Sign up`, `
 The brief writes `View source →` and the rest with the `→` glyph. The kit uses `->` (audit item 6).
 
 ## Describing a project
-Each project is described by what it is made of and what it does. `[PROPOSED]` (derived from the brief and the
+Each project is described by what it is made of and what it does. `[DECIDED 2026-10-08]` (derived from the brief and the
 `ProjectRow` decision)
 
 - **Name:** the project's own name, exactly as the repository spells it.
@@ -125,7 +125,7 @@ The subhead and the "What belongs here?" column of the target lose their dashes 
 rewritten sentences are copy for Brian's approval with the homepage story, not decided here. `[PROPOSED]`
 
 ## Errors, empty states, and the 404
-Say what happened and what is available, in one or two plain sentences, then give one link. `[PROPOSED]`
+Say what happened and what is available, in one or two plain sentences, then give one link. `[DECIDED 2026-10-08]`
 
 > That page doesn't exist. The projects are listed on the home page. Return to the home page ->
 

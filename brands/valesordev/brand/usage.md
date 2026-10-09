@@ -15,9 +15,11 @@ Each section is a stable anchor: cite `usage.md#<section>`.
 
 Never introduce, unless Brian asks in the session: new colors, new font families, rounded or card-heavy UI,
 gradients, shadows, marketing copy, decorative diagrams, or additional illustration styles. `[DECIDED 2026-10-08]`
-(brief, section 6 CLAUDE.md example)
+(brief, the "never introduce" example in the brief's section 6)
 
 ## brandheader
+
+`[DECIDED 2026-10-08]` (`visual-language.md#brandheader`). Nav is Projects and GitHub; there is no About link.
 
 **Correct**
 - Serif "Valesor Development" at left, linking to `/`; serif Projects and GitHub at right; a 1px rule under.
@@ -126,7 +128,7 @@ REPO     github.com/<org>/<repo>
 
 ## footer
 
-`[PROPOSED]` (see `visual-language.md#footer`)
+`[DECIDED 2026-10-08]` (see `visual-language.md#footer`)
 
 **Correct**
 - A rule, then "Valesor Development" with a one-line license statement (text `[PROPOSED]`, Brian approves) at left; GitHub and
@@ -143,7 +145,7 @@ REPO     github.com/<org>/<repo>
 
 ## privacy-page
 
-`[PROPOSED]` (see `visual-language.md#privacy-page-template`). Text is Brian's.
+`[DECIDED 2026-10-08]` (see `visual-language.md#privacy-page-template`). Text is Brian's.
 
 **Correct**
 - `BrandHeader`, a rule, "Privacy" as the H1, a one-line subhead, titled sections of mono text at a 72 character
@@ -158,21 +160,21 @@ REPO     github.com/<org>/<repo>
 - Any claim the page's text doesn't make: the look adds none.
 
 ## Page recipes
-How the components combine. `[DECIDED 2026-10-08]` for the homepage (the specimen); `[PROPOSED]` for the rest.
+How the components combine. `[DECIDED 2026-10-08]`: the homepage is the specimen, and the other recipes follow from it.
 
 ### homepage
 `BrandHeader`, `Hero` over the engraving, a rule, then a `SectionRule` "Projects" with its link, `ProjectRow`s,
 and the `Footer`. The target's three-column info band (What is Valesor Development? / License / What belongs
-here?) is the audit's candidate. It is not specified here. If the homepage story needs it, visual-designer
+here?) is the audit's candidate and is not in the decided kit. If the homepage story needs it, visual-designer
 specifies it on the story with this file's rules (serif column titles, mono text, a secondary `TextLink`,
-hairline dividers, stacking when narrow). `[PROPOSED]`
+hairline dividers, stacking when narrow). The band stays `[PROPOSED]` (audit, Navigation, mark, components).
 
 ### text page
 `BrandHeader`, `SectionRule`, H1, subhead, sections at the reading measure, `Footer`. For `/privacy` and the 404.
 
 ### 404
 `BrandHeader`, the H1 "Not found.", the sentence from `voice.md#errors-empty-states-and-the-404`, one
-secondary `TextLink` home, `Footer`. `[PROPOSED]`
+secondary `TextLink` home, `Footer`. `[DECIDED 2026-10-08]`
 
 ## Self-check
 Before a PR, ask the brief's questions: Does it look editorial or technical rather than commercial? Is the

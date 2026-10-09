@@ -1,7 +1,7 @@
 # Valesor Development — visual audit
 
 **Target:** references/target-homepage.png (sha256 b67f5adac546) · frozen 2026-10-08 from https://app.notion.com/p/3f26a339c86181249193d3b987def934
-**Status:** core rows approved 2026-10-08 (PR #20); candidate and hero rows still `[PROPOSED]`
+**Status:** core rows approved 2026-10-08 (PR #20); `ink-faint`, `rule (strong)`, Nav, and hero aspect decided 2026-10-08 (Decisions item 9); other candidate and hero rows still `[PROPOSED]`
 
 Classes: **core** (persists across the brand) · **candidate** (test before adopting) · **hero** (this composition only).
 Every line is `[PROPOSED]` until Brian decides it, then `[DECIDED <date>]`; Decisions lists what he has decided so far.
@@ -18,9 +18,9 @@ Brief: the Notion page's character (quiet, durable, precise, independent, open, 
 | ink (illustration) | #000000 | ~6% of pixels at L < 100 (mostly the illustration) | engraving line | core | [DECIDED 2026-10-08] | the engraving is pure black, as the brief's "pure black ink on pure white" asks |
 | ink (display type) | #000000 as sampled | small | wordmark, H1, section/row titles | core: #111111 for type, #000000 only in the engraving | [DECIDED 2026-10-08] | the target renders it pure black; the brief says #111111 |
 | ink-muted | ≈ #555555 | small text | mono body, descriptions, metadata values | core | [DECIDED 2026-10-08] | a single mid grey carries all secondary text; matches the brief's `ink-muted #545454` |
-| ink-faint | ≈ #808080 | tiny | metadata labels (STACK / LICENSE / REPO) | candidate | [PROPOSED] | could be ink-muted at a smaller size; anti-aliasing makes it unclear whether it is a third grey |
+| ink-faint | ≈ #808080 | tiny | metadata labels (STACK / LICENSE / REPO) | candidate | [DECIDED 2026-10-08] | could be ink-muted at a smaller size; anti-aliasing makes it unclear whether it is a third grey. Decided: folded into ink-muted |
 | rule (light) | ≈ #CCCCCC–#D6D6D6 | 1px lines | row dividers, vertical column dividers, header rule's first pixel | core | [DECIDED 2026-10-08] | hairlines carry the layout; the hex is a sample, the token set fixes the value |
-| rule (strong) | ≈ #A6A6A8–#B1B2B3 | 1px lines | header rule, section rules above/below "Projects" block | candidate | [PROPOSED] | two rule weights may be intended (structure vs. row) or one rule rendered unevenly; it is a decision for the token set |
+| rule (strong) | ≈ #A6A6A8–#B1B2B3 | 1px lines | header rule, section rules above/below "Projects" block | candidate | [DECIDED 2026-10-08] | two rule weights may be intended (structure vs. row) or one rule rendered unevenly; it is a decision for the token set. Decided: one rule weight |
 | accent | ≈ #C8202A (darkest sampled #CA0F18; mid-stroke #C62A24) | ~0.03% | primary CTA text and underline, "View all projects ->" (target shows →; see Decisions item 6), row arrows | core | [DECIDED 2026-10-08] | the only chroma in the page (about 0.1–0.15% of pixels have a channel spread above 15); direction and primary action only |
 
 Artefacts (not colours): the "white" ground varies #FCFCFC–#FFFFFF with a faint, even grain (generator noise, not
@@ -42,7 +42,7 @@ Arrow glyphs (`→`) in this section are observations of the target. The kit use
 | Column / row title | "License", "Andara's World" | same serif | ≈ 1.2× (column) / ≈ 1.7× (row) | regular · title case | core | [DECIDED 2026-10-08] |
 | Body / descriptions | hero blurb, column text, row descriptions | monospace, humanist, dotted-or-slashed zero (IBM Plex Mono–like) | 1× (≈ 14–15px) | regular · sentence case · normal | core | [DECIDED 2026-10-08] |
 | Metadata | STACK / LICENSE / REPO + values | same mono, labels uppercase | ≈ 0.85× | regular · labels uppercase, spaced · values as written | core | [DECIDED 2026-10-08] |
-| Nav | Projects, GitHub, About | serif, small | ≈ 1× | regular | candidate | [PROPOSED] |
+| Nav | Projects, GitHub, About (kit: Projects, GitHub; About dropped, Decisions item 9) | serif, small | ≈ 1× | regular | candidate | [DECIDED 2026-10-08] |
 | Links / CTAs | "Browse the source →", "Read the license →" | mono, underlined, trailing arrow (CTAs and action links only, not nav) | 1× | regular · sentence case | core | [DECIDED 2026-10-08] |
 
 Pairing: serif for names and headings, mono for everything that explains or measures. No sans-serif appears. The
@@ -68,7 +68,7 @@ Choosing is Brian's.
 | Observation | Class | Status | Why |
 |---|---|---|---|
 | Hero art is full-bleed left to right, bottom edge ragged and sitting ≈ 20px above the rule at y 511 | core | [DECIDED 2026-10-08] | the illustration is the brief's "primary recognizable element" |
-| Aspect ≈ 3.7:1 as cropped here (1586 × ≈ 355 of art); the brief names `hero-wide` as 2.4:1 | candidate | [PROPOSED] | the target is shorter than the brief's ratio; the slot spec resolves it |
+| Aspect ≈ 3.7:1 as cropped here (1586 × ≈ 355 of art); the brief names `hero-wide` as 2.4:1 | candidate | [DECIDED 2026-10-08] | the target is shorter than the brief's ratio; the slot spec resolves it |
 | H1, subhead, blurb, CTA sit in the upper-left empty sky; the tree crown (≈ x 650–870) rises beside the right end of the subhead (ends ≈ x 602) | core | [DECIDED 2026-10-08] | "large intentional negative-space zones": type lives in the art's empty zone |
 | Subject: wind-shaped juniper on a rocky crest, scrub, a layered ridge falling to a basin, mountains at right, a large moon at upper right (≈ x 1290–1395, y 135–235) | hero | [PROPOSED] | this subject belongs to this slot; the *language* is core, below |
 | Moon: stippled disc with a thin dotted outline, no fill | candidate | [PROPOSED] | recurring "large moon" is in the brief; test it in other compositions before making it a mark |
@@ -132,3 +132,4 @@ the serif + mono pairing, the vermilion accent, and the engraving language shoul
   6. "use the typed ->". Decided: link and row arrows are typed `->` in copy and CTAs, not the `→` glyph the target shows. The target's `→` is an observation; the kit's arrow is `->`. Primary and row arrows are vermilion per item 3; the ink secondary link arrow is decided with the core TextLink row (item 8).
   7. "#111 for type, comma for the separator". Decided: type ink #111111, #000000 only in the engraving; stack lists use a comma ("TypeScript, SQLite, Tauri"), not `·`.
   8. All 18 checkboxes on PR #20 checked. The PR asked him to strike or reclassify "core proposals", with the checkboxes grouping them, so I read this as approving every core row (about 28 rows and bullets), including the texture and hierarchy bullets that have no box of their own; all are `[DECIDED 2026-10-08]`. One checkbox still reads "trailing `→` on every link"; the audit row governs: arrows on call-to-action and action links only (Codex review, e46d97c), typed `->` (item 6). Candidate and hero rows were not on the checklist and stay `[PROPOSED]`.
+  9. 2026-10-08 Brian, on the S7M-VAL-003 follow-up (architecture's §8 review): "Option 1, but leave the Apache-2.0 default and the reading font open". Decided: the brand docs' recommendations on PR #21, including `ink-faint` folded into `ink-muted`, one `rule` weight (no `rule-strong`), serif Nav (Projects, GitHub; no About), and the hero aspect resolved in the hero slot spec. Still open: the Apache-2.0 default and the footer license line, the rewritten homepage copy, long-form reading font. The info band, moon, and hero subject rows stay `[PROPOSED]`.
