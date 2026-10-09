@@ -38,8 +38,8 @@ opens the site on mobile and desktop, JavaScript off, and:
 | Brand docs, tokens, components spec for the homepage | visual-designer | FEAT-01 |
 | `ProjectRow` for in-development work: a status part, and a row with no link or repository data. `brands/valesordev/brand/usage.md` today forbids a status badge, rows with different parts, and a missing value shown as a blank, and says one link per row to the source repository | visual-designer | needs visual-designer: amend the brand docs before the row is built; the look is theirs. The amendment reopens M1's gate in `docs/roadmap.md` and holds M3, so pm re-cuts both |
 | Whether the homepage copy that says "released" ("Software, tools, and systems, released in the open." `voice.md`, `visual-language.md`) still holds while nothing is released | visual-designer | needs visual-designer; see Decisions |
-| Project-list data source and schema | architecture | resolved 2026-10-09 (issue #39): ADR 0001 §6 is a hand-curated committed file, `sites/valesordev.com/src/data/projects.json`, with `status` and optional `url` and `spdx` |
-| Site structure: how `sites/valesordev.com` consumes `brands/valesordev`, workspaces | architecture | needs architecture (ADR or spec; none in `docs/adr/` yet) |
+| Project-list data source and schema | architecture | resolved 2026-10-09 (issue #39): see ADR 0001 §6 |
+| Site structure: how `sites/valesordev.com` consumes `brands/valesordev`, workspaces | architecture | resolved: ADR 0001 §1-§3 and §7 (accepted 2026-10-08) |
 | Components and page | implementation | needs stories citing FEAT-01's brand docs |
 | Project list and statuses | Brian | decided 2026-10-09, see Decisions |
 
