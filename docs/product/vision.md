@@ -6,7 +6,7 @@ the "Website Redesign Project Plan" for bashburn.com; Brian's hosting decision i
 marked `[ASSUMED]` are my inference, not something a source states. Brian confirms or corrects each in review.
 
 ## For
-- **Visitors** who want to know what an imprint is, what it has released, and where the source, writing, or
+- **Visitors** who want to know what an imprint is, what it has released or is working on, and where the source, writing, or
   work lives: people reading the code, the fiction, the production credits, or the blog. `[ASSUMED]` They arrive
   from a link, a repository, an RSS reader, or a search, read, follow a link out, and leave. The
   likeliest visitors are developers (Valesor), readers and viewers of the worlds (System 9, Solo7), and
@@ -28,7 +28,7 @@ plainly related to the others; Solo7 Productions' brand page asks that the three
   bashburn.com), each built from its own brand kit in one monorepo and deployed to Cloudflare. The legacy
   solo7.media site on GitHub Pages will be retired (Brian, 2026-10-07). `[ASSUMED]` It retires when its
   replacement deploys to Cloudflare; until then it stays up.
-- Is: a record of published work. `[ASSUMED]` The imprint is the byline; voice rules (for example whether
+- Is: a record of published work and, until the first release, of work in development, labelled with its status. `[ASSUMED]` The imprint is the byline; voice rules (for example whether
   first-person singular is used) are each brand's `voice.md`.
 - Is: observed, not tracking. Grafana Faro measures the site (web vitals, performance, frontend errors), never
   the reader. The "instrumented, not tracked" claim and `/privacy` text change only with Brian.
@@ -36,7 +36,7 @@ plainly related to the others; Solo7 Productions' brand page asks that the three
   ever).
 - Isn't: a shared component library. Imprints never share visual components; only non-visual code is shared.
 - `[ASSUMED]` Isn't (yet): a home for individual products' own sites (for example Andara's World), or
-  project pages for released work. Those come after each imprint's homepage and aren't planned here.
+  project pages for released work or work in development. Those come after each imprint's homepage and aren't planned here.
 - Isn't: carried over from the old brand-kit or solo7-theme. The kits start from scratch
   (`.claude/roles/product.md`, sequencing).
 
@@ -56,3 +56,5 @@ Ordered tie-breakers for product calls.
 - 2026-10-07: drafted from the sources above (awaiting Brian's approval in PR).
 - 2026-10-07: all sites deploy to Cloudflare; the legacy solo7.media site will be retired (decided by Brian in
   session; confirmation in PR #5).
+- 2026-10-09: nothing is released yet, so valesordev.com lists projects in development with their status (Brian, in
+  session). The imprint's definition (publicly released software) is unchanged.

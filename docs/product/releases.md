@@ -14,8 +14,10 @@ Project Direction" (first milestone, build sequence, component list). Lines mark
 For: visitors to valesordev.com (developers reading the code and licenses). Brian, as publisher: R1 also proves
 the workflow every later release reuses.
 Promise: a visitor lands on valesordev.com, sees plainly that Valesor Development is the imprint for publicly
-released software, sees each released project, and follows a link to the source. `[ASSUMED]` The row also shows stack and license;
-the Valesor brand docs decide the row's contents.
+released software, sees the projects it is developing now with each one's status (in progress or concept), and
+follows a link to the source where a repository exists. Nothing is released yet (Brian, 2026-10-09), so no row
+claims it is. `[ASSUMED]` A row also shows stack and license where the repository gives them; the Valesor brand docs
+decide the row's contents.
 The page is the one in the Valesor target image, built from the new brand kit, readable with JavaScript off, and
 the site measures itself, never the reader.
 Bet: one imprint can go from Notion brief to a live Cloudflare site through the roles and `make` targets alone,
@@ -25,8 +27,9 @@ Features:
 - FEAT-01 — Valesor brand kit v1 (must): foundation, voice, visual language, tokens, illustration system, hero
   art and marks, `qa.md`; the target homepage is the specimen. Enables the homepage below; no visitor-visible
   change of its own.
-- FEAT-02 — valesordev.com homepage (must): the target homepage, with the project list drawn from released
-  projects and every project row linking to its source.
+- FEAT-02 — valesordev.com homepage (must): the target homepage, with a project list of work in development
+  (Andara's World and Vagabond in progress, System 9 Studios Pipeline a concept) and each row that has a public
+  repository linking to its source.
 - FEAT-03 — Site deploys and cutover (must): preview on every PR, production on merge, valesordev.com DNS
   moved to Cloudflare (`[ASSUMED]` from the old repo's hosting; the production cutover is Brian's call). Visitor-
   visible effect: the site is up at its permanent address.
@@ -34,14 +37,17 @@ Features:
   with Brian. Visitor-visible effect: the `/privacy` page states what is and isn't measured.
 - FEAT-?? — Link-preview card (cut-first): an Open Graph image for valesordev.com. `[ASSUMED]` Visitors often
   arrive from a shared link.
-Cut line: no project detail pages, README template, or documentation landing page (the Notion brief lists them as
+Cut line: no "released" project rows until a project is released; no statuses beyond in progress and concept. No
+project detail pages, README template, or documentation landing page (the Notion brief lists them as
 later reference implementations; the vision says project pages aren't planned yet). No other imprint's work. No
 new copy beyond what the homepage target shows. Why: R1 must prove the workflow, not widen the site.
 Success signals:
 - Brian opens valesordev.com (apex and `www`, both with valid TLS) and sees the target homepage, light and dark
   if the kit has both, mobile and desktop, JavaScript off (demo step, run by Brian; sre verifies the hostnames).
   The same check passes on a preview URL before cutover.
-- The rendered project rows match the project list Brian approved, and each links to its source (Brian).
+- The page shows exactly Andara's World (in progress), Vagabond (in progress), and System 9 Studios Pipeline
+  (concept), each with its status in words; the first two link to their public repositories and resolve, and the
+  third has no link (Brian).
 - `/brand-qa` passes against `brands/valesordev/qa.md` on that page (visual-designer).
 - A PR to the site gets a preview URL, and merging deploys production, using only `make` targets (sre).
 - Every URL the old site published returns the page or a redirect, and the rollback is rehearsed before cutover
@@ -107,3 +113,7 @@ Delivered by: not yet planned.
   bashburn.com; solo7.media waits). R2 pairs System 9 and Solo7 Productions because they credit each other and
   must not converge, so one release tests both. Awaiting Brian's review in the PR.
 - 2026-10-07: briefs written for R1's four `must` features (FEAT-01 to FEAT-04).
+- 2026-10-09: R1 re-cut per Brian: no project is released yet, so the homepage lists three projects in development
+  with statuses instead of released ones. Promise, FEAT-02, cut line, and success signals changed; the bet, the other
+  features, and the imprint's definition did not. FEAT-02 needs a visual-designer amendment for a status part and a
+  linkless row (the brand docs forbid both today).
