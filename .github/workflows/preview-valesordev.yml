@@ -3,12 +3,17 @@
 # Fork and Dependabot PRs get no secrets, so they skip the deploy with a notice.
 name: preview valesordev.com
 
+# The path filter lists every input of the site build; add a new input here when one appears.
 on:
   pull_request:
     paths:
       - sites/valesordev.com/**
       - brands/valesordev/**
+      - brands/*/package.json
+      - brands/*/brand.mk
+      - brands/_tools/**
       - packages/**
+      - .npmrc
       - package.json
       - package-lock.json
       - tsconfig.base.json
