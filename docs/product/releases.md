@@ -10,7 +10,7 @@ Sources: `docs/product/vision.md`; `.claude/roles/product.md` (sequencing, Brian
 monorepo (solo7.media)" (phases, R1 = pipeline + Valesor end to end); Notion › Valesor Development › "Brand Kit
 Project Direction" (first milestone, build sequence, component list). Lines marked `[ASSUMED]` are my inference.
 
-## R1 — Valesor Development, end to end *(status: proposed)*
+## R1 — Valesor Development, end to end *(status: shipping)*
 For: visitors to valesordev.com (developers reading the code and licenses). Brian, as publisher: R1 also proves
 the workflow every later release reuses.
 Promise: a visitor lands on valesordev.com, sees plainly that Valesor Development is the imprint for publicly
@@ -56,7 +56,7 @@ Success signals:
   `CLAUDE.md` §7 (sre verifies; Brian approves the text).
 - R2 starts only after every process fix named in R1's sprint closeout is closed or ticketed (pm checks at the
   closeout).
-Delivered by: not yet planned.
+Delivered by: M1 to M5 in `docs/roadmap.md` (pm); stories on the board.
 
 ## R2 — System 9 Studios and Solo7 Productions *(status: proposed)*
 For: visitors who want to know what the creative studio and the producer org are, and what they have made.
@@ -123,3 +123,4 @@ Delivered by: not yet planned.
 - 2026-10-09: issue #39 resolved. ADR 0001 §6 now uses a static, hand-curated project list, so FEAT-02's project-list
   dependency is closed. Scope, promise, and cut line did not change. pm drops #39 from M3's Needs in
   `docs/roadmap.md` after this merges.
+- 2026-10-10: R1 `proposed` → `shipping`: M1 and M2 are in progress (first review, `reviews/R1-2026-10-10-01.md`: no-go).
