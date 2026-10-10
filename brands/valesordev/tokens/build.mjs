@@ -90,6 +90,7 @@ const misses = []
 for (const pair of tokens.contrast) {
   // Floors are WCAG 2.1 AA: 4.5:1 for text (color.*), 3:1 for non-text (alias.*).
   const floor = pair.fg.startsWith('color.') ? 4.5 : 3
+  if (pair.bg !== 'color.paper') throw new Error(`contrast ${pair.fg}: bg must be color.paper (the only ground), got ${pair.bg}`)
   if (typeof pair.min !== 'number' || pair.min < floor) throw new Error(`contrast ${pair.fg}: min must be a number of at least ${floor}`)
   const fg = resolve(get(pair.fg).value)
   const bg = resolve(get(pair.bg).value)
