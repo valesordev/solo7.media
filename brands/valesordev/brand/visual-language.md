@@ -46,8 +46,8 @@ Two families, one job each. `[DECIDED 2026-10-08]` (audit: Typography; Q2)
 - **Monospace** explains and measures: body text, descriptions, taglines, metadata, links and CTAs, footer.
 - No sans-serif, anywhere. No third family, no italic display, no bold display. Weight is regular throughout.
   `[DECIDED 2026-10-08]`
-- Families are open-source and self-hosted, chosen and licensed in the type-and-palette story; the audit lists
-  candidates and Brian picks (`tokens/README.md#typefaces`). Not decided here.
+- Families are open-source and self-hosted: Source Serif 4 for the display serif and Source Code Pro for the
+  monospace, both OFL-1.1. `[DECIDED 2026-10-10]` (`tokens/README.md`, S7M-VAL-006)
 - No typeface sourced from IBM, in any role, even though open source. `[DECIDED 2026-10-10]` (Brian: a hard rule)
 
 Roles. Sizes are relative to body (`1x`) as measured in the audit; the token story sets the scale.

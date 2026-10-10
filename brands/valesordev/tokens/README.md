@@ -7,9 +7,10 @@ the `./assets/*` export. Roles and rules are in `../brand/visual-language.md`; t
 
 Light theme only. There is no dark theme, no radius, no shadow, and no fill token, because the brand has none.
 
-Status marks as in `../brand/foundation.md`. Everything below is `[PROPOSED]` until Brian approves the PR.
+Status marks as in `../brand/foundation.md`. Everything below is `[DECIDED 2026-10-10]`: Brian approved the typeface
+pick and the values in "Values the docs left to this story" at review of PR #66.
 
-## Typefaces `[PROPOSED]`
+## Typefaces
 Both OFL-1.1, Latin subset, regular weight only (the brand uses no other weight and no italic), as WOFF2 from
 `@fontsource/*@5.3.0`. The licence text sits beside each font in `../assets/fonts/` and is copied into `dist/`.
 OFL allows self-hosting and embedding; it requires the copyright notice and licence to travel with the files, which
@@ -65,7 +66,7 @@ Checked by the build, which fails on a miss. WCAG 2.1 relative luminance, agains
 `rule` `#D0D0D0` is about 1.5:1 against `paper`. It is a decorative hairline and carries no information on its own
 (`visual-language.md#color`), so it has no contrast requirement; a link's underline is its own token.
 
-## Values the docs left to this story `[PROPOSED]`
+## Values the docs left to this story
 - `paper` `#FEFEFE`: the target's median. Not pure white, so the engraving's treatment maps its whites to this value.
 - `rule` `#D0D0D0`: inside the audit's sampled `#CCCCCC` to `#D6D6D6`, neutral.
 - Line height: 1.6 for body, 1.5 for every other role except `display` at 1.2. The rule is body at least 1.5
