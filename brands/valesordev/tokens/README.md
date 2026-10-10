@@ -13,9 +13,9 @@ Status marks as in `../brand/foundation.md`. Everything below is `[PROPOSED]` un
 Both OFL-1.1, Latin subset, regular weight only (the brand uses no other weight and no italic), as WOFF2 from
 `@fontsource/*@5.3.0`. The licence text sits beside each font in `../assets/fonts/` and is copied into `dist/`.
 OFL allows self-hosting and embedding; it requires the copyright notice and licence to travel with the files, which
-the build does. Source Serif 4 carries Adobe's Reserved Font Name "Source": the files are used unmodified and
-unrenamed (Fontsource's Latin subset, taken from the upstream release), which the licence allows; do not rename or
-edit them. Whether the licence text is published beside the fonts on the deployed site is the site story's call.
+the build does. Source Serif 4 carries Adobe's Reserved Font Name "Source": the files are used as published in
+`@fontsource/source-serif-4@5.3.0` (a Latin subset of the upstream release) and are not renamed or edited, which the
+licence allows; do not rename or edit them. The licence text is upstream's. Whether the licence text is published beside the fonts on the deployed site is the site story's call.
 
 | Role | Recommended | Licence | Why | Rejected |
 |---|---|---|---|---|
