@@ -6,4 +6,5 @@ Brief: Notion › Valesor Development › Brand Kit Project Direction. Its homep
 frozen into `references/target-homepage.png` by `/brand-audit valesordev`.
 
 Layout (`CLAUDE.md` §3): `brand/`, `references/`, `tokens/`, `art-direction/`, `assets/`, `components/`, `qa.md`,
-`brand.mk`, `dist/` (generated). Nothing here yet: the kit starts from scratch.
+`brand.mk`, `dist/` (generated). Brand docs, `tokens/` (with the self-hosted fonts under `assets/fonts/`), and the
+references are in; art direction, art assets, components, and `qa.md` follow in their own stories.

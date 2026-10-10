@@ -2,7 +2,7 @@
 
 The look of Valesor, as rules. Identity is in `foundation.md`, words in `voice.md`, and correct and incorrect
 usage of each component in `usage.md`. This file does not hold token values: color, type, and spacing values live in
-`tokens/tokens.json` (a later story); the numbers here are the audit's measurements or decided limits. It names roles and states the rules those tokens must satisfy. A component
+`tokens/tokens.json` (names and contrast record: `tokens/README.md`); the numbers here are the audit's measurements or decided limits. It names roles and states the rules those tokens must satisfy. A component
 uses a token or asks visual-designer; it never carries a hex, font name, or spacing literal (`CLAUDE.md` §5).
 
 Status marks as in `foundation.md`. The audit's decided rows are cited by name (`audit: <section>`).
