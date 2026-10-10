@@ -12,12 +12,15 @@ Status marks as in `../brand/foundation.md`. Everything below is `[PROPOSED]` un
 ## Typefaces `[PROPOSED]`
 Both OFL-1.1, Latin subset, regular weight only (the brand uses no other weight and no italic), as WOFF2 from
 `@fontsource/*@5.3.0`. The licence text sits beside each font in `../assets/fonts/` and is copied into `dist/`.
-OFL allows self-hosting and embedding; it requires the licence to travel with the files, which the build does.
+OFL allows self-hosting and embedding; it requires the copyright notice and licence to travel with the files, which
+the build does. Source Serif 4 carries Adobe's Reserved Font Name "Source": the files are used unmodified and
+unrenamed (Fontsource's Latin subset, taken from the upstream release), which the licence allows; do not rename or
+edit them. Whether the licence text is published beside the fonts on the deployed site is the site story's call.
 
 | Role | Recommended | Licence | Why | Rejected |
 |---|---|---|---|---|
 | Display serif | Source Serif 4 | OFL-1.1 | Transitional with sharp serifs, close to the target's Times-like serif; a quiet, durable colour at 4x | Newsreader (OFL-1.1): softer, old-style; Libre Caslon Text (OFL-1.1): only 400 and 700, display-heavy colour; Tinos (Apache-2.0): a Times clone, reads as a default |
-| Monospace | IBM Plex Mono | OFL-1.1 | The audit's reading of the target ("IBM Plex Mono-like"), humanist, slashed zero | JetBrains Mono (OFL-1.1): tall x-height, reads as an IDE; Commit Mono (OFL-1.1): not fetched or compared; Plex already matches the audit's reading |
+| Monospace | IBM Plex Mono | OFL-1.1 | The audit's reading of the target ("IBM Plex Mono-like"), humanist, dotted zero | JetBrains Mono (OFL-1.1): tall x-height, reads as an IDE; Commit Mono (OFL-1.1): not fetched or compared; Plex already matches the audit's reading |
 
 To take a different pick: replace the font file and licence under `../assets/fonts/`, then change that family's
 `family`, `fallback`, `files`, and `licenseFile` in `tokens.json`. Nothing else moves.

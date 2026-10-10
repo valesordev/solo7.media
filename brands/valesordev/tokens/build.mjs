@@ -50,6 +50,7 @@ for (const font of Object.values(tokens.font)) {
   for (const file of font.files) {
     const from = join(kit, file.src)
     if (!existsSync(from)) throw new Error(`missing font file ${file.src}`)
+    if (readFileSync(from).subarray(0, 4).toString('latin1') !== 'wOF2') throw new Error(`${file.src} is not a WOFF2 file`)
     const to = join(dist, file.src)
     mkdirSync(dirname(to), { recursive: true })
     copyFileSync(from, to)
@@ -72,6 +73,18 @@ const luminance = (hex) => {
 const ratio = (a, b) => {
   const [hi, lo] = [luminance(a), luminance(b)].sort((x, y) => y - x)
   return (hi + 0.05) / (lo + 0.05)
+}
+const ROLES = ['paper', 'ink', 'ink-muted', 'rule', 'accent']
+if (Object.keys(tokens.color).join() !== ROLES.join()) {
+  throw new Error(`color roles must be exactly ${ROLES.join(', ')} (no ink-faint, no rule-strong)`)
+}
+for (const [key, leaf] of Object.entries(tokens.color)) {
+  if (!/^#[0-9A-Fa-f]{6}$/.test(leaf.value)) throw new Error(`color.${key} must be a 6-digit hex, got ${leaf.value}`)
+}
+// Every colour role used for text must be checked against paper; rule is a decorative hairline.
+const checked = new Set(tokens.contrast.map((pair) => pair.fg))
+for (const role of ROLES.filter((r) => r !== 'paper' && r !== 'rule')) {
+  if (!checked.has(`color.${role}`)) throw new Error(`color.${role} has no entry in contrast`)
 }
 const misses = []
 for (const pair of tokens.contrast) {
