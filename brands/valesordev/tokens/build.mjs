@@ -86,6 +86,9 @@ const checked = new Set(tokens.contrast.map((pair) => pair.fg))
 for (const role of ROLES.filter((r) => r !== 'paper' && r !== 'rule')) {
   if (!checked.has(`color.${role}`)) throw new Error(`color.${role} has no entry in contrast`)
 }
+for (const key of Object.keys(tokens.alias)) {
+  if (!checked.has(`alias.${key}`)) throw new Error(`alias.${key} has no entry in contrast`)
+}
 const misses = []
 for (const pair of tokens.contrast) {
   // Floors are WCAG 2.1 AA: 4.5:1 for text (color.*), 3:1 for non-text (alias.*).
