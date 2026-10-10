@@ -47,7 +47,8 @@ Two families, one job each. `[DECIDED 2026-10-08]` (audit: Typography; Q2)
 - No sans-serif, anywhere. No third family, no italic display, no bold display. Weight is regular throughout.
   `[DECIDED 2026-10-08]`
 - Families are open-source and self-hosted, chosen and licensed in the type-and-palette story; the audit lists
-  candidates and Brian picks. Not decided here.
+  candidates and Brian picks (`tokens/README.md#typefaces`). Not decided here.
+- No typeface sourced from IBM, in any role, even though open source. `[DECIDED 2026-10-10]` (Brian: a hard rule)
 
 Roles. Sizes are relative to body (`1x`) as measured in the audit; the token story sets the scale.
 `[DECIDED 2026-10-08]` for role, family, and relative size; the scale itself is tokens.

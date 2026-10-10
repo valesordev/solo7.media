@@ -20,7 +20,10 @@ licence allows; do not rename or edit them. The licence text is upstream's. Whet
 | Role | Recommended | Licence | Why | Rejected |
 |---|---|---|---|---|
 | Display serif | Source Serif 4 | OFL-1.1 | Transitional with sharp serifs, close to the target's Times-like serif; a quiet, durable colour at 4x | Newsreader (OFL-1.1): softer, old-style; Libre Caslon Text (OFL-1.1): only 400 and 700, display-heavy colour; Tinos (Apache-2.0): a Times clone, reads as a default |
-| Monospace | IBM Plex Mono | OFL-1.1 | The audit's reading of the target ("IBM Plex Mono-like"), humanist, dotted zero | JetBrains Mono (OFL-1.1): tall x-height, reads as an IDE; Commit Mono (OFL-1.1): not fetched or compared; Plex already matches the audit's reading |
+| Monospace | Source Code Pro | OFL-1.1 | Humanist, dotted zero, as the audit describes the target's mono; drawn by the same foundry as Source Serif 4, so the pair shares proportions and stroke contrast | JetBrains Mono (OFL-1.1): tall x-height, reads as an IDE; Commit Mono (OFL-1.1): not fetched or compared; any IBM-sourced face (IBM Plex Mono and the rest): excluded by rule, see below |
+
+**No IBM-sourced typefaces, in any role.** `[DECIDED 2026-10-10]` (Brian) A hard rule, though they are open source:
+the audit's first mono candidate was dropped for it. The rule is in `../brand/visual-language.md#typography`.
 
 To take a different pick: replace the font file and licence under `../assets/fonts/`, then change that family's
 `family`, `fallback`, `files`, and `licenseFile` in `tokens.json`. Nothing else moves.

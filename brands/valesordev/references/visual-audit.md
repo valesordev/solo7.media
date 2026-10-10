@@ -51,7 +51,7 @@ common choice than the brief assumed (Q2).
 
 Font candidates (OSS, self-hostable), licence to be confirmed by Brian's pick:
 - Display serif: Newsreader (OFL), Source Serif 4 (OFL), Libre Caslon Text (OFL), Tinos (Apache-2.0, Times metric clone).
-- Mono: IBM Plex Mono (OFL), JetBrains Mono (OFL), Commit Mono (OFL).
+- Mono: ~~IBM Plex Mono (OFL)~~ (excluded 2026-10-10: no IBM-sourced typefaces, `brand/visual-language.md#typography`), JetBrains Mono (OFL), Commit Mono (OFL), Source Code Pro (OFL).
 Choosing is Brian's.
 
 ## Layout

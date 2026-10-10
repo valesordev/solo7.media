@@ -1,6 +1,6 @@
 // Builds dist/tokens.css and dist/assets/fonts/ from tokens.json. No dependencies.
 // Entry point: `make build-brand-valesordev` (brand.mk). Fails on a missing font file or a contrast miss.
-import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { copyFileSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -45,6 +45,8 @@ for (const [role, spec] of Object.entries(tokens.type)) {
 }
 
 // Self-hosted faces, referenced relative to tokens.css; the files are built beside it.
+// Start from an empty fonts folder so a dropped family can never linger in dist/ and ship.
+rmSync(join(dist, 'assets', 'fonts'), { recursive: true, force: true })
 const faces = []
 for (const font of Object.values(tokens.font)) {
   for (const file of font.files) {
