@@ -93,6 +93,9 @@ for (const pair of tokens.contrast) {
   if (typeof pair.min !== 'number' || pair.min < floor) throw new Error(`contrast ${pair.fg}: min must be a number of at least ${floor}`)
   const fg = resolve(get(pair.fg).value)
   const bg = resolve(get(pair.bg).value)
+  for (const [name, hex] of [[pair.fg, fg], [pair.bg, bg]]) {
+    if (!/^#[0-9A-Fa-f]{6}$/.test(hex)) throw new Error(`contrast ${name} must resolve to a 6-digit hex, got ${hex}`)
+  }
   const r = ratio(fg, bg)
   console.log(`contrast ${pair.fg} ${fg} on ${pair.bg} ${bg}: ${r.toFixed(2)}:1 (min ${pair.min})`)
   if (r < pair.min) misses.push(`${pair.fg} on ${pair.bg} is ${r.toFixed(2)}:1, needs ${pair.min}:1`)
