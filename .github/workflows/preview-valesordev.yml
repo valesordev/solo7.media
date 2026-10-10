@@ -1,0 +1,93 @@
+# Preview deploy of sites/valesordev.com to a Cloudflare Workers static-assets
+# preview URL, posted to the PR. Build, deploy and verify are make targets (§9).
+# Fork and Dependabot PRs get no secrets, so they skip the deploy with a notice.
+name: preview valesordev.com
+
+# The path filter lists every input of the site build; add a new input here when one appears.
+on:
+  pull_request:
+    paths:
+      - sites/valesordev.com/**
+      - brands/valesordev/**
+      - brands/*/package.json
+      - brands/*/brand.mk
+      - brands/_tools/**
+      - packages/**
+      - .npmrc
+      - package.json
+      - package-lock.json
+      - tsconfig.base.json
+      - Makefile
+      - scripts/**
+      - .github/workflows/preview-valesordev.yml
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: preview-valesordev-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+      PREVIEW_ALIAS: pr-${{ github.event.pull_request.number }}
+    steps:
+      - name: Skip PRs without secrets (forks, Dependabot)
+        id: gate
+        env:
+          HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+          ACTOR: ${{ github.actor }}
+        run: |
+          if [ "$HEAD_REPO" != "$GITHUB_REPOSITORY" ] || [ "$ACTOR" = "dependabot[bot]" ]; then
+            echo "::notice::No Cloudflare credentials for this PR (fork or Dependabot), preview deploy skipped."
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.gate.outputs.run == 'true'
+
+      - uses: actions/setup-node@v4
+        if: steps.gate.outputs.run == 'true'
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Deploy preview
+        id: deploy
+        if: steps.gate.outputs.run == 'true'
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          # the build logs share stdout; the URL is the last line
+          url=$(make --no-print-directory preview-site-valesordev | tail -n1)
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+
+      - name: Verify preview serves the stub
+        if: steps.gate.outputs.run == 'true'
+        env:
+          PREVIEW_URL: ${{ steps.deploy.outputs.url }}
+        run: make verify-preview-valesordev PREVIEW_URL="$PREVIEW_URL"
+
+      - name: Post preview URL to the PR
+        if: steps.gate.outputs.run == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PREVIEW_URL: ${{ steps.deploy.outputs.url }}
+        run: |
+          marker='<!-- preview-valesordev -->'
+          body="$marker"$'\nPreview (valesordev.com): '"$PREVIEW_URL"$'\nCommit: '"${{ github.event.pull_request.head.sha }}"
+          id=$(gh api --paginate "repos/$GITHUB_REPOSITORY/issues/${{ github.event.pull_request.number }}/comments" \
+            --jq "[.[] | select(.user.login == \"github-actions[bot]\" and (.body | startswith(\"$marker\")))][0].id // empty")
+          if [ -n "$id" ]; then
+            gh api -X PATCH "repos/$GITHUB_REPOSITORY/issues/comments/$id" -f body="$body" >/dev/null
+          else
+            gh api "repos/$GITHUB_REPOSITORY/issues/${{ github.event.pull_request.number }}/comments" -f body="$body" >/dev/null
+          fi
