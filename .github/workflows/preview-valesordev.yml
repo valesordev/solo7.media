@@ -55,6 +55,7 @@ jobs:
       - name: Deploy preview
         id: deploy
         if: steps.gate.outputs.run == 'true'
+        shell: bash
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: |
@@ -64,7 +65,9 @@ jobs:
 
       - name: Verify preview serves the stub
         if: steps.gate.outputs.run == 'true'
-        run: make verify-preview-valesordev PREVIEW_URL='${{ steps.deploy.outputs.url }}'
+        env:
+          PREVIEW_URL: ${{ steps.deploy.outputs.url }}
+        run: make verify-preview-valesordev PREVIEW_URL="$PREVIEW_URL"
 
       - name: Post preview URL to the PR
         if: steps.gate.outputs.run == 'true'
@@ -74,8 +77,8 @@ jobs:
         run: |
           marker='<!-- preview-valesordev -->'
           body="$marker"$'\nPreview (valesordev.com): '"$PREVIEW_URL"$'\nCommit: '"${{ github.event.pull_request.head.sha }}"
-          id=$(gh api "repos/$GITHUB_REPOSITORY/issues/${{ github.event.pull_request.number }}/comments" \
-            --jq "[.[] | select(.body | startswith(\"$marker\"))][0].id // empty")
+          id=$(gh api --paginate "repos/$GITHUB_REPOSITORY/issues/${{ github.event.pull_request.number }}/comments" \
+            --jq "[.[] | select(.user.login == \"github-actions[bot]\" and (.body | startswith(\"$marker\")))][0].id // empty")
           if [ -n "$id" ]; then
             gh api -X PATCH "repos/$GITHUB_REPOSITORY/issues/comments/$id" -f body="$body" >/dev/null
           else

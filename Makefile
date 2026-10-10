@@ -4,7 +4,7 @@
 
 BRANDS := valesordev system9studios solo7productions solo7media bashburn
 
-.PHONY: help check check-layout build-site-valesordev preview-site-valesordev verify-preview-valesordev legacy-solo7-media
+.PHONY: help check check-layout build-site-valesordev bootstrap-site-valesordev preview-site-valesordev verify-preview-valesordev legacy-solo7-media
 
 help: ## List targets
 	@grep -hE '^[a-zA-Z0-9_%-]+:.*## ' $(MAKEFILE_LIST) | sort | \
@@ -25,12 +25,20 @@ build-site-valesordev: build-brand-valesordev ## Build sites/valesordev.com/dist
 # Preview deploy (ADR-0001 §4). PREVIEW_ALIAS names the preview (CI passes pr-<number>).
 # Needs CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID in the environment.
 PREVIEW_ALIAS ?= manual
+# Text the preview must contain; change it when the stub is replaced by the real homepage.
+PREVIEW_MARKER ?= This site is being rebuilt.
+
+# One-time, by a person: `versions upload` cannot create a Worker. This deploys the assets-only
+# Worker (workers_dev off, so nothing becomes public) and is Cloudflare account state, so it is
+# never run from CI.
+bootstrap-site-valesordev: build-site-valesordev ## ONE-TIME, manual: create the valesordev-com Worker so previews can upload
+	WRANGLER_SEND_METRICS=false npx --yes wrangler@4.149.0 deploy --config sites/valesordev.com/wrangler.jsonc
 
 preview-site-valesordev: build-site-valesordev ## Build, upload a preview version, print its URL (PREVIEW_ALIAS=pr-N)
 	@scripts/preview-site.sh valesordev.com $(PREVIEW_ALIAS)
 
 verify-preview-valesordev: ## Fetch PREVIEW_URL and fail unless it serves the stub page
-	@scripts/verify-preview.sh "$(PREVIEW_URL)" "This site is being rebuilt."
+	@scripts/verify-preview.sh "$(PREVIEW_URL)" "$(PREVIEW_MARKER)"
 
 legacy-solo7-media: ## Build the legacy solo7.media site (needs NODE_AUTH_TOKEN for GitHub Packages)
 	cd sites/solo7.media && npm ci && npm run build
