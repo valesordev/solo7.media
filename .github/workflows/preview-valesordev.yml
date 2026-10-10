@@ -31,13 +31,14 @@ jobs:
       CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
       PREVIEW_ALIAS: pr-${{ github.event.pull_request.number }}
     steps:
-      - name: Skip fork PRs
+      - name: Skip PRs without secrets (forks, Dependabot)
         id: gate
         env:
           HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+          ACTOR: ${{ github.actor }}
         run: |
-          if [ "$HEAD_REPO" != "$GITHUB_REPOSITORY" ]; then
-            echo "::notice::Fork PR: no Cloudflare credentials, preview deploy skipped."
+          if [ "$HEAD_REPO" != "$GITHUB_REPOSITORY" ] || [ "$ACTOR" = "dependabot[bot]" ]; then
+            echo "::notice::No Cloudflare credentials for this PR (fork or Dependabot), preview deploy skipped."
             echo "run=false" >> "$GITHUB_OUTPUT"
           else
             echo "run=true" >> "$GITHUB_OUTPUT"
