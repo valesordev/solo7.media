@@ -1,6 +1,12 @@
 # Preview deploy of sites/valesordev.com to a Cloudflare Workers static-assets
 # preview URL, posted to the PR. Build, deploy and verify are make targets (§9).
 # Fork and Dependabot PRs get no secrets, so they skip the deploy with a notice.
+#
+# The job runs the PR's own code (Makefile, scripts/, package.json and its
+# dependencies) with the Cloudflare token, and coordinator lanes open PRs from
+# this repo, not a fork. So the job runs in the `preview` environment, which
+# holds CLOUDFLARE_API_TOKEN and requires Brian's approval: nothing gets the
+# token until he has looked at the PR and approved the deployment.
 name: preview valesordev.com
 
 # The path filter lists every input of the site build; add a new input here when one appears.
@@ -32,6 +38,7 @@ concurrency:
 jobs:
   preview:
     runs-on: ubuntu-latest
+    environment: preview
     timeout-minutes: 10
     env:
       CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
