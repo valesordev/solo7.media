@@ -59,8 +59,11 @@ Status marks as in `foundation.md`. An item with no mark restates a `[DECIDED]` 
 12. Is the weight regular throughout: no bold, no italic display? (`visual-language.md#typography`)
 13. Is no typeface from IBM present, in any role? (`visual-language.md#typography`)
 14. Are metadata labels uppercase mono, spaced, in `ink-muted`? Is each text role in the case the role table gives
-    it (sentence case for H1, subhead, section titles, body, and links; title case for the wordmark, row titles,
-    and column titles)? (`visual-language.md#typography`, `voice.md#case-and-punctuation`)
+    it (sentence case for H1, subhead, section titles, body, and links; title case for the wordmark and row
+    titles)? (`visual-language.md#typography`, `voice.md#case-and-punctuation`)
+    Column titles, including `/privacy` section titles (item 54): case not checked. `[PROPOSED]` pending Brian:
+    the role table sets them in title case, `voice.md#case-and-punctuation` keeps title case for names and
+    sentence case for headings, so a multiword column title has no determinate pass.
 15. Does running text on a text page stay within 72 characters a line, with body line height at least 1.5?
     (`visual-language.md#typography` Notes, `visual-language.md#layout`)
 16. Is all text real, selectable text, with none set inside an image? (`visual-language.md#typography` Notes,
