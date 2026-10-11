@@ -240,11 +240,12 @@ For `/privacy` only. The text is Brian's (`CLAUDE.md` §7); these items check th
 73. Does every text and background pair on the page meet 4.5:1, including `ink-muted` at the label size and
     `accent`, and every non-text indicator (secondary underline, focus outline) meet 3:1? Check against the
     `contrast` entries in `tokens/tokens.json`. (`visual-language.md#color` Rules)
-74. Is colour never the only signal: links underlined (except the wordmark and nav links at rest, which carry no
-    underline and no colour cue, items 4 and 32), status in words, arrows with their row context?
-    (`visual-language.md#color` Rules, `visual-language.md#brandheader`, WCAG 1.4.1) Footer links: underline at
-    rest not checked. `[PROPOSED]` pending Brian: `visual-language.md#footer` calls them navigation in the nav
-    role and `usage.md#footer` "plain mono links", but neither says whether they are underlined at rest.
+74. Is colour never the only signal: links underlined (except nav links at rest, item 32), status in words,
+    arrows with their row context? (`visual-language.md#color` Rules, `visual-language.md#brandheader`,
+    WCAG 1.4.1) The wordmark and footer links: underline at rest not checked. `[PROPOSED]` pending Brian:
+    `visual-language.md#color` says a link has an underline and `#brandheader` exempts only nav links, while the
+    wordmark is "plain text" (`#brandheader`) and footer links are navigation in the nav role (`#footer`),
+    "plain mono links" (`usage.md#footer`); no doc says whether either is underlined at rest.
 75. Does every interactive element show a 2px `ink` outline with a 2px offset on keyboard focus, never removed?
     Does hover only thicken the underline to 2px, with no colour change and no change on visited?
     (`visual-language.md#interaction-states`)
