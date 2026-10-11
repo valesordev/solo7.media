@@ -30,8 +30,8 @@ Status marks as in `foundation.md`. An item with no mark restates a `[DECIDED]` 
    rather than a software company's homepage? (`foundation.md#the-model-a-monograph-not-a-homepage`)
 2. Does it read as quiet, durable, precise, independent, open, technical, and field-tested, as the character table
    describes each word? (`foundation.md#character`)
-3. Is Valesor Development named as an imprint, never a company, studio, team, firm, or brand?
-   (`foundation.md#identity`, `voice.md#first-person-singular`)
+3. Is Valesor Development named as an imprint, never a company, studio, team, firm, or brand? Saying what it is
+   not ("Not a company.") passes. (`foundation.md#identity`, `voice.md#first-person-singular`)
 4. Is the mark the serif wordmark "Valesor Development" alone, with no symbol, glyph, or logo image?
    (`foundation.md#identity`, `visual-language.md#brandheader`)
 5. Is the page free of anything borrowed from a sibling imprint's look (System 9 Studios, Solo7 Productions,
@@ -90,10 +90,10 @@ Status marks as in `foundation.md`. An item with no mark restates a `[DECIDED]` 
 23. Wide: are the H1, subhead, blurb, and CTA set in the illustration's empty sky, never on engraved ground?
     At both widths: is there no scrim, overlay, or gradient behind any type? (`visual-language.md#hero`,
     `visual-language.md#illustration`, `usage.md#hero`)
-24. Is there exactly one H1, a mono blurb of at most two short lines, and exactly one vermilion CTA? Wide: is the
-    subhead a single line? (`visual-language.md#hero`) At mobile width the subhead's line count is not checked:
-    the docs don't say whether the single-line rule holds when the 1.7x subhead can't fit 390px, and that gap is
-    pending Brian. `[PROPOSED]`
+24. Is there exactly one H1, a mono blurb, and exactly one vermilion CTA? Wide: is the subhead a single line and
+    the blurb at most two short lines? (`visual-language.md#hero`) At mobile width the subhead's and blurb's line
+    counts are not checked: the docs don't say whether those limits hold when the 1.7x subhead can't fit 390px
+    and the blurb rewraps at the narrow measure, and that gap is pending Brian. `[PROPOSED]`
 25. Wide: is the type left aligned to the content column, in the left part of the frame?
     (`visual-language.md#hero`)
 26. Does the illustration run full-bleed, its bottom edge ragged, sitting just above the rule beneath?
@@ -128,15 +128,16 @@ Status marks as in `foundation.md`. An item with no mark restates a `[DECIDED]` 
 36. Is the row up to four parts between two 1px rules: serif name (tagline beneath only if the project list
     carries one), mono description, `TechnicalMetadata`, and, on a row with a repository, a vermilion `->` at the
     far right? (`usage.md#projectrow`, `visual-language.md#projectrow`)
-37. Does every row have the same parts in the same columns, differing only where a row has no repository?
-    (`usage.md#projectrow`)
+37. Does every row have the same parts, differing only where a row has no repository? Wide: are they in the same
+    columns? (`usage.md#projectrow`, `visual-language.md#projectrow`)
 38. Does each row state its status in words, "In progress" or "Concept", as the first `TechnicalMetadata` field,
     with colour, weight, and position never carrying it alone? (`usage.md#projectrow`, `voice.md#status-words`)
 39. Is a row with a repository one link to it, whose accessible name is the project name? (`usage.md#projectrow`,
     `visual-language.md#projectrow`)
-40. Does a row with no repository have no link, no `->`, no placeholder, no blank, and no "coming soon"; keep the
-    arrow column's width so columns stay aligned; leave LICENSE and REPO out; and stay undimmed in `ink` and
-    `ink-muted`? (`usage.md#projectrow`, Correct: a row with no repository)
+40. Does a row with no repository have no link, no `->`, no placeholder, no blank, and no "coming soon"; leave
+    LICENSE and REPO out; and stay undimmed in `ink` and `ink-muted`? Wide: does it keep the arrow column's width
+    so columns stay aligned? (`usage.md#projectrow`, Correct: a row with no repository;
+    `visual-language.md#projectrow`)
 41. Is a row with no repository plain list-item text, with no `<a>` without `href`, `role="link"`,
     `aria-disabled`, or `tabindex`? (`usage.md#projectrow`)
 42. Are the rows a `<ul>`, and free of cards, borders, shadows, radii, fills, thumbnails, icons, language dots,
@@ -145,7 +146,8 @@ Status marks as in `foundation.md`. An item with no mark restates a `[DECIDED]` 
 43. Is the row data real: no placeholder or invented data, no target-image repository URLs, no "fction"?
     (`usage.md#projectrow`, `voice.md#describing-a-project`)
 44. At mobile width, do name, description, and metadata stack, with the arrow on the right of the name line, and
-    no arrow on a row with no repository? (`visual-language.md#narrow-layout-mobile` item 5)
+    on a row with no repository no arrow and a name line that is the name alone?
+    (`visual-language.md#narrow-layout-mobile` item 5, `visual-language.md#projectrow`)
 
 ### TechnicalMetadata
 45. Is it a `dl` of uppercase mono labels in `ink-muted` and mono values, fields in the order STATUS, STACK,
@@ -238,9 +240,11 @@ For `/privacy` only. The text is Brian's (`CLAUDE.md` §7); these items check th
 73. Does every text and background pair on the page meet 4.5:1, including `ink-muted` at the label size and
     `accent`, and every non-text indicator (secondary underline, focus outline) meet 3:1? Check against the
     `contrast` entries in `tokens/tokens.json`. (`visual-language.md#color` Rules)
-74. Is colour never the only signal: links underlined (except nav links at rest, which carry no underline and no
-    colour cue, item 32), status in words, arrows with their row context? (`visual-language.md#color` Rules,
-    `visual-language.md#brandheader`, WCAG 1.4.1)
+74. Is colour never the only signal: links underlined (except the wordmark and nav links at rest, which carry no
+    underline and no colour cue, items 4 and 32), status in words, arrows with their row context?
+    (`visual-language.md#color` Rules, `visual-language.md#brandheader`, WCAG 1.4.1) Footer links: underline at
+    rest not checked. `[PROPOSED]` pending Brian: `visual-language.md#footer` calls them navigation in the nav
+    role and `usage.md#footer` "plain mono links", but neither says whether they are underlined at rest.
 75. Does every interactive element show a 2px `ink` outline with a 2px offset on keyboard focus, never removed?
     Does hover only thicken the underline to 2px, with no colour change and no change on visited?
     (`visual-language.md#interaction-states`)
