@@ -2,7 +2,7 @@
 
 **Status:** draft (S7M-VAL-009); approved <YYYY-MM-DD> (PR #<n>) once Brian approves it
 **Sources:** brand/foundation.md, brand/visual-language.md, brand/usage.md, brand/voice.md, tokens/tokens.json,
-all @ 26d2d0e
+tokens/README.md, all @ 26d2d0e
 
 The checklist `/brand-qa valesordev` runs, and the visual check of `CLAUDE.md` §8 item 3. Every item is a yes/no
 question answered by looking at the rendered page (or, for the token check, its built CSS), and each names the
@@ -16,7 +16,9 @@ Status marks as in `foundation.md`. An item with no mark restates a `[DECIDED]` 
 - **Theme:** light only. There is no dark theme. (`visual-language.md#color`, Themes)
 - **Widths:** two, one per layout: desktop at 1440 CSS px (wide layout) and mobile at 390 CSS px (narrow layout,
   below the 48rem breakpoint). `[PROPOSED]` (the docs fix the breakpoint, `visual-language.md#layout`, not the test
-  widths; these are the widths in the `/brand-qa` examples)
+  widths; these are the widths in the `/brand-qa` examples). Plus one H1 check at 320 CSS px (item 80).
+- An item marked "Wide" is answered at desktop width only; at mobile width the narrow-layout item that follows it
+  governs. (`visual-language.md#narrow-layout-mobile`)
 - **JavaScript off** at both widths: every item below is answered with JavaScript disabled. (`CLAUDE.md` §5)
 - **Evidence:** each result names a screenshot region, a selector, or a CSS line. Never judge a page from its
   source alone.
@@ -56,8 +58,9 @@ Status marks as in `foundation.md`. An item with no mark restates a `[DECIDED]` 
     `foundation.md#what-the-brand-is-made-of` item 3)
 12. Is the weight regular throughout: no bold, no italic display? (`visual-language.md#typography`)
 13. Is no typeface from IBM present, in any role? (`visual-language.md#typography`)
-14. Are metadata labels uppercase mono, spaced, in `ink-muted`? Are headings, subheads, and links sentence case,
-    and only names title case? (`visual-language.md#typography`, `voice.md#case-and-punctuation`)
+14. Are metadata labels uppercase mono, spaced, in `ink-muted`? Is each text role in the case the role table gives
+    it (sentence case for H1, subhead, section titles, body, and links; title case for the wordmark, row titles,
+    and column titles)? (`visual-language.md#typography`, `voice.md#case-and-punctuation`)
 15. Does running text on a text page stay within 72 characters a line, with body line height at least 1.5?
     (`visual-language.md#typography` Notes, `visual-language.md#layout`)
 16. Is all text real, selectable text, with none set inside an image? (`visual-language.md#typography` Notes,
@@ -71,7 +74,8 @@ Status marks as in `foundation.md`. An item with no mark restates a `[DECIDED]` 
     lighter, or vermilion rule? (`visual-language.md#layout`, `visual-language.md#color` Not roles,
     `usage.md#sectionrule`)
 19. Does every band open with a rule (a rule, space, content, a rule), including the footer, and is there no
-    heading without a rule above it? (`visual-language.md#layout`, `visual-language.md#sectionrule`)
+    heading without a rule above it? (`visual-language.md#layout`, `visual-language.md#sectionrule`,
+    `usage.md#sectionrule`, `visual-language.md#footer`)
 20. Are rules and type doing the layout: no box, border other than a hairline rule, fill, radius, or shadow?
     (`visual-language.md#layout`, `foundation.md#what-the-brand-is-made-of` item 4)
 21. Is whitespace left empty rather than filled, with the largest space above the H1 and between bands?
@@ -80,12 +84,13 @@ Status marks as in `foundation.md`. An item with no mark restates a `[DECIDED]` 
     intermediate layout? (`visual-language.md#narrow-layout-mobile`)
 
 ## Hero
-23. Are the H1, subhead, blurb, and CTA set in the illustration's empty sky, never on engraved ground, with no
-    scrim, overlay, or gradient behind them? (`visual-language.md#hero`, `visual-language.md#illustration`,
-    `usage.md#hero`)
-24. Is there exactly one H1, a single-line subhead, a mono blurb of at most two short lines, and exactly one
-    vermilion CTA? (`visual-language.md#hero`)
-25. Is the type left aligned to the content column, in the left part of the frame? (`visual-language.md#hero`)
+23. Wide: are the H1, subhead, blurb, and CTA set in the illustration's empty sky, never on engraved ground?
+    At both widths: is there no scrim, overlay, or gradient behind any type? (`visual-language.md#hero`,
+    `visual-language.md#illustration`, `usage.md#hero`)
+24. Is there exactly one H1, a mono blurb of at most two short lines, and exactly one vermilion CTA? Wide: is the
+    subhead a single line? (`visual-language.md#hero`)
+25. Wide: is the type left aligned to the content column, in the left part of the frame?
+    (`visual-language.md#hero`)
 26. Does the illustration run full-bleed, its bottom edge ragged, sitting just above the rule beneath?
     (`visual-language.md#illustration`)
 27. Is the hero free of a second CTA, ghost button, badge, counter, "new" flag, announcement bar, scroll cue,
@@ -93,14 +98,16 @@ Status marks as in `foundation.md`. An item with no mark restates a `[DECIDED]` 
 28. At mobile width, is the order H1, subhead, blurb, CTA, then the art as a full-bleed band below?
     (`visual-language.md#narrow-layout-mobile` item 2)
 29. Is the illustration pure black pen-and-ink on white (heavy contour, hatch and stipple, no grey wash or
-    gradient), from an installed slot with provenance, and free of text? (`visual-language.md#illustration`,
-    `foundation.md#what-the-brand-is-made-of` item 5)
+    gradient), and free of text? (`visual-language.md#illustration`, `foundation.md#what-the-brand-is-made-of`
+    item 5) Is it from an installed art slot with provenance? `[PROPOSED]` (the role's rule for generated art,
+    `.claude/roles/visual-designer.md`; the brand docs defer to `art-direction/illustration-system.md`, not yet
+    written)
 30. Is the decorative homepage hero marked `alt=""`? (`visual-language.md#illustration`)
 
 ## Component usage
 ### BrandHeader
-31. Is it the first element: the serif wordmark at left linking to `/`, serif Projects and GitHub at right, and a
-    1px rule under it? No About link? (`visual-language.md#brandheader`, `usage.md#brandheader`)
+31. Is it the first element: the serif wordmark linking to `/`, serif Projects and GitHub links, a 1px rule under
+    it, and no About link? Wide: is the wordmark at left and the links at right? (`visual-language.md#brandheader`, `usage.md#brandheader`)
 32. Is it free of arrows, pills, buttons, rest underlines, and hover colours on nav links, with the current page
     shown only by a 1px underline? (`visual-language.md#brandheader`)
 33. Is it neither sticky nor shrinking, with no shadow, hamburger, or drawer, and at mobile width are the wordmark
@@ -113,9 +120,9 @@ Status marks as in `foundation.md`. An item with no mark restates a `[DECIDED]` 
     both left aligned? (`usage.md#sectionrule`, `visual-language.md#narrow-layout-mobile` item 4)
 
 ### ProjectRow
-36. Is the row the four parts between two 1px rules: serif name (tagline beneath only if the project list carries
-    one), mono description, `TechnicalMetadata`, and a vermilion `->` at the far right? (`usage.md#projectrow`,
-    `visual-language.md#projectrow`)
+36. Is the row up to four parts between two 1px rules: serif name (tagline beneath only if the project list
+    carries one), mono description, `TechnicalMetadata`, and, on a row with a repository, a vermilion `->` at the
+    far right? (`usage.md#projectrow`, `visual-language.md#projectrow`)
 37. Does every row have the same parts in the same columns, differing only where a row has no repository?
     (`usage.md#projectrow`)
 38. Does each row state its status in words, "In progress" or "Concept", as the first `TechnicalMetadata` field,
@@ -195,8 +202,8 @@ For `/privacy` only. The text is Brian's (`CLAUDE.md` §7); these items check th
     customers, platform, or launched? (`voice.md#preferred-vocabulary`)
 64. Is every CTA from the CTA vocabulary or the same verb-then-object shape, never "Get started", "Learn more",
     "Contact us", or another avoided CTA? (`voice.md#cta-vocabulary`)
-65. Are source and license visible wherever a project with a repository is named? (`foundation.md#character`,
-    Open)
+65. Are source, license, and repository visible wherever a project with a repository is named, and does a
+    project with none state its status instead? (`foundation.md#character`, Open)
 66. Are the homepage lines the decided ones: "The engineering imprint." and the subhead "Software, tools, and
     systems, developed in the open."? (`voice.md#the-imprints-own-sentences`)
 
@@ -212,10 +219,12 @@ For `/privacy` only. The text is Brian's (`CLAUDE.md` §7); these items check th
     (`visual-language.md#motion`)
 
 ## Tokens
-71. **No off-token values:** does the built CSS and every component under `brands/valesordev/components/` and
-    `sites/valesordev.com/` reference tokens only, with no literal colour (hex, `rgb()`, `hsl()`, named colour),
-    font family name, or spacing value outside `brands/valesordev/tokens/`? Each literal is a defect.
-    (`usage.md#before-building-anything`, `visual-language.md`, `CLAUDE.md` §5)
+71. **No off-token values:** do the components under `brands/valesordev/components/` and the source and built CSS
+    of `sites/valesordev.com/` reference tokens only, with no literal colour (hex, `rgb()`, `hsl()`, named
+    colour), font family name, or spacing value? The token definitions themselves (`brands/valesordev/tokens/` and
+    the generated `tokens.css` it builds) are not scanned. The one allowed literal is a component's
+    `@media (min-width: 48rem)`. Every other literal is a defect. (`usage.md#before-building-anything`,
+    `tokens/README.md`, Custom properties, `CLAUDE.md` §5)
 72. Is every token used one that `tokens/tokens.json` defines, with no new token introduced without a brand-doc
     reason? (`visual-language.md`, `tokens/README.md`)
 
@@ -231,10 +240,13 @@ For `/privacy` only. The text is Brian's (`CLAUDE.md` §7); these items check th
 76. Is every link and arrow target at least 24 by 24 CSS px, and is the whole `ProjectRow` its link area?
     (`visual-language.md#interaction-states`)
 77. Are there real headings (one H1) and landmarks (`header`, `main`, `footer`), and lists marked up as lists?
-    (`visual-language.md#hero`, `visual-language.md#projectrow`)
+    (`visual-language.md#hero`, `visual-language.md#projectrow`, WCAG 1.3.1)
 78. Is `prefers-reduced-motion` respected (nothing animates either way)? (`visual-language.md#motion`)
 79. Is the page fully readable and every link usable with JavaScript off, at both widths? (`CLAUDE.md` §5,
     `visual-language.md#privacy-page-template`)
+80. At 320 CSS px, does the H1 (display 4x) wrap well: whole words, no overflow, no horizontal scroll? A fail here
+    is a brand-doc change (a narrow display size), routed to visual-designer. (`tokens/README.md`, Values the docs
+    left to this story)
 
 ## Self-check
 `usage.md#self-check` asks the brief's questions before a PR. Each one maps to items above: editorial, not

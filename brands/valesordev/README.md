@@ -7,4 +7,5 @@ frozen into `references/target-homepage.png` by `/brand-audit valesordev`.
 
 Layout (`CLAUDE.md` §3): `brand/`, `references/`, `tokens/`, `art-direction/`, `assets/`, `components/`, `qa.md`,
 `brand.mk`, `dist/` (generated). Brand docs, `tokens/` (with the self-hosted fonts under `assets/fonts/`), and the
-references are in; art direction, art assets, components, and `qa.md` follow in their own stories.
+references and `qa.md` (the `/brand-qa` checklist) are in; art direction, art assets, and components follow in
+their own stories.
