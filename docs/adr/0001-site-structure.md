@@ -137,6 +137,34 @@ out of the R1 schema; a later amendment adds them if a row needs them.
 `src/pages/` holds routes only, with one `.astro` file per URL. Routes: `/`, `/privacy/`, and a `404.astro`.
 Content that is data (the project list) lives in `src/data/`. R1 has no content collections.
 
+### 8. Component tests: Vitest and Astro's Container API, run by `make check`
+Added 2026-10-11 (Brian, in the SPRINT-02 contract review of S7M-VAL-015 to 018). Every brand component
+story asks for a render test, and before this decision the repo had no test runner, so each builder would have
+picked one, and nothing in the gate would have run the tests.
+
+- **Runner:** Vitest, a single root `devDependency` in `package.json` (architecture's), so all brands use one
+  version. Components render with Astro's Container API (`experimental_AstroContainer` from `astro/container`),
+  using the `astro` the workspace already installs. `renderToString` with props and slots; assertions are on
+  the HTML. The config turns the dev toolbar off (`getViteConfig({ test: {…} }, { devToolbar: { enabled: false } })`):
+  with it on, the dev-mode render stamps every element with `data-astro-source-file="<absolute path>"`, so the
+  HTML would depend on where the repo is checked out.
+- **Where:** `brands/<slug>/components/vitest.config.ts` (built with `getViteConfig` from `astro/config`) and
+  `brands/<slug>/components/__tests__/<Name>.test.ts`. Both belong to implementation, like the components.
+  Nothing goes in the brand's `package.json`. The first component story of a brand sets the harness up, and the
+  rest reuse it.
+- **Target:** `test-brand-<slug>` (sre's recipe; the name is fixed here) depends on the workspace install and
+  runs the locked binary (`npx --no-install vitest run --root brands/<slug>/components`), offline and without
+  secrets. `make check` runs it for every brand that has any `brands/<slug>/components/*.astro`. The predicate is
+  the components, not the config, so a brand whose config is missing fails: without it the `.astro` imports
+  don't parse. A brand with no test file fails too (Vitest's default; `passWithNoTests` is never set), so a
+  missing suite can't pass the gate. A suite of only skipped tests does pass, so `.skip` and `.only` are refused
+  at PR review.
+- **What tests cover:** markup and structure (elements, landmarks, heading levels, link targets and text, the
+  `->` rule, `aria-*`). Look and token use are checked by `/brand-qa` against `qa.md`, not by these tests.
+- **The API is still marked experimental in Astro 5.** If an Astro upgrade changes it, the upgrade PR updates
+  the tests. A throwaway spike on Astro 5.18.2 and Vitest 3.2.7, with a test component placed
+  in `brands/valesordev/components/` and then removed, rendered and passed with this layout.
+
 ## Open for the builder
 Astro compiling `.astro` files from a linked workspace package may need config (for example
 `vite.ssr.noExternal`). The skeleton story proves it in its build and records what was needed here by amendment.
@@ -184,3 +212,5 @@ Astro compiling `.astro` files from a linked workspace package may need config (
 7. **Redirect scheme / URL permanence ADR (architecture), before cutover.** Not blocked by this ADR; it needs the
    old site's published URL list.
 8. **Site-specific `/privacy` page (implementation), after the brand docs cite its template.** FEAT-04.
+9. **`test-brand-<slug>` in `make check` (sre), decision 8.** The first brand to need it is `valesordev`
+   (S7M-VAL-015 sets up its harness).
