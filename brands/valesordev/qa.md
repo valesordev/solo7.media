@@ -58,8 +58,8 @@ Status marks as in `foundation.md`. An item with no mark restates a `[DECIDED]` 
     `foundation.md#what-the-brand-is-made-of` item 3)
 12. Is the weight regular throughout: no bold, no italic display? (`visual-language.md#typography`)
 13. Is no typeface from IBM present, in any role? (`visual-language.md#typography`)
-14. Are metadata labels uppercase mono, spaced, in `ink-muted`? Is each text role in the case the role table gives
-    it (sentence case for H1, subhead, section titles, body, and links; title case for the wordmark and row
+14. Are metadata labels uppercase mono, spaced, in `ink-muted`? Is each text role listed here in the case the role
+    table gives it (sentence case for H1, subhead, section titles, body, and links; title case for the wordmark and row
     titles)? (`visual-language.md#typography`, `voice.md#case-and-punctuation`)
     Column titles, including `/privacy` section titles (item 54): case not checked. `[PROPOSED]` pending Brian:
     the role table sets them in title case, `voice.md#case-and-punctuation` keeps title case for names and
