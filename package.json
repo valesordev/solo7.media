@@ -6,5 +6,8 @@
     "packages/*",
     "brands/*",
     "sites/valesordev.com"
-  ]
+  ],
+  "devDependencies": {
+    "vitest": "^3.2.7"
+  }
 }
