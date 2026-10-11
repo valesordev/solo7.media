@@ -5,7 +5,7 @@
 tokens/README.md, all @ 26d2d0e
 
 The checklist `/brand-qa valesordev` runs, and the visual check of `CLAUDE.md` §8 item 3. Every item is a yes/no
-question answered by looking at the rendered page (or, for the token check, its built CSS), and each names the
+question answered by looking at the rendered page (or, for the token check, its component and site style source), and each names the
 section it enforces. A "no" is a fail. The docs govern: where an item and its cited section disagree, the section
 wins and this file is the defect. This file adds no rule of its own.
 
@@ -90,7 +90,7 @@ Status marks as in `foundation.md`. An item with no mark restates a `[DECIDED]` 
 24. Is there exactly one H1, a mono blurb of at most two short lines, and exactly one vermilion CTA? Wide: is the
     subhead a single line? (`visual-language.md#hero`) At mobile width the subhead's line count is not checked:
     the docs don't say whether the single-line rule holds when the 1.7x subhead can't fit 390px, and that gap is
-    raised to Brian on S7M-VAL-009's PR.
+    pending Brian. `[PROPOSED]`
 25. Wide: is the type left aligned to the content column, in the left part of the frame?
     (`visual-language.md#hero`)
 26. Does the illustration run full-bleed, its bottom edge ragged, sitting just above the rule beneath?
@@ -221,7 +221,7 @@ For `/privacy` only. The text is Brian's (`CLAUDE.md` §7); these items check th
     (`visual-language.md#motion`)
 
 ## Tokens
-71. **No off-token values:** do the components under `brands/valesordev/components/` and the styles under
+71. **No off-token values:** do the components under `brands/valesordev/components/` (when it exists) and the styles under
     `sites/valesordev.com/src/` reference tokens only, with no literal colour (hex, `rgb()`, `hsl()`, named
     colour), font family name, or spacing value? Scan source, not the built bundle: the bundle carries the token
     package's own `--*` definitions and `@font-face` blocks, which are the tokens, not uses of them. The one
