@@ -88,7 +88,9 @@ Status marks as in `foundation.md`. An item with no mark restates a `[DECIDED]` 
     At both widths: is there no scrim, overlay, or gradient behind any type? (`visual-language.md#hero`,
     `visual-language.md#illustration`, `usage.md#hero`)
 24. Is there exactly one H1, a mono blurb of at most two short lines, and exactly one vermilion CTA? Wide: is the
-    subhead a single line? (`visual-language.md#hero`)
+    subhead a single line? (`visual-language.md#hero`) At mobile width the subhead's line count is not checked:
+    the docs don't say whether the single-line rule holds when the 1.7x subhead can't fit 390px, and that gap is
+    raised to Brian on S7M-VAL-009's PR.
 25. Wide: is the type left aligned to the content column, in the left part of the frame?
     (`visual-language.md#hero`)
 26. Does the illustration run full-bleed, its bottom edge ragged, sitting just above the rule beneath?
@@ -219,11 +221,11 @@ For `/privacy` only. The text is Brian's (`CLAUDE.md` §7); these items check th
     (`visual-language.md#motion`)
 
 ## Tokens
-71. **No off-token values:** do the components under `brands/valesordev/components/` and the source and built CSS
-    of `sites/valesordev.com/` reference tokens only, with no literal colour (hex, `rgb()`, `hsl()`, named
-    colour), font family name, or spacing value? The token definitions themselves (`brands/valesordev/tokens/` and
-    the generated `tokens.css` it builds) are not scanned. The one allowed literal is a component's
-    `@media (min-width: 48rem)`. Every other literal is a defect. (`usage.md#before-building-anything`,
+71. **No off-token values:** do the components under `brands/valesordev/components/` and the styles under
+    `sites/valesordev.com/src/` reference tokens only, with no literal colour (hex, `rgb()`, `hsl()`, named
+    colour), font family name, or spacing value? Scan source, not the built bundle: the bundle carries the token
+    package's own `--*` definitions and `@font-face` blocks, which are the tokens, not uses of them. The one
+    allowed literal is a component's `@media (min-width: 48rem)`. Every other literal is a defect. (`usage.md#before-building-anything`,
     `tokens/README.md`, Custom properties, `CLAUDE.md` §5)
 72. Is every token used one that `tokens/tokens.json` defines, with no new token introduced without a brand-doc
     reason? (`visual-language.md`, `tokens/README.md`)
