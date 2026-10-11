@@ -48,13 +48,17 @@
       "Bash(.claude/bin/role check-cmd)",
       "Bash(.claude/bin/sprint-state:*)",
       "Bash(.claude/bin/story show:*)",
-      "Bash(.claude/bin/story list:*)"
+      "Bash(.claude/bin/story list:*)",
+      "Bash(.claude/bin/coordinator plan:*)",
+      "Bash(.claude/bin/coordinator status)"
     ],
     "ask": [
       "Bash(make deploy:*)",
       "Bash(npx wrangler deploy:*)",
       "Bash(npx wrangler secret:*)",
-      "Bash(gh workflow run:*)"
+      "Bash(gh workflow run:*)",
+      "Bash(.claude/bin/coordinator run:*)",
+      "Bash(.claude/bin/coordinator clean:*)"
     ]
   }
 }
