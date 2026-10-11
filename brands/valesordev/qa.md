@@ -16,7 +16,7 @@ Status marks as in `foundation.md`. An item with no mark restates a `[DECIDED]` 
 - **Theme:** light only. There is no dark theme. (`visual-language.md#color`, Themes)
 - **Widths:** two, one per layout: desktop at 1440 CSS px (wide layout) and mobile at 390 CSS px (narrow layout,
   below the 48rem breakpoint). `[PROPOSED]` (the docs fix the breakpoint, `visual-language.md#layout`, not the test
-  widths; these are the widths in the `/brand-qa` examples). Plus one H1 check at 320 CSS px (item 80).
+  widths; these are the widths in the `/brand-qa` examples). Plus one reflow check at 320 CSS px (item 80).
 - An item marked "Wide" is answered at desktop width only; at mobile width the narrow-layout item that follows it
   governs. (`visual-language.md#narrow-layout-mobile`)
 - **JavaScript off** at both widths: every item below is answered with JavaScript disabled. (`CLAUDE.md` §5)
@@ -119,8 +119,8 @@ Status marks as in `foundation.md`. An item with no mark restates a `[DECIDED]` 
     and links on two lines, all visible? (`usage.md#brandheader`, `visual-language.md#narrow-layout-mobile` item 1)
 
 ### SectionRule
-34. Is it a full-column hairline, then a serif title at left and, if present, one right aligned primary
-    `TextLink` that names where it goes? (`visual-language.md#sectionrule`, `usage.md#sectionrule`)
+34. Is it a full-column hairline, then a serif title at left and, if present, one primary `TextLink` that names
+    where it goes? Wide: is that link right aligned? (`visual-language.md#sectionrule`, `usage.md#sectionrule`)
 35. Is it free of a fill, icon, number, or kicker above the title? At mobile width, is the link below the title,
     both left aligned? (`usage.md#sectionrule`, `visual-language.md#narrow-layout-mobile` item 4)
 
@@ -166,8 +166,8 @@ Status marks as in `foundation.md`. An item with no mark restates a `[DECIDED]` 
 
 ### Footer
 51. Is it a rule, then "Valesor Development" in serif with "Released under Apache-2.0 by default." in `ink-muted`
-    mono at left, and GitHub then Privacy as plain mono links at right? (`visual-language.md#footer`,
-    `usage.md#footer`)
+    mono, and GitHub then Privacy as plain mono links? Wide: is the name and line at left and the links at right?
+    (`visual-language.md#footer`, `usage.md#footer`)
 52. Is it free of a copyright symbol, year, "All rights reserved", social icons, newsletter field, sitemap,
     back-to-top, tinted band, arrows, and links to pages that don't exist? At mobile width, does it stack left
     aligned? (`usage.md#footer`)
@@ -203,8 +203,9 @@ For `/privacy` only. The text is Brian's (`CLAUDE.md` §7); these items check th
     list, urgency, social proof, exclamation mark, reader-hook question, or second-person promise?
     (`voice.md#principle`, `voice.md#never`)
 62. Is "I" used where a person is needed, and never "we", "our team", or "us"? (`voice.md#first-person-singular`)
-63. Is the preferred vocabulary used (projects, users, source, repository, released, project site), not products,
-    customers, platform, or launched? (`voice.md#preferred-vocabulary`)
+63. Is the preferred vocabulary used (projects, users, source, repository, released, project site), never
+    products, customers, platform, or launched as names for the work? The decided negative line "Not a company.
+    No clients. No products." passes. (`voice.md#preferred-vocabulary`, `voice.md#the-imprints-own-sentences`)
 64. Is every CTA from the CTA vocabulary or the same verb-then-object shape, never "Get started", "Learn more",
     "Contact us", or another avoided CTA? (`voice.md#cta-vocabulary`)
 65. Are source, license, and repository visible wherever a project with a repository is named, and does a
@@ -237,8 +238,9 @@ For `/privacy` only. The text is Brian's (`CLAUDE.md` §7); these items check th
 73. Does every text and background pair on the page meet 4.5:1, including `ink-muted` at the label size and
     `accent`, and every non-text indicator (secondary underline, focus outline) meet 3:1? Check against the
     `contrast` entries in `tokens/tokens.json`. (`visual-language.md#color` Rules)
-74. Is colour never the only signal: links underlined, status in words, arrows with their row context?
-    (`visual-language.md#color` Rules, WCAG 1.4.1)
+74. Is colour never the only signal: links underlined (except nav links at rest, which carry no underline and no
+    colour cue, item 32), status in words, arrows with their row context? (`visual-language.md#color` Rules,
+    `visual-language.md#brandheader`, WCAG 1.4.1)
 75. Does every interactive element show a 2px `ink` outline with a 2px offset on keyboard focus, never removed?
     Does hover only thicken the underline to 2px, with no colour change and no change on visited?
     (`visual-language.md#interaction-states`)
@@ -249,9 +251,10 @@ For `/privacy` only. The text is Brian's (`CLAUDE.md` §7); these items check th
 78. Is `prefers-reduced-motion` respected (nothing animates either way)? (`visual-language.md#motion`)
 79. Is the page fully readable and every link usable with JavaScript off, at both widths? (`CLAUDE.md` §5,
     `visual-language.md#privacy-page-template`)
-80. At 320 CSS px, does the H1 (display 4x) wrap well: whole words, no overflow, no horizontal scroll? A fail here
-    is a brand-doc change (a narrow display size), routed to visual-designer. (`tokens/README.md`, Values the docs
-    left to this story)
+80. At 320 CSS px, does the whole page reflow with no horizontal scroll and no content clipped or overflowing
+    (WCAG 1.4.10), and does the H1 (display 4x) wrap on whole words? An H1 fail is a brand-doc change (a narrow
+    display size), routed to visual-designer; any other overflow is routed to implementation. (`tokens/README.md`,
+    Values the docs left to this story; `CLAUDE.md` §5)
 
 ## Self-check
 `usage.md#self-check` asks the brief's questions before a PR. Each one maps to items above: editorial, not
