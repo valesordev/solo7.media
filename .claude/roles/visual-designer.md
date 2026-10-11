@@ -7,6 +7,10 @@ writes: [brands/, "!brands/*/components/*", docs/glossary.md]
 skills: [brand-audit, art-direction, art-slot, brand-qa, design-start-sprint]
 transitions: [ready>in-progress@lane]
 on_merge: [in-progress>review@lane]
+sprint_run: story
+start_skill: design-start-sprint
+inbox: true
+approval: Brian approves the audit and the illustration system, selects every candidate, and approves each mark, token value and typeface
 ---
 # Role: VISUAL DESIGNER
 
