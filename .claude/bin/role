@@ -276,6 +276,69 @@ def put_role(root: Path, sid: str, role: str | None, pinned: bool = False) -> No
         pin_file(root, sid).write_text("coordinator\n")
 
 
+# ------------------------------------------------------------- session worktrees
+#
+# `/role <role>` moves a person's session into its own worktree (Claude Code's EnterWorktree, under
+# .claude/worktrees/), so Brian keeps working in the checkout he launched from. Not for `/role none`,
+# a cloud session (its own container already), or a coordinator lane (the coordinator made its worktree).
+WORKTREES = ".claude/worktrees"
+ROLE_WORKTREE_PREFIX = "role-"   # the coordinator's clean and handoff leave these alone
+
+
+def _common(root: Path) -> Path:
+    return state_dir(root).parent
+
+
+def main_root(root: Path) -> Path:
+    return _common(root).parent
+
+
+def in_linked_worktree(root: Path) -> bool:
+    try:
+        return Path(_git(root, "rev-parse", "--absolute-git-dir")).resolve() != _common(root).resolve()
+    except subprocess.CalledProcessError:
+        return False
+
+
+def _worktree_note(root: Path, sid: str) -> Path:
+    return state_dir(root) / ".worktree" / _check_session(sid)
+
+
+def session_worktree(root: Path, sid: str) -> Path | None:
+    """The worktree /role gave this session, if it still exists."""
+    f = _worktree_note(root, sid)
+    name = f.read_text().strip() if f.is_file() else ""
+    wt = main_root(root) / WORKTREES / name if name else None
+    return wt if wt and wt.is_dir() else None
+
+
+def exclude_worktrees(root: Path) -> None:
+    """Keep .claude/worktrees/ out of the main checkout's `git status` (and out of `git add .claude/`)."""
+    f = _common(root) / "info" / "exclude"
+    have = f.read_text().splitlines() if f.is_file() else []
+    if WORKTREES + "/" not in have:
+        f.parent.mkdir(parents=True, exist_ok=True)
+        f.write_text("\n".join(have + [WORKTREES + "/"]) + "\n")
+
+
+def worktree_line(root: Path, role: str, sid: str) -> str | None:
+    """What `role set` tells the session about its worktree, or None when it keeps its directory."""
+    if role == UNRESTRICTED or os.environ.get("COORDINATOR_LANE") \
+            or os.environ.get("CLAUDE_CODE_REMOTE", "").lower() in ("1", "true", "yes"):
+        return None
+    note = _worktree_note(root, sid)
+    note.parent.mkdir(parents=True, exist_ok=True)
+    if in_linked_worktree(root):
+        if root.resolve().parent == (main_root(root) / WORKTREES).resolve():
+            note.write_text(root.name + "\n")
+        return f"Worktree: this session already works in {root}"
+    name = ROLE_WORKTREE_PREFIX + role + "-" + re.sub(r"[^A-Za-z0-9._-]", "", sid)[:8]
+    note.write_text(name + "\n")
+    exclude_worktrees(root)
+    return (f"Worktree: {name} (enter it with EnterWorktree, name {name}, before any other step: "
+            f"Brian keeps the checkout this session started in)")
+
+
 def head_sha(root: Path) -> str | None:
     try:
         return _git(root, "rev-parse", "HEAD")
@@ -371,6 +434,9 @@ def cmd_set(args: list[str]) -> int:
         return 1
     prev = get_role(root, args[1])
     put_role(root, args[1], role)
+    wt = worktree_line(root, role, args[1])
+    if wt:
+        print(wt + "\n")
     if prev and prev != role:
         print(f"(role changed: {prev} -> {role})\n")
     print(charter(roles, role))
@@ -490,6 +556,11 @@ def hook_session_start(_: list[str]) -> int:
     role = get_role(root, sid) if SESSION_RE.match(sid) else None
     if role:
         # resume / compact / clear with a role already set: re-inject the charter.
+        wt = session_worktree(root, sid)
+        cwd = Path(data.get("cwd") or os.getcwd()).resolve()
+        if wt and not cwd.is_relative_to(wt.resolve()):
+            print(f"This session works in its own worktree: run EnterWorktree with path {wt} before "
+                  f"anything else, so Brian's checkout stays his.\n")
         print(charter(roles, role))
     else:
         print(
@@ -1699,6 +1770,37 @@ LANE_EXEC_FLAGS = {"make": {"--eval", "-E", "-f", "--file", "--makefile", "-C", 
                    "go": {"-exec", "--exec", "-toolexec", "--toolexec", "-overlay", "--overlay"}}
 
 
+# terraform in a lane: these subcommands with these options only. No backend (no state, no
+# credentials), no plan or apply, no module or plugin from elsewhere; `-chdir` stays in the worktree.
+# (`init` still downloads the providers the config names, and `validate` runs them: Brian's call.)
+LANE_TERRAFORM = {"version": {"-json"},
+                  "fmt": {"-check", "-diff", "-recursive", "-list=false", "-write=false", "-no-color"},
+                  "validate": {"-json", "-no-color"},
+                  "init": {"-backend=false", "-input=false", "-no-color", "-lockfile=readonly", "-upgrade"}}
+
+
+def _lane_terraform_problem(seg: list[str], where: Path) -> str | None:
+    if os.path.basename(seg[0]) != "terraform":
+        return None
+    args = seg[1:]
+    while args and args[0].startswith("-chdir="):
+        if _lane_file_problem(args[0].split("=", 1)[1], where):
+            return "a lane's terraform -chdir names a directory in its worktree"
+        args = args[1:]
+    verb = args[0] if args else ""
+    if verb not in LANE_TERRAFORM:
+        return f"terraform {verb or '(no subcommand)'} isn't a lane's (version, fmt, validate, init -backend=false)"
+    for a in args[1:]:
+        if a.startswith("-"):
+            if a not in LANE_TERRAFORM[verb]:
+                return f"terraform {verb} in a lane takes {', '.join(sorted(LANE_TERRAFORM[verb]))} only, not {a}"
+        elif verb != "fmt" or _lane_file_problem(a, where):
+            return f"terraform {verb} in a lane names no path but a directory in its worktree (fmt only)"
+    if verb == "init" and "-backend=false" not in args:
+        return "a lane runs terraform init only with -backend=false (no state backend, no credentials)"
+    return None
+
+
 def _lane_exec_flag_problem(seg: list[str]) -> str | None:
     tool = seg[0]
     if tool not in LANE_EXEC_FLAGS:
@@ -1848,7 +1950,7 @@ def lane_shell_problem(command: str, where: Path, sid: str = "") -> str | None:
     for seg in _simple_commands(command):
         if os.path.basename(seg[0]) in LANE_SHELL_BUILTINS:
             return f"a lane doesn't run the shell builtin {seg[0]!r}"
-        why = _lane_exec_flag_problem(seg)
+        why = _lane_exec_flag_problem(seg) or _lane_terraform_problem(seg, where)
         if why:
             return why
         why = _lane_reader_problem(seg, where) or _lane_cd_problem(seg, where)
