@@ -30,7 +30,8 @@ TEST_BRAND_TARGETS := $(addprefix test-brand-,$(BRANDS))
 $(TEST_BRAND_TARGETS): test-brand-%: install
 	npx --no-install vitest run --root brands/$*/components
 
-test-brand-valesordev: ## Run the Valesor component tests (vitest, offline, no secrets)
+# Components import the brand's generated outputs (tokens.css, dist/assets), so tests run on a fresh build.
+test-brand-valesordev: build-brand-valesordev ## Run the Valesor component tests (vitest, offline, no secrets)
 
 build-site-valesordev: build-brand-valesordev install ## Build sites/valesordev.com/dist/ (installs workspace packages first)
 	ASTRO_TELEMETRY_DISABLED=1 DO_NOT_TRACK=1 npm run build --workspace sites/valesordev.com
