@@ -4,6 +4,7 @@
 |---|---|
 | `target-homepage.png` | The v1 homepage target. Frozen. Evidence, not a spec: only what `visual-audit.md` classifies as core binds. |
 | `visual-audit.md` | The audit of the target. Brand docs and tokens cite this, never the image. |
+| `chatgpt-project.md` | The ChatGPT project instructions, rendered from `art-direction/illustration-system.md`. Never hand-edited. |
 
 ## Freeze record: `target-homepage.png`
 
