@@ -215,4 +215,4 @@ secondary `TextLink` home, `Footer`. `[DECIDED 2026-10-08]`
 Before a PR, ask the brief's questions: Does it look editorial or technical rather than commercial? Is the
 palette still ink, paper, and one accent? Are rules and type doing the layout? Was whitespace preserved? Did
 any gradient, shadow, or card appear? Does the copy say what the software is? Is Valesor an imprint? Is "I" used
-when a person is needed? Are source and license visible? The full checklist is `qa.md` (later story).
+when a person is needed? Are source and license visible? The full checklist is `../qa.md`.
