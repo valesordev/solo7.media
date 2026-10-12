@@ -88,8 +88,8 @@ Prefer:
 - `Open the repository ->`
 - `See how it works ->`
 - `View all projects ->`
-- `Return to the home page ->` `[PROPOSED 2026-10-11]` (S7M-VAL-018): the home link that ends a text page
-  (`/privacy`, the 404). The wording is the 404's (`#errors-empty-states-and-the-404`).
+- `Return to the home page ->` `[PROPOSED 2026-10-11]` (S7M-VAL-018): the home link that ends `/privacy`
+  (`visual-language.md#privacy-page-template`). The wording is the 404's (`#errors-empty-states-and-the-404`).
 
 The first seven are in the target or the brief. Others follow the same shape: a verb that is
 literally what the link does, then the object. New CTAs not on this list are proposed to visual-designer on the

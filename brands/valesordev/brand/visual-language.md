@@ -282,7 +282,8 @@ Built under FEAT-04. The text is Brian's and changes only with him (`CLAUDE.md` 
 - Text page: a `SectionRule`; one H1 in the display role ("Privacy"); a one-line subhead in `ink-muted` mono;
   then sections. Each section: a serif title in the column-title role, then mono body at a measure of at most 72
   characters. Left aligned to the content column. Section titles have no rule of their own: the page's one
-  `SectionRule` introduces the band, and space separates its sections (`#sectionrule`). `[PROPOSED 2026-10-11]`
+  `SectionRule` introduces the band, and space alone separates its sections: `space.l` above each section title
+  (`#sectionrule`). `[PROPOSED 2026-10-11]`
 - Lists use plain bullets in body type. No tables, no callouts, no accordions, no icons, no checkmarks.
 - Links in the text are underlined `ink`, no arrow. The page ends with a secondary `TextLink` to the home page,
   reading "Return to the home page ->" (`voice.md#cta-vocabulary`). `[PROPOSED 2026-10-11]`
