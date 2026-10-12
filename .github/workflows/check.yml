@@ -1,0 +1,37 @@
+# PR gate (CLAUDE.md §8): runs `make check` and nothing else (§9).
+#
+# It needs no secrets, so it runs on every PR, forks and Dependabot included.
+# There is no skip gate and no path filter on purpose: a skipped job reports
+# success, so a required check would pass a broken build. The job name `check`
+# is the status check Brian makes required; keep it stable.
+name: check
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: check-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: make check
+        run: make check
