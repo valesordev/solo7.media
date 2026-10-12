@@ -4,22 +4,35 @@
 
 BRANDS := valesordev system9studios solo7productions solo7media bashburn
 
-.PHONY: help check check-layout build-site-valesordev bootstrap-site-valesordev preview-site-valesordev verify-preview-valesordev legacy-solo7-media
+.PHONY: help check check-layout install build-site-valesordev bootstrap-site-valesordev preview-site-valesordev verify-preview-valesordev legacy-solo7-media
 
 help: ## List targets
 	@grep -hE '^[a-zA-Z0-9_%-]+:.*## ' $(MAKEFILE_LIST) | sort | \
 	  awk 'BEGIN {FS = ":.*## "} {printf "  %-22s %s\n", $$1, $$2}'
 
-check: check-layout ## PR gate: layout checks and site builds; lint and tests are added per site in R1
-	@if [ -d sites/valesordev.com ]; then $(MAKE) build-site-valesordev; fi
+# Brands with at least one component get their tests in `make check` (ADR 0001 §8). The predicate is the
+# .astro files, not the vitest config, so a brand with components and no config or no tests fails the gate.
+TEST_BRANDS := $(foreach b,$(BRANDS),$(if $(wildcard brands/$(b)/components/*.astro),$(b)))
+
+check: check-layout $(addprefix test-brand-,$(TEST_BRANDS)) $(if $(wildcard sites/valesordev.com),build-site-valesordev) ## PR gate: layout checks, brand component tests, site builds
 
 check-layout: ## Every brand has its folder and README; package.json parses
 	@for b in $(BRANDS); do test -f brands/$$b/README.md || { echo "missing brands/$$b/README.md"; exit 1; }; done
 	@node -e 'JSON.parse(require("fs").readFileSync("package.json"))'
 	@echo "layout ok"
 
-build-site-valesordev: build-brand-valesordev ## Build sites/valesordev.com/dist/ (installs workspace packages first)
+install: ## Install workspace packages from the lockfile (npm ci)
 	npm ci
+
+# One rule for every brand; `make check` runs only the brands in TEST_BRANDS. passWithNoTests is never set.
+TEST_BRAND_TARGETS := $(addprefix test-brand-,$(BRANDS))
+.PHONY: $(TEST_BRAND_TARGETS)
+$(TEST_BRAND_TARGETS): test-brand-%: install
+	npx --no-install vitest run --root brands/$*/components
+
+test-brand-valesordev: ## Run the Valesor component tests (vitest, offline, no secrets)
+
+build-site-valesordev: build-brand-valesordev install ## Build sites/valesordev.com/dist/ (installs workspace packages first)
 	ASTRO_TELEMETRY_DISABLED=1 DO_NOT_TRACK=1 npm run build --workspace sites/valesordev.com
 
 # Preview deploy (ADR-0001 §4). PREVIEW_ALIAS names the preview (CI passes pr-<number>).
