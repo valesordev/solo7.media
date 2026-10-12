@@ -20,9 +20,10 @@ that slot's prompt (`/art-slot`), never here.
   low ridge, sparse scrub)
 - **Wind-shaped juniper:** the hero slot's subject only. It is not a recurring motif, and no other composition
   uses it. `[DECIDED 2026-10-08]` (audit Decisions item 11: "the juniper subject belongs to the hero slot only")
-- **Large moon:** a candidate motif only, not a mark. A slot uses it only when its spec says so and names it as a
-  test of the motif. It becomes part of this system (or a mark) only by a revision Brian approves after a second
-  composition has used it. `[DECIDED 2026-10-08]` (audit Decisions item 11)
+- **Large moon:** a candidate motif only, not a mark, until a second composition uses it. `[DECIDED 2026-10-08]`
+  (audit Decisions item 11). A slot uses it only when its spec says so and names it as a test of the motif, and it
+  becomes part of this system (or a mark) only by a revision Brian approves. `[PROPOSED]` Reason: keeps the motif
+  test explicit, so it doesn't spread by habit. Rejected: free use in any slot until promoted.
 - **Never:** people or figures, animals, buildings, roads, vehicles, machines, screens, circuitry, or any literal
   picture of software. The land is the subject; the software is in the type beside it. `[PROPOSED]` Reason: the
   brief's "Not Valesor" list rules out cyberpunk and glossy product renders, and a monograph plate shows terrain,
@@ -34,7 +35,7 @@ Pen-and-ink survey or engraving line: heavy contours, fine hatching and cross-ha
 texture and distance. `[DECIDED 2026-10-08]` (audit: Illustration language; `visual-language.md#illustration`)
 
 - Every value is made by line density, never by tone. No grey wash, no airbrush, no blended shading.
-  `[DECIDED 2026-10-08]`
+  `[DECIDED 2026-10-08]` (audit: Illustration language)
 - Detail is concentrated in the subject mass and thins toward its edges, so the plate dissolves into the paper
   rather than stopping at a frame. `[PROPOSED]` Reason: the target's ragged bottom edge and open sky
   (audit: Composition, core). Rejected: a ruled plate border (a box, which `visual-language.md#layout` forbids).
@@ -90,7 +91,9 @@ Rules for every composition type:
   the kit's fonts, never generated. `[DECIDED 2026-10-08]` (`visual-language.md#illustration`;
   `.claude/roles/visual-designer.md`)
 - **Edges:** the terrain runs off both side edges (full-bleed). The bottom edge is ragged, the drawing thinning
-  out into paper, never a straight cut or a frame. `[DECIDED 2026-10-08]` (audit: Composition, core)
+  out into paper, never a straight cut or a frame. `[DECIDED 2026-10-08]` for `hero-wide` (audit: Composition,
+  core; `visual-language.md#hero`); `[PROPOSED]` as the rule for every type. Reason: a boxed plate is the box
+  `visual-language.md#layout` forbids. Rejected: deciding edges per type (it invites a framed variant).
 - **Horizon and scale:** a low eye level; one near subject mass rising from the bottom edge, with land falling
   away behind it to distant ranges. `[PROPOSED]` Reason: the target's structure, and it keeps the upper part of
   the frame empty for type. Rejected: an aerial or map view (it fills the whole frame).
@@ -131,14 +134,19 @@ Parameters (threshold level, speck size) are set in each slot's build rule, not 
 
 ## Exclusions
 Always: no text, lettering, numbers, logos, watermarks, signatures, or UI; no named artists, studios, or
-franchises; no real people or real organisations' marks. `[DECIDED 2026-10-08]` (role rules)
+franchises; no real organisations' marks. `[DECIDED 2026-10-08]` (`.claude/roles/visual-designer.md`, rules for
+generated art). No real people. `[PROPOSED]` Reason: a likeness is the same risk as a mark, and the subject rule
+already has no figures. Rejected: leaving it to the subject rule alone.
 
 Valesor-specific: `[DECIDED 2026-10-08]` (`foundation.md#not-valesor`) unless marked
-- no gradient, glow, colour, or grey wash
-- no glossy or 3D-rendered look, no photographic texture
-- no cyberpunk or technology imagery
+- no gradient, colour, or grey wash
+- no glossy product-render look
+- no cyberpunk
 - no decorative Norse motifs: knotwork, runes, longships, dragon heads
 - no paper texture, grain, or aged-paper tint (the page has none; `foundation.md#not-valesor`)
+- no glow, no 3D-rendered or photographic look, no technology imagery. `[PROPOSED]` Reason: the generator's usual
+  ways to reach "glossy" and "cyberpunk" without the words, and a plate shows terrain, not a product (see
+  Subject matter). Rejected: relying on the two named exclusions alone.
 - no Andara's World imagery: Valesor makes tools for that world; its look is System 9's (`foundation.md#brand-family-boundary`). `[PROPOSED]`
 
 Sibling imprints: none has an illustration system yet. Each sibling's first `/art-direction` checks itself against
