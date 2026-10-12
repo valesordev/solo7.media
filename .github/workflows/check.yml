@@ -2,21 +2,23 @@
 #
 # It needs no secrets, so it runs on every PR, forks and Dependabot included.
 # There is no skip gate and no path filter on purpose: a skipped job reports
-# success, so a required check would pass a broken build. The job name `check`
-# is the status check Brian makes required; keep it stable.
+# success, so a required check would pass a broken build. No base-branch
+# filter either: a stacked PR retargeted to main fires only `edited`, so it
+# would wait forever on a required check it never ran. The job name `check` is
+# the status check Brian makes required; keep it stable.
 name: check
 
 on:
   pull_request:
-    branches: [main]
   push:
     branches: [main]
 
 permissions:
   contents: read
 
+# PRs cancel superseded runs; each push to main keeps its own run and verdict.
 concurrency:
-  group: check-${{ github.event.pull_request.number || github.ref }}
+  group: check-${{ github.event.pull_request.number || github.sha }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
