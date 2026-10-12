@@ -1,0 +1,68 @@
+---
+// SectionRule (visual-language.md#sectionrule, usage.md#sectionrule). A full-column 1px rule, with an optional
+// serif section title at left and an optional primary TextLink at right. With neither, it is the rule alone.
+import TextLink from './TextLink.astro';
+
+interface Props {
+  title?: string;
+  level?: 2 | 3;
+  link?: { href: string; text: string };
+}
+
+const { title, level = 2, link } = Astro.props;
+const Heading = level === 3 ? 'h3' : 'h2';
+---
+
+<div class="section-rule">
+  {
+    (title || link) && (
+      <div class="content">
+        {title && <Heading class="title">{title}</Heading>}
+        {link && (
+          <TextLink href={link.href} variant="primary">
+            {link.text}
+          </TextLink>
+        )}
+      </div>
+    )
+  }
+</div>
+
+<style>
+  .section-rule {
+    border-block-start: var(--line-rule-width) solid var(--color-rule);
+  }
+
+  /* Narrow (visual-language.md#narrow-layout-mobile, item 4): title above link, both left aligned. */
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-block-start: var(--space-2xs);
+  }
+
+  .title {
+    margin: 0;
+    font-family: var(--type-section-family);
+    font-size: var(--type-section-size);
+    font-weight: normal;
+    line-height: var(--type-section-line-height);
+    letter-spacing: var(--type-section-tracking);
+    color: var(--color-ink);
+  }
+
+  /* 48rem is layout.breakpoint-wide: media queries can't read custom properties (tokens/tokens.json). */
+  @media (min-width: 48rem) {
+    .content {
+      flex-direction: row;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: var(--space-m);
+    }
+
+    /* A link without a title still sits at right. */
+    .content > :global(.text-link) {
+      margin-inline-start: auto;
+    }
+  }
+</style>
