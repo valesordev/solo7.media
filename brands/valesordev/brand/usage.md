@@ -58,7 +58,8 @@ gradients, shadows, marketing copy, decorative diagrams, or additional illustrat
 - A rule above every band, including the footer.
 
 **Incorrect**
-- A heading with no rule above it.
+- A band heading with no rule above it. (A text page's section titles sit inside its one band and take no rule
+  of their own, `visual-language.md#sectionrule`.) `[PROPOSED 2026-10-11]`
 - A filled bar, band, or tinted section background.
 - A kicker or number above the title ("01 / Projects").
 - A right link that isn't an action, or two links on the right.

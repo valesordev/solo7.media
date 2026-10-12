@@ -77,8 +77,9 @@ Status marks as in `foundation.md`. An item with no mark restates a `[DECIDED]` 
     lighter, or vermilion rule? (`visual-language.md#layout`, `visual-language.md#color` Not roles,
     `usage.md#sectionrule`)
 19. Does every band open with a rule (a rule, space, content, a rule), including the footer, and is there no
-    heading without a rule above it? (`visual-language.md#layout`, `visual-language.md#sectionrule`,
-    `usage.md#sectionrule`, `visual-language.md#footer`)
+    band heading without a rule above it? A text page's section titles sit inside its one band and have no rule
+    of their own. (`visual-language.md#layout`, `visual-language.md#sectionrule`, `usage.md#sectionrule`,
+    `visual-language.md#footer`, `visual-language.md#privacy-page-template`) `[PROPOSED 2026-10-11]`
 20. Are rules and type doing the layout: no box, border other than a hairline rule, fill, radius, or shadow?
     (`visual-language.md#layout`, `foundation.md#what-the-brand-is-made-of` item 4)
 21. Is whitespace left empty rather than filled, with the largest space above the H1 and between bands?
