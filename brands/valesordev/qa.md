@@ -77,8 +77,10 @@ Status marks as in `foundation.md`. An item with no mark restates a `[DECIDED]` 
     lighter, or vermilion rule? (`visual-language.md#layout`, `visual-language.md#color` Not roles,
     `usage.md#sectionrule`)
 19. Does every band open with a rule (a rule, space, content, a rule), including the footer, and is there no
-    heading without a rule above it? (`visual-language.md#layout`, `visual-language.md#sectionrule`,
+    band heading without a rule above it? (`visual-language.md#layout`, `visual-language.md#sectionrule`,
     `usage.md#sectionrule`, `visual-language.md#footer`)
+    `[PROPOSED]` pending Brian (PR #79): "band heading" restates a `[PROPOSED 2026-10-11]` rule; until it is
+    decided, a heading inside a band with no rule above it is reported, not failed.
 20. Are rules and type doing the layout: no box, border other than a hairline rule, fill, radius, or shadow?
     (`visual-language.md#layout`, `foundation.md#what-the-brand-is-made-of` item 4)
 21. Is whitespace left empty rather than filled, with the largest space above the H1 and between bands?
@@ -183,13 +185,18 @@ Status marks as in `foundation.md`. An item with no mark restates a `[DECIDED]` 
 For `/privacy` only. The text is Brian's (`CLAUDE.md` §7); these items check the frame, never the wording of a claim.
 
 54. Is it `BrandHeader`, a `SectionRule`, the H1 "Privacy" in the display role, a one-line `ink-muted` mono
-    subhead, titled sections (serif column-title role, mono body at most 72 characters), and `Footer`?
-    (`visual-language.md#privacy-page-template`, `usage.md#privacy-page`)
+    subhead, titled sections (serif column-title role, mono body at most 72 characters), and `Footer`? Do the
+    section titles have no rule of their own, with space alone, `space.l`, above each section title?
+    (`visual-language.md#privacy-page-template`, `visual-language.md#sectionrule`, `usage.md#privacy-page`)
+    `[PROPOSED]` pending Brian (PR #79): the section-title question restates a `[PROPOSED 2026-10-11]` rule;
+    until it is decided, a "no" is reported, not failed.
 55. Is it free of a hero, illustration, cookie banner, consent dialog, "manage preferences" control, table,
     accordion, callout, icon, and checkmark list, with lists as plain bullets in body type?
     (`visual-language.md#privacy-page-template`, `usage.md#privacy-page`)
-56. Are links in the text underlined `ink` with no arrow, and does the page end with a secondary `TextLink` home?
-    (`visual-language.md#privacy-page-template`)
+56. Are links in the text underlined `ink` with no arrow, and does the page end with a secondary `TextLink` home
+    reading "Return to the home page ->"? (`visual-language.md#privacy-page-template`, `voice.md#cta-vocabulary`)
+    `[PROPOSED]` pending Brian (PR #79): the wording restates a `[PROPOSED 2026-10-11]` rule; until it is
+    decided, other wording is reported, not failed.
 57. Does the first screen state what is and isn't measured, as the text provides, with the look adding no claim
     of its own? (`visual-language.md#privacy-page-template`, `usage.md#privacy-page`)
 58. Is the Privacy link in the footer of every page? (`usage.md#footer`)

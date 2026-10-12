@@ -189,7 +189,10 @@ Rules the audit doesn't state (counts, markup, limits, data format) are decided 
 
 - A full-column 1px `rule`, with optional content under it: a serif section title at left and a right aligned
   `TextLink` (the target: "Projects" and "View all projects ->").
-- A rule introduces every band; there is no heading without a rule above it.
+- A rule introduces every band; there is no band heading without a rule above it. A heading inside a band (a
+  text page's section titles, `#privacy-page-template`) sits under the band's rule and takes none of its own.
+  `[PROPOSED 2026-10-11]` (S7M-VAL-018) Reason: a text page is one band; a rule per section would cut the
+  reading text into bands. Rejected: a rule above every section title.
 - The right link, if present, is a primary `TextLink` and says where it goes.
 - No fill, no icon, no number, no kicker above the title.
 - Tokens: `rule`, `ink`, `accent`, section title role.
@@ -278,9 +281,12 @@ Built under FEAT-04. The text is Brian's and changes only with him (`CLAUDE.md` 
 - The standard frame: `BrandHeader`, then a text page, then `Footer`. No hero, no illustration.
 - Text page: a `SectionRule`; one H1 in the display role ("Privacy"); a one-line subhead in `ink-muted` mono;
   then sections. Each section: a serif title in the column-title role, then mono body at a measure of at most 72
-  characters. Left aligned to the content column.
+  characters. Left aligned to the content column. Section titles have no rule of their own: the page's one
+  `SectionRule` introduces the band, and space alone separates its sections: `space.l` above each section title
+  (`#sectionrule`). `[PROPOSED 2026-10-11]`
 - Lists use plain bullets in body type. No tables, no callouts, no accordions, no icons, no checkmarks.
-- Links in the text are underlined `ink`, no arrow. The page ends with a secondary `TextLink` to the home page.
+- Links in the text are underlined `ink`, no arrow. The page ends with a secondary `TextLink` to the home page,
+  reading "Return to the home page ->" (`voice.md#cta-vocabulary`). `[PROPOSED 2026-10-11]`
 - The page states in its first screen what is and isn't measured, as the text provides. The look makes no claim
   of its own.
 - Reads fully with JavaScript off, at both layouts.
