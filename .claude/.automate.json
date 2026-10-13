@@ -1,5 +1,5 @@
 {
-  "source": "automate.valesordev.com@ba5a5b8",
+  "source": "automate.valesordev.com@c70e318",
   "target": "solo7-media",
   "files": {
     ".claude/skills/arch-start-sprint/SKILL.md": "c8129dce9e5c851c6867342d7d93d89271e796886b0dbb7136f97fb73c92564d",
@@ -56,7 +56,7 @@
     ".claude/skills/sre-start-sprint/SKILL.md": "2c283eeee7463780086ec84320437f43db9a19efb77c65ffdae361cd31605456",
     ".claude/skills/sre-start-sprint/references/examples.md": "a22df600f0c3f11a3fc70c435de07f18d9837e4cc6d3fe440758bd31d28e62c2",
     ".claude/bin/codex-review": "db19ad0a18de9e34fc9228db167218b9973aa5d099fb3e4236eae4910e6368f5",
-    ".claude/bin/coordinator": "b4e8316fd1eb8e7ca0abc6b8cee6e1bda018ea017ab1ae5b20e4e148b5d26439",
+    ".claude/bin/coordinator": "e39187bea531adbed279b9accba0b573614339ddb02699ddab90e7c310d4b491",
     ".claude/bin/project-mirror": "5afd8e1e543d2244d4f7cb2f08083e516e29ebadb01e4dbfbe73bb9647a9c011",
     ".claude/bin/role": "a7b82fd1237b5b71c5188d6843b69d8f0a0e27d20889f89d4c1d045c047f9954",
     ".claude/bin/sprint-state": "db86f12d2c60c0bf39502d28242969b746682212e518dc07528ffff7954c8d6f",
@@ -66,7 +66,7 @@
     ".claude/roles/architecture.md": "66eb058d76d49690cecc92e9c74f6c12d133cfba2116a4f8208a1e227811499f",
     ".claude/roles/implementation.md": "b8d568ec1c71073d303cf6012cf8ac28ad782fe9f0592bc1377382e4376e2239",
     ".claude/roles/pm.md": "c58184d3d1d37c1627336fd33e97a3b36b9a742cabeb517331121c4d2f34dad6",
-    ".claude/roles/product.md": "631a8f16b7a77b7ce56ede1e48013c272544b9013a35397e9e58ad0021b016a1",
+    ".claude/roles/product.md": "aa2610112bde08260426f92aa70a9dc7ac7cf27b5d6247293089d4fafd441ef3",
     ".claude/roles/sre.md": "d3960e01259031b62abb7c20399dbf2550f54a4ceb3e603f9808257bf7d1c349",
     ".claude/roles/visual-designer.md": "140f5ff540864fb0da0d79ddb67cae7f19d71c73a3bf7d7bb946dbe992a23ae2"
   },
