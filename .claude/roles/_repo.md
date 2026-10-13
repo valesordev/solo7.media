@@ -12,7 +12,7 @@ Repo-wide role config for the solo7.media monorepo. It holds the brand kits
 and the sites for the four imprints and the blog. `generated` paths are never
 edited by hand in any role: `make` builds `brands/<slug>/dist/` from tokens and
 asset sources, and each site's `dist/` and `.astro/`; `npm install` writes
-`package-lock.json`. Paths not in a role's `writes` need Brian's approval
+`package-lock.json`. Paths not in a role's `writes` need the owner's approval
 (`CLAUDE.md`, `README.md`, `.gitignore`, `.claude/`).
 
 | Brand (`brands/<slug>/`) | Site (`sites/<domain>/`) | Design target |
@@ -29,7 +29,7 @@ Each Notion page is the brief for its brand. Its homepage image is frozen into
 
 Roles: `product` owns what each site is for and what each release ships.
 `pm` runs sprints on the board. `architecture` decides structure and reviews
-contracts. `visual-designer` owns every brand decision Brian approves.
+contracts. `visual-designer` owns every brand decision the owner approves.
 `implementation` builds components and sites. `sre` owns the build, CI,
 Cloudflare, DNS, and Faro. Run one role per session (`/clear` before
 switching).
@@ -41,7 +41,7 @@ section it implements, `brands/<slug>/brand/<file>.md#<section>`, in its
 contract. Architecture doesn't move it to `ready` without that citation. When
 a build hits something the brand docs don't decide, the builder asks with
 `story comment <ID> --to visual-designer` and moves on. The answer is a brand
-doc change Brian approves, never a value chosen in a component.
+doc change the owner approves, never a value chosen in a component.
 
 ## Stories and sprints
 Stories (`S7M-<comp>-NNN`), epics (`EPIC-NN`), and sprints
