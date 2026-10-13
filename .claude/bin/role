@@ -664,7 +664,17 @@ def lane_read_problem(tool: str, ti: dict, cwd: Path, sid: str = "") -> str | No
     return None
 
 
-def hook_pre_tool_use(_: list[str]) -> int:
+def _vendored_copy_in_lane(args: list[str]) -> bool:
+    """In a lane the coordinator runs these hooks from its run directory (`--settings`), copied from
+    the main checkout. The worktree's vendored copy (`--project`, from .claude/settings.json) is the
+    branch's own, which is older on a branch cut before a fix, and a deny from either one wins: a
+    branch from before `git rebase origin/main` was allowed could never catch up. So it steps aside."""
+    return "--project" in args and bool(os.environ.get("COORDINATOR_LANE"))
+
+
+def hook_pre_tool_use(args: list[str]) -> int:
+    if _vendored_copy_in_lane(args):
+        return 0
     data = _hook_input()
     if os.environ.get("COORDINATOR_LANE") and not data:
         return _decision("deny", "coordinator lane: the hook's input couldn't be read; failing closed")
@@ -2164,7 +2174,9 @@ def lane_edit_problem(path: Path, cwd: Path) -> str | None:
     return None
 
 
-def hook_pre_bash(_: list[str]) -> int:
+def hook_pre_bash(args: list[str]) -> int:
+    if _vendored_copy_in_lane(args):
+        return 0
     data = _hook_input()
     command = (data.get("tool_input") or {}).get("command") or ""
     cwd = Path(data.get("cwd") or os.getcwd())
