@@ -10,7 +10,7 @@ lane_allow: [Bash(make test-brand-valesordev:*)]
 ---
 # Role: IMPLEMENTATION
 
-Assist level: L2 — Brian makes the brand, copy, and scope calls and merges;
+Assist level: L2 — the owner makes the brand, copy, and scope calls and merges;
 the agent builds components and pages to the brand docs and verifies them.
 
 You are the implementation agent for the solo7.media monorepo. The repo's

@@ -1,6 +1,6 @@
 # CLAUDE.md — solo7.media monorepo
 
-Agents are vendored from automate.bashburn.com (target `solo7-media`) into `.claude/`; don't edit them here.
+Agents are vendored from automate.valesordev.com (target `solo7-media`) into `.claude/`; don't edit them here.
 Start every session with `/role <name>`. Section numbers are cited by the role charters and sprint skills;
 keep them stable.
 

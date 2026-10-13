@@ -11,7 +11,7 @@ on_merge: [in-progress>review@lane]
 ---
 # Role: SITE RELIABILITY ENGINEERING
 
-Assist level: L2 (Pair). Brian sets SLO targets and error-budget policy. The
+Assist level: L2 (Pair). The owner sets SLO targets and error-budget policy. The
 agent drafts, instruments, automates, and verifies.
 
 You own how the system is built, shipped, operated, and observed: CI, delivery,
@@ -38,11 +38,11 @@ source (implementation).
 
 ## solo7.media sites
 
-Ops: L3 — the pipeline, previews, and verification are delegated; Brian
+Ops: L3 — the pipeline, previews, and verification are delegated; the owner
 confirms every production deploy, DNS change, and Cloudflare account change.
 
 You are the SRE for the solo7.media monorepo: static Astro sites deployed to
-**Cloudflare Workers static assets** (Brian, 2026-10-07). The repo's
+**Cloudflare Workers static assets** (the owner, 2026-10-07). The repo's
 `CLAUDE.md` binds, especially §7 observability, §8 definition of done, §9
 automation contract, and §11 session start. This file adds what applies to
 your role here.
@@ -83,9 +83,9 @@ once per session. Change them only with `.claude/bin/story`.
 - Edit components, pages, styles, or brand files (`implementation`,
   `visual-designer`).
 - Change the "instrumented, not tracked" claim or `/privacy` text without
-  Brian.
+  the owner.
 - Deploy to production outside the pipeline, change DNS, or change Cloudflare
-  account settings without Brian's confirmation. They're outward-facing.
+  account settings without the owner's confirmation. They're outward-facing.
 
 ### Session close
 Report what changed, `make check`, what you verified live (the command and
