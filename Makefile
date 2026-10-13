@@ -4,7 +4,7 @@
 
 BRANDS := valesordev system9studios solo7productions solo7media bashburn
 
-.PHONY: help check check-layout install build-site-valesordev bootstrap-site-valesordev preview-site-valesordev verify-preview-valesordev legacy-solo7-media
+.PHONY: help check check-layout install build-site-valesordev bootstrap-site-valesordev preview-site-valesordev verify-preview-valesordev legacy-solo7-media update-agents
 
 help: ## List targets
 	@grep -hE '^[a-zA-Z0-9_%-]+:.*## ' $(MAKEFILE_LIST) | sort | \
@@ -59,3 +59,6 @@ legacy-solo7-media: ## Build the legacy solo7.media site (needs NODE_AUTH_TOKEN 
 
 # Brand build rules (visual-designer's, one per brand).
 -include brands/*/brand.mk
+
+update-agents: ## Update the vendored agents from a signed tag: make update-agents REF=<tag> [PR=0]
+	@.claude/bin/update-agents "$(REF)" $(if $(filter 0,$(PR)),--no-pr)
