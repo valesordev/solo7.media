@@ -1,5 +1,5 @@
 {
-  "source": "automate.bashburn.com@b7839f5",
+  "source": "automate.bashburn.com@419ec8a",
   "target": "solo7-media",
   "files": {
     ".claude/skills/arch-start-sprint/SKILL.md": "94489be54f36d507c373fa734901625e137da6ae00f8d9c258c3513ce2914640",
@@ -58,7 +58,7 @@
     ".claude/bin/codex-review": "930010419f491dc660ab5a69f2454221102108e8926645de74b258e9ab019007",
     ".claude/bin/coordinator": "53588e756e1a6f9c4760694307929528b7e13d0b9c29666e86eb7eabcbbf4f98",
     ".claude/bin/project-mirror": "a0c7c9689f2a98b0ab07b20ff60e41e0686a2a6a876bc941fb79f91012362c59",
-    ".claude/bin/role": "419f2e21593dcb01236a9c2449f9b8b0b1feddb33711398546bc91d2cf0e9d9a",
+    ".claude/bin/role": "4c2027fa0a83588b5cc5e4435da0a415c0fa296bfc2ee74a435090dbe23dd9e8",
     ".claude/bin/sprint-state": "6a8ae9cff5eb3f2a56255efaf542b27a9e7a4dc7a394eb6c58e1723402b14dfc",
     ".claude/bin/story": "69bb9ed618c0ec4cf7e2dded526ad6d011c7643aef5491982307067c2a7b70ee",
     ".github/workflows/story-merge.yml": "f6ac9f521771067aec73a5ee65c7b02527b988dbb761fb4e8ec5dd488bfd163d",
@@ -71,8 +71,8 @@
     ".claude/roles/visual-designer.md": "1531595a815beea98b79149a345404894c0f1f4e62bf32b3469be3ceeea0868b"
   },
   "hook_commands": [
-    "python3 \"${CLAUDE_PROJECT_DIR}/.claude/bin/role\" hook-pre-bash",
-    "python3 \"${CLAUDE_PROJECT_DIR}/.claude/bin/role\" hook-pre-tool-use",
+    "python3 \"${CLAUDE_PROJECT_DIR}/.claude/bin/role\" hook-pre-bash --project",
+    "python3 \"${CLAUDE_PROJECT_DIR}/.claude/bin/role\" hook-pre-tool-use --project",
     "python3 \"${CLAUDE_PROJECT_DIR}/.claude/bin/role\" hook-session-start"
   ],
   "settings": {
