@@ -165,6 +165,40 @@ picked one, and nothing in the gate would have run the tests.
   the tests. A throwaway spike on Astro 5.18.2 and Vitest 3.2.7, with a test component placed
   in `brands/valesordev/components/` and then removed, rendered and passed with this layout.
 
+### 9. Rendered QA screenshots: specimens in a second Astro source root, Playwright, `qa-shots-<slug>`
+Added 2026-10-14 (Brian, in the SPRINT-02 contract review of S7M-INF-008, issue #90). `/brand-qa` (§8 of
+`CLAUDE.md`, item 3) judges the rendered page, and `qa.md` forbids judging from source. Component stories
+reach `review` before any route uses their components. Before this decision, the only way to render one was a
+hand-written specimen in `src/pages/`, and that would have shipped.
+
+- **Specimens:** `sites/<domain>/specimens/pages/<Name>.astro`, one file per component (or per group the story
+  names), built by a second config, `sites/<domain>/astro.specimens.config.mjs`, with `srcDir: './specimens'` and
+  `outDir` in the QA output directory below. Both belong to implementation, like the site. Each component story
+  adds the specimen for its components. Specimens follow the page rules in §2: they use the site's base layout
+  (so tokens load once, as in production), compose brand components through the package's `exports`, pass
+  content in as props, and carry no color, font, or spacing literal. They sit under `specimens/pages/` because
+  Astro reads routes from `<srcDir>/pages/`.
+- **Why a second root and not the Container API:** a specimen goes through the same Astro build as production,
+  with the same CSS bundling, so the screenshot shows what a visitor would see. `renderToString` (§8) is right for
+  markup tests and wrong for a look check.
+- **The production build never reads `specimens/`:** `astro.config.mjs` keeps the default `srcDir` (`./src`), and
+  §7 still holds (`src/pages/` is routes only). `make build-site-<slug>` emits no specimen route or file.
+- **Browser:** Playwright, a root `devDependency` pinned **exactly** (`1.63.0`; no range), so the lockfile also pins
+  the Chromium build it drives. A system browser isn't locked, so it drifts with OS updates and screenshots
+  differ between machines. The browser binary is downloaded once to the user cache, not into the repo, by an
+  sre `make` target (`qa-browser-install`, the only step that needs network). After that, `qa-shots-<slug>` runs
+  offline and without secrets. It fails with a message naming that target when the browser is missing. A version
+  bump is a PR that changes this pin, and its author re-shoots any page under review.
+- **Output:** `dist/qa/<slug>/` at the repo root, which the existing `dist/` line in `.gitignore` already
+  covers, so no `.gitignore` change is needed. It is never under `sites/*/dist/` (which `wrangler.jsonc`
+  deploys) or `brands/*/dist/` (which a site imports). The specimen build writes to `dist/qa/<slug>/specimens/`.
+- **Target:** `qa-shots-<slug>` (the name is fixed here; the recipe and its script under `scripts/` are sre's).
+  It depends on `build-site-<slug>` and serves each output over `http://localhost`, not `file://`, so root-relative
+  assets and trailing-slash URLs (§3) resolve the way they do on Cloudflare. It is not part of `make check`,
+  because it takes screenshots and judges nothing. `/brand-qa` reads its output.
+- **Not decided here:** widths, theme, and which states are captured. Those come from the brand's `qa.md`
+  ("How to run it"), and the story that adds a brand's target cites them.
+
 ## Open for the builder
 Astro compiling `.astro` files from a linked workspace package may need config (for example
 `vite.ssr.noExternal`). The skeleton story proves it in its build and records what was needed here by amendment.
@@ -214,3 +248,6 @@ Astro compiling `.astro` files from a linked workspace package may need config (
 8. **Site-specific `/privacy` page (implementation), after the brand docs cite its template.** FEAT-04.
 9. **`test-brand-<slug>` in `make check` (sre), decision 8.** The first brand to need it is `valesordev`
    (S7M-VAL-015 sets up its harness).
+10. **`qa-shots-<slug>` and `qa-browser-install` (sre), decision 9:** S7M-INF-008 for `valesordev`. Each
+    component story then adds its specimen under `sites/<domain>/specimens/pages/` (implementation); the first one
+    also adds `astro.specimens.config.mjs`.
