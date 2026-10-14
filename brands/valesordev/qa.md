@@ -3,7 +3,7 @@
 **Status:** approved 2026-10-14 (S7M-VAL-009: PR #72, approved 2026-10-12; its open marks decided by Brian
 2026-10-14, "agree" on the story)
 **Sources:** brand/foundation.md, brand/visual-language.md, brand/usage.md, brand/voice.md, tokens/tokens.json,
-tokens/README.md, all @ 26d2d0e, with the 2026-10-14 decisions
+tokens/README.md, as amended by S7M-VAL-009 (2026-10-14)
 
 The checklist `/brand-qa valesordev` runs, and the visual check of `CLAUDE.md` §8 item 3. Every item is a yes/no
 question answered by looking at the rendered page (or, for the token check, its component and site style source), and each names the
@@ -93,8 +93,8 @@ section it cites. No item is `[PROPOSED]`.
     At both widths: is there no scrim, overlay, or gradient behind any type? (`visual-language.md#hero`,
     `visual-language.md#illustration`, `usage.md#hero`)
 24. Is there exactly one H1, a mono blurb, and exactly one vermilion CTA? Wide: is the subhead a single line and
-    the blurb at most two short lines? At mobile width, do the subhead and blurb wrap in their own roles, with no
-    other type size? (`visual-language.md#hero`) `[DECIDED 2026-10-14]`
+    the blurb at most two short lines? At mobile width, are the subhead and blurb in their own roles, wrapping as
+    needed, with no other type size? (`visual-language.md#hero`) `[DECIDED 2026-10-14]`
 25. Wide: is the type left aligned to the content column, in the left part of the frame?
     (`visual-language.md#hero`)
 26. Does the illustration run full-bleed, its bottom edge ragged, sitting just above the rule beneath?
@@ -231,7 +231,7 @@ For `/privacy` only. The text is Brian's (`CLAUDE.md` §7); these items check th
 
 ## Tokens
 71. **No off-token values:** do the components under `brands/valesordev/components/` (when it exists), the styles under
-    `sites/valesordev.com/src/`, and the component specimens under `sites/valesordev.com/specimens/` (ADR 0001 §9)
+    `sites/valesordev.com/src/`, and the component specimens under `sites/valesordev.com/specimens/` (when it exists, ADR 0001 §9)
     reference tokens only, with no literal colour (hex, `rgb()`, `hsl()`, named
     colour), font family name, or spacing value? Scan source, not the built bundle: the bundle carries the token
     package's own `--*` definitions and `@font-face` blocks, which are the tokens, not uses of them. The one
@@ -245,10 +245,10 @@ For `/privacy` only. The text is Brian's (`CLAUDE.md` §7); these items check th
     `accent`, and every non-text indicator (secondary underline, focus outline) meet 3:1? Check against the
     `contrast` entries in `tokens/tokens.json`. (`visual-language.md#color` Rules)
 74. Is colour never the only signal: links underlined (except nav links, the wordmark, and footer links, which
-    have no underline at rest, item 32), status in words, arrows with their row context? (`visual-language.md#color`
+    have no underline at rest, items 32 and 51), status in words, arrows with their row context? (`visual-language.md#color`
     Rules, `visual-language.md#brandheader`, `visual-language.md#footer`, WCAG 1.4.1) `[DECIDED 2026-10-14]`
 75. Does every interactive element show a 2px `ink` outline with a 2px offset on keyboard focus, never removed?
-    Does hover only thicken the underline to 2px (on a link with no rest underline, draw it at 2px), with no colour
+    Does hover only thicken the underline to 2px (on the wordmark and footer links, draw it at 2px), with no colour
     change and no change on visited?
     (`visual-language.md#interaction-states`)
 76. Is every link and arrow target at least 24 by 24 CSS px, and is the whole `ProjectRow` its link area?

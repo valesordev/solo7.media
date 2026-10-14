@@ -183,7 +183,7 @@ Rules the audit doesn't state (counts, markup, limits, data format) are decided 
 `[DECIDED 2026-10-08]` (audit: Hero)
 Rules the audit doesn't state (counts, markup, limits, data format) are decided with the anatomy.
 
-- A block over the illustration's empty zone: H1, subhead, a two-line mono blurb, and one primary `TextLink`.
+- A block over the illustration's empty zone: H1, subhead, a mono blurb, and one primary `TextLink`.
   Type is left aligned to the content column edge and stays in the left part of the frame.
 - One H1 per page. One CTA, vermilion. Wide: the subhead is a single line and the blurb at most two short lines.
   Narrow: the subhead wraps and the blurb rewraps at the narrow measure, in the same roles, with no new type step.

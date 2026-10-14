@@ -37,10 +37,11 @@ gradients, shadows, marketing copy, decorative diagrams, or additional illustrat
 ## hero
 
 **Correct**
-- H1 "The engineering imprint.", a one-line subhead, a two-line mono blurb, and one vermilion CTA ("Browse the
+- H1 "The engineering imprint.", a subhead (one line when wide), a mono blurb (at most two lines when wide), and one vermilion CTA ("Browse the
   source ->"), all in the clear sky of a full-bleed engraving.
 - Type left aligned to the content column; art ragged at the bottom, sitting above the rule that follows.
-- Narrow: type, CTA, then the art as a band below.
+- Narrow: type, CTA, then the art as a band below. The subhead wraps and the blurb rewraps, in the same roles.
+  `[DECIDED 2026-10-14]`
 
 **Incorrect**
 - Type over the engraved ground, with a scrim or gradient to make it legible.
