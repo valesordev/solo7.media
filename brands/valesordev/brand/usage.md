@@ -29,6 +29,7 @@ gradients, shadows, marketing copy, decorative diagrams, or additional illustrat
 - A logo image, glyph, or tagline beside the wordmark.
 - A filled "Get started" or "Contact" button in the header.
 - Arrows, pills, or hover colors on nav links.
+- A rest underline on the wordmark or a nav link. `[DECIDED 2026-10-14]`
 - A hamburger menu or drawer.
 - A sticky or shrinking header; a header shadow.
 - Sans-serif nav.
@@ -59,7 +60,7 @@ gradients, shadows, marketing copy, decorative diagrams, or additional illustrat
 
 **Incorrect**
 - A band heading with no rule above it. (A text page's section titles sit inside its one band and take no rule
-  of their own, `visual-language.md#sectionrule`.) `[PROPOSED 2026-10-11]`
+  of their own, `visual-language.md#sectionrule`.) `[DECIDED 2026-10-14]`
 - A filled bar, band, or tinted section background.
 - A kicker or number above the title ("01 / Projects").
 - A right link that isn't an action, or two links on the right.
@@ -175,6 +176,7 @@ REPO     github.com/<org>/<repo>
 **Incorrect**
 - A copyright symbol, year, or "All rights reserved".
 - Social icons, a newsletter field, a sitemap, or a back-to-top control.
+- A rest underline on the footer links. `[DECIDED 2026-10-14]`
 - A tinted or dark footer band.
 - A link to a page that doesn't exist.
 - Arrows on footer links.
