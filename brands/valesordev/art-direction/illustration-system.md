@@ -8,8 +8,8 @@
 **ChatGPT project:** Valesor Development — Art (instructions: `../references/chatgpt-project.md`)
 
 Status marks as in `../brand/foundation.md`: `[DECIDED <date>]` is Brian's and cites where he decided it. A bare
-`[DECIDED 2026-10-12]` was proposed in the PR #84 draft and approved as written at its review; each still names
-the alternative it rejected. A later recommendation carries the proposed mark from `../brand/foundation.md` until Brian
+`[DECIDED 2026-10-12]` was proposed in the PR #84 draft and approved as written at its review; most name the
+alternative they rejected. A later recommendation carries the proposed mark from `../brand/foundation.md` until Brian
 approves it.
 
 These rules hold for every Valesor image. What belongs to one image (this tree, this moon, this ridge line) goes in
