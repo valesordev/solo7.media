@@ -172,8 +172,9 @@ reach `review` before any route uses their components. Before this decision, the
 hand-written specimen in `src/pages/`, and that would have shipped.
 
 - **Specimens:** `sites/<domain>/specimens/pages/<Name>.astro`, one file per component (or per group the story
-  names), built by a second config, `sites/<domain>/astro.specimens.config.mjs`, with `srcDir: './specimens'` and
-  `outDir` in the QA output directory below. Both belong to implementation, like the site. Each component story
+  names), built by a second config, `sites/<domain>/astro.specimens.config.mjs`. It imports the production
+  `./astro.config.mjs` and overrides only `srcDir` (`'./specimens'`) and `outDir` (in the QA output directory below), so
+  `site`, `trailingSlash`, and any later build setting can't drift between the two. Both belong to implementation, like the site. Each component story
   adds the specimen for its components. Specimens follow the page rules in §2: they use the site's base layout
   (so tokens load once, as in production), compose brand components through the package's `exports`, pass
   content in as props, and carry no color, font, or spacing literal. They sit under `specimens/pages/` because
@@ -191,10 +192,14 @@ hand-written specimen in `src/pages/`, and that would have shipped.
   bump is a PR that changes this pin, and its author re-shoots any page under review.
 - **Output:** `dist/qa/<slug>/` at the repo root, which the existing `dist/` line in `.gitignore` already
   covers, so no `.gitignore` change is needed. It is never under `sites/*/dist/` (which `wrangler.jsonc`
-  deploys) or `brands/*/dist/` (which a site imports). The specimen build writes to `dist/qa/<slug>/specimens/`.
+  deploys) or `brands/*/dist/` (which a site imports). The specimen build writes to `dist/qa/<slug>/specimens/`. Astro empties that directory on every build, so
+  screenshots and the report go in `dist/qa/<slug>/shots/`, never inside `specimens/`.
 - **Target:** `qa-shots-<slug>` (the name is fixed here; the recipe and its script under `scripts/` are sre's).
   It depends on `build-site-<slug>` and serves each output over `http://localhost`, not `file://`, so root-relative
-  assets and trailing-slash URLs (§3) resolve the way they do on Cloudflare. It is not part of `make check`,
+  assets and trailing-slash URLs (§3) resolve the way they do on Cloudflare. A missing route therefore answers
+  with `404.html` and status 404, as `not_found_handling: 404-page` does (§4). Pages are named by route (`/`,
+  `/privacy/`). The name `404` requests `/404.html`, and it is the only entry where status 404 passes. Every other
+  page or specimen that answers anything but 200 fails the run. It is not part of `make check`,
   because it takes screenshots and judges nothing. `/brand-qa` reads its output.
 - **Not decided here:** widths, theme, and which states are captured. Those come from the brand's `qa.md`
   ("How to run it"), and the story that adds a brand's target cites them.
