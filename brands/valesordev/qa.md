@@ -1,8 +1,9 @@
 # Valesor Development: brand QA
 
-**Status:** draft (S7M-VAL-009); approved <YYYY-MM-DD> (PR #<n>) once Brian approves it
+**Status:** approved 2026-10-14 (S7M-VAL-009: PR #72, approved 2026-10-12; its open marks decided by Brian
+2026-10-14, "agree" on the story)
 **Sources:** brand/foundation.md, brand/visual-language.md, brand/usage.md, brand/voice.md, tokens/tokens.json,
-tokens/README.md, all @ 26d2d0e
+tokens/README.md, as amended by S7M-VAL-009 (2026-10-14)
 
 The checklist `/brand-qa valesordev` runs, and the visual check of `CLAUDE.md` §8 item 3. Every item is a yes/no
 question answered by looking at the rendered page (or, for the token check, its component and site style source), and each names the
@@ -10,13 +11,15 @@ section it enforces. A "no" is a fail. The docs govern: where an item and its ci
 wins and this file is the defect. This file adds no rule of its own.
 
 Status marks as in `foundation.md`. An item with no mark restates a `[DECIDED]` rule in the section it cites.
-`[PROPOSED]` items are how the check is run, not brand rules, and wait for Brian at PR review.
+A `[DECIDED 2026-10-14]` mark on an item is how the check is run, or a rule decided that day, recorded in the
+section it cites. No item is `[PROPOSED]`.
 
 ## How to run it
 - **Theme:** light only. There is no dark theme. (`visual-language.md#color`, Themes)
 - **Widths:** two, one per layout: desktop at 1440 CSS px (wide layout) and mobile at 390 CSS px (narrow layout,
-  below the 48rem breakpoint). `[PROPOSED]` (the docs fix the breakpoint, `visual-language.md#layout`, not the test
-  widths; these are the widths in the `/brand-qa` examples). Plus one reflow check at 320 CSS px (item 80).
+  below the 48rem breakpoint). `[DECIDED 2026-10-14]` (the docs fix the breakpoint, `visual-language.md#layout`,
+  not the test widths; these are the widths in the `/brand-qa` examples). Plus one reflow check at 320 CSS px
+  (item 80).
 - An item marked "Wide" is answered at desktop width only; at mobile width the narrow-layout item that follows it
   governs. (`visual-language.md#narrow-layout-mobile`)
 - **JavaScript off** at both widths: every item below is answered with JavaScript disabled. (`CLAUDE.md` §5)
@@ -59,11 +62,9 @@ Status marks as in `foundation.md`. An item with no mark restates a `[DECIDED]` 
 12. Is the weight regular throughout: no bold, no italic display? (`visual-language.md#typography`)
 13. Is no typeface from IBM present, in any role? (`visual-language.md#typography`)
 14. Are metadata labels uppercase mono, spaced, in `ink-muted`? Is each text role listed here in the case the role
-    table gives it (sentence case for H1, subhead, section titles, body, and links; title case for the wordmark and row
-    titles)? (`visual-language.md#typography`, `voice.md#case-and-punctuation`)
-    Column titles, including `/privacy` section titles (item 54): case not checked. `[PROPOSED]` pending Brian:
-    the role table sets them in title case, `voice.md#case-and-punctuation` keeps title case for names and
-    sentence case for headings, so a multiword column title has no determinate pass.
+    table gives it (sentence case for H1, subhead, section titles, body, and links; title case for the wordmark, row
+    titles, and column titles, including `/privacy` section titles, item 54)? (`visual-language.md#typography`,
+    `voice.md#case-and-punctuation`) `[DECIDED 2026-10-14]`
 15. Does running text on a text page stay within 72 characters a line, with body line height at least 1.5?
     (`visual-language.md#typography` Notes, `visual-language.md#layout`)
 16. Is all text real, selectable text, with none set inside an image? (`visual-language.md#typography` Notes,
@@ -78,9 +79,8 @@ Status marks as in `foundation.md`. An item with no mark restates a `[DECIDED]` 
     `usage.md#sectionrule`)
 19. Does every band open with a rule (a rule, space, content, a rule), including the footer, and is there no
     band heading without a rule above it? (`visual-language.md#layout`, `visual-language.md#sectionrule`,
-    `usage.md#sectionrule`, `visual-language.md#footer`)
-    `[PROPOSED]` pending Brian (PR #79): "band heading" restates a `[PROPOSED 2026-10-11]` rule; until it is
-    decided, a heading inside a band with no rule above it is reported, not failed.
+    `usage.md#sectionrule`, `visual-language.md#footer`) A heading inside a band (a text page's section titles)
+    takes no rule of its own and passes. `[DECIDED 2026-10-14]`
 20. Are rules and type doing the layout: no box, border other than a hairline rule, fill, radius, or shadow?
     (`visual-language.md#layout`, `foundation.md#what-the-brand-is-made-of` item 4)
 21. Is whitespace left empty rather than filled, with the largest space above the H1 and between bands?
@@ -93,9 +93,8 @@ Status marks as in `foundation.md`. An item with no mark restates a `[DECIDED]` 
     At both widths: is there no scrim, overlay, or gradient behind any type? (`visual-language.md#hero`,
     `visual-language.md#illustration`, `usage.md#hero`)
 24. Is there exactly one H1, a mono blurb, and exactly one vermilion CTA? Wide: is the subhead a single line and
-    the blurb at most two short lines? (`visual-language.md#hero`) At mobile width the subhead's and blurb's line
-    counts are not checked: the docs don't say whether those limits hold when the 1.7x subhead can't fit 390px
-    and the blurb rewraps at the narrow measure, and that gap is pending Brian. `[PROPOSED]`
+    the blurb at most two short lines? At mobile width, are the subhead and blurb in their own roles, wrapping as
+    needed, with no other type size? (`visual-language.md#hero`) `[DECIDED 2026-10-14]`
 25. Wide: is the type left aligned to the content column, in the left part of the frame?
     (`visual-language.md#hero`)
 26. Does the illustration run full-bleed, its bottom edge ragged, sitting just above the rule beneath?
@@ -106,9 +105,8 @@ Status marks as in `foundation.md`. An item with no mark restates a `[DECIDED]` 
     (`visual-language.md#narrow-layout-mobile` item 2)
 29. Is the illustration pure black pen-and-ink on white (heavy contour, hatch and stipple, no grey wash or
     gradient), and free of text? (`visual-language.md#illustration`, `foundation.md#what-the-brand-is-made-of`
-    item 5) Is it from an installed art slot with provenance? `[PROPOSED]` (the role's rule for generated art,
-    `.claude/roles/visual-designer.md`; the brand docs defer to `art-direction/illustration-system.md`, not yet
-    written)
+    item 5) Is it from an installed art slot with provenance? `[DECIDED 2026-10-14]` (the role's rule for
+    generated art, `.claude/roles/visual-designer.md`, and `art-direction/illustration-system.md`, AD v1)
 30. Is the decorative homepage hero marked `alt=""`? (`visual-language.md#illustration`)
 
 ## Component usage
@@ -116,7 +114,7 @@ Status marks as in `foundation.md`. An item with no mark restates a `[DECIDED]` 
 31. Is it the first element: the serif wordmark linking to `/`, serif Projects and GitHub links, a 1px rule under
     it, and no About link? Wide: is the wordmark at left and the links at right? (`visual-language.md#brandheader`, `usage.md#brandheader`)
 32. Is it free of arrows, pills, buttons, rest underlines, and hover colours on nav links, with the current page
-    shown only by a 1px underline? (`visual-language.md#brandheader`)
+    shown only by a 1px underline? Is the wordmark free of a rest underline too? (`visual-language.md#brandheader`)
 33. Is it neither sticky nor shrinking, with no shadow, hamburger, or drawer, and at mobile width are the wordmark
     and links on two lines, all visible? (`usage.md#brandheader`, `visual-language.md#narrow-layout-mobile` item 1)
 
@@ -170,7 +168,7 @@ Status marks as in `foundation.md`. An item with no mark restates a `[DECIDED]` 
 
 ### Footer
 51. Is it a rule, then "Valesor Development" in serif with "Released under Apache-2.0 by default." in `ink-muted`
-    mono, and GitHub then Privacy as plain mono links? Wide: is the name and line at left and the links at right?
+    mono, and GitHub then Privacy as plain mono links with no underline at rest? Wide: is the name and line at left and the links at right?
     (`visual-language.md#footer`, `usage.md#footer`)
 52. Is it free of a copyright symbol, year, "All rights reserved", social icons, newsletter field, sitemap,
     back-to-top, tinted band, arrows, and links to pages that don't exist? At mobile width, does it stack left
@@ -188,15 +186,13 @@ For `/privacy` only. The text is Brian's (`CLAUDE.md` §7); these items check th
     subhead, titled sections (serif column-title role, mono body at most 72 characters), and `Footer`? Do the
     section titles have no rule of their own, with space alone, `space.l`, above each section title?
     (`visual-language.md#privacy-page-template`, `visual-language.md#sectionrule`, `usage.md#privacy-page`)
-    `[PROPOSED]` pending Brian (PR #79): the section-title question restates a `[PROPOSED 2026-10-11]` rule;
-    until it is decided, a "no" is reported, not failed.
+    `[DECIDED 2026-10-14]`
 55. Is it free of a hero, illustration, cookie banner, consent dialog, "manage preferences" control, table,
     accordion, callout, icon, and checkmark list, with lists as plain bullets in body type?
     (`visual-language.md#privacy-page-template`, `usage.md#privacy-page`)
 56. Are links in the text underlined `ink` with no arrow, and does the page end with a secondary `TextLink` home
     reading "Return to the home page ->"? (`visual-language.md#privacy-page-template`, `voice.md#cta-vocabulary`)
-    `[PROPOSED]` pending Brian (PR #79): the wording restates a `[PROPOSED 2026-10-11]` rule; until it is
-    decided, other wording is reported, not failed.
+    `[DECIDED 2026-10-14]`
 57. Does the first screen state what is and isn't measured, as the text provides, with the look adding no claim
     of its own? (`visual-language.md#privacy-page-template`, `usage.md#privacy-page`)
 58. Is the Privacy link in the footer of every page? (`usage.md#footer`)
@@ -234,8 +230,9 @@ For `/privacy` only. The text is Brian's (`CLAUDE.md` §7); these items check th
     (`visual-language.md#motion`)
 
 ## Tokens
-71. **No off-token values:** do the components under `brands/valesordev/components/` (when it exists) and the styles under
-    `sites/valesordev.com/src/` reference tokens only, with no literal colour (hex, `rgb()`, `hsl()`, named
+71. **No off-token values:** do the components under `brands/valesordev/components/` (when it exists), the styles under
+    `sites/valesordev.com/src/`, and the component specimens under `sites/valesordev.com/specimens/` (when it exists, ADR 0001 §9)
+    reference tokens only, with no literal colour (hex, `rgb()`, `hsl()`, named
     colour), font family name, or spacing value? Scan source, not the built bundle: the bundle carries the token
     package's own `--*` definitions and `@font-face` blocks, which are the tokens, not uses of them. The one
     allowed literal is a component's `@media (min-width: 48rem)`. Every other literal is a defect. (`usage.md#before-building-anything`,
@@ -247,15 +244,13 @@ For `/privacy` only. The text is Brian's (`CLAUDE.md` §7); these items check th
 73. Does every text and background pair on the page meet 4.5:1, including `ink-muted` at the label size and
     `accent`, and every non-text indicator (secondary underline, focus outline) meet 3:1? Check against the
     `contrast` entries in `tokens/tokens.json`. (`visual-language.md#color` Rules)
-74. Is colour never the only signal: links underlined (except nav links at rest, item 32), status in words,
-    arrows with their row context? (`visual-language.md#color` Rules, `visual-language.md#brandheader`,
-    WCAG 1.4.1) The wordmark and footer links: underline at rest not checked. `[PROPOSED]` pending Brian:
-    `visual-language.md#color` says a link has an underline and `#brandheader` exempts only nav links, while the
-    wordmark is "plain text" (`#brandheader`) and footer links are navigation in the nav role (`#footer`),
-    "plain mono links" (`usage.md#footer`); no doc says whether either is underlined at rest.
+74. Is colour never the only signal: links underlined (except nav links, the wordmark, and footer links, which
+    have no underline at rest, items 32 and 51), status in words, arrows with their row context? (`visual-language.md#color`
+    Rules, `visual-language.md#brandheader`, `visual-language.md#footer`, WCAG 1.4.1) `[DECIDED 2026-10-14]`
 75. Does every interactive element show a 2px `ink` outline with a 2px offset on keyboard focus, never removed?
-    Does hover only thicken the underline to 2px, with no colour change and no change on visited?
-    (`visual-language.md#interaction-states`)
+    Does hover only thicken the underline to 2px (on the wordmark and footer links, draw it at 2px), with no colour
+    change and no change on visited?
+    (`visual-language.md#interaction-states`, `visual-language.md#brandheader`, `visual-language.md#footer`)
 76. Is every link and arrow target at least 24 by 24 CSS px, and is the whole `ProjectRow` its link area?
     (`visual-language.md#interaction-states`)
 77. Are there real headings (one H1) and landmarks (`header`, `main`, `footer`), and lists marked up as lists?

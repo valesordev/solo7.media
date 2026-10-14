@@ -32,6 +32,8 @@ Rules:
 - Contrast: text on `paper` is at least 4.5:1 (WCAG 2.1 AA), including `ink-muted` at the smallest size and
   `accent`. Hairlines and decorative rules carry no information on their own. `[DECIDED 2026-10-08]` (`CLAUDE.md` §5)
 - Color is never the only signal: a link has an underline, an arrow has its row context. `[DECIDED 2026-10-08]`
+  Nav links, the wordmark, and footer links have no underline at rest; their place in the header or footer
+  marks them as links (`#brandheader`, `#footer`). `[DECIDED 2026-10-14]`
 - No other colors: no hover color, no state colors, no second accent. An error or success state is stated in
   words, in `ink`. `[DECIDED 2026-10-08]` (brief: avoid secondary colors)
 - No gradients, no opacity tints standing in for a new color, no shadows. `[DECIDED 2026-10-08]`
@@ -70,6 +72,9 @@ Roles. Sizes are relative to body (`1x`) as measured in the audit; the token sto
 Notes:
 - Nav `[DECIDED 2026-10-08]`: serif at body size, no arrow. The alternative, mono, would make the header read as a
   toolbar.
+- Column titles, including `/privacy` section titles (`#privacy-page-template`), are title case as the table
+  says, an exception to sentence case for headings (`voice.md#case-and-punctuation`). `[DECIDED 2026-10-14]`
+  (Brian on S7M-VAL-009)
 - The subhead line in the target contains a spaced em dash; the copy is rewritten under `voice.md#characters`.
 - Line height and measure are set at token time. Rules: body line height at least 1.5; running text measure at
   most 72 characters in a text page (`/privacy`). `[DECIDED 2026-10-08]`
@@ -162,7 +167,9 @@ Rules the audit doesn't state (counts, markup, limits, data format) are decided 
 - The first element of every page. Serif wordmark "Valesor Development" at left; serif text links at
   right (the target shows Projects, GitHub, About; the kit drops About, see below; the nav row itself is `[DECIDED 2026-10-08]`); a 1px `rule` below, on the content column.
 - The wordmark is the only mark: no glyph, no logo image, no tagline (decided). It is plain text and links to `/`
-  `[DECIDED 2026-10-08]`.
+  `[DECIDED 2026-10-08]`. Like the nav links, it has no underline at rest; hover, active, and focus-visible are as
+  in `#interaction-states`, the hover underline appearing at 2px. `[DECIDED 2026-10-14]` (Brian on S7M-VAL-009)
+  Reason: an underlined wordmark reads as a link in prose, not a name. Rejected: a rest underline on the wordmark.
 - Nav links carry no arrow, `[DECIDED 2026-10-08]`; no button, pill, or underline at rest `[DECIDED 2026-10-08]`.
 - Current page: a 1px underline on the current link. `[DECIDED 2026-10-08]` (the audit shows no current-page state.
   Rejected: bold, because regular is the only weight; a color change, because the accent is for action.)
@@ -176,9 +183,12 @@ Rules the audit doesn't state (counts, markup, limits, data format) are decided 
 `[DECIDED 2026-10-08]` (audit: Hero)
 Rules the audit doesn't state (counts, markup, limits, data format) are decided with the anatomy.
 
-- A block over the illustration's empty zone: H1, subhead, a two-line mono blurb, and one primary `TextLink`.
+- A block over the illustration's empty zone: H1, subhead, a mono blurb, and one primary `TextLink`.
   Type is left aligned to the content column edge and stays in the left part of the frame.
-- One H1 per page. The subhead is a single line. The blurb is at most two short lines. One CTA, vermilion.
+- One H1 per page. One CTA, vermilion. Wide: the subhead is a single line and the blurb at most two short lines.
+  Narrow: the subhead wraps and the blurb rewraps at the narrow measure, in the same roles, with no new type step.
+  `[DECIDED 2026-10-14]` (Brian on S7M-VAL-009) Reason: the 1.7x subhead can't fit one line at 390px. Rejected: a
+  smaller narrow subhead size (a type step the scale doesn't have).
 - The illustration is full-bleed; the type sits in its empty sky, never on engraved ground.
 - No second CTA, no badge, no counter, no scroll cue, no overlay or gradient scrim.
 - Tokens: `ink` (H1, subhead), `ink-muted` (blurb), `accent` (CTA), display serif and mono roles.
@@ -191,7 +201,7 @@ Rules the audit doesn't state (counts, markup, limits, data format) are decided 
   `TextLink` (the target: "Projects" and "View all projects ->").
 - A rule introduces every band; there is no band heading without a rule above it. A heading inside a band (a
   text page's section titles, `#privacy-page-template`) sits under the band's rule and takes none of its own.
-  `[PROPOSED 2026-10-11]` (S7M-VAL-018) Reason: a text page is one band; a rule per section would cut the
+  `[DECIDED 2026-10-14]` (S7M-VAL-018; Brian on S7M-VAL-009) Reason: a text page is one band; a rule per section would cut the
   reading text into bands. Rejected: a rule above every section title.
 - The right link, if present, is a primary `TextLink` and says where it goes.
 - No fill, no icon, no number, no kicker above the title.
@@ -267,7 +277,9 @@ Not in the target. `[DECIDED 2026-10-08]` (the brief lists a Footer; the audit h
 
 - A `SectionRule` above, then one row in two groups: at left, "Valesor Development" in serif and a one-line mono
   statement in `ink-muted` (license line: "Released under Apache-2.0 by default." `[DECIDED 2026-10-08]`); at right, two mono links: GitHub,
-  Privacy. No arrow on footer links (they are navigation).
+  Privacy. No arrow on footer links (they are navigation). No underline at rest, as nav links; hover, active, and
+  focus-visible are as in `#interaction-states`, the hover underline appearing at 2px. `[DECIDED 2026-10-14]`
+  (Brian on S7M-VAL-009)
 - Link order: GitHub, Privacy. Privacy is present on every page.
 - No copyright symbol or year (a published "(c)" line implies a company; the license is stated instead). No
   social icons, no sitemap, no newsletter, no back-to-top.
@@ -283,10 +295,11 @@ Built under FEAT-04. The text is Brian's and changes only with him (`CLAUDE.md` 
   then sections. Each section: a serif title in the column-title role, then mono body at a measure of at most 72
   characters. Left aligned to the content column. Section titles have no rule of their own: the page's one
   `SectionRule` introduces the band, and space alone separates its sections: `space.l` above each section title
-  (`#sectionrule`). `[PROPOSED 2026-10-11]`
+  (`#sectionrule`). Section titles are in the column-title role's title case (`#typography`).
+  `[DECIDED 2026-10-14]`
 - Lists use plain bullets in body type. No tables, no callouts, no accordions, no icons, no checkmarks.
 - Links in the text are underlined `ink`, no arrow. The page ends with a secondary `TextLink` to the home page,
-  reading "Return to the home page ->" (`voice.md#cta-vocabulary`). `[PROPOSED 2026-10-11]`
+  reading "Return to the home page ->" (`voice.md#cta-vocabulary`). `[DECIDED 2026-10-14]`
 - The page states in its first screen what is and isn't measured, as the text provides. The look makes no claim
   of its own.
 - Reads fully with JavaScript off, at both layouts.

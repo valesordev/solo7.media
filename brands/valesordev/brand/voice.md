@@ -69,7 +69,9 @@ middle dot). The image is evidence, not a spec; this section governs.
 `[DECIDED 2026-10-08]` (derived from the target's copy)
 
 - Sentence case for headings, subheads, and links: "The engineering imprint.", "Read the license ->".
-- Title case for names only: Valesor Development, Andara's World.
+- Title case for names: Valesor Development, Andara's World.
+- One heading exception: column titles, including `/privacy` section titles, are title case
+  (`visual-language.md#typography`). `[DECIDED 2026-10-14]` (Brian on S7M-VAL-009)
 - The H1 and subhead end with a period when they are statements. Navigation labels and metadata labels carry
   none.
 - Metadata labels (`STACK`, `LICENSE`, `REPO`) are uppercase, set by style, written in sentence case in the
@@ -88,7 +90,7 @@ Prefer:
 - `Open the repository ->`
 - `See how it works ->`
 - `View all projects ->`
-- `Return to the home page ->` `[PROPOSED 2026-10-11]` (S7M-VAL-018): the home link that ends `/privacy`
+- `Return to the home page ->` `[DECIDED 2026-10-14]` (S7M-VAL-018): the home link that ends `/privacy`
   (`visual-language.md#privacy-page-template`). The wording is the 404's (`#errors-empty-states-and-the-404`).
 
 The first seven are in the target or the brief. Others follow the same shape: a verb that is
