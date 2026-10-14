@@ -8,6 +8,7 @@
     "sites/valesordev.com"
   ],
   "devDependencies": {
+    "playwright": "1.63.0",
     "vitest": "^3.2.7"
   }
 }
