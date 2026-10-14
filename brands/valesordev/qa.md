@@ -250,7 +250,7 @@ For `/privacy` only. The text is Brian's (`CLAUDE.md` §7); these items check th
 75. Does every interactive element show a 2px `ink` outline with a 2px offset on keyboard focus, never removed?
     Does hover only thicken the underline to 2px (on the wordmark and footer links, draw it at 2px), with no colour
     change and no change on visited?
-    (`visual-language.md#interaction-states`)
+    (`visual-language.md#interaction-states`, `visual-language.md#brandheader`, `visual-language.md#footer`)
 76. Is every link and arrow target at least 24 by 24 CSS px, and is the whole `ProjectRow` its link area?
     (`visual-language.md#interaction-states`)
 77. Are there real headings (one H1) and landmarks (`header`, `main`, `footer`), and lists marked up as lists?
