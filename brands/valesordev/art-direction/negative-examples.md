@@ -4,7 +4,7 @@ What drifted from `illustration-system.md`, why, and the rule that catches it. E
 from. Rejected candidates are not committed (`assets/candidates/` is gitignored), so an entry describes the image
 and names its slot and candidate letter; a committed source is linked.
 
-**Status:** draft, with `illustration-system.md`. No Valesor image has been generated yet, so the only evidence is
+**Status:** AD v1, with `illustration-system.md` (approved 2026-10-12, PR #84). No Valesor image has been generated yet, so the only evidence is
 the frozen target. The second list is the drift to look for first, from the rules most likely to break; each item
 moves to the first list, with its image, when a candidate shows it.
 

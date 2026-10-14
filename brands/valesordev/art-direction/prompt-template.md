@@ -4,7 +4,7 @@ The skeleton every Valesor candidate prompt fills (`/art-slot`). The style is in
 instructions (`../references/chatgpt-project.md`, rendered from `illustration-system.md`); a prompt carries only
 the slot and the candidate's variation. Write for the ink treatment: clean black line on plain white, no tone.
 
-**Status:** draft, with `illustration-system.md`. Prompts use it once that file is AD v1.
+**Status:** AD v1, with `illustration-system.md` (approved 2026-10-12, PR #84).
 
 ## Block
 

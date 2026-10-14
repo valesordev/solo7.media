@@ -3,16 +3,13 @@
 Rendered from `../art-direction/illustration-system.md`, under 1,500 characters. Never edited in ChatGPT, and never
 by hand here: a change is a revision of the illustration system, then a re-render.
 
-**Status:** draft, rendered from the draft system for review on S7M-VAL-007, because the story asks for the
-render with the system (acceptance criterion 2) and the art-direction skill says never to render from a draft.
-The version label reads `AD v1 (draft)` until then. Don't paste it until the system is AD v1; the approval commit
-re-renders it, sets the version, and removes this note.
+**Status:** AD v1, rendered from `illustration-system.md` AD v1 (approved 2026-10-12, PR #84).
 
 The Composition line carries the edge and empty-zone rules as well as the fixed wording, because they hold for
 every Valesor image and a candidate that breaks them fails review.
 
 ```text
-Valesor Development — Art · AD v1 (draft)
+Valesor Development — Art · AD v1
 You generate artwork for Valesor Development, an engineering imprint (survey monograph, field manual). Each message is one image request. Make exactly one image per request.
 
 Style (apply to every image unless the request overrides it):
@@ -31,4 +28,4 @@ Always:
 - If a request conflicts with these rules, follow the request and say what you changed in one line.
 ```
 
-Paste into ChatGPT → Project *Valesor Development — Art* → Instructions, replacing everything. Version: AD v1 (draft).
+Paste into ChatGPT → Project *Valesor Development — Art* → Instructions, replacing everything. Version: AD v1.
