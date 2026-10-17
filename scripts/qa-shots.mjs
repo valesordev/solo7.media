@@ -197,13 +197,15 @@ async function shoot(t, width) {
     // whatever it was still loading. None of those is this page failing to render.
     // Keyed by the top-level page when the event fires, so an iframe's assets belong to the page that embeds it.
     const docOf = () => page.mainFrame().url().split('#')[0];
+    // The page's own navigations are checked by goto (and a download link aborts one); an iframe's document is an asset.
+    const pageNav = (req) => req.isNavigationRequest() && req.frame() === page.mainFrame();
     page.on('response', (r) => {
       const req = r.request();
-      if (!req.isNavigationRequest() && r.url().startsWith(origin + '/') && r.status() >= 400) broken.push({ doc: docOf(), what: `${r.status()} ${r.url()}` });
+      if (!pageNav(req) && r.url().startsWith(origin + '/') && r.status() >= 400) broken.push({ doc: docOf(), what: `${r.status()} ${r.url()}` });
     });
     page.on('requestfailed', (req) => {
       const error = req.failure()?.errorText ?? 'failed';
-      if (!req.isNavigationRequest() && error !== 'net::ERR_ABORTED' && req.url().startsWith(origin + '/')) broken.push({ doc: docOf(), what: `${error} ${req.url()}` });
+      if (!pageNav(req) && error !== 'net::ERR_ABORTED' && req.url().startsWith(origin + '/')) broken.push({ doc: docOf(), what: `${error} ${req.url()}` });
     });
     let final;
     const brokenHere = () => [...new Set(broken.filter((b) => b.doc === final).map((b) => b.what))];

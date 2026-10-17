@@ -37,7 +37,7 @@ The browser goes to the user cache (`~/.cache/ms-playwright/`), never into the r
 Every requested page and specimen must answer 200 after redirects. Otherwise the run exits non-zero and names
 each one that failed. A page whose own stylesheets, fonts or images answer 4xx or fail also fails. That includes
 ones that load only during capture, such as a late font or a `:hover` background, which `report.json` lists
-as `brokenAssets`. Only the page's own requests count, including those of its iframes. Assets of other pages opened for the visited state
+as `brokenAssets`. Only the page's own requests count, including its iframes' documents and their assets. Assets of other pages opened for the visited state
 don't, and neither do downloads or requests cut off by leaving the page. The run still writes everything it
 could capture.
 
