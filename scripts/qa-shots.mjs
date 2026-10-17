@@ -195,14 +195,15 @@ async function shoot(t, width) {
     // Same-origin assets that fail, keyed by the document that asked for them: the visited pass opens other pages
     // (their assets are theirs, not this page's), a download link aborts its navigation, and leaving a page aborts
     // whatever it was still loading. None of those is this page failing to render.
-    const docOf = (req) => req.frame().url().split('#')[0];
+    // Keyed by the top-level page when the event fires, so an iframe's assets belong to the page that embeds it.
+    const docOf = () => page.mainFrame().url().split('#')[0];
     page.on('response', (r) => {
       const req = r.request();
-      if (!req.isNavigationRequest() && r.url().startsWith(origin + '/') && r.status() >= 400) broken.push({ doc: docOf(req), what: `${r.status()} ${r.url()}` });
+      if (!req.isNavigationRequest() && r.url().startsWith(origin + '/') && r.status() >= 400) broken.push({ doc: docOf(), what: `${r.status()} ${r.url()}` });
     });
     page.on('requestfailed', (req) => {
       const error = req.failure()?.errorText ?? 'failed';
-      if (!req.isNavigationRequest() && error !== 'net::ERR_ABORTED' && req.url().startsWith(origin + '/')) broken.push({ doc: docOf(req), what: `${error} ${req.url()}` });
+      if (!req.isNavigationRequest() && error !== 'net::ERR_ABORTED' && req.url().startsWith(origin + '/')) broken.push({ doc: docOf(), what: `${error} ${req.url()}` });
     });
     let final;
     const brokenHere = () => [...new Set(broken.filter((b) => b.doc === final).map((b) => b.what))];
