@@ -67,7 +67,8 @@ could capture.
    Each image is the element's box plus 8 px, so a focus outline drawn outside the box is in frame.
 4. It writes `report.json`.
 
-Off-site requests from the page itself (fonts, scripts) are blocked and listed as warnings.
+Off-site requests from the page itself (fonts, scripts, an iframe's document) are blocked and listed as
+warnings. Only the page's own off-site link navigations get the stub page.
 
 ## Output
 

@@ -177,11 +177,12 @@ async function shoot(t, width) {
   const origin = new URL(t.url).origin;
   const external = new Set();
   const broken = [];
-  // Offline: nothing leaves localhost. A link that navigates off-site gets a stub page (so it can be visited).
+  // Offline: nothing leaves localhost. A link that navigates the page off-site gets a stub page (so it can be
+  // visited); anything else off-site, an iframe's document included, is blocked and listed as a warning.
   await ctx.route('**/*', (route) => {
     const req = route.request();
     if (req.url().startsWith(origin + '/')) return route.continue();
-    if (req.isNavigationRequest()) return route.fulfill({ status: 200, contentType: 'text/html', body: '<!doctype html><title>stub</title>' });
+    if (req.isNavigationRequest() && !req.frame().parentFrame()) return route.fulfill({ status: 200, contentType: 'text/html', body: '<!doctype html><title>stub</title>' });
     external.add(req.url());
     return route.abort();
   });
