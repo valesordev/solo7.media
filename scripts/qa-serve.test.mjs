@@ -13,6 +13,8 @@ before(() => {
   parent = mkdtempSync(join(tmpdir(), 'qa-serve-'));
   root = join(parent, 'site');
   writeFileSync(join(parent, 'secret'), 'secret');
+  mkdirSync(join(parent, 'site-x'));
+  writeFileSync(join(parent, 'site-x', 'secret'), 'sibling'); // shares the root's name as a prefix
   const put = (p, body) => {
     mkdirSync(join(root, p, '..'), { recursive: true });
     writeFileSync(join(root, p), body);
@@ -65,6 +67,7 @@ test('missing routes get the nearest 404.html with status 404', () => {
 // when both are gone.
 test('paths never escape the root', () => {
   assert.equal(r('/../secret'), '404 /404.html');
+  assert.equal(r('/../site-x/secret'), '404 /404.html');
   assert.equal(r('/%2e%2e/secret'), '404 /404.html');
   assert.equal(r('/..%2Fsecret'), '404 /404.html');
   assert.equal(r('/' + '../'.repeat(64) + 'etc/passwd'), '404 /404.html');

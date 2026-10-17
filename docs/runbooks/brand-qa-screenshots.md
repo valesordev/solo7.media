@@ -48,11 +48,13 @@ still writes everything it could capture.
    a viewport 900 px tall, and a device scale of 1.
 3. It takes a full-page screenshot, then finds every link and button (`a[href]`, `button`, `summary`, form
    controls, `[role=button]`, `[role=link]`, `[tabindex]`) and captures each one's states:
-   - **rest**: on a fresh load, mouse parked at (0, 0).
+   - **rest**: on a fresh load, with the mouse moved to a viewport corner the element doesn't cover, or
+     outside the viewport. If the element still matches `:hover`, a warning says its image may show hover.
+     The visited image is taken the same way.
    - **hover**: the mouse over the element.
    - **active**: the mouse button held down on the element. It's released at a viewport corner the element
-     doesn't cover, so nothing is followed. If the element covers all four corners and the release follows
-     it, the page is reloaded and a warning is recorded.
+     doesn't cover (outside the viewport when it covers all four), so nothing is followed. If a release
+     ever does follow the link, the page is reloaded and a warning is recorded.
    - **focus-visible**: reached by pressing Tab from the top of a fresh load, never by programmatic focus. An
      element Tab never reaches is recorded as `not reached by Tab`.
    - **visited**: each link is followed by keyboard and the page is reloaded. Off-site links go to a local
@@ -96,7 +98,7 @@ dist/qa/valesordev/shots/
 - Item 75 (focus and hover): compare `NN-rest`, `NN-hover`, `NN-focus-visible` and `NN-visited` for the same
   element.
 - Item 76 (24 by 24 targets): `atLeast24x24` and `fragments` per element. A target under 24 px is a fail
-  unless an exception in the item applies. A link with more than one fragment wrapped onto several lines, so
+  unless an exception in the item applies. A link with more than one fragment has wrapped onto several lines;
   judge each line's box, not the union in `width` and `height`.
 - Item 80 (320 px reflow): `horizontalScroll` at width 320, plus `<name>/320/page.png` for clipping and the H1
   wrap.

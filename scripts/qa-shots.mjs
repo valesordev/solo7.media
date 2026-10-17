@@ -10,7 +10,7 @@
 import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join, relative, resolve } from 'node:path';
+import { basename, join, relative, resolve } from 'node:path';
 import { parseArgs } from 'node:util';
 import { chromium } from 'playwright';
 import { serve } from './qa-serve.mjs';
@@ -55,6 +55,21 @@ const rel = (p) => relative(repo, p);
 
 if (pages.length && !existsSync(join(siteDist, 'index.html'))) fail(`${rel(siteDist)} has no index.html; run make build-site-${args.slug}`);
 
+const targets = [
+  ...pages.map((p) => ({
+    kind: 'page',
+    request: p,
+    name: p === '404' ? '404' : p.replace(/^\/|\/$/g, '').replace(/[^A-Za-z0-9_.-]+/g, '-') || 'index',
+    path: p === '404' ? '/404.html' : p,
+  })),
+  ...specimens.map((s) => ({ kind: 'specimen', request: s, name: `specimen-${s}`, path: `/${s}/` })),
+];
+// Two requests with one output name would overwrite each other's images (/a/b/ and /a-b/, or a repeated entry).
+// Checked before anything is built or the previous run's shots are removed.
+for (const [name, ts] of Object.entries(Object.groupBy(targets, (t) => t.name))) {
+  if (ts.length > 1) fail(`${ts.map((t) => t.request).join(' and ')} would both write shots/${name}/; request one of them per run`);
+}
+
 // Specimens: the second Astro root (ADR 0001 §9), built only when asked for.
 if (specimens.length) {
   const config = join(site, 'astro.specimens.config.mjs');
@@ -80,20 +95,7 @@ const origins = {};
 if (pages.length) ({ origin: origins.site } = await serve(siteDist).then((s) => (servers.push(s.server), s)));
 if (specimens.length) ({ origin: origins.specimens } = await serve(specimenDist).then((s) => (servers.push(s.server), s)));
 
-const targets = [
-  ...pages.map((p) => ({
-    kind: 'page',
-    request: p,
-    name: p === '404' ? '404' : p.replace(/^\/|\/$/g, '').replace(/[^A-Za-z0-9_.-]+/g, '-') || 'index',
-    url: origins.site + (p === '404' ? '/404.html' : p),
-  })),
-  ...specimens.map((s) => ({ kind: 'specimen', request: s, name: `specimen-${s}`, url: `${origins.specimens}/${s}/` })),
-];
-// Two requests with one output name would overwrite each other's images (/a/b/ and /a-b/, or a repeated entry).
-const byName = Object.groupBy(targets, (t) => t.name);
-for (const [name, ts] of Object.entries(byName)) {
-  if (ts.length > 1) fail(`${ts.map((t) => t.request).join(' and ')} would both write shots/${name}/; request one of them per run`);
-}
+for (const t of targets) t.url = (t.kind === 'page' ? origins.site : origins.specimens) + t.path;
 
 const failures = [];
 const report = {
@@ -214,10 +216,23 @@ async function shoot(t, width) {
     const out = (p) => rel(p);
     for (const e of elements) e.states = Object.fromEntries(STATES.map((s) => [s, null]));
 
-    // An element's state image: its box plus PAD, clipped to the viewport after scrolling it into view.
-    const snap = async (e, path) => {
+    // A viewport corner the element doesn't cover (as it's scrolled now), or undefined when it covers all four.
+    const corners = [{ x: 1, y: 1 }, { x: width - 2, y: 1 }, { x: 1, y: HEIGHT - 2 }, { x: width - 2, y: HEIGHT - 2 }];
+    const awayFrom = (e) => loc(e).evaluate((el, pts) => pts.find((p) => !el.contains(document.elementFromPoint(p.x, p.y))), corners);
+
+    // An element's state image: its box plus PAD, clipped to the viewport after scrolling it into view. With
+    // `park`, the mouse is first moved off the element, so a rest or visited image never shows it hovered.
+    const snap = async (e, path, { park = false } = {}) => {
       const l = loc(e);
       await l.scrollIntoViewIfNeeded({ timeout: 2000 });
+      if (park) {
+        // A corner off the element, or else outside the viewport; warn only if it still matches :hover.
+        const away = (await awayFrom(e)) ?? { x: -1, y: -1 };
+        await cdp.send('Input.dispatchMouseEvent', { type: 'mouseMoved', ...away, button: 'none' });
+        if (await l.evaluate((el) => el.matches(':hover'))) {
+          warnings.push(`${e.selector} is still under the mouse wherever it's parked: its ${basename(path, '.png').slice(3)} image may show hover`);
+        }
+      }
       const b = await l.boundingBox();
       if (!b) throw new Error('no box');
       const x = Math.max(0, Math.floor(b.x - PAD));
@@ -240,7 +255,7 @@ async function shoot(t, width) {
     for (const e of elements) if (!e.rendered) for (const s of STATES) e.states[s] = 'not rendered';
 
     // rest, then hover and active (pressed, released away from the element so nothing is clicked).
-    for (const e of shown) await attempt(e, 'rest', () => snap(e, file(e.index, 'rest')));
+    for (const e of shown) await attempt(e, 'rest', () => snap(e, file(e.index, 'rest'), { park: true }));
     for (const e of shown) {
       await attempt(e, 'hover', async () => {
         await loc(e).hover({ timeout: 2000 });
@@ -253,8 +268,7 @@ async function shoot(t, width) {
         await loc(e).scrollIntoViewIfNeeded({ timeout: 2000 });
         const b = await loc(e).boundingBox();
         if (!b) throw new Error('no box');
-        const corners = [{ x: 1, y: 1 }, { x: width - 2, y: 1 }, { x: 1, y: HEIGHT - 2 }, { x: width - 2, y: HEIGHT - 2 }];
-        const away = await loc(e).evaluate((el, pts) => pts.find((p) => !el.contains(document.elementFromPoint(p.x, p.y))), corners);
+        const away = await awayFrom(e);
         const at = { x: b.x + b.width / 2, y: b.y + b.height / 2, button: 'left', clickCount: 1 };
         const before = page.url();
         await cdp.send('Input.dispatchMouseEvent', { type: 'mouseMoved', ...at, button: 'none' });
@@ -262,8 +276,9 @@ async function shoot(t, width) {
         try {
           return await snap(e, file(e.index, 'active'));
         } finally {
-          await cdp.send('Input.dispatchMouseEvent', { type: 'mouseReleased', ...at, ...(away ?? corners[0]) });
-          // With no corner free of the element the release clicks it; the navigation commits after the event.
+          await cdp.send('Input.dispatchMouseEvent', { type: 'mouseReleased', ...at, ...(away ?? { x: -1, y: -1 }) });
+          // With no corner free of the element it's released outside the viewport; if that still clicks, the navigation
+          // commits after the event.
           if (!away) await page.waitForURL((u) => u.href !== before, { timeout: 3000 }).catch(() => {});
           await page.waitForLoadState('load');
           if (page.url() !== before) {
@@ -316,7 +331,7 @@ async function shoot(t, width) {
       await load();
     }
     await load();
-    for (const e of links) if (!e.states.visited) await attempt(e, 'visited', () => snap(e, file(e.index, 'visited')));
+    for (const e of links) if (!e.states.visited) await attempt(e, 'visited', () => snap(e, file(e.index, 'visited'), { park: true }));
 
     for (const e of elements) delete e.rendered;
     if (external.size) warnings.push(`blocked ${external.size} off-site request(s): ${[...external].join(', ')}`);
