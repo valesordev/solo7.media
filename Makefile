@@ -22,7 +22,7 @@ check-layout: ## Every brand has its folder and README; package.json parses
 	@echo "layout ok"
 
 test-scripts: ## Run the tests for scripts/ (node:test, offline)
-	node --test 'scripts/*.test.mjs'
+	node --test --test-timeout=60000 'scripts/*.test.mjs'
 
 install: ## Install workspace packages from the lockfile (npm ci)
 	npm ci

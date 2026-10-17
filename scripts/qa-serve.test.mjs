@@ -26,6 +26,8 @@ before(() => {
   put('docs/404.html', 'docs 404');
   put('_astro/site.css', 'body{}');
   put('日本/index.html', 'unicode');
+  put('a?b.html', 'question'); // routes whose names need ? and # escaped in a Location
+  put('a#b/index.html', 'hash');
 });
 after(() => rmSync(parent, { recursive: true, force: true }));
 
@@ -78,6 +80,8 @@ test('paths never escape the root', () => {
 
 test('over HTTP: 404 body and status, redirect keeps the query', async () => {
   const { server, origin } = await serve(root);
+  // Every request is bounded, so a server that never answers fails this test instead of hanging make check.
+  const fetch = (url, init = {}) => globalThis.fetch(url, { signal: AbortSignal.timeout(5000), ...init });
   try {
     const missing = await fetch(`${origin}/does-not-exist/`);
     assert.equal(missing.status, 404);
@@ -103,11 +107,17 @@ test('over HTTP: 404 body and status, redirect keeps the query', async () => {
     const uni = await fetch(`${origin}/%E6%97%A5%E6%9C%AC?q=1`, { redirect: 'manual' });
     assert.equal(uni.status, 307);
     assert.equal(uni.headers.get('location'), '/%E6%97%A5%E6%9C%AC/?q=1');
-    const odd = await fetch(`${origin}/a%3Fb.html`, { redirect: 'manual' });
-    assert.equal(odd.status, 404);
     const followed = await fetch(`${origin}/%E6%97%A5%E6%9C%AC`);
     assert.equal(await followed.text(), 'unicode');
+    // ? and # in a route name stay escaped, or the redirect lands on a query or a fragment of another route.
+    const question = await fetch(`${origin}/a%3Fb.html`, { redirect: 'manual' });
+    assert.equal(question.headers.get('location'), '/a%3Fb');
+    assert.equal(await (await fetch(`${origin}/a%3Fb.html`)).text(), 'question');
+    const hash = await fetch(`${origin}/a%23b`, { redirect: 'manual' });
+    assert.equal(hash.headers.get('location'), '/a%23b/');
+    assert.equal(await (await fetch(`${origin}/a%23b`)).text(), 'hash');
   } finally {
+    server.closeAllConnections();
     server.close();
   }
 });
