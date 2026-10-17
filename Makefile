@@ -4,7 +4,7 @@
 
 BRANDS := valesordev system9studios solo7productions solo7media bashburn
 
-.PHONY: help check check-layout install build-site-valesordev bootstrap-site-valesordev preview-site-valesordev verify-preview-valesordev legacy-solo7-media update-agents
+.PHONY: help check check-layout test-scripts install build-site-valesordev qa-browser-install qa-shots-valesordev qa-serve-valesordev bootstrap-site-valesordev preview-site-valesordev verify-preview-valesordev legacy-solo7-media update-agents
 
 help: ## List targets
 	@grep -hE '^[a-zA-Z0-9_%-]+:.*## ' $(MAKEFILE_LIST) | sort | \
@@ -14,12 +14,15 @@ help: ## List targets
 # .astro files, not the vitest config, so a brand with components and no config or no tests fails the gate.
 TEST_BRANDS := $(foreach b,$(BRANDS),$(if $(wildcard brands/$(b)/components/*.astro),$(b)))
 
-check: check-layout $(addprefix test-brand-,$(TEST_BRANDS)) $(if $(wildcard sites/valesordev.com),build-site-valesordev) ## PR gate: layout checks, brand component tests, site builds
+check: check-layout test-scripts $(addprefix test-brand-,$(TEST_BRANDS)) $(if $(wildcard sites/valesordev.com),build-site-valesordev) ## PR gate: layout checks, script tests, brand component tests, site builds
 
 check-layout: ## Every brand has its folder and README; package.json parses
 	@for b in $(BRANDS); do test -f brands/$$b/README.md || { echo "missing brands/$$b/README.md"; exit 1; }; done
 	@node -e 'JSON.parse(require("fs").readFileSync("package.json"))'
 	@echo "layout ok"
+
+test-scripts: ## Run the tests for scripts/ (node:test, offline)
+	node --test 'scripts/*.test.mjs'
 
 install: ## Install workspace packages from the lockfile (npm ci)
 	npm ci
@@ -53,6 +56,24 @@ preview-site-valesordev: build-site-valesordev ## Build, upload a preview versio
 
 verify-preview-valesordev: ## Fetch PREVIEW_URL and fail unless it serves the stub page
 	@scripts/verify-preview.sh "$(PREVIEW_URL)" "$(PREVIEW_MARKER)"
+
+# Rendered screenshots for /brand-qa (ADR 0001 §9; runbook docs/runbooks/brand-qa-screenshots.md). Not in `make check`.
+# Pages by route (404 means /404.html); specimens by name, built from sites/<domain>/specimens/pages/<Name>.astro.
+QA_PAGES ?= /,404
+QA_SPECIMENS ?=
+QA_PORT ?= 4321
+# Widths come from the brand's qa.md "How to run it": brands/valesordev/qa.md#how-to-run-it (desktop, mobile, 320 reflow).
+QA_WIDTHS_valesordev := 1440,390,320
+
+qa-browser-install: install ## ONE-TIME, needs network: download the Chromium the pinned Playwright drives
+	npx --no-install playwright install chromium
+
+qa-shots-valesordev: build-site-valesordev ## Screenshots, states and size report for /brand-qa (QA_PAGES=/,404 QA_SPECIMENS=Name,…)
+	node scripts/qa-shots.mjs --slug valesordev --site sites/valesordev.com --widths '$(QA_WIDTHS_valesordev)' \
+	  --pages '$(QA_PAGES)' --specimens '$(QA_SPECIMENS)'
+
+qa-serve-valesordev: build-site-valesordev ## Serve sites/valesordev.com/dist/ on QA_PORT the way Cloudflare does (404-page)
+	node scripts/qa-serve.mjs sites/valesordev.com/dist $(QA_PORT)
 
 legacy-solo7-media: ## Build the legacy solo7.media site (needs NODE_AUTH_TOKEN for GitHub Packages)
 	cd sites/solo7.media && npm ci && npm run build
