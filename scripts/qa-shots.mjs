@@ -192,12 +192,20 @@ async function shoot(t, width) {
   const warnings = [];
   try {
     const page = ctx.pages()[0] ?? (await ctx.newPage());
+    // Same-origin assets that fail, keyed by the document that asked for them: the visited pass opens other pages
+    // (their assets are theirs, not this page's), a download link aborts its navigation, and leaving a page aborts
+    // whatever it was still loading. None of those is this page failing to render.
+    const docOf = (req) => req.frame().url().split('#')[0];
     page.on('response', (r) => {
-      if (r.request().resourceType() !== 'document' && r.url().startsWith(origin + '/') && r.status() >= 400) broken.push(`${r.status()} ${r.url()}`);
+      const req = r.request();
+      if (!req.isNavigationRequest() && r.url().startsWith(origin + '/') && r.status() >= 400) broken.push({ doc: docOf(req), what: `${r.status()} ${r.url()}` });
     });
-    page.on('requestfailed', (r) => {
-      if (r.url().startsWith(origin + '/')) broken.push(`${r.failure()?.errorText} ${r.url()}`);
+    page.on('requestfailed', (req) => {
+      const error = req.failure()?.errorText ?? 'failed';
+      if (!req.isNavigationRequest() && error !== 'net::ERR_ABORTED' && req.url().startsWith(origin + '/')) broken.push({ doc: docOf(req), what: `${error} ${req.url()}` });
     });
+    let final;
+    const brokenHere = () => [...new Set(broken.filter((b) => b.doc === final).map((b) => b.what))];
 
     const cdp = await ctx.newCDPSession(page);
     const load = async () => {
@@ -209,7 +217,8 @@ async function shoot(t, width) {
     const chain = [];
     for (let r = res?.request(); r; r = r.redirectedFrom()) chain.unshift(r.url());
     if (!res || res.status() !== 200) throw new Error(`${t.url} answered ${res ? res.status() : 'nothing'} (must be 200)`);
-    if (broken.length) throw new Error(`the page did not render: ${broken.join(', ')}`);
+    final = page.url().split('#')[0];
+    if (brokenHere().length) throw new Error(`the page did not render: ${brokenHere().join(', ')}`);
 
     const screenshot = join(dir, 'page.png');
     await page.screenshot({ path: screenshot, fullPage: true });
@@ -348,6 +357,8 @@ async function shoot(t, width) {
     await load();
     for (const e of links) if (!e.states.visited) await attempt(e, 'visited', () => snap(e, file(e.index, 'visited'), { park: true }));
 
+    // Let anything the last captures started finish (or fail) before the result is read.
+    await page.waitForLoadState('networkidle', { timeout: 5000 }).catch(() => {});
     for (const e of elements) delete e.rendered;
     if (external.size) warnings.push(`blocked ${external.size} off-site request(s): ${[...external].join(', ')}`);
     return {
@@ -362,7 +373,7 @@ async function shoot(t, width) {
       scrollWidth: scroll.scrollWidth,
       clientWidth: scroll.clientWidth,
       warnings,
-      brokenAssets: [...new Set(broken)],
+      brokenAssets: brokenHere(),
       elements,
     };
   } finally {
