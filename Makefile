@@ -65,7 +65,8 @@ QA_PORT ?= 4321
 # Widths come from the brand's qa.md "How to run it": brands/valesordev/qa.md#how-to-run-it (desktop, mobile, 320 reflow).
 QA_WIDTHS_valesordev := 1440,390,320
 
-qa-browser-install: install ## ONE-TIME, needs network: download the Chromium the pinned Playwright drives
+# After `make install`; not a prerequisite, because npm ci would wipe and reinstall node_modules each time.
+qa-browser-install: ## ONE-TIME (after make install), needs network: download the Chromium the pinned Playwright drives
 	npx --no-install playwright install chromium
 
 qa-shots-valesordev: build-site-valesordev ## Screenshots, states and size report for /brand-qa (QA_PAGES=/,404 QA_SPECIMENS=Name,…)

@@ -84,7 +84,7 @@ export function serve(root, port = 0) {
     const body = r.file ? readFileSync(r.file) : Buffer.from('Not found\n');
     const type = r.file ? TYPES[extname(r.file).toLowerCase()] ?? 'application/octet-stream' : TYPES['.txt'];
     res.writeHead(r.status, { 'content-type': type, 'content-length': body.length, 'cache-control': 'no-store' });
-    res.end(req.method === 'HEAD' ? undefined : body);
+    res.end(body); // node's http omits the body of a HEAD response itself
   });
   return new Promise((ok, fail) => {
     server.once('error', fail);

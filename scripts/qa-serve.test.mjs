@@ -6,9 +6,13 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { resolveRequest, serve } from './qa-serve.mjs';
 
+let parent;
 let root;
 before(() => {
-  root = mkdtempSync(join(tmpdir(), 'qa-serve-'));
+  // The site root sits one level inside its own temp dir, next to a file that must never be served.
+  parent = mkdtempSync(join(tmpdir(), 'qa-serve-'));
+  root = join(parent, 'site');
+  writeFileSync(join(parent, 'secret'), 'secret');
   const put = (p, body) => {
     mkdirSync(join(root, p, '..'), { recursive: true });
     writeFileSync(join(root, p), body);
@@ -20,7 +24,7 @@ before(() => {
   put('docs/404.html', 'docs 404');
   put('_astro/site.css', 'body{}');
 });
-after(() => rmSync(root, { recursive: true, force: true }));
+after(() => rmSync(parent, { recursive: true, force: true }));
 
 const r = (p) => {
   const x = resolveRequest(root, p);
@@ -56,9 +60,15 @@ test('missing routes get the nearest 404.html with status 404', () => {
   assert.equal(r('/_astro/missing.css'), '404 /404.html');
 });
 
+// Two guards stop this: the `..` segment check and the containment check after resolve(). The containment check
+// is defence in depth (no decoded path without a `..` segment resolves outside the root), so these tests fail only
+// when both are gone.
 test('paths never escape the root', () => {
-  assert.equal(r('/../etc/passwd'), '404 /404.html');
-  assert.equal(r('/%2e%2e/etc/passwd'), '404 /404.html');
+  assert.equal(r('/../secret'), '404 /404.html');
+  assert.equal(r('/%2e%2e/secret'), '404 /404.html');
+  assert.equal(r('/..%2Fsecret'), '404 /404.html');
+  assert.equal(r('/' + '../'.repeat(64) + 'etc/passwd'), '404 /404.html');
+  assert.equal(r('/' + '..%2F'.repeat(64) + 'etc/passwd'), '404 /404.html');
   assert.equal(r('/%E0%A4%A'), '404 /404.html');
 });
 
@@ -75,6 +85,16 @@ test('over HTTP: 404 body and status, redirect keeps the query', async () => {
     assert.equal(page.status, 200);
     assert.equal(page.url, `${origin}/404`);
     assert.equal(await page.text(), 'root 404');
+    // Chromium drops a stylesheet served with the wrong type, so a bad mapping would shoot an unstyled page.
+    assert.equal(page.headers.get('content-type'), 'text/html; charset=utf-8');
+    const css = await fetch(`${origin}/_astro/site.css`);
+    assert.equal(css.headers.get('content-type'), 'text/css; charset=utf-8');
+    const head = await fetch(`${origin}/`, { method: 'HEAD' });
+    assert.equal(head.status, 200);
+    assert.equal(head.headers.get('content-length'), '4');
+    assert.equal(await head.text(), '');
+    const post = await fetch(`${origin}/`, { method: 'POST' });
+    assert.equal(post.status, 405);
   } finally {
     server.close();
   }

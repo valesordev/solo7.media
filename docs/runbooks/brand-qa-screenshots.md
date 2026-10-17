@@ -8,7 +8,7 @@ built in S7M-INF-008. Only `valesordev` has a target so far.
 
 ```sh
 make install              # workspace packages, from the lockfile
-make qa-browser-install   # downloads the Chromium that the pinned playwright (1.63.0) drives; the only step that needs network
+make qa-browser-install   # after make install: downloads the Chromium that the pinned playwright (1.63.0) drives; the only step that needs network
 ```
 
 The browser goes to the user cache (`~/.cache/ms-playwright/`), never into the repo. A Playwright version bump
@@ -50,8 +50,9 @@ still writes everything it could capture.
    controls, `[role=button]`, `[role=link]`, `[tabindex]`) and captures each one's states:
    - **rest**: on a fresh load, mouse parked at (0, 0).
    - **hover**: the mouse over the element.
-   - **active**: the mouse button held down on the element. It's released away from the element, so nothing
-     is followed.
+   - **active**: the mouse button held down on the element. It's released at a viewport corner the element
+     doesn't cover, so nothing is followed. If the element covers all four corners and the release follows
+     it, the page is reloaded and a warning is recorded.
    - **focus-visible**: reached by pressing Tab from the top of a fresh load, never by programmatic focus. An
      element Tab never reaches is recorded as `not reached by Tab`.
    - **visited**: each link is followed by keyboard and the page is reloaded. Off-site links go to a local
@@ -83,7 +84,8 @@ dist/qa/valesordev/shots/
 - `warnings`: states not captured, Tab-focus without `:focus-visible`, blocked off-site requests
 - `elements[]`: one entry per element:
   - `selector` (unique in the page), `text`, `href`
-  - `width` and `height` in CSS px, and `atLeast24x24` (item 76)
+  - `width` and `height` in CSS px (the bounding box), `fragments` (one box per line when an inline link
+    wraps), and `atLeast24x24`, which is true only when every fragment is at least 24 by 24 (item 76)
   - `tabOrder`
   - `states`: a path for each state, or the reason it wasn't captured
 
@@ -93,8 +95,9 @@ dist/qa/valesordev/shots/
   the element `selector` as the evidence.
 - Item 75 (focus and hover): compare `NN-rest`, `NN-hover`, `NN-focus-visible` and `NN-visited` for the same
   element.
-- Item 76 (24 by 24 targets): `width`, `height` and `atLeast24x24` per element. A target under 24 px is a fail
-  unless an exception in the item applies.
+- Item 76 (24 by 24 targets): `atLeast24x24` and `fragments` per element. A target under 24 px is a fail
+  unless an exception in the item applies. A link with more than one fragment wrapped onto several lines, so
+  judge each line's box, not the union in `width` and `height`.
 - Item 80 (320 px reflow): `horizontalScroll` at width 320, plus `<name>/320/page.png` for clipping and the H1
   wrap.
 - Paste the report's per-element numbers into the PR, or attach the images, as the `/brand-qa` evidence for
@@ -114,5 +117,6 @@ routing rules.
 | `Playwright's Chromium is not installed` | `make qa-browser-install` |
 | `<url> answered 404 (must be 200)` | The route doesn't exist in the build. Check the spelling and trailing slash, or the specimen name. |
 | `the page did not render: 404 …/_astro/…` | A stylesheet or asset the page links is missing from the build. That's the site's bug (implementation). |
+| `… would both write shots/<name>/` | Two requests map to one output name (`/a/b/` and `/a-b/`, or an entry listed twice). Request them in separate runs. |
 | `astro.specimens.config.mjs does not exist` | No component story has added specimens yet. Specimens are implementation's (ADR 0001 §9). |
 | `no result after 300s` | A browser call hung. Rerun it. If it repeats, open an issue for sre with the command. |

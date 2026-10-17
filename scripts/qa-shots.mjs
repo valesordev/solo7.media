@@ -89,6 +89,11 @@ const targets = [
   })),
   ...specimens.map((s) => ({ kind: 'specimen', request: s, name: `specimen-${s}`, url: `${origins.specimens}/${s}/` })),
 ];
+// Two requests with one output name would overwrite each other's images (/a/b/ and /a-b/, or a repeated entry).
+const byName = Object.groupBy(targets, (t) => t.name);
+for (const [name, ts] of Object.entries(byName)) {
+  if (ts.length > 1) fail(`${ts.map((t) => t.request).join(' and ')} would both write shots/${name}/; request one of them per run`);
+}
 
 const failures = [];
 const report = {
@@ -241,19 +246,30 @@ async function shoot(t, width) {
         await loc(e).hover({ timeout: 2000 });
         return snap(e, file(e.index, 'hover'));
       });
-      // Pressed through CDP and released at (0, 0) with no move in between: a held move over a link starts a
-      // drag, which Playwright's mouse waits on forever with JavaScript off, and a release on the element clicks it.
+      // Pressed through CDP and released at a viewport corner that isn't on the element, with no move in between:
+      // a held move over a link starts a drag, which Playwright's mouse waits on forever with JavaScript off, and a
+      // release on the element (or inside it) clicks it. If the page navigates anyway, it's reloaded and flagged.
       await attempt(e, 'active', async () => {
         await loc(e).scrollIntoViewIfNeeded({ timeout: 2000 });
         const b = await loc(e).boundingBox();
         if (!b) throw new Error('no box');
+        const corners = [{ x: 1, y: 1 }, { x: width - 2, y: 1 }, { x: 1, y: HEIGHT - 2 }, { x: width - 2, y: HEIGHT - 2 }];
+        const away = await loc(e).evaluate((el, pts) => pts.find((p) => !el.contains(document.elementFromPoint(p.x, p.y))), corners);
         const at = { x: b.x + b.width / 2, y: b.y + b.height / 2, button: 'left', clickCount: 1 };
+        const before = page.url();
         await cdp.send('Input.dispatchMouseEvent', { type: 'mouseMoved', ...at, button: 'none' });
         await cdp.send('Input.dispatchMouseEvent', { type: 'mousePressed', ...at });
         try {
           return await snap(e, file(e.index, 'active'));
         } finally {
-          await cdp.send('Input.dispatchMouseEvent', { type: 'mouseReleased', ...at, x: 0, y: 0 });
+          await cdp.send('Input.dispatchMouseEvent', { type: 'mouseReleased', ...at, ...(away ?? corners[0]) });
+          // With no corner free of the element the release clicks it; the navigation commits after the event.
+          if (!away) await page.waitForURL((u) => u.href !== before, { timeout: 3000 }).catch(() => {});
+          await page.waitForLoadState('load');
+          if (page.url() !== before) {
+            warnings.push(`${e.selector} active: releasing the mouse followed the link (it covers every viewport corner); page reloaded`);
+            await load();
+          }
         }
       });
     }
@@ -346,6 +362,10 @@ function collect(query) {
   return [...document.querySelectorAll(query)].map((el, index) => {
     const r = el.getBoundingClientRect();
     const cs = getComputedStyle(el);
+    // An inline link that wraps has one box per line; its bounding box is their union, so the target check
+    // uses the smallest line box (qa.md item 76 measures the target a pointer can hit).
+    const round = (n) => Math.round(n * 100) / 100;
+    const fragments = [...el.getClientRects()].filter((f) => f.width > 0 && f.height > 0).map((f) => ({ width: round(f.width), height: round(f.height) }));
     return {
       index,
       selector: selectorOf(el),
@@ -353,9 +373,10 @@ function collect(query) {
       role: el.getAttribute('role'),
       text: (el.innerText || el.getAttribute('aria-label') || el.value || '').replace(/\s+/g, ' ').trim().slice(0, 80),
       href: el.href ? String(el.href) : null,
-      width: Math.round(r.width * 100) / 100,
-      height: Math.round(r.height * 100) / 100,
-      atLeast24x24: r.width >= 24 && r.height >= 24,
+      width: round(r.width),
+      height: round(r.height),
+      fragments,
+      atLeast24x24: fragments.length > 0 && fragments.every((f) => f.width >= 24 && f.height >= 24),
       rendered: r.width > 0 && r.height > 0 && cs.visibility !== 'hidden' && cs.display !== 'none',
     };
   });
