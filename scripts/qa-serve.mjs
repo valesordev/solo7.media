@@ -78,7 +78,9 @@ export function serve(root, port = 0) {
     const url = new URL(req.url, 'http://localhost');
     const r = resolveRequest(root, url.pathname);
     if (r.status === 307) {
-      res.writeHead(307, { location: r.location + url.search }).end();
+      // resolveRequest works on the decoded path; the header needs it encoded again, one segment at a time.
+      const location = r.location.split('/').map(encodeURIComponent).join('/');
+      res.writeHead(307, { location: location + url.search }).end();
       return;
     }
     const body = r.file ? readFileSync(r.file) : Buffer.from('Not found\n');

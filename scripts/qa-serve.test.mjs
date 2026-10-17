@@ -25,6 +25,7 @@ before(() => {
   put('about.html', 'about');
   put('docs/404.html', 'docs 404');
   put('_astro/site.css', 'body{}');
+  put('日本/index.html', 'unicode');
 });
 after(() => rmSync(parent, { recursive: true, force: true }));
 
@@ -98,6 +99,14 @@ test('over HTTP: 404 body and status, redirect keeps the query', async () => {
     assert.equal(await head.text(), '');
     const post = await fetch(`${origin}/`, { method: 'POST' });
     assert.equal(post.status, 405);
+    // A redirect to a non-ASCII route goes out percent-encoded (a raw one makes writeHead throw).
+    const uni = await fetch(`${origin}/%E6%97%A5%E6%9C%AC?q=1`, { redirect: 'manual' });
+    assert.equal(uni.status, 307);
+    assert.equal(uni.headers.get('location'), '/%E6%97%A5%E6%9C%AC/?q=1');
+    const odd = await fetch(`${origin}/a%3Fb.html`, { redirect: 'manual' });
+    assert.equal(odd.status, 404);
+    const followed = await fetch(`${origin}/%E6%97%A5%E6%9C%AC`);
+    assert.equal(await followed.text(), 'unicode');
   } finally {
     server.close();
   }
