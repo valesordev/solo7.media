@@ -52,9 +52,10 @@ still writes everything it could capture.
      outside the viewport. If the element still matches `:hover`, a warning says its image may show hover.
      The visited image is taken the same way.
    - **hover**: the mouse over the element.
-   - **active**: the mouse button held down on the element. It's released at a viewport corner the element
-     doesn't cover (outside the viewport when it covers all four), so nothing is followed. An element with
-     something else over its centre isn't pressed: its active state is recorded as not captured. If a release
+   - **active**: the mouse button held down at the centre of the element's first line box. It's released at a
+     viewport corner the element doesn't cover (outside the viewport when it covers all four), so nothing is
+     followed. If that point hits something else (an overlay, or the element has `pointer-events: none`), it
+     isn't pressed, and its active state is recorded as not captured, naming what was hit. If a release
      outside the viewport still follows the link, the page is reloaded and a warning is recorded.
    - **focus-visible**: reached by pressing Tab from the top of a fresh load, never by programmatic focus. An
      element Tab never reaches is recorded as `not reached by Tab`.

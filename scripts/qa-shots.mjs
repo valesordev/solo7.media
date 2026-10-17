@@ -268,14 +268,20 @@ async function shoot(t, width) {
       // release on the element (or inside it) clicks it. If the page navigates anyway, it's reloaded and flagged.
       await attempt(e, 'active', async () => {
         await loc(e).scrollIntoViewIfNeeded({ timeout: 2000 });
-        const b = await loc(e).boundingBox();
-        if (!b) throw new Error('no box');
         const away = await awayFrom(e);
-        const at = { x: b.x + b.width / 2, y: b.y + b.height / 2, button: 'left', clickCount: 1 };
-        // Pressing where something else sits on top would press (and could follow) that element instead.
-        if (!(await loc(e).evaluate((el, p) => el.contains(document.elementFromPoint(p.x, p.y)), at))) {
-          throw new Error('another element covers its centre');
-        }
+        // Pressed at the centre of its first line box: a wrapped link's union box can centre on the text between
+        // its lines. Pressing a point the element doesn't own would press (and could follow) something else.
+        const target = await loc(e).evaluate((el) => {
+          const f = [...el.getClientRects()].find((r) => r.width > 0 && r.height > 0);
+          if (!f) return { miss: 'no line box' };
+          const p = { x: f.x + f.width / 2, y: f.y + f.height / 2 };
+          const hit = document.elementFromPoint(p.x, p.y);
+          if (el.contains(hit)) return p;
+          const name = !hit ? 'nothing' : hit.id ? `#${hit.id}` : hit.localName;
+          return { miss: `the press point hits ${name}, not the element (covered, or pointer-events: none)` };
+        });
+        if (target.miss) throw new Error(target.miss);
+        const at = { ...target, button: 'left', clickCount: 1 };
         const before = page.url();
         await cdp.send('Input.dispatchMouseEvent', { type: 'mouseMoved', ...at, button: 'none' });
         await cdp.send('Input.dispatchMouseEvent', { type: 'mousePressed', ...at });
