@@ -175,15 +175,24 @@ async function shoot(t, width) {
   }
   report.browser ??= `chromium ${ctx.browser()?.version() ?? ''}`.trim();
   const origin = new URL(t.url).origin;
-  const external = new Set();
+  const external = [];
   const broken = [];
-  // Offline: nothing leaves localhost. A link that navigates the page off-site gets a stub page (so it can be
-  // visited); anything else off-site, an iframe's document included, is blocked and listed as a warning.
+  // The top-level page open when an event fires (the shot page, or one the visited pass opened).
+  const docNow = () => (ctx.pages()[0]?.mainFrame().url() ?? '').split('#')[0];
+  // Offline: nothing leaves localhost. A link that navigates a top-level page off-site gets a stub page (so it can
+  // be visited); anything else off-site, an iframe's document included, is blocked and listed as a warning.
   await ctx.route('**/*', (route) => {
     const req = route.request();
     if (req.url().startsWith(origin + '/')) return route.continue();
-    if (req.isNavigationRequest() && !req.frame().parentFrame()) return route.fulfill({ status: 200, contentType: 'text/html', body: '<!doctype html><title>stub</title>' });
-    external.add(req.url());
+    if (req.isNavigationRequest()) {
+      // A popup's first navigation (<base target="_blank">) has no frame yet; it is a top-level page too.
+      let top = true;
+      try {
+        top = !req.frame().parentFrame();
+      } catch {}
+      if (top) return route.fulfill({ status: 200, contentType: 'text/html', body: '<!doctype html><title>stub</title>' });
+    }
+    external.push({ doc: docNow(), url: req.url() });
     return route.abort();
   });
 
@@ -196,17 +205,16 @@ async function shoot(t, width) {
     // Same-origin assets that fail, keyed by the document that asked for them: the visited pass opens other pages
     // (their assets are theirs, not this page's), a download link aborts its navigation, and leaving a page aborts
     // whatever it was still loading. None of those is this page failing to render.
-    // Keyed by the top-level page when the event fires, so an iframe's assets belong to the page that embeds it.
-    const docOf = () => page.mainFrame().url().split('#')[0];
+    // Keyed by the top-level page when the event fires (docNow), so an iframe's assets belong to the page that embeds it.
     // The page's own navigations are checked by goto (and a download link aborts one); an iframe's document is an asset.
     const pageNav = (req) => req.isNavigationRequest() && req.frame() === page.mainFrame();
     page.on('response', (r) => {
       const req = r.request();
-      if (!pageNav(req) && r.url().startsWith(origin + '/') && r.status() >= 400) broken.push({ doc: docOf(), what: `${r.status()} ${r.url()}` });
+      if (!pageNav(req) && r.url().startsWith(origin + '/') && r.status() >= 400) broken.push({ doc: docNow(), what: `${r.status()} ${r.url()}` });
     });
     page.on('requestfailed', (req) => {
       const error = req.failure()?.errorText ?? 'failed';
-      if (!pageNav(req) && error !== 'net::ERR_ABORTED' && req.url().startsWith(origin + '/')) broken.push({ doc: docOf(), what: `${error} ${req.url()}` });
+      if (!pageNav(req) && error !== 'net::ERR_ABORTED' && req.url().startsWith(origin + '/')) broken.push({ doc: docNow(), what: `${error} ${req.url()}` });
     });
     let final;
     const brokenHere = () => [...new Set(broken.filter((b) => b.doc === final).map((b) => b.what))];
@@ -364,7 +372,8 @@ async function shoot(t, width) {
     // Let anything the last captures started finish (or fail) before the result is read.
     await page.waitForLoadState('networkidle', { timeout: 5000 }).catch(() => {});
     for (const e of elements) delete e.rendered;
-    if (external.size) warnings.push(`blocked ${external.size} off-site request(s): ${[...external].join(', ')}`);
+    const blocked = [...new Set(external.filter((x) => x.doc === final).map((x) => x.url))];
+    if (blocked.length) warnings.push(`blocked ${blocked.length} off-site request(s): ${blocked.join(', ')}`);
     return {
       width,
       requested: t.url,
