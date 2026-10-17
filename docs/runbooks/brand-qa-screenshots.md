@@ -53,8 +53,9 @@ still writes everything it could capture.
      The visited image is taken the same way.
    - **hover**: the mouse over the element.
    - **active**: the mouse button held down on the element. It's released at a viewport corner the element
-     doesn't cover (outside the viewport when it covers all four), so nothing is followed. If a release
-     ever does follow the link, the page is reloaded and a warning is recorded.
+     doesn't cover (outside the viewport when it covers all four), so nothing is followed. An element with
+     something else over its centre isn't pressed: its active state is recorded as not captured. If a release
+     outside the viewport still follows the link, the page is reloaded and a warning is recorded.
    - **focus-visible**: reached by pressing Tab from the top of a fresh load, never by programmatic focus. An
      element Tab never reaches is recorded as `not reached by Tab`.
    - **visited**: each link is followed by keyboard and the page is reloaded. Off-site links go to a local

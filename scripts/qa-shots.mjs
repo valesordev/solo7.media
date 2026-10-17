@@ -44,6 +44,8 @@ const pages = list(args.pages);
 const specimens = list(args.specimens);
 if (!pages.length && !specimens.length) fail('nothing to shoot: set QA_PAGES or QA_SPECIMENS');
 for (const p of pages) if (p !== '404' && !p.startsWith('/')) fail(`QA_PAGES entry "${p}" is neither a route starting with / nor 404`);
+// A . or .. segment would name an output dir outside shots/<name>/.
+for (const p of pages) if (p.split('/').some((s) => s === '.' || s === '..')) fail(`QA_PAGES entry "${p}" has a . or .. segment`);
 for (const s of specimens) if (!/^[A-Za-z0-9_-]+$/.test(s)) fail(`QA_SPECIMENS entry "${s}" is not a specimen name`);
 
 const site = resolve(repo, args.site);
@@ -270,6 +272,10 @@ async function shoot(t, width) {
         if (!b) throw new Error('no box');
         const away = await awayFrom(e);
         const at = { x: b.x + b.width / 2, y: b.y + b.height / 2, button: 'left', clickCount: 1 };
+        // Pressing where something else sits on top would press (and could follow) that element instead.
+        if (!(await loc(e).evaluate((el, p) => el.contains(document.elementFromPoint(p.x, p.y)), at))) {
+          throw new Error('another element covers its centre');
+        }
         const before = page.url();
         await cdp.send('Input.dispatchMouseEvent', { type: 'mouseMoved', ...at, button: 'none' });
         await cdp.send('Input.dispatchMouseEvent', { type: 'mousePressed', ...at });
