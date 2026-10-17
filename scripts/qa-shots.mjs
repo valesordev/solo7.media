@@ -357,7 +357,7 @@ async function shoot(t, width) {
       const there = new URL(e.href);
       if (there.href === here.href) continue; // already in history: this page
       try {
-        await loc(e).evaluate((el) => el.removeAttribute('target'));
+        await loc(e).evaluate((el) => el.setAttribute('target', '_self'));
         await loc(e).focus({ timeout: 2000 });
         await Promise.all([page.waitForURL((u) => u.href !== here.href, { timeout: 5000 }), page.keyboard.press('Enter')]);
       } catch (err) {
