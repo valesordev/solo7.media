@@ -35,8 +35,9 @@ The browser goes to the user cache (`~/.cache/ms-playwright/`), never into the r
   `make check`.
 
 Every requested page and specimen must answer 200 after redirects. Otherwise the run exits non-zero and names
-each one that failed. A page whose own stylesheets, fonts or images answer 4xx or fail also fails. The run
-still writes everything it could capture.
+each one that failed. A page whose own stylesheets, fonts or images answer 4xx or fail also fails. That includes
+ones that load only during capture, such as a late font or a `:hover` background, which `report.json` lists
+as `brokenAssets`. The run still writes everything it could capture.
 
 ## What it does
 

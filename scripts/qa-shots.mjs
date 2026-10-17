@@ -119,7 +119,10 @@ try {
       // A browser call that never returns fails the run instead of hanging it.
       const watchdog = setTimeout(() => fail(`${t.kind} ${t.request} at ${width}px: no result after ${WATCHDOG_S}s`), WATCHDOG_S * 1000);
       try {
-        entry.widths.push(await shoot(t, width));
+        const shot = await shoot(t, width);
+        entry.widths.push(shot);
+        // Fonts and state-only images (a :hover background) load after the first check; any that failed fail the run.
+        if (shot.brokenAssets.length) failures.push(`${t.kind} ${t.request} at ${width}px: assets failed while capturing: ${shot.brokenAssets.join(', ')}`);
       } catch (e) {
         failures.push(`${t.kind} ${t.request} at ${width}px: ${e.message.split('\n')[0]}`);
         entry.widths.push({ width, error: e.message.split('\n')[0] });
@@ -359,6 +362,7 @@ async function shoot(t, width) {
       scrollWidth: scroll.scrollWidth,
       clientWidth: scroll.clientWidth,
       warnings,
+      brokenAssets: [...new Set(broken)],
       elements,
     };
   } finally {
