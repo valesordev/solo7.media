@@ -18,6 +18,8 @@ describe('SectionRule', () => {
     expect(headings(html)).toEqual([]);
     expect(anchors(html)).toEqual([]);
     expect(decode(html)).toBe('');
+    // No empty content wrapper: its padding would add height under the rule.
+    expect(html).not.toMatch(/class="[^"]*\bcontent\b/);
   });
 
   it('renders the title as an <h2> by default', async () => {
