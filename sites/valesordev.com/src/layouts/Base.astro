@@ -1,0 +1,35 @@
+---
+// The site's base layout (ADR 0001 §2): the document shell, and the one place the site imports the brand tokens.
+// The page ground is `paper` with `ink` body type (visual-language.md#color, #typography).
+import '@solo7/brand-valesordev/tokens.css';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style>
+  body {
+    margin: 0;
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--type-body-family);
+    font-size: var(--type-body-size);
+    line-height: var(--type-body-line-height);
+    letter-spacing: var(--type-body-tracking);
+  }
+</style>

@@ -1,0 +1,14 @@
+---
+// SectionRule specimen (S7M-VAL-015): the rule alone, with a title, with a link, with both, and an h3 title.
+// Wording from the target (visual-language.md#sectionrule).
+import SectionRule from '@solo7/brand-valesordev/components/SectionRule.astro';
+import Specimen from '../layouts/Specimen.astro';
+---
+
+<Specimen title="SectionRule">
+  <SectionRule />
+  <SectionRule title="Projects" />
+  <SectionRule link={{ href: '/', text: 'View all projects' }} />
+  <SectionRule title="Projects" link={{ href: '/', text: 'View all projects' }} />
+  <SectionRule title="Projects" level={3} link={{ href: '/', text: 'View all projects' }} />
+</Specimen>
