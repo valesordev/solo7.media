@@ -1,0 +1,11 @@
+---
+// BrandHeader specimen (S7M-VAL-016): as on a page with no current link (/privacy/), then with Projects current.
+// Both go in the header slot, outside <main>, so each sets its own column as it does on a page.
+import BrandHeader from '@solo7/brand-valesordev/components/BrandHeader.astro';
+import Specimen from '../layouts/Specimen.astro';
+---
+
+<Specimen title="BrandHeader">
+  <BrandHeader slot="header" />
+  <BrandHeader slot="header" current="projects" />
+</Specimen>
