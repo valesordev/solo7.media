@@ -5,9 +5,11 @@ import { afterAll, describe, expect, it } from 'vitest';
 import * as links from '../links';
 
 // AC9 of S7M-VAL-016: the site's fixed destinations live in links.ts, and no component spells them itself.
-// The scan is fail-safe: it reads raw source, comments and styles included, so a destination written anywhere in a
-// component fails it, even in a comment or a CSS `content` (reword the comment; take the value from links.ts).
-// A URL assembled from pieces ('https://github.com/' + 'valesordev') is out of its reach.
+// The scan is fail-safe: it reads raw source, comments and styles included, so a destination written as a quoted or
+// attribute value anywhere in a component fails it, even inside a comment or a CSS `content` (reword the comment;
+// take the value from links.ts). It also catches the value with or without its trailing slash, in any letter case.
+// Out of its reach: a URL assembled from pieces ('https://github.com/' + 'valesordev'), the same place under another
+// scheme or none (http://, //github.com/…), and a destination in prose (see https://github.com/valesordev for…).
 const root = join(import.meta.dirname, '..');
 
 /** Every source file under dir that could spell a destination: not links.ts, the tests, or the test config. */
@@ -18,10 +20,12 @@ const sourcesUnder = (dir: string) =>
     .filter((f) => f !== 'links.ts' && f !== 'vitest.config.ts' && !f.split('/').includes('__tests__'));
 
 const escape = (s: string) => s.replace(/[.*+?^${}()|[\]\\/]/g, '\\$&');
-// A destination as a whole value: after a quote or `=`, and not followed by more of a path or name.
-const patterns = Object.values(links).map(
-  (url) => [url, new RegExp(`(?:["'\`]|=\\s*)${escape(url)}(?![\\w./#-])`)] as const,
-);
+// A destination as a whole value: after a quote or `=`, with or without its trailing slash, and not followed by
+// more of a path or name. `/` itself keeps its one slash.
+const patterns = Object.values(links).map((url) => {
+  const body = url === '/' ? escape(url) : `${escape(url.replace(/\/$/, ''))}\\/?`;
+  return [url, new RegExp(`(?:["'\`]|=\\s*)${body}(?![\\w./#-])`, 'i')] as const;
+});
 const spelled = (source: string) => patterns.filter(([, re]) => re.test(source)).map(([url]) => url);
 
 describe('links.ts', () => {
@@ -67,6 +71,11 @@ describe('links.ts', () => {
       [`<a href = "/">`],
       [`<a href=/ >`],
       [`<a href=/#projects>`],
+      [`<a href= /#projects>`],
+      [`<a href="https://github.com/valesordev/">`],
+      [`<a href="https://GitHub.com/valesordev">`],
+      [`<a href="/privacy">`],
+      [`<a href="/PRIVACY/">`],
       [`const home = '/';`],
       [`export const P = "/privacy/";`],
       [`<a href="https://github.com/valesordev">`],
