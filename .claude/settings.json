@@ -411,7 +411,8 @@
       "Bash(gcx traces labels:*)",
       "Bash(gcx traces metrics:*)",
       "Bash(gcx traces query:*)",
-      "Bash(gcx version:*)"
+      "Bash(gcx version:*)",
+      "Bash(.claude/bin/story check:*)"
     ],
     "ask": [
       "Bash(make deploy:*)",
