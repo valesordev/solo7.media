@@ -1,5 +1,7 @@
 ---
 // A specimen page: the site's base layout and the brand's one content column (visual-language.md#layout).
+// The landmark is named by aria-label rather than a hidden <h1>: hiding one takes non-token literals
+// (qa.md #71), and the H1 belongs to the real page a component is placed on.
 import Base from '../../src/layouts/Base.astro';
 
 interface Props {
@@ -10,8 +12,7 @@ const { title } = Astro.props;
 ---
 
 <Base title={`${title} specimen · Valesor Development`}>
-  <main>
-    <h1 class="visually-hidden">{title} specimen</h1>
+  <main aria-label={`${title} specimen`}>
     <slot />
   </main>
 </Base>
@@ -24,14 +25,5 @@ const { title } = Astro.props;
     max-inline-size: var(--layout-max-width);
     margin-inline: auto;
     padding: var(--space-xl) var(--layout-inset);
-  }
-
-  .visually-hidden {
-    /* Out of view and out of the scroll width (WCAG 1.4.10 at 320px), still read by assistive technology. */
-    position: absolute;
-    inset-inline-start: 0;
-    max-inline-size: 100%;
-    overflow: hidden;
-    clip-path: inset(50%);
   }
 </style>
