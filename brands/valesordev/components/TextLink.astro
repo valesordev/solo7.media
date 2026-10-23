@@ -1,0 +1,50 @@
+---
+// TextLink (visual-language.md#textlink, usage.md#textlink). Mono, 1px underline, typed trailing `->`.
+// The caller passes the link text without the arrow; the arrow is real text inside the link.
+interface Props {
+  href: string;
+  variant: 'primary' | 'secondary';
+}
+
+const { href, variant } = Astro.props;
+---
+
+<a class:list={['text-link', variant]} href={href}><slot />{' ->'}</a>
+
+<style>
+  .text-link {
+    display: inline-block;
+    min-block-size: var(--line-target-min);
+    min-inline-size: var(--line-target-min);
+    font-family: var(--type-link-family);
+    font-size: var(--type-link-size);
+    line-height: var(--type-link-line-height);
+    letter-spacing: var(--type-link-tracking);
+    text-decoration-line: underline;
+    text-decoration-thickness: var(--line-underline-width);
+  }
+
+  /* Visited is the same as rest (visual-language.md#interaction-states). */
+  .primary,
+  .primary:visited {
+    color: var(--color-accent);
+    text-decoration-color: var(--color-accent);
+  }
+
+  .secondary,
+  .secondary:visited {
+    color: var(--color-ink);
+    text-decoration-color: var(--link-underline-secondary);
+  }
+
+  /* Hover and active thicken the underline; the colour never changes. */
+  .text-link:hover,
+  .text-link:active {
+    text-decoration-thickness: var(--line-underline-width-hover);
+  }
+
+  .text-link:focus-visible {
+    outline: var(--line-focus-width) solid var(--focus-ring);
+    outline-offset: var(--line-focus-offset);
+  }
+</style>
