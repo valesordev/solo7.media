@@ -45,8 +45,8 @@ gap, `[DECIDED 2026-10-24]`; no other item is.
 ### Colour roles
 6. Is every colour on the page one of `paper`, `ink`, `ink-muted`, `rule`, or `accent`, plus `#000000` inside the
    engraving only? (`visual-language.md#color`, `foundation.md#what-the-brand-is-made-of` item 1)
-7. Is `ink` on display and body type and the wordmark; `ink-muted` on descriptions, taglines, metadata, and footer
-   text; `rule` on hairlines only? (`visual-language.md#color`, role table)
+7. Is `ink` on display and body type and the wordmark; `ink-muted` on descriptions, taglines, metadata, and the
+   footer's license statement; `rule` on hairlines only? (`visual-language.md#color`, role table)
 8. Is vermilion (`accent`) used only for primary action text and underline, `ProjectRow` arrows, and the
    `SectionRule` link, and never for a heading, decoration, emphasis, status, or a rule? (`visual-language.md#color`,
    `usage.md#textlink`, `usage.md#sectionrule`)
@@ -54,8 +54,9 @@ gap, `[DECIDED 2026-10-24]`; no other item is.
    (`visual-language.md#color` Rules, `foundation.md#not-valesor`)
 
 ### Type roles
-10. Do serif things name (wordmark, H1, subhead, section titles, project names, column titles, nav) and mono
-    things explain and measure (body, descriptions, taglines, metadata, links and CTAs, footer text)?
+10. Do serif things name (wordmark, H1, subhead, section titles, project names, column titles, nav, the footer's
+    name) and mono things explain and measure (body, descriptions, taglines, metadata, links and CTAs, the footer's
+    statement and links)?
     (`visual-language.md#typography`, role table)
 11. **No sans-serif:** is every glyph on the page set in Source Serif 4 or Source Code Pro, with no sans-serif and no
     third family anywhere, including fallbacks that actually rendered? (`visual-language.md#typography`,
@@ -181,6 +182,14 @@ gap, `[DECIDED 2026-10-24]`; no other item is.
 52. Is it free of a copyright symbol, year, "All rights reserved", social icons, newsletter field, sitemap,
     back-to-top, tinted band, arrows, and links to pages that don't exist? At mobile width, does it stack left
     aligned? (`usage.md#footer`)
+    Is the name in the `nav` role in `ink`, the statement in the `body` role in `ink-muted` on the line below it,
+    and the links in the `link` role in `ink`? Wide: do the links share the name's baseline? At mobile width, are
+    the links below the statement, on one line? (`visual-language.md#footer`, Type and colour, Arrangement)
+    `[PROPOSED]` (S7M-VAL-017)
+    Is the row `space.m` below the rule and followed by `space.xl` at the page end, with no added space between the
+    name and statement, `space.xl` between GitHub and Privacy, wide at least `space.m` between the groups, narrow
+    `space.s` above the links, and no other value? (`visual-language.md#footer`, Spacing) `[PROPOSED]` Answered in
+    component source, as item 71 is. (S7M-VAL-017)
 
 ### 404
 53. Does the 404 have `BrandHeader`, the H1 "Not found.", the sentence from the voice doc, one secondary
