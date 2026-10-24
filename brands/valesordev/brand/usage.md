@@ -187,8 +187,9 @@ REPO     github.com/<org>/<repo>
 `[DECIDED 2026-10-08]` (see `visual-language.md#privacy-page-template`). Text is Brian's.
 
 **Correct**
-- `BrandHeader`, a rule, "Privacy" as the H1, a one-line subhead, titled sections of mono text at a 72 character
-  measure, `Footer`. Reads with JavaScript off at both layouts.
+- `BrandHeader` (its rule opens the band), "Privacy" as the H1, a one-line subhead, titled sections of mono text
+  at a 72 character measure, `Footer`. Reads with JavaScript off at both layouts. (`[DECIDED 2026-10-24]` Brian, in
+  session on S7M-VAL-018; was: `BrandHeader`, a rule, "Privacy" as the H1)
 - Plain first person singular statements of what is and isn't measured.
 
 **Incorrect**
@@ -209,7 +210,9 @@ specifies it on the story with this file's rules (serif column titles, mono text
 hairline dividers, stacking when narrow). Not adopted: `[DECIDED 2026-10-08]` (audit, Navigation, mark, components).
 
 ### text page
-`BrandHeader`, `SectionRule`, H1, subhead, sections at the reading measure, `Footer`. For `/privacy` and the 404.
+`BrandHeader`, H1, subhead, sections at the reading measure, `Footer`. For `/privacy` and the 404. `BrandHeader`'s
+rule opens the band; there is no `SectionRule` under it. `[DECIDED 2026-10-24]` (Brian, in session on S7M-VAL-018;
+was: `BrandHeader`, `SectionRule`, H1; `visual-language.md#privacy-page-template`)
 
 ### 404
 `BrandHeader`, the H1 "Not found.", the sentence from `voice.md#errors-empty-states-and-the-404`, one

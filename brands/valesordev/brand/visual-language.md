@@ -77,6 +77,8 @@ Notes:
   says, an exception to sentence case for headings (`voice.md#case-and-punctuation`). `[DECIDED 2026-10-14]`
   (Brian on S7M-VAL-009)
 - The subhead line in the target contains a spaced em dash; the copy is rewritten under `voice.md#characters`.
+- The role table's Subhead is the hero's (`#hero`). A text page's subhead is mono, as
+  `#privacy-page-template` decides (`[DECIDED 2026-10-08]`), in the body role. `[PROPOSED]` (S7M-VAL-018)
 - Line height and measure are set at token time. Rules: body line height at least 1.5; running text measure at
   most 72 characters in a text page (`/privacy`). `[DECIDED 2026-10-08]`
 - Long-form reading (project pages, README-style content, text pages): the body role (mono) at the measure above.
@@ -370,12 +372,56 @@ Not in the target. `[DECIDED 2026-10-08]` (the brief lists a Footer; the audit h
 Built under FEAT-04. The text is Brian's and changes only with him (`CLAUDE.md` §7); this specifies the frame.
 
 - The standard frame: `BrandHeader`, then a text page, then `Footer`. No hero, no illustration.
-- Text page: a `SectionRule`; one H1 in the display role ("Privacy"); a one-line subhead in `ink-muted` mono;
-  then sections. Each section: a serif title in the column-title role, then mono body at a measure of at most 72
-  characters. Left aligned to the content column. Section titles have no rule of their own: the page's one
-  `SectionRule` introduces the band, and space alone separates its sections: `space.l` above each section title
-  (`#sectionrule`). Section titles are in the column-title role's title case (`#typography`).
-  `[DECIDED 2026-10-14]`
+- Text page: one H1 in the display role ("Privacy"); a one-line subhead in `ink-muted` mono; then sections. Each
+  section: a serif title in the column-title role, then mono body at a measure of at most 72 characters. Left
+  aligned to the content column. Section titles have no rule of their own, and space alone separates the
+  sections: `space.l` above each section title after the first (`#sectionrule`); the first takes the `space.xl`
+  below the subhead (Spacing, below). Section titles are in the column-title role's title case (`#typography`).
+  `[DECIDED 2026-10-14]` ("after the first" and the first title's `space.xl` `[PROPOSED]`, S7M-VAL-018; was:
+  "`space.l` above each section title")
+- The text page has no `SectionRule` of its own: `BrandHeader`'s rule is the rule that opens its one band.
+  `[DECIDED 2026-10-24]` (Brian, in session on S7M-VAL-018; was: "a `SectionRule`" first, and "the page's one
+  `SectionRule` introduces the band") Reason: a `SectionRule` directly under `BrandHeader` puts two full-column
+  hairlines in a row: meeting, they read as a double rule the kit has nowhere else; apart, they frame an empty
+  stripe, the box `#sectionrule` rejects. Rejected: both of those.
+- **Type** (S7M-VAL-018). The subhead is the `body` role (mono, 1x) in `ink-muted`. `[PROPOSED]` Reason: as the
+  footer's statement (`#footer`): a sentence at body size reads as a plain statement. Rejected: the `value` role
+  (0.85x reads as fine print), the `subhead` role (serif 1.7x, the hero's; this template's decided line sets the
+  text page's subhead in mono, `#typography`).
+- **Spacing** (S7M-VAL-018). The text page's vertical space and gaps are the `space` steps below and nothing else,
+  at both widths. The column, inset, and measure are `#layout`'s. `[PROPOSED]` The reasons compare positions of
+  glyphs, computed from the kit's fonts and line heights (`tokens/tokens.json`) at the 15px body size.
+  - `BrandHeader`'s rule to the H1: `space.2xl`. Reason: `#layout` puts the largest steps above the H1. This
+    sets the H1's cap tops about 89px below the rule's bottom edge (about 90px below its line); the target's
+    are 83px below its header rule's line. Rejected: `space.3xl` (about 113px, a gap the target doesn't show),
+    `space.xl` (less than the `space.2xl` this page puts between bands, below).
+  - The H1 to the subhead: no added space; the two line boxes separate them. Reason: the H1's baseline is then
+    about 22px above the subhead's cap tops; the target sets its subhead's cap tops 23px below its H1's baseline.
+    The H1 and subhead read as one heading.
+  - The subhead to the first section title: `space.xl`. Reason: the page's head ends here, so this gap is wider
+    than the `space.l` between sections, and the subhead doesn't read as the first section's lead. Rejected:
+    `space.l` (that reason), `space.2xl` (as much as above the H1, which would split the head from its text).
+  - A section title to its body: no added space; the line boxes separate them. Reason: a title sits with its own
+    text. Its baseline is then about 15px above the body's cap tops, under the paragraph gap below.
+  - Between paragraphs and lists, in either order (paragraph, list, or list after list): `space.s`. Where a
+    title or the home link follows, its own step applies instead. Reason: it puts about 30px between a line's
+    baseline and the next paragraph's cap tops, between the 15px of a title to its body and the 46px of a
+    paragraph to the next section's title, so the three steps read apart. Rejected: `space.m` (a blank body line,
+    38px, too close to the 46px section break), no space (paragraphs merge in mono, which has no indent).
+  - Lists: the item text is indented `space.m` from the column edge, and the bullet hangs in that indent, inside
+    the column. Items are `space.2xs` apart. Reason: the bullet and the space after it are about two mono
+    characters (18px), so `space.m` keeps the bullet inside the column edge everything else aligns to; and the
+    item gap, under the paragraph gap, keeps a wrapped item's lines together while separating it from the next.
+    Rejected: `space.s` indent (the bullet would cross the column edge), bullets outside the column, no item gap
+    (two wrapped items read as one).
+  - The last section to "Return to the home page ->": `space.xl`. Reason: the link closes the page and is not
+    part of the last section. Rejected: `space.l` (it would read as the last section's link).
+  - Below the link, before the `Footer`'s rule: `space.2xl`. This space is the text page's, not the `Footer`'s
+    (`#footer`). Reason: `#layout` puts the largest steps between bands. Rejected: `space.xl` (no more than the
+    gap above the link, so the link would float between the text and the footer).
+- Tokens (S7M-VAL-018): `ink`, `ink-muted`, display, `body`, column-title, and `link` roles, `space.2xs`, `space.s`,
+  `space.m`, `space.l`, `space.xl`, `space.2xl`, and `#layout`'s `layout.max-width`, `layout.inset-narrow`,
+  `layout.inset-wide`, and `layout.measure`. `[PROPOSED]`
 - Lists use plain bullets in body type. No tables, no callouts, no accordions, no icons, no checkmarks.
 - Links in the text are underlined `ink`, no arrow. The page ends with a secondary `TextLink` to the home page,
   reading "Return to the home page ->" (`voice.md#cta-vocabulary`). `[DECIDED 2026-10-14]`
