@@ -21,7 +21,7 @@ Roles only. Values are set at token time against the contrast rules below.
 |---|---|---|---|
 | `paper` | page ground | neutral near-white, `[DECIDED 2026-10-08]` | not warm; the engraving's whites must match it |
 | `ink` | display and body type, wordmark, secondary link underline text | `#111111`, `[DECIDED 2026-10-08]` | `#000000` appears only inside the engraving |
-| `ink-muted` | descriptions, taglines, metadata values, the footer's license statement (`[DECIDED 2026-10-24]`, PR #118; was: footer text) | mid grey near `#545454`, `[DECIDED 2026-10-08]` | the single secondary grey |
+| `ink-muted` | descriptions, taglines, metadata values, the footer's license statement (`[DECIDED 2026-10-24]` Brian on PR #118; was: footer text) | mid grey near `#545454`, `[DECIDED 2026-10-08]` | the single secondary grey |
 | `rule` | every 1px hairline and divider | light neutral grey, `[DECIDED 2026-10-08]` | not warm |
 | `accent` | primary action text and underline, row arrows, "View all projects" | one vermilion near `#C8202A`, `[DECIDED 2026-10-08]` | direction and primary action only |
 
@@ -119,7 +119,7 @@ Everything stacks in reading order, left aligned, the same column inset, the sam
 5. `ProjectRow`: name and tagline (if the list carries one); description; `TechnicalMetadata`; the arrow stays on
    the right of the name line, and a row with no repository has no arrow. Row rules stay. `[DECIDED 2026-10-09]`
 6. `Footer`: the link group stacks below the name and statement, left aligned; GitHub and Privacy share one line
-   (`#footer`, Arrangement, `[DECIDED 2026-10-24]`, PR #118; was: links stack, left aligned).
+   (`#footer`, Arrangement, `[DECIDED 2026-10-24]` Brian on PR #118; was: links stack, left aligned).
 
 ## Illustration
 Pure black ink on white, pen-and-ink survey or engraving rendering, heavy contours with fine hatch and stipple,
@@ -180,7 +180,7 @@ Rules the audit doesn't state (counts, markup, limits, data format) are decided 
 - No About page or link. `[DECIDED 2026-10-08]` (Brian: it is described on the homepage; the target's About nav
   link and "About this project ->" link are dropped)
 - **Spacing** (issue #111). The header's vertical space and its gaps are the `space` steps below and nothing
-  else. `[DECIDED 2026-10-24]` (Brian, PR #113) The column inset is `#layout`'s (`layout.inset-*`), and the
+  else. `[DECIDED 2026-10-24]` (Brian on PR #113) The column inset is `#layout`'s (`layout.inset-*`), and the
   links' minimum box is the target size (`#interaction-states`); neither is header spacing.
   - Above and below the wordmark and nav, inside the rule: `space.xs`, top and bottom. `[DECIDED 2026-10-24]`
     Reason: with the wordmark role's line box this puts the rule 60px below the top of the page when wide, the
@@ -224,7 +224,7 @@ Rules the audit doesn't state (counts, markup, limits, data format) are decided 
 - The right link, if present, is a primary `TextLink` and says where it goes.
 - No fill, no icon, no number, no kicker above the title.
 - **Spacing** (issue #111). The component's vertical space and its gaps are the `space` steps below and nothing
-  else. `[DECIDED 2026-10-24]` (Brian, PR #113)
+  else. `[DECIDED 2026-10-24]` (Brian on PR #113)
   - Between the rule and the content under it (the title, the link, or both): `space.2xs`. `[DECIDED 2026-10-24]`
     Reason: the target's "Projects" band runs 63px rule to rule (y 682 to 745), which is the 1px rule, 8px, and
     the section role's 54px line box, so the title reads as hanging from its rule. Rejected: `space.3xs` (the
@@ -315,7 +315,7 @@ Not in the target. `[DECIDED 2026-10-08]` (the brief lists a Footer; the audit h
   social icons, no sitemap, no newsletter, no back-to-top.
 - Narrow: stacks, left aligned.
 - **Type and colour** (S7M-VAL-017). Each part takes an existing role; the footer adds no type step.
-  `[DECIDED 2026-10-24]` (Brian, PR #118)
+  `[DECIDED 2026-10-24]` (Brian on PR #118)
   - "Valesor Development": the `nav` role (serif, 1x), in `ink`. Plain text, not a link. Reason: it's the
     smallest serif role in the scale, so the name stays serif and the footer reads as a sign-off under the page,
     not a second header. Rejected: the `wordmark` role (1.6x repeats the header at full size), `column-title`
@@ -333,7 +333,7 @@ Not in the target. `[DECIDED 2026-10-08]` (the brief lists a Footer; the audit h
     (serif, which contradicts "mono links" above), `ink-muted` links (they would read as part of the statement).
   - This replaces the earlier tokens line, "wordmark role at the small end, nav role", which named a size the
     scale doesn't have and a serif role for the mono links.
-- **Arrangement** (S7M-VAL-017). `[DECIDED 2026-10-24]` (Brian, PR #118)
+- **Arrangement** (S7M-VAL-017). `[DECIDED 2026-10-24]` (Brian on PR #118)
   - The left group is two lines at both widths: the name, then the statement on the line below it. Reason: a
     colophon reads as a name with a note under it; and on one line, the name, statement, and links overrun the
     column just above the breakpoint (about 700px of type and gaps in the 648px column at 768px). Rejected: name and
@@ -346,7 +346,7 @@ Not in the target. `[DECIDED 2026-10-08]` (the brief lists a Footer; the audit h
     line (a list of two that reads like a menu).
 - **Spacing** (S7M-VAL-017). The footer's vertical space and gaps are the `space` steps below and nothing else.
   The column inset is `#layout`'s, and the links' minimum box is the target size (`#interaction-states`).
-  `[DECIDED 2026-10-24]` (Brian, PR #118)
+  `[DECIDED 2026-10-24]` (Brian on PR #118)
   - Between the footer's rule and the row: `space.m`. Reason: the row is not a title, so it doesn't hang from its
     rule as `SectionRule`'s `space.2xs` title does. The extra space marks it as the page's close. Rejected:
     `space.2xs` (the name would read as a section title), `space.l` and larger (the row floats free of its rule).
@@ -363,7 +363,7 @@ Not in the target. `[DECIDED 2026-10-08]` (the brief lists a Footer; the audit h
     as the rule above the footer, so the footer would read as two bands without a rule).
   - The space above the footer's rule belongs to the band before it, not to `Footer` (as in `#sectionrule`).
 - Tokens: `rule`, `ink`, `ink-muted`, `nav`, `body`, and `link` roles, `space.s`, `space.m`, `space.xl`.
-  `[DECIDED 2026-10-24]` (Brian, PR #118; was: `rule`, `ink`, `ink-muted`, wordmark role at the small end, nav role)
+  `[DECIDED 2026-10-24]` (Brian on PR #118; was: `rule`, `ink`, `ink-muted`, wordmark role at the small end, nav role)
 
 ## `/privacy` page template
 `[DECIDED 2026-10-08]`
