@@ -180,21 +180,21 @@ Rules the audit doesn't state (counts, markup, limits, data format) are decided 
 - No About page or link. `[DECIDED 2026-10-08]` (Brian: it is described on the homepage; the target's About nav
   link and "About this project ->" link are dropped)
 - **Spacing** (issue #111). The header's vertical space and its gaps are the `space` steps below and nothing
-  else. `[PROPOSED]` The column inset is `#layout`'s (`layout.inset-*`), and the links' minimum box is the target
-  size (`#interaction-states`); neither is header spacing.
-  - Above and below the wordmark and nav, inside the rule: `space.xs`, top and bottom. `[PROPOSED]` Reason: with
-    the wordmark role's line box this puts the rule 60px below the top of the page when wide, the target's
-    header height (audit: Layout, "header 60px"), without adopting the measurement as a rule. Rejected: `space.s`
-    (a deeper header than the target with no gain), `space.2xs` (the wordmark crowds the rule).
+  else. `[DECIDED 2026-10-24]` (Brian, PR #113) The column inset is `#layout`'s (`layout.inset-*`), and the
+  links' minimum box is the target size (`#interaction-states`); neither is header spacing.
+  - Above and below the wordmark and nav, inside the rule: `space.xs`, top and bottom. `[DECIDED 2026-10-24]`
+    Reason: with the wordmark role's line box this puts the rule 60px below the top of the page when wide, the
+    target's header height (audit: Layout, "header 60px"), without adopting the measurement as a rule. Rejected:
+    `space.s` (a deeper header than the target with no gain), `space.2xs` (the wordmark crowds the rule).
   - Between nav links: `space.xl`. `[DECIDED 2026-10-24]` (Brian on issue #111) Reason: the target sets its nav
     links about 55px apart; `space.xl` is the nearest step, and it keeps Projects and GitHub reading as two
     destinations rather than one phrase. It applies at both widths; the two links still share one line at 320px.
     Rejected: `space.m`, as first shipped (half the target's gap), `space.l` (still tighter than the target).
-  - Wide, between the wordmark and the nav: at least `space.m`. `[PROPOSED]` The two groups sit at opposite
-    ends of the column, so this minimum only shows if the column is narrow enough to bring them together.
+  - Wide, between the wordmark and the nav: at least `space.m`. `[DECIDED 2026-10-24]` The two groups sit at
+    opposite ends of the column, so this minimum only shows if the column is narrow enough to bring them together.
     Reason: it holds them apart as two groups just above the breakpoint. Rejected: no minimum (they could touch).
   - Narrow, between the wordmark line and the nav line: no added space; the two line boxes separate them.
-    `[PROPOSED]` Reason: added space would make the nav look like a separate band without a rule.
+    `[DECIDED 2026-10-24]` Reason: added space would make the nav look like a separate band without a rule.
 - Tokens: `ink`, `rule`, display serif, wordmark and nav roles, `space.xs`, `space.m`, `space.xl`.
 
 ### Hero
@@ -224,16 +224,16 @@ Rules the audit doesn't state (counts, markup, limits, data format) are decided 
 - The right link, if present, is a primary `TextLink` and says where it goes.
 - No fill, no icon, no number, no kicker above the title.
 - **Spacing** (issue #111). The component's vertical space and its gaps are the `space` steps below and nothing
-  else. `[PROPOSED]`
-  - Between the rule and the content under it (the title, the link, or both): `space.2xs`. `[PROPOSED]`
+  else. `[DECIDED 2026-10-24]` (Brian, PR #113)
+  - Between the rule and the content under it (the title, the link, or both): `space.2xs`. `[DECIDED 2026-10-24]`
     Reason: the target's "Projects" band runs 63px rule to rule (y 682 to 745), which is the 1px rule, 8px, and
     the section role's 54px line box, so the title reads as hanging from its rule. Rejected: `space.3xs` (the
     title's line box nearly touches the rule), `space.xs` and larger (the title floats free of its rule, and the
     two rules start to read as a box).
-  - Wide, between the title and the link: at least `space.m`. `[PROPOSED]` The link sits at the right end of
-    the column, so this minimum only shows if the title is long. Reason: as for the header's two groups.
+  - Wide, between the title and the link: at least `space.m`. `[DECIDED 2026-10-24]` The link sits at the right
+    end of the column, so this minimum only shows if the title is long. Reason: as for the header's two groups.
   - Narrow, between the title and the link below it: no added space; the two line boxes separate them.
-    `[PROPOSED]`
+    `[DECIDED 2026-10-24]`
   - The space below the content, before the band's next element, belongs to the band, not to `SectionRule`.
 - Tokens: `rule`, `ink`, `accent`, section title role, `space.2xs`, `space.m`.
 
