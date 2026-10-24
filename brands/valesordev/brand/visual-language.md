@@ -373,8 +373,10 @@ Built under FEAT-04. The text is Brian's and changes only with him (`CLAUDE.md` 
 - Text page: one H1 in the display role ("Privacy"); a one-line subhead in `ink-muted` mono; then sections. Each
   section: a serif title in the column-title role, then mono body at a measure of at most 72 characters. Left
   aligned to the content column. Section titles have no rule of their own, and space alone separates the
-  sections: `space.l` above each section title (`#sectionrule`). Section titles are in the column-title role's
-  title case (`#typography`). `[DECIDED 2026-10-14]`
+  sections: `space.l` above each section title after the first (`#sectionrule`); the first takes the `space.xl`
+  below the subhead (Spacing, below). Section titles are in the column-title role's title case (`#typography`).
+  `[DECIDED 2026-10-14]` ("after the first" `[PROPOSED]`, S7M-VAL-018; was: "`space.l` above each section
+  title")
 - The text page has no `SectionRule` of its own: `BrandHeader`'s rule is the rule that opens its one band.
   `[DECIDED 2026-10-24]` (Brian, in session on S7M-VAL-018; was: "a `SectionRule`" first, and "the page's one
   `SectionRule` introduces the band") Reason: a `SectionRule` directly under `BrandHeader` puts two full-column
@@ -387,8 +389,9 @@ Built under FEAT-04. The text is Brian's and changes only with him (`CLAUDE.md` 
   at both widths. The column, inset, and measure are `#layout`'s. `[PROPOSED]` The reasons compare positions of
   glyphs, computed from the kit's fonts and line heights (`tokens/tokens.json`) at the 15px body size.
   - `BrandHeader`'s rule to the H1: `space.2xl`. Reason: `#layout` puts the largest steps above the H1. This
-    sets the H1's cap tops about 89px below the rule; the target's are 83px below its header rule. Rejected:
-    `space.3xl` (about 113px, a gap the target doesn't show), `space.xl` (less than the space between bands).
+    sets the H1's cap tops about 89px below the rule's bottom edge (about 90px below its line); the target's
+    are 83px below its header rule's line. Rejected: `space.3xl` (about 113px, a gap the target doesn't show),
+    `space.xl` (less than the `space.2xl` this page puts between bands, below).
   - The H1 to the subhead: no added space; the two line boxes separate them. Reason: the H1's baseline is then
     about 22px above the subhead's cap tops; the target sets its subhead's cap tops 23px below its H1's baseline.
     The H1 and subhead read as one heading.
@@ -397,7 +400,8 @@ Built under FEAT-04. The text is Brian's and changes only with him (`CLAUDE.md` 
     `space.l` (that reason), `space.2xl` (as much as above the H1, which would split the head from its text).
   - A section title to its body: no added space; the line boxes separate them. Reason: a title sits with its own
     text. Its baseline is then about 15px above the body's cap tops, under the paragraph gap below.
-  - Between paragraphs, and between a paragraph and a list: `space.s`. Reason: it puts about 30px between a line's
+  - Between paragraphs and lists, in either order (paragraph, list, or list after list): `space.s`. Where a
+    title or the home link follows, its own step applies instead. Reason: it puts about 30px between a line's
     baseline and the next paragraph's cap tops, between the 15px of a title to its body and the 46px of a
     paragraph to the next section's title, so the three steps read apart. Rejected: `space.m` (a blank body line,
     38px, too close to the 46px section break), no space (paragraphs merge in mono, which has no indent).

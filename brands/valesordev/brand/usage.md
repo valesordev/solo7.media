@@ -187,8 +187,9 @@ REPO     github.com/<org>/<repo>
 `[DECIDED 2026-10-08]` (see `visual-language.md#privacy-page-template`). Text is Brian's.
 
 **Correct**
-- `BrandHeader`, a rule, "Privacy" as the H1, a one-line subhead, titled sections of mono text at a 72 character
-  measure, `Footer`. Reads with JavaScript off at both layouts.
+- `BrandHeader` (its rule opens the band), "Privacy" as the H1, a one-line subhead, titled sections of mono text
+  at a 72 character measure, `Footer`. Reads with JavaScript off at both layouts. (`[DECIDED 2026-10-24]` Brian, in
+  session on S7M-VAL-018; was: `BrandHeader`, a rule, "Privacy" as the H1)
 - Plain first person singular statements of what is and isn't measured.
 
 **Incorrect**
