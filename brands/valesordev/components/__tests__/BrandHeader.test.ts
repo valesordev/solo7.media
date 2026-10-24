@@ -4,7 +4,7 @@ import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 import { beforeAll, describe, expect, it } from 'vitest';
 import BrandHeader from '../BrandHeader.astro';
 import { GITHUB_ORG_URL, HOME_HREF, PROJECTS_HREF } from '../links';
-import { anchors, decode } from './html';
+import { anchors, decode, styleRules } from './html';
 
 let container: AstroContainer;
 
@@ -68,18 +68,10 @@ describe('BrandHeader', () => {
     expect(decode(current[0].inner)).toBe('Projects');
   });
 
-  // Render output carries no styles, so the decided spacing step is read from the component's <style>. Comments are
-  // stripped first, and every rule is read, inside media queries too, so an override at either width fails it.
+  // Render output carries no styles, so the decided spacing step is read from the component's <style>, every rule
+  // included, inside media queries too, so an override at either width fails it.
   it('spaces the nav links space.xl apart at both widths (visual-language.md#brandheader, Spacing)', () => {
-    const source = readFileSync(join(import.meta.dirname, '..', 'BrandHeader.astro'), 'utf8');
-    const style = (source.match(/<style>([\s\S]*?)<\/style>/)?.[1] ?? '').replace(/\/\*[\s\S]*?\*\//g, '');
-    const rules = [...style.matchAll(/([^{}]+)\{([^{}]*)\}/g)].map(([, selector, body]) => ({
-      selectors: selector.split(',').map((s) => s.trim()),
-      decls: body
-        .split(';')
-        .map((d) => d.split(':').map((part) => part.trim()))
-        .filter(([prop, value]) => prop && value),
-    }));
+    const rules = styleRules(readFileSync(join(import.meta.dirname, '..', 'BrandHeader.astro'), 'utf8'));
     const isNav = (s: string) => /(^|[\s>+~])nav$/.test(s);
     const inNav = (s: string) => /(^|[\s>+~])nav[\s>+~]/.test(s);
 
