@@ -177,7 +177,9 @@ Rules the audit doesn't state (counts, markup, limits, data format) are decided 
   to the `valesordev` organization. `[DECIDED 2026-10-08]` labels and destinations.
 - No About page or link. `[DECIDED 2026-10-08]` (Brian: it is described on the homepage; the target's About nav
   link and "About this project ->" link are dropped)
-- **Spacing** (issue #111). Every value is a `space` step; nothing else spaces the header.
+- **Spacing** (issue #111). The header's vertical space and its gaps are the `space` steps below and nothing
+  else. `[PROPOSED]` The column inset is `#layout`'s (`layout.inset-*`), and the links' minimum box is the target
+  size (`#interaction-states`); neither is header spacing.
   - Above and below the wordmark and nav, inside the rule: `space.xs`, top and bottom. `[PROPOSED]` Reason: with
     the wordmark role's line box this puts the rule 60px below the top of the page when wide, the target's
     header height (audit: Layout, "header 60px"), without adopting the measurement as a rule. Rejected: `space.s`
@@ -219,10 +221,13 @@ Rules the audit doesn't state (counts, markup, limits, data format) are decided 
   reading text into bands. Rejected: a rule above every section title.
 - The right link, if present, is a primary `TextLink` and says where it goes.
 - No fill, no icon, no number, no kicker above the title.
-- **Spacing** (issue #111). Every value is a `space` step; nothing else spaces the component.
+- **Spacing** (issue #111). The component's vertical space and its gaps are the `space` steps below and nothing
+  else. `[PROPOSED]`
   - Between the rule and the content under it (the title, the link, or both): `space.2xs`. `[PROPOSED]`
-    Reason: the target's title line box starts about 8px under its rule, so the title reads as hanging from it.
-    Rejected: `space.xs` and larger (the title floats free of its rule, and two rules start to read as a box).
+    Reason: the target's "Projects" band runs 63px rule to rule (y 682 to 745), which is the 1px rule, 8px, and
+    the section role's 54px line box, so the title reads as hanging from its rule. Rejected: `space.3xs` (the
+    title's line box nearly touches the rule), `space.xs` and larger (the title floats free of its rule, and the
+    two rules start to read as a box).
   - Wide, between the title and the link: at least `space.m`. `[PROPOSED]` The link sits at the right end of
     the column, so this minimum only shows if the title is long. Reason: as for the header's two groups.
   - Narrow, between the title and the link below it: no added space; the two line boxes separate them.
