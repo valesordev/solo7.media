@@ -9,18 +9,28 @@ brief (Brand Kit Project Direction, Valesor Development).
 
 Status marks: `[DECIDED <date>]` is Brian's. `[PROPOSED]` is visual-designer's recommendation awaiting Brian at
 PR review. Nothing `[PROPOSED]` may be cited by a story as binding; that includes every `[PROPOSED P<n>]`.
+Wherever a rule or gate says `[PROPOSED]` (the M1 gate "no `[PROPOSED]` left" among them), it means both forms,
+bare and with an ID: a check for open proposals matches the prefix `[PROPOSED`.
 Nothing is open at 2026-10-08: the Apache-2.0 default, footer license line, homepage copy, long-form reading font,
 and every audit row are decided.
 `references/visual-audit.md` is the authority for any row marked `[PROPOSED]` later.
 
-Proposal IDs (S7M-VAL-019). Automation reads these forms exactly, so they are written exactly as shown.
+Proposal IDs (S7M-VAL-019). This heading marks the brand as using the convention. Automation reads these forms
+exactly, so they are written exactly as shown; `<n>`, `<pr>`, `<YYYY-MM-DD>`, and `<summary>` are the only parts
+that vary.
 - Each new proposal is marked `[PROPOSED P<n>]`, where `<n>` is a positive integer unique within
-  `brands/valesordev/`. A new ID is the next number not used anywhere under `brands/valesordev/`, in a
-  `[PROPOSED P<n>]` or a `[DECIDED …, P<n>]` mark. An ID is never reused, even after its proposal is decided.
+  `brands/valesordev/`. An ID is never reused, even after its proposal is decided, rejected, or removed.
   A bare `[PROPOSED]` stays valid for marks written before this convention.
+- Last proposal ID: P0. This line is the ledger (P0: none issued yet). A new ID is one more than the ledger's
+  number, which is also the next number not used anywhere under `brands/valesordev/` in a `[PROPOSED P<n>]` or
+  `[DECIDED <YYYY-MM-DD>, PR #<pr>, P<n>]` mark. The PR that adds proposals raises the ledger to its highest new
+  ID in the same commit. Reason: an ID that only had to be absent from the files could be issued twice, once
+  after its proposal's text is removed and once by two branches cut from the same `main`; the ledger only goes
+  up, and two branches raising it conflict at merge.
 - The visual-designer PR that adds proposals lists each ID once in its body, on a line of its own that starts
-  exactly `- [ ] P<n>: <one-line summary>`. Brian checking the box (`- [x] P<n>`) is his decision on that ID. A box
-  still unchecked when the PR merges leaves that proposal `[PROPOSED P<n>]`: neither decided nor rejected.
+  exactly `- [ ] P<n>: <one-line summary>`. Brian checking the box (`- [x] P<n>` or `- [X] P<n>`) is his decision
+  on that ID. A box still unchecked when the PR merges leaves that proposal `[PROPOSED P<n>]`: neither decided nor
+  rejected.
 - For each checked ID, automation rewrites `[PROPOSED P<n>]` as `[DECIDED <YYYY-MM-DD>, PR #<pr>, P<n>]`, with the
   PR's merge date in UTC. The ID stays in the mark so the decision can be traced and the ID is not reused.
   `[DECIDED <date>]` remains the mark for a decision Brian makes himself, outside a PR's checkboxes.
