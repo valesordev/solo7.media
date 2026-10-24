@@ -21,7 +21,7 @@ Roles only. Values are set at token time against the contrast rules below.
 |---|---|---|---|
 | `paper` | page ground | neutral near-white, `[DECIDED 2026-10-08]` | not warm; the engraving's whites must match it |
 | `ink` | display and body type, wordmark, secondary link underline text | `#111111`, `[DECIDED 2026-10-08]` | `#000000` appears only inside the engraving |
-| `ink-muted` | descriptions, taglines, metadata values, footer text | mid grey near `#545454`, `[DECIDED 2026-10-08]` | the single secondary grey |
+| `ink-muted` | descriptions, taglines, metadata values, the footer's license statement (`[PROPOSED]`, S7M-VAL-017; was: footer text) | mid grey near `#545454`, `[DECIDED 2026-10-08]` | the single secondary grey |
 | `rule` | every 1px hairline and divider | light neutral grey, `[DECIDED 2026-10-08]` | not warm |
 | `accent` | primary action text and underline, row arrows, "View all projects" | one vermilion near `#C8202A`, `[DECIDED 2026-10-08]` | direction and primary action only |
 
@@ -45,7 +45,8 @@ Two families, one job each. `[DECIDED 2026-10-08]` (audit: Typography; Q2)
 
 - **Display serif** names things: wordmark, H1, subhead, section titles, project names, column titles. Nav is
   serif too, but that is `[DECIDED 2026-10-08]` (below).
-- **Monospace** explains and measures: body text, descriptions, taglines, metadata, links and CTAs, footer.
+- **Monospace** explains and measures: body text, descriptions, taglines, metadata, links and CTAs, the footer's
+  statement and links (`#footer`; was: footer).
 - No sans-serif, anywhere. No third family, no italic display, no bold display. Weight is regular throughout.
   `[DECIDED 2026-10-08]`
 - Families are open-source and self-hosted: Source Serif 4 for the display serif and Source Code Pro for the
@@ -117,7 +118,8 @@ Everything stacks in reading order, left aligned, the same column inset, the sam
 4. `SectionRule` title and its link: title above, link below, both left aligned.
 5. `ProjectRow`: name and tagline (if the list carries one); description; `TechnicalMetadata`; the arrow stays on
    the right of the name line, and a row with no repository has no arrow. Row rules stay. `[DECIDED 2026-10-09]`
-6. `Footer`: links stack, left aligned.
+6. `Footer`: the link group stacks below the name and statement, left aligned; GitHub and Privacy share one line
+   (`#footer`, Arrangement, `[PROPOSED]`; was: links stack, left aligned).
 
 ## Illustration
 Pure black ink on white, pen-and-ink survey or engraving rendering, heavy contours with fine hatch and stipple,
@@ -312,7 +314,55 @@ Not in the target. `[DECIDED 2026-10-08]` (the brief lists a Footer; the audit h
 - No copyright symbol or year (a published "(c)" line implies a company; the license is stated instead). No
   social icons, no sitemap, no newsletter, no back-to-top.
 - Narrow: stacks, left aligned.
-- Tokens: `rule`, `ink`, `ink-muted`, wordmark role at the small end, nav role.
+- **Type and colour** (S7M-VAL-017). Each part takes an existing role; the footer adds no type step. `[PROPOSED]`
+  - "Valesor Development": the `nav` role (serif, 1x), in `ink`. Plain text, not a link. Reason: it's the
+    smallest serif role in the scale, so the name stays serif and the footer reads as a sign-off under the page,
+    not a second header. Rejected: the `wordmark` role (1.6x repeats the header at full size), `column-title`
+    (a heading role, and the name is not a heading).
+  - The license statement: the `body` role (mono, 1x), in `ink-muted`. Reason: it's a sentence, and at body size
+    it reads as a plain statement. Rejected: the `value` role (0.85x makes the license read as fine print, which is
+    the legal-footer look the brand refuses).
+    Narrow: below about 24rem (384px) the statement wraps to a second line, in the same role, with no new type
+    step, as `#hero` lets the subhead wrap. It is one line from 24rem up. "One-line" above means one sentence on
+    its own line, not a line that never wraps. Reason: it is 333px at body size, wider than the 272px column at
+    320px; holding it to one line would need a smaller size or `nowrap`, and `nowrap` fails reflow (WCAG 1.4.10).
+    Rejected: the `value` role to make it fit (it still wraps at 320px).
+  - GitHub and Privacy: the `link` role (mono, 1x), in `ink`. Reason: links are mono (`#typography`), and `ink`
+    sets them apart from the `ink-muted` statement, as the header's nav links are `ink`. Rejected: the `nav` role
+    (serif, which contradicts "mono links" above), `ink-muted` links (they would read as part of the statement).
+  - This replaces the earlier tokens line, "wordmark role at the small end, nav role", which named a size the
+    scale doesn't have and a serif role for the mono links.
+- **Arrangement** (S7M-VAL-017). `[PROPOSED]`
+  - The left group is two lines at both widths: the name, then the statement on the line below it. Reason: a
+    colophon reads as a name with a note under it; and on one line, the name, statement, and links overrun the
+    column just above the breakpoint (about 700px of type and gaps in the 648px column at 768px). Rejected: name and
+    statement side by side when wide (it wraps near the breakpoint and looks different at each width).
+  - Wide: the links share the name's baseline (the first line). Reason: as in `BrandHeader`, the name and the
+    destinations sit on one line, and the statement is a note beneath the name. Rejected: the last line's baseline
+    (it would pair the links with the license sentence, as if they belonged to it).
+  - Narrow: the link group goes below the left group, left aligned. GitHub and Privacy stay on one line, as the
+    header's nav does; the two links fit at 320px. Reason: consistent with `BrandHeader`. Rejected: one link per
+    line (a list of two that reads like a menu).
+- **Spacing** (S7M-VAL-017). The footer's vertical space and gaps are the `space` steps below and nothing else.
+  The column inset is `#layout`'s, and the links' minimum box is the target size (`#interaction-states`).
+  `[PROPOSED]`
+  - Between the footer's rule and the row: `space.m`. Reason: the row is not a title, so it doesn't hang from its
+    rule as `SectionRule`'s `space.2xs` title does. The extra space marks it as the page's close. Rejected:
+    `space.2xs` (the name would read as a section title), `space.l` and larger (the row floats free of its rule).
+  - Below the row, at the end of the page: `space.xl`. Reason: it keeps the last line clear of the viewport's
+    bottom edge, including under a mobile browser's toolbar, without a blank screen to scroll through. Rejected:
+    `space.m` (the page stops short), `space.2xl` (empty scroll after the content ends).
+  - Between the name and the statement: no added space; the two line boxes separate them. Reason: they are one
+    group, as the header's narrow wordmark and nav lines are.
+  - Between GitHub and Privacy: `space.xl`, at both widths. Reason: the header's nav gap (`#brandheader`,
+    `[DECIDED 2026-10-24]`), for the same two destinations.
+  - Wide, between the two groups: at least `space.m`. Reason: as for `BrandHeader`'s two groups.
+  - Narrow, between the left group and the links: `space.s`. Reason: both are mono at 1x, so without a gap the
+    links read as a third line of the statement. Rejected: no added space (that reason), `space.m` (as much space
+    as the rule above the footer, so the footer would read as two bands without a rule).
+  - The space above the footer's rule belongs to the band before it, not to `Footer` (as in `#sectionrule`).
+- Tokens: `rule`, `ink`, `ink-muted`, `nav`, `body`, and `link` roles, `space.s`, `space.m`, `space.xl`.
+  `[PROPOSED]` (S7M-VAL-017; was: `rule`, `ink`, `ink-muted`, wordmark role at the small end, nav role)
 
 ## `/privacy` page template
 `[DECIDED 2026-10-08]`
