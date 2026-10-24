@@ -12,9 +12,10 @@ wins and this file is the defect. This file adds no rule of its own.
 
 Status marks as in `foundation.md`. An item with no mark restates a `[DECIDED]` rule in the section it cites.
 A `[DECIDED 2026-10-14]` mark on an item is how the check is run, or a rule decided that day, recorded in the
-section it cites. The spacing clauses of items 33 and 35 are `[PROPOSED]` (issue #111), except item 33's nav-link
-gap, `[DECIDED 2026-10-24]`. Item 52's type, arrangement, and spacing clauses, and item 7's footer clause, are
-`[PROPOSED]` (S7M-VAL-017); no other item is.
+section it cites. The spacing clauses of items 33 and 35 are `[DECIDED 2026-10-24]` (Brian on PR #113; item 33's
+nav-link gap, Brian on issue #111).
+Item 52's type, arrangement, and spacing clauses, and item 7's footer clause, are `[DECIDED 2026-10-24]` (Brian on
+PR #118). No item is `[PROPOSED]`.
 
 ## How to run it
 - **Theme:** light only. There is no dark theme. (`visual-language.md#color`, Themes)
@@ -48,7 +49,7 @@ gap, `[DECIDED 2026-10-24]`. Item 52's type, arrangement, and spacing clauses, a
    engraving only? (`visual-language.md#color`, `foundation.md#what-the-brand-is-made-of` item 1)
 7. Is `ink` on display and body type and the wordmark; `ink-muted` on descriptions, taglines, metadata, and the
    footer's license statement; `rule` on hairlines only? (`visual-language.md#color`, role table) The footer clause is
-   `[PROPOSED]` (S7M-VAL-017; was: footer text).
+   `[DECIDED 2026-10-24]` (Brian on PR #118; was: footer text).
 8. Is vermilion (`accent`) used only for primary action text and underline, `ProjectRow` arrows, and the
    `SectionRule` link, and never for a heading, decoration, emphasis, status, or a rule? (`visual-language.md#color`,
    `usage.md#textlink`, `usage.md#sectionrule`)
@@ -123,7 +124,8 @@ gap, `[DECIDED 2026-10-24]`. Item 52's type, arrangement, and spacing clauses, a
     Is the gap between nav links `space.xl`? (`visual-language.md#brandheader`, Spacing) `[DECIDED 2026-10-24]`
     Is the header's other vertical space and gaps `space.xs` above and below the wordmark and nav, wide at least
     `space.m` between the wordmark and the nav, and no other value? (`visual-language.md#brandheader`, Spacing)
-    `[PROPOSED]` Both spacing questions are answered in component source, as item 71 is. (issue #111)
+    `[DECIDED 2026-10-24]` (Brian on PR #113) Both spacing questions are answered in component source, as item 71 is.
+    (issue #111)
 
 ### SectionRule
 34. Is it a full-column hairline, then a serif title at left and, if present, one primary `TextLink` that names
@@ -131,8 +133,8 @@ gap, `[DECIDED 2026-10-24]`. Item 52's type, arrangement, and spacing clauses, a
 35. Is it free of a fill, icon, number, or kicker above the title? At mobile width, is the link below the title,
     both left aligned? (`usage.md#sectionrule`, `visual-language.md#narrow-layout-mobile` item 4)
     Is the content `space.2xs` below the rule, wide at least `space.m` between the title and the link, and no other
-    value spacing the component? (`visual-language.md#sectionrule`, Spacing) `[PROPOSED]` Answered in component
-    source, as item 71 is. (issue #111)
+    value spacing the component? (`visual-language.md#sectionrule`, Spacing) `[DECIDED 2026-10-24]`
+    (Brian on PR #113) Answered in component source, as item 71 is. (issue #111)
 
 ### ProjectRow
 36. Is the row up to four parts between two 1px rules: serif name (tagline beneath only if the project list
@@ -188,11 +190,11 @@ gap, `[DECIDED 2026-10-24]`. Item 52's type, arrangement, and spacing clauses, a
     the links below the statement, on one line? At 390 CSS px is the statement one line, and at 320 CSS px (item
     80's width) does it wrap onto a second line in the `body` role rather than overflow or shrink?
     (`visual-language.md#footer`, Type and colour, Arrangement)
-    `[PROPOSED]` (S7M-VAL-017)
+    `[DECIDED 2026-10-24]` (Brian on PR #118)
     Is the row `space.m` below the rule and followed by `space.xl` at the page end, with no added space between the
     name and statement, `space.xl` between GitHub and Privacy, wide at least `space.m` between the groups, narrow
-    `space.s` above the links, and no other value? (`visual-language.md#footer`, Spacing) `[PROPOSED]` Answered in
-    component source, as item 71 is. (S7M-VAL-017)
+    `space.s` above the links, and no other value? (`visual-language.md#footer`, Spacing) `[DECIDED 2026-10-24]`
+    (Brian on PR #118) Answered in component source, as item 71 is. (S7M-VAL-017)
 
 ### 404
 53. Does the 404 have `BrandHeader`, the H1 "Not found.", the sentence from the voice doc, one secondary
