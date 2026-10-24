@@ -8,9 +8,27 @@ Derived from the approved audit (`../references/visual-audit.md`, core rows deci
 brief (Brand Kit Project Direction, Valesor Development).
 
 Status marks: `[DECIDED <date>]` is Brian's. `[PROPOSED]` is visual-designer's recommendation awaiting Brian at
-PR review. Nothing `[PROPOSED]` may be cited by a story as binding. Nothing is open at 2026-10-08: the Apache-2.0 default,
-footer license line, homepage copy, long-form reading font, and every audit row are decided.
+PR review. Nothing `[PROPOSED]` may be cited by a story as binding; that includes every `[PROPOSED P<n>]`.
+Wherever a rule or gate says `[PROPOSED]` (the M1 gate "no `[PROPOSED]` left" among them), it means a mark in
+either form, bare or with an ID. The examples in this paragraph and in Proposal IDs below are not marks.
+Nothing is open at 2026-10-08: the Apache-2.0 default, footer license line, homepage copy, long-form reading font,
+and every audit row are decided.
 `references/visual-audit.md` is the authority for any row marked `[PROPOSED]` later.
+
+Proposal IDs (S7M-VAL-019). The words "Proposal IDs" opening this paragraph mark the brand as using the
+convention. Automation reads the forms below exactly, so they are written exactly as shown. In the forms automation
+reads, only `<n>`, `<pr>`, `<YYYY-MM-DD>`, `<summary>` (one line), and the box (space, `x`, or `X`) vary.
+- Each new proposal is marked `[PROPOSED P<n>]`, where `<n>` is a positive integer unique within
+  `brands/valesordev/`: a new ID is the next number not used anywhere under `brands/valesordev/`, in a
+  `[PROPOSED P<n>]` or a `[DECIDED <YYYY-MM-DD>, PR #<pr>, P<n>]` mark. An ID is never reused, even after its
+  proposal is decided. A bare `[PROPOSED]` stays valid for marks written before this convention.
+- The visual-designer PR that adds proposals lists each ID once in its body, on a line of its own that starts
+  exactly `- [ ] P<n>: <summary>`. Brian checking the box (`- [x] P<n>` or `- [X] P<n>`) is his decision
+  on that ID. A box still unchecked when the PR merges leaves that proposal `[PROPOSED P<n>]`: neither decided nor
+  rejected.
+- For each checked ID, automation rewrites `[PROPOSED P<n>]` as `[DECIDED <YYYY-MM-DD>, PR #<pr>, P<n>]`, with the
+  PR's merge date in UTC. The ID stays in the mark so the decision can be traced and the ID is not reused.
+  `[DECIDED <date>]` remains the mark for a decision Brian makes himself, outside a PR's checkboxes.
 
 ## Identity
 Valesor Development is the engineering imprint: the banner applied to software that is complete enough to be
