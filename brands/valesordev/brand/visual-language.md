@@ -77,6 +77,8 @@ Notes:
   says, an exception to sentence case for headings (`voice.md#case-and-punctuation`). `[DECIDED 2026-10-14]`
   (Brian on S7M-VAL-009)
 - The subhead line in the target contains a spaced em dash; the copy is rewritten under `voice.md#characters`.
+- The role table's Subhead is the hero's (`#hero`). A text page's subhead is mono, as
+  `#privacy-page-template` decides (`[DECIDED 2026-10-08]`), in the body role. `[PROPOSED]` (S7M-VAL-018)
 - Line height and measure are set at token time. Rules: body line height at least 1.5; running text measure at
   most 72 characters in a text page (`/privacy`). `[DECIDED 2026-10-08]`
 - Long-form reading (project pages, README-style content, text pages): the body role (mono) at the measure above.
@@ -375,8 +377,8 @@ Built under FEAT-04. The text is Brian's and changes only with him (`CLAUDE.md` 
   aligned to the content column. Section titles have no rule of their own, and space alone separates the
   sections: `space.l` above each section title after the first (`#sectionrule`); the first takes the `space.xl`
   below the subhead (Spacing, below). Section titles are in the column-title role's title case (`#typography`).
-  `[DECIDED 2026-10-14]` ("after the first" `[PROPOSED]`, S7M-VAL-018; was: "`space.l` above each section
-  title")
+  `[DECIDED 2026-10-14]` ("after the first" and the first title's `space.xl` `[PROPOSED]`, S7M-VAL-018; was:
+  "`space.l` above each section title")
 - The text page has no `SectionRule` of its own: `BrandHeader`'s rule is the rule that opens its one band.
   `[DECIDED 2026-10-24]` (Brian, in session on S7M-VAL-018; was: "a `SectionRule`" first, and "the page's one
   `SectionRule` introduces the band") Reason: a `SectionRule` directly under `BrandHeader` puts two full-column
@@ -384,7 +386,8 @@ Built under FEAT-04. The text is Brian's and changes only with him (`CLAUDE.md` 
   stripe, the box `#sectionrule` rejects. Rejected: both of those.
 - **Type** (S7M-VAL-018). The subhead is the `body` role (mono, 1x) in `ink-muted`. `[PROPOSED]` Reason: as the
   footer's statement (`#footer`): a sentence at body size reads as a plain statement. Rejected: the `value` role
-  (0.85x reads as fine print).
+  (0.85x reads as fine print), the `subhead` role (serif 1.7x, the hero's; this template's decided line sets the
+  text page's subhead in mono, `#typography`).
 - **Spacing** (S7M-VAL-018). The text page's vertical space and gaps are the `space` steps below and nothing else,
   at both widths. The column, inset, and measure are `#layout`'s. `[PROPOSED]` The reasons compare positions of
   glyphs, computed from the kit's fonts and line heights (`tokens/tokens.json`) at the 15px body size.
@@ -417,7 +420,8 @@ Built under FEAT-04. The text is Brian's and changes only with him (`CLAUDE.md` 
     (`#footer`). Reason: `#layout` puts the largest steps between bands. Rejected: `space.xl` (no more than the
     gap above the link, so the link would float between the text and the footer).
 - Tokens (S7M-VAL-018): `ink`, `ink-muted`, display, `body`, column-title, and `link` roles, `space.2xs`, `space.s`,
-  `space.m`, `space.l`, `space.xl`, `space.2xl`, `layout.measure`. `[PROPOSED]`
+  `space.m`, `space.l`, `space.xl`, `space.2xl`, and `#layout`'s `layout.max-width`, `layout.inset-narrow`,
+  `layout.inset-wide`, and `layout.measure`. `[PROPOSED]`
 - Lists use plain bullets in body type. No tables, no callouts, no accordions, no icons, no checkmarks.
 - Links in the text are underlined `ink`, no arrow. The page ends with a secondary `TextLink` to the home page,
   reading "Return to the home page ->" (`voice.md#cta-vocabulary`). `[DECIDED 2026-10-14]`

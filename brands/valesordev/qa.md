@@ -58,9 +58,10 @@ PR #118). Item 54's rule-above-the-H1 clause is `[DECIDED 2026-10-24]` (Brian, i
    (`visual-language.md#color` Rules, `foundation.md#not-valesor`)
 
 ### Type roles
-10. Do serif things name (wordmark, H1, subhead, section titles, project names, column titles, nav, the footer's
-    name) and mono things explain and measure (body, descriptions, taglines, metadata, links and CTAs, the footer's
-    statement and links)? (`visual-language.md#typography`, role table; the footer's parts: `visual-language.md#footer`)
+10. Do serif things name (wordmark, H1, the hero's subhead, section titles, project names, column titles, nav, the
+    footer's name) and mono things explain and measure (body, descriptions, taglines, metadata, links and CTAs, a
+    text page's subhead, the footer's statement and links)? (`visual-language.md#typography`, role table; the
+    footer's parts: `visual-language.md#footer`; a text page's subhead: `visual-language.md#privacy-page-template`)
 11. **No sans-serif:** is every glyph on the page set in Source Serif 4 or Source Code Pro, with no sans-serif and no
     third family anywhere, including fallbacks that actually rendered? (`visual-language.md#typography`,
     `foundation.md#what-the-brand-is-made-of` item 3)
