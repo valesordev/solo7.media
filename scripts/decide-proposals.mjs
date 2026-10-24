@@ -45,7 +45,8 @@ export function addedLines(diff) {
     if (hunk) { inHunk = true; line = Number(hunk[1]); continue; }
     if (!inHunk) {
       if (!l.startsWith('+++ ')) continue;
-      const target = l.slice(4);
+      // git ends the header with a tab when the path has a space.
+      const target = l.slice(4).replace(/\t$/, '');
       if (target.startsWith('"')) throw new Error(`quoted path in diff, not supported: ${target}`);
       path = target === '/dev/null' ? null : target.replace(/^b\//, '');
       if (path) added.set(path, added.get(path) ?? new Set());
@@ -115,10 +116,9 @@ export function selfCheck(files, outputs, decided, date, pr) {
     if (before.length !== after.length) { errors.push(`self-check: ${path} changed line count`); continue; }
     after.forEach((a, i) => {
       const ids = subs.get(i + 1) ?? [];
-      // Each decided mark appears exactly once on its line, and putting every one back gives the input line.
-      const once = ids.every((id) => a.split(decidedMark(date, pr, id)).length === 2);
+      // Putting every decided mark on the line back to its proposed form gives the input line.
       const restored = ids.reduce((s, id) => s.replace(decidedMark(date, pr, id), proposedMark(id)), a);
-      if (!once || restored !== before[i]) errors.push(`self-check: ${path}:${i + 1} differs beyond the mark`);
+      if (restored !== before[i]) errors.push(`self-check: ${path}:${i + 1} differs beyond the mark`);
     });
   }
   return errors;

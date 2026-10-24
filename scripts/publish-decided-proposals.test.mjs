@@ -21,7 +21,9 @@ case "$2" in
   repos/o/r/git/ref/heads/*) [ -n "$FAKE_REF" ] || { echo "HTTP 404" >&2; exit 1; }; echo "{\\"object\\":{\\"sha\\":\\"$FAKE_REF\\"}}";;
   repos/o/r/git/commits/*) echo "{\\"parents\\":[{\\"sha\\":\\"$FAKE_PARENT\\"}]}";;
   repos/o/r/contents/*) echo "{\\"encoding\\":\\"base64\\",\\"content\\":\\"$FAKE_CONTENT\\"}";;
-  "repos/o/r/pulls?"*) echo "\${FAKE_PULLS:-[]}";;
+  repos/o/r/compare/*) c='[{"filename":"brands/valesordev/brand/usage.md"}]'; echo "{\\"files\\":\${FAKE_COMPARE:-$c}}";;
+  "repos/o/r/pulls?head=o:auto/decide-proposals-42&state=all") echo "\${FAKE_PULLS:-[]}";;
+  "repos/o/r/pulls?"*) echo "unexpected pulls query: $2" >&2; exit 1;;
   repos/o/r/issues/42/comments) echo "$FAKE_COMMENT";;
   repos/o/r/pulls) echo '{"number":77}';;
   graphql) echo '{"data":{}}';;
@@ -96,9 +98,46 @@ test('re-run after more boxes were checked: the branch content differs → fails
   assert.ok(!r.paths.some((p) => p === 'repos/o/r/pulls' || p.includes('/comments')));
 });
 
-test('re-run after the follow-up PR merged: no branch, commit or PR; the comment points at it', () => {
+const pull = (state, decided, merged = false) => JSON.stringify([{ number: 77, state, merged_at: merged ? '2026-10-25T00:00:00Z' : null,
+  body: `Decides…\n<!-- decided: ${decided} -->\n` }]);
+
+test('the follow-up PR body records the decided IDs for re-runs', () => {
+  const r = publish({ decided: [2, 5], left: [], files: ['brands/valesordev/brand/usage.md'] });
+  assert.equal(r.status, 0, r.stderr);
+  const body = r.calls.find((c) => c.args[1] === 'repos/o/r/pulls').args.find((a) => a.startsWith('body='));
+  assert.match(body, /<!-- decided: 2,5 -->/);
+});
+
+test('re-run with the follow-up PR open and the same IDs: reused, no second PR or commit', () => {
   const r = publish({ decided: [2], left: [], files: ['brands/valesordev/brand/usage.md'] },
-    { FAKE_PULLS: '[{"number":77,"state":"closed","merged_at":"2026-10-25T00:00:00Z"}]' });
+    { FAKE_REF: 'b'.repeat(40), FAKE_PARENT: MERGE, FAKE_CONTENT: b64(LOCAL), FAKE_PULLS: pull('open', '2') });
+  assert.equal(r.status, 0, r.stderr);
+  assert.ok(!r.paths.some((p) => p === 'repos/o/r/pulls' || p === 'graphql'));
+  assert.match(r.calls.at(-1).args.find((a) => a.startsWith('body=')), /in #77/);
+});
+
+test('re-run with an open or merged follow-up that decided other IDs: fails red, no PR, no comment', () => {
+  for (const [state, merged] of [['open', false], ['closed', true]]) {
+    const r = publish({ decided: [2], left: [{ id: 3, reason: 'unchecked' }], files: ['brands/valesordev/brand/usage.md'] },
+      { FAKE_REF: 'b'.repeat(40), FAKE_PARENT: MERGE, FAKE_CONTENT: b64(LOCAL), FAKE_PULLS: pull(state, '2,3', merged) });
+    assert.notEqual(r.status, 0, state);
+    assert.match(r.stderr, /#77 decided P2, P3; this run decides P2/, state);
+    assert.ok(!r.paths.some((p) => p === 'repos/o/r/pulls' || p.includes('/comments')), state);
+  }
+});
+
+test('re-run whose branch commit changed a file this run does not: fails red', () => {
+  const r = publish({ decided: [1], left: [], files: ['brands/valesordev/brand/usage.md'] },
+    { FAKE_REF: 'b'.repeat(40), FAKE_PARENT: MERGE, FAKE_CONTENT: b64(LOCAL),
+      FAKE_COMPARE: '[{"filename":"brands/valesordev/brand/usage.md"},{"filename":"brands/valesordev/brand/voice.md"}]' });
+  assert.notEqual(r.status, 0);
+  assert.match(r.stderr, /changes .*voice\.md/);
+  assert.ok(!r.paths.some((p) => p === 'repos/o/r/pulls' || p.includes('/comments')));
+});
+
+test('re-run after the follow-up PR merged with the same IDs: no branch, commit or PR; the comment points at it', () => {
+  const r = publish({ decided: [2], left: [], files: ['brands/valesordev/brand/usage.md'] },
+    { FAKE_PULLS: pull('closed', '2', true) });
   assert.equal(r.status, 0, r.stderr);
   assert.ok(!r.paths.some((p) => p === 'graphql' || p === 'repos/o/r/git/refs' || p === 'repos/o/r/pulls' || p.startsWith('repos/o/r/git/ref/')));
   assert.match(r.calls.at(-1).args.find((a) => a.startsWith('body=')), /in #77/);

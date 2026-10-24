@@ -37,8 +37,18 @@ function upsertComment(repo, pr, body) {
 function openFollowUp(repo, s) {
   const branch = `auto/decide-proposals-${s.pr}`;
   const [owner] = repo.split('/');
-  const pulls = json(`repos/${repo}/pulls?head=${owner}:${branch}&state=all`);
-  // A re-run after the follow-up merged: the marks are already decided on main, so point at it and stop.
+  const list = (ids) => ids.map((id) => `P${id}`).join(', ');
+  // An earlier run's follow-up, open or merged, records what it decided; a re-run reuses it only for the same IDs
+  // (Brian may have changed the boxes since). A closed, unmerged one is ignored.
+  const pulls = json(`repos/${repo}/pulls?head=${owner}:${branch}&state=all`).filter((p) => p.merged_at || p.state === 'open');
+  for (const p of pulls) {
+    const recorded = (/<!-- decided: ([\d,]*) -->/.exec(p.body ?? '')?.[1] ?? '').split(',').filter(Boolean).map(Number);
+    if (recorded.join() !== s.decided.join()) {
+      throw new Error(`#${p.number} decided ${list(recorded)}; this run decides ${list(s.decided)}. `
+        + (p.merged_at ? 'It has merged: decide the difference in a new PR.' : 'Close it, delete its branch, and re-run.'));
+    }
+  }
+  // Already merged with the same IDs: the marks are decided on main, so point at it and stop.
   const merged = pulls.find((p) => p.merged_at);
   if (merged) return merged.number;
 
@@ -61,7 +71,11 @@ function openFollowUp(repo, s) {
   } else {
     const parent = json(`repos/${repo}/git/commits/${head}`).parents?.[0]?.sha;
     if (parent !== s.mergeSha) throw new Error(`${branch} exists at ${head}, not built on the merge commit ${s.mergeSha}; delete it and re-run`);
-    // Its commit must hold exactly this run's files (Brian may have checked more boxes since the first run).
+    // Its commit must change exactly this run's files, with this run's content (the boxes may have changed since).
+    const changed = json(`repos/${repo}/compare/${s.mergeSha}...${head}`).files.map((f) => f.filename).sort();
+    if (changed.join('\n') !== [...s.files].sort().join('\n')) {
+      throw new Error(`${branch} changes ${changed.join(', ')}; this run changes ${s.files.join(', ')}; delete the branch and re-run`);
+    }
     for (const path of s.files) {
       const at = json(`repos/${repo}/contents/${path}?ref=${encodeURIComponent(branch)}`);
       if (Buffer.compare(Buffer.from(at.content ?? '', 'base64'), readFileSync(path)) !== 0) {
@@ -73,11 +87,13 @@ function openFollowUp(repo, s) {
   const open = pulls.filter((p) => p.state === 'open');
   if (open.length) return open[0].number;
   const body = [
-    `Decides the proposal IDs Brian checked on #${s.pr}: ${s.decided.map((id) => `P${id}`).join(', ')}.`,
+    `Decides the proposal IDs Brian checked on #${s.pr}: ${list(s.decided)}.`,
     `Each \`[PROPOSED P<n>]\` becomes \`[DECIDED ${s.date}, PR #${s.pr}, P<n>]\`; nothing else in these files changes.`,
     s.left.length ? `Still open: ${s.left.map((l) => `P${l.id} (${l.reason})`).join(', ')}.` : 'Still open: none.',
     '',
     'Opened by `.github/workflows/decide-proposals.yml` (`make decide-proposals`). Review and merge it like any other PR.',
+    // Read back by a re-run (above); keep it in the body.
+    `<!-- decided: ${s.decided.join(',')} -->`,
   ].join('\n');
   return json(`repos/${repo}/pulls`, '-f', `title=Decide checked proposals from #${s.pr}`, '-f', `head=${branch}`,
     '-f', 'base=main', '-f', `body=${body}`).number;

@@ -94,6 +94,11 @@ test('addedLines: an added line starting "++ " is content, not a file header', (
   assert.deepEqual([...addedLines(diff)].map(([p, s]) => [p, [...s]]), [['brands/v/brand/a.md', [1, 2]]]);
 });
 
+test('addedLines: a path with a space (git appends a tab to its header) is kept', () => {
+  const diff = ['diff --git a/brands/v/brand/a b.md b/brands/v/brand/a b.md', '--- a/brands/v/brand/a b.md\t', '+++ b/brands/v/brand/a b.md\t', '@@ -0,0 +1 @@', '+x'].join('\n');
+  assert.deepEqual([...addedLines(diff).keys()], ['brands/v/brand/a b.md']);
+});
+
 test('self-check (AC5): a change beyond the mark is caught', () => {
   const f = file('brands/valesordev/brand/usage.md', ['A [PROPOSED P1]', 'B'], [1]);
   const decided = [{ id: 1, path: f.path, line: 1 }];
