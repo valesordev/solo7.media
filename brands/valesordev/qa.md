@@ -15,7 +15,8 @@ A `[DECIDED 2026-10-14]` mark on an item is how the check is run, or a rule deci
 section it cites. The spacing clauses of items 33 and 35 are `[DECIDED 2026-10-24]` (Brian on PR #113; item 33's
 nav-link gap, Brian on issue #111).
 Item 52's type, arrangement, and spacing clauses, and item 7's footer clause, are `[DECIDED 2026-10-24]` (Brian on
-PR #118). No item is `[PROPOSED]`.
+PR #118). Item 54's rule-above-the-H1 clause is `[DECIDED 2026-10-24]` (Brian, in session on S7M-VAL-018), and its
+type and spacing clause is `[PROPOSED]` (S7M-VAL-018); no other item is `[PROPOSED]`.
 
 ## How to run it
 - **Theme:** light only. There is no dark theme. (`visual-language.md#color`, Themes)
@@ -204,11 +205,18 @@ PR #118). No item is `[PROPOSED]`.
 ## `/privacy` template
 For `/privacy` only. The text is Brian's (`CLAUDE.md` §7); these items check the frame, never the wording of a claim.
 
-54. Is it `BrandHeader`, a `SectionRule`, the H1 "Privacy" in the display role, a one-line `ink-muted` mono
-    subhead, titled sections (serif column-title role, mono body at most 72 characters), and `Footer`? Do the
-    section titles have no rule of their own, with space alone, `space.l`, above each section title?
+54. Is it `BrandHeader`, the H1 "Privacy" in the display role, a one-line `ink-muted` mono subhead, titled
+    sections (serif column-title role, mono body at most 72 characters), and `Footer`? Do the section titles have
+    no rule of their own, with space alone, `space.l`, above each section title?
     (`visual-language.md#privacy-page-template`, `visual-language.md#sectionrule`, `usage.md#privacy-page`)
-    `[DECIDED 2026-10-14]`
+    `[DECIDED 2026-10-14]` Is `BrandHeader`'s rule the only rule above the H1, with no `SectionRule` under it?
+    `[DECIDED 2026-10-24]` (Brian, in session on S7M-VAL-018)
+    Is the subhead in the `body` role? Is the space `space.2xl` from `BrandHeader`'s rule to the H1, none added
+    from the H1 to the subhead, `space.xl` from the subhead to the first section title, none added from a section
+    title to its body, `space.s` between paragraphs and before a list, list text indented `space.m` with the
+    bullet inside the column and items `space.2xs` apart, `space.xl` before the home link, `space.2xl` from the
+    link to the `Footer`'s rule, and no other value? (`visual-language.md#privacy-page-template`, Type, Spacing)
+    `[PROPOSED]` Answered in component source, as item 71 is. (S7M-VAL-018)
 55. Is it free of a hero, illustration, cookie banner, consent dialog, "manage preferences" control, table,
     accordion, callout, icon, and checkmark list, with lists as plain bullets in body type?
     (`visual-language.md#privacy-page-template`, `usage.md#privacy-page`)
