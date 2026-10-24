@@ -4,7 +4,7 @@
 
 BRANDS := valesordev system9studios solo7productions solo7media bashburn
 
-.PHONY: help check check-layout test-scripts install build-site-valesordev qa-browser-install qa-shots-valesordev qa-serve-valesordev bootstrap-site-valesordev preview-site-valesordev verify-preview-valesordev legacy-solo7-media update-agents
+.PHONY: help check check-layout test-scripts install build-site-valesordev qa-browser-install qa-shots-valesordev qa-serve-valesordev bootstrap-site-valesordev preview-site-valesordev verify-preview-valesordev approve-deploy legacy-solo7-media update-agents
 
 help: ## List targets
 	@grep -hE '^[a-zA-Z0-9_%-]+:.*## ' $(MAKEFILE_LIST) | sort | \
@@ -56,6 +56,10 @@ preview-site-valesordev: build-site-valesordev ## Build, upload a preview versio
 
 verify-preview-valesordev: ## Fetch PREVIEW_URL and fail unless it serves the stub page
 	@scripts/verify-preview.sh "$(PREVIEW_URL)" "$(PREVIEW_MARKER)"
+
+approve-deploy: ## Approve a PR's waiting preview deploy as you: make approve-deploy PR=123 [COMMENT=...]
+	@test -n "$(PR)" || (echo "usage: make approve-deploy PR=<number> [COMMENT=<review comment>]" && exit 1)
+	./scripts/approve-deploy.sh "$(PR)" "$(or $(COMMENT),Approved via make)"
 
 # Rendered screenshots for /brand-qa (ADR 0001 §9; runbook docs/runbooks/brand-qa-screenshots.md). Not in `make check`.
 # Pages by route (404 means /404.html); specimens by name, built from sites/<domain>/specimens/pages/<Name>.astro.
