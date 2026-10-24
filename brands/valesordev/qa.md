@@ -58,8 +58,7 @@ gap, `[DECIDED 2026-10-24]`. Item 52's type, arrangement, and spacing clauses, a
 ### Type roles
 10. Do serif things name (wordmark, H1, subhead, section titles, project names, column titles, nav, the footer's
     name) and mono things explain and measure (body, descriptions, taglines, metadata, links and CTAs, the footer's
-    statement and links)?
-    (`visual-language.md#typography`, role table)
+    statement and links)? (`visual-language.md#typography`, role table; the footer's parts: `visual-language.md#footer`)
 11. **No sans-serif:** is every glyph on the page set in Source Serif 4 or Source Code Pro, with no sans-serif and no
     third family anywhere, including fallbacks that actually rendered? (`visual-language.md#typography`,
     `foundation.md#what-the-brand-is-made-of` item 3)
@@ -186,7 +185,8 @@ gap, `[DECIDED 2026-10-24]`. Item 52's type, arrangement, and spacing clauses, a
     aligned? (`usage.md#footer`)
     Is the name in the `nav` role in `ink`, the statement in the `body` role in `ink-muted` on the line below it,
     and the links in the `link` role in `ink`? Wide: do the links share the name's baseline? At mobile width, are
-    the links below the statement, on one line, and does the statement wrap below 24rem rather than overflow?
+    the links below the statement, on one line? At 390 CSS px is the statement one line, and at 320 CSS px (item
+    80's width) does it wrap onto a second line in the `body` role rather than overflow or shrink?
     (`visual-language.md#footer`, Type and colour, Arrangement)
     `[PROPOSED]` (S7M-VAL-017)
     Is the row `space.m` below the rule and followed by `space.xl` at the page end, with no added space between the

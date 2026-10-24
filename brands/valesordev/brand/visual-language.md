@@ -362,6 +362,7 @@ Not in the target. `[DECIDED 2026-10-08]` (the brief lists a Footer; the audit h
     as the rule above the footer, so the footer would read as two bands without a rule).
   - The space above the footer's rule belongs to the band before it, not to `Footer` (as in `#sectionrule`).
 - Tokens: `rule`, `ink`, `ink-muted`, `nav`, `body`, and `link` roles, `space.s`, `space.m`, `space.xl`.
+  `[PROPOSED]` (S7M-VAL-017; was: `rule`, `ink`, `ink-muted`, wordmark role at the small end, nav role)
 
 ## `/privacy` page template
 `[DECIDED 2026-10-08]`
