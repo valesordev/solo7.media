@@ -12,7 +12,8 @@ wins and this file is the defect. This file adds no rule of its own.
 
 Status marks as in `foundation.md`. An item with no mark restates a `[DECIDED]` rule in the section it cites.
 A `[DECIDED 2026-10-14]` mark on an item is how the check is run, or a rule decided that day, recorded in the
-section it cites. The spacing clauses of items 33 and 35 are `[DECIDED 2026-10-24]` (issue #111; Brian on PR #113).
+section it cites. The spacing clauses of items 33 and 35 are `[DECIDED 2026-10-24]` (Brian on PR #113; item 33's
+nav-link gap, Brian on issue #111).
 Item 52's type, arrangement, and spacing clauses, and item 7's footer clause, are `[DECIDED 2026-10-24]` (Brian on
 PR #118). No item is `[PROPOSED]`.
 
