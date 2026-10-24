@@ -34,11 +34,12 @@ const { current } = Astro.props;
     border-block-end: var(--line-rule-width) solid var(--color-rule);
   }
 
-  /* Narrow (visual-language.md#narrow-layout-mobile, item 1): wordmark on the first line, nav on the second. */
+  /* Narrow (visual-language.md#narrow-layout-mobile, item 1): wordmark on the first line, nav on the second.
+     The gap between nav links is space.xl at both widths (visual-language.md#brandheader, Spacing). */
   nav {
     display: flex;
     flex-wrap: wrap;
-    column-gap: var(--space-m);
+    column-gap: var(--space-xl);
   }
 
   a {

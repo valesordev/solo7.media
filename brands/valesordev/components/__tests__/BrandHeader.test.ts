@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 import { beforeAll, describe, expect, it } from 'vitest';
 import BrandHeader from '../BrandHeader.astro';
@@ -64,5 +66,35 @@ describe('BrandHeader', () => {
     const current = links.filter((l) => /\baria-current="page"/.test(l.attrs));
     expect(current).toHaveLength(1);
     expect(decode(current[0].inner)).toBe('Projects');
+  });
+
+  // Render output carries no styles, so the decided spacing step is read from the component's <style>. Comments are
+  // stripped first, and every rule is read, inside media queries too, so an override at either width fails it.
+  it('spaces the nav links space.xl apart at both widths (visual-language.md#brandheader, Spacing)', () => {
+    const source = readFileSync(join(import.meta.dirname, '..', 'BrandHeader.astro'), 'utf8');
+    const style = (source.match(/<style>([\s\S]*?)<\/style>/)?.[1] ?? '').replace(/\/\*[\s\S]*?\*\//g, '');
+    const rules = [...style.matchAll(/([^{}]+)\{([^{}]*)\}/g)].map(([, selector, body]) => ({
+      selectors: selector.split(',').map((s) => s.trim()),
+      decls: body
+        .split(';')
+        .map((d) => d.split(':').map((part) => part.trim()))
+        .filter(([prop, value]) => prop && value),
+    }));
+    const isNav = (s: string) => /(^|[\s>+~])nav$/.test(s);
+    const inNav = (s: string) => /(^|[\s>+~])nav[\s>+~]/.test(s);
+
+    // A `gap` shorthand's column gap is its last value.
+    const gaps = rules
+      .filter((r) => r.selectors.some(isNav))
+      .flatMap((r) => r.decls.filter(([prop]) => prop === 'gap' || prop === 'column-gap'))
+      .map(([prop, value]) => (prop === 'gap' ? value.split(/\s+(?![^(]*\))/).at(-1) : value));
+    expect(gaps.length).toBeGreaterThan(0);
+    expect(gaps).toEqual(gaps.map(() => 'var(--space-xl)'));
+
+    // Nothing inside the nav spaces the links another way.
+    const linkSpacing = rules
+      .filter((r) => r.selectors.some(inNav))
+      .flatMap((r) => r.decls.filter(([prop]) => /^(margin|padding)/.test(prop)));
+    expect(linkSpacing).toEqual([]);
   });
 });
