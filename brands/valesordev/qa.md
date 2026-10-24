@@ -12,7 +12,7 @@ wins and this file is the defect. This file adds no rule of its own.
 
 Status marks as in `foundation.md`. An item with no mark restates a `[DECIDED]` rule in the section it cites.
 A `[DECIDED 2026-10-14]` mark on an item is how the check is run, or a rule decided that day, recorded in the
-section it cites. No item is `[PROPOSED]`.
+section it cites. The spacing clauses of items 33 and 35 are `[PROPOSED]` (issue #111); no other item is.
 
 ## How to run it
 - **Theme:** light only. There is no dark theme. (`visual-language.md#color`, Themes)
@@ -117,12 +117,18 @@ section it cites. No item is `[PROPOSED]`.
     shown only by a 1px underline? Is the wordmark free of a rest underline too? (`visual-language.md#brandheader`)
 33. Is it neither sticky nor shrinking, with no shadow, hamburger, or drawer, and at mobile width are the wordmark
     and links on two lines, all visible? (`usage.md#brandheader`, `visual-language.md#narrow-layout-mobile` item 1)
+    Is it spaced by the steps `visual-language.md#brandheader` names (Spacing): `space.xs` above and below the
+    wordmark and nav, `space.xl` between nav links, wide at least `space.m` between the wordmark and the nav, and no
+    other value? `[PROPOSED]` (issue #111)
 
 ### SectionRule
 34. Is it a full-column hairline, then a serif title at left and, if present, one primary `TextLink` that names
     where it goes? Wide: is that link right aligned? (`visual-language.md#sectionrule`, `usage.md#sectionrule`)
 35. Is it free of a fill, icon, number, or kicker above the title? At mobile width, is the link below the title,
     both left aligned? (`usage.md#sectionrule`, `visual-language.md#narrow-layout-mobile` item 4)
+    Is the content `space.2xs` below the rule, wide at least `space.m` between the title and the link, and no other
+    value spacing the component?
+    (`visual-language.md#sectionrule`, Spacing) `[PROPOSED]` (issue #111)
 
 ### ProjectRow
 36. Is the row up to four parts between two 1px rules: serif name (tagline beneath only if the project list
