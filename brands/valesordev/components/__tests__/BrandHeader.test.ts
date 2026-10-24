@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 import { beforeAll, describe, expect, it } from 'vitest';
 import BrandHeader from '../BrandHeader.astro';
@@ -64,5 +66,13 @@ describe('BrandHeader', () => {
     const current = links.filter((l) => /\baria-current="page"/.test(l.attrs));
     expect(current).toHaveLength(1);
     expect(decode(current[0].inner)).toBe('Projects');
+  });
+
+  // Render output carries no styles, so the decided spacing step is read from the component's source.
+  it('spaces the nav links space.xl apart (visual-language.md#brandheader, Spacing)', () => {
+    const source = readFileSync(join(import.meta.dirname, '..', 'BrandHeader.astro'), 'utf8');
+    const navRule = source.match(/^\s*nav\s*\{([^}]*)\}/m);
+    expect(navRule).not.toBeNull();
+    expect(navRule![1]).toMatch(/column-gap:\s*var\(--space-xl\);/);
   });
 });
