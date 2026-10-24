@@ -34,13 +34,15 @@ function upsertComment(repo, pr, body) {
   else api(`repos/${repo}/issues/${pr}/comments`, '-f', `body=${body}`);
 }
 
-function openFollowUp(repo, s) {
-  const branch = `auto/decide-proposals-${s.pr}`;
+const branchFor = (s) => `auto/decide-proposals-${s.pr}`;
+const list = (ids) => ids.map((id) => `P${id}`).join(', ') || 'nothing';
+
+// An earlier run's follow-up, open or merged, records what it decided. Every run checks it, including one that
+// decides nothing, and fails if this run's IDs differ (Brian may have changed the boxes since). A closed,
+// unmerged follow-up is ignored. Returns the open or merged follow-ups, all deciding exactly this run's IDs.
+function priorFollowUps(repo, s) {
   const [owner] = repo.split('/');
-  const list = (ids) => ids.map((id) => `P${id}`).join(', ');
-  // An earlier run's follow-up, open or merged, records what it decided; a re-run reuses it only for the same IDs
-  // (Brian may have changed the boxes since). A closed, unmerged one is ignored.
-  const pulls = json(`repos/${repo}/pulls?head=${owner}:${branch}&state=all`).filter((p) => p.merged_at || p.state === 'open');
+  const pulls = json(`repos/${repo}/pulls?head=${owner}:${branchFor(s)}&state=all`).filter((p) => p.merged_at || p.state === 'open');
   for (const p of pulls) {
     const recorded = (/<!-- decided: ([\d,]*) -->/.exec(p.body ?? '')?.[1] ?? '').split(',').filter(Boolean).map(Number);
     if (recorded.join() !== s.decided.join()) {
@@ -48,6 +50,11 @@ function openFollowUp(repo, s) {
         + (p.merged_at ? 'It has merged: decide the difference in a new PR.' : 'Close it, delete its branch, and re-run.'));
     }
   }
+  return pulls;
+}
+
+function openFollowUp(repo, s, pulls) {
+  const branch = branchFor(s);
   // Already merged with the same IDs: the marks are decided on main, so point at it and stop.
   const merged = pulls.find((p) => p.merged_at);
   if (merged) return merged.number;
@@ -106,7 +113,8 @@ function main([summaryPath]) {
     return 2;
   }
   const s = JSON.parse(readFileSync(summaryPath, 'utf8'));
-  const followUp = s.files.length ? openFollowUp(repo, s) : null;
+  const pulls = priorFollowUps(repo, s);
+  const followUp = s.files.length ? openFollowUp(repo, s, pulls) : null;
   if (followUp) console.log(`follow-up PR #${followUp}`);
   upsertComment(repo, s.pr, commentBody(s, followUp));
   console.log(`commented on #${s.pr}`);

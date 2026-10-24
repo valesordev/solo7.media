@@ -51,8 +51,8 @@ const publish = (summary, env = {}) => {
 test('nothing decided: no branch, commit or PR; one comment listing what is open', () => {
   const r = publish({ decided: [], left: [{ id: 3, reason: 'unchecked' }], files: [] });
   assert.equal(r.status, 0, r.stderr);
-  assert.deepEqual(r.paths, ['repos/o/r/issues/42/comments', 'repos/o/r/issues/42/comments']);
-  const body = r.calls[1].args.find((a) => a.startsWith('body='));
+  assert.deepEqual(r.paths, ['repos/o/r/pulls?head=o:auto/decide-proposals-42&state=all', 'repos/o/r/issues/42/comments', 'repos/o/r/issues/42/comments']);
+  const body = r.calls[2].args.find((a) => a.startsWith('body='));
   assert.match(body, /Nothing decided/);
   assert.match(body, /Still open: P3 \(unchecked\)/);
 });
@@ -123,6 +123,15 @@ test('re-run with an open or merged follow-up that decided other IDs: fails red,
     assert.notEqual(r.status, 0, state);
     assert.match(r.stderr, /#77 decided P2, P3; this run decides P2/, state);
     assert.ok(!r.paths.some((p) => p === 'repos/o/r/pulls' || p.includes('/comments')), state);
+  }
+});
+
+test('re-run with no boxes checked while an open or merged follow-up decided P2: fails red, comment untouched', () => {
+  for (const [state, merged] of [['open', false], ['closed', true]]) {
+    const r = publish({ decided: [], left: [{ id: 2, reason: 'unchecked' }], files: [] }, { FAKE_PULLS: pull(state, '2', merged) });
+    assert.notEqual(r.status, 0, state);
+    assert.match(r.stderr, /#77 decided P2; this run decides nothing/, state);
+    assert.ok(!r.paths.some((p) => p.includes('/comments')), state);
   }
 });
 
