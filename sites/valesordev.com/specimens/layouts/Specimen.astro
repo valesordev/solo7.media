@@ -1,7 +1,8 @@
 ---
 // A specimen page: the site's base layout and the brand's one content column (visual-language.md#layout).
 // The landmark is named by aria-label rather than a hidden <h1>: hiding one takes non-token literals
-// (qa.md #71), and the H1 belongs to the real page a component is placed on.
+// (qa.md #71), and the H1 belongs to the real page a component is placed on. The `header` slot sits before
+// <main>, where a page puts BrandHeader; it sets its own column.
 import Base from '../../src/layouts/Base.astro';
 
 interface Props {
@@ -12,6 +13,7 @@ const { title } = Astro.props;
 ---
 
 <Base title={`${title} specimen · Valesor Development`}>
+  <slot name="header" />
   <main aria-label={`${title} specimen`}>
     <slot />
   </main>

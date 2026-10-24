@@ -1,0 +1,95 @@
+---
+// BrandHeader (visual-language.md#brandheader, usage.md#brandheader). The serif wordmark at left linking home,
+// the serif nav links Projects and GitHub at right, and a 1px rule below, on the content column. The first
+// element of every page, so it sets its own column: it sits beside <main>, not inside it.
+import { GITHUB_ORG_URL, HOME_HREF, PROJECTS_HREF } from './links';
+
+interface Props {
+  current?: 'projects';
+}
+
+const { current } = Astro.props;
+---
+
+<header class="brand-header">
+  <div class="bar">
+    <a class="wordmark" href={HOME_HREF}>Valesor Development</a>
+    <nav aria-label="Main">
+      <a class="nav-link" href={PROJECTS_HREF} aria-current={current === 'projects' ? 'page' : undefined}>Projects</a>
+      <a class="nav-link" href={GITHUB_ORG_URL}>GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .brand-header {
+    padding-inline: var(--layout-inset);
+  }
+
+  /* The rule hangs from the content column (visual-language.md#layout), so it is drawn on the bar, not the header. */
+  .bar {
+    max-inline-size: var(--layout-max-width);
+    margin-inline: auto;
+    padding-block: var(--space-xs);
+    border-block-end: var(--line-rule-width) solid var(--color-rule);
+  }
+
+  /* Narrow (visual-language.md#narrow-layout-mobile, item 1): wordmark on the first line, nav on the second. */
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: var(--space-m);
+  }
+
+  a {
+    display: inline-block;
+    min-block-size: var(--line-target-min);
+    min-inline-size: var(--line-target-min);
+    color: var(--color-ink);
+    text-decoration-line: none;
+    text-decoration-color: var(--color-ink);
+  }
+
+  .wordmark {
+    font-family: var(--type-wordmark-family);
+    font-size: var(--type-wordmark-size);
+    line-height: var(--type-wordmark-line-height);
+    letter-spacing: var(--type-wordmark-tracking);
+  }
+
+  .nav-link {
+    font-family: var(--type-nav-family);
+    font-size: var(--type-nav-size);
+    line-height: var(--type-nav-line-height);
+    letter-spacing: var(--type-nav-tracking);
+  }
+
+  /* Current page: a 1px underline, no colour or weight change. :where() keeps this selector below a:hover and
+     a:active in specificity, so hover and active still draw the current link's underline at 2px. */
+  .nav-link:where([aria-current='page']) {
+    text-decoration-line: underline;
+    text-decoration-thickness: var(--line-underline-width);
+  }
+
+  /* Hover and active draw the underline at 2px; visited is the same as rest (visual-language.md#interaction-states). */
+  a:hover,
+  a:active {
+    text-decoration-line: underline;
+    text-decoration-thickness: var(--line-underline-width-hover);
+  }
+
+  a:focus-visible {
+    outline: var(--line-focus-width) solid var(--focus-ring);
+    outline-offset: var(--line-focus-offset);
+  }
+
+  /* 48rem is layout.breakpoint-wide: media queries can't read custom properties (tokens/tokens.json). */
+  @media (min-width: 48rem) {
+    .bar {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: var(--space-m);
+    }
+  }
+</style>
