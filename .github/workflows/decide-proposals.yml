@@ -1,0 +1,67 @@
+# After a role:visual-designer PR merges into main, mark the proposal IDs Brian checked on it as decided
+# (S7M-INF-010; convention: brands/valesordev/brand/foundation.md, "Proposal IDs"). Both steps are make
+# targets (§9). It never pushes to main: the change arrives as a follow-up PR that Brian merges.
+#
+# `pull_request` (never `pull_request_target`), so it runs only main's own workflow and scripts: the checkout
+# is the merge commit. The PR body is read by the script through the API, never interpolated here.
+# The follow-up PR is opened with the story-bot App token, because a PR opened with GITHUB_TOKEN doesn't
+# trigger check.yml. It carries no role: label, so merging it doesn't run this workflow again.
+# Outcome: the comment on the merged PR on success; a red run (GitHub notifies whoever merged) on any refusal.
+name: decide proposals
+
+on:
+  pull_request:
+    types: [closed]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: decide-proposals-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  decide:
+    if: >-
+      github.event.pull_request.merged == true &&
+      github.event.pull_request.base.ref == 'main' &&
+      contains(github.event.pull_request.labels.*.name, 'role:visual-designer')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.merge_commit_sha }}
+          # The merge commit and its first parent: the script diffs one against the other.
+          fetch-depth: 2
+          persist-credentials: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - id: app
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ vars.STORY_APP_ID }}
+          private-key: ${{ secrets.STORY_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: solo7.media
+          permission-contents: write
+          permission-pull-requests: write
+
+      - name: Decide checked proposals
+        env:
+          GH_TOKEN: ${{ steps.app.outputs.token }}
+          GH_REPO: ${{ github.repository }}
+          PR: ${{ github.event.pull_request.number }}
+          SUMMARY: ${{ runner.temp }}/decide-proposals.json
+        run: make --no-print-directory decide-proposals
+
+      - name: Open the follow-up PR and comment
+        env:
+          GH_TOKEN: ${{ steps.app.outputs.token }}
+          SUMMARY: ${{ runner.temp }}/decide-proposals.json
+        run: make --no-print-directory publish-decided-proposals

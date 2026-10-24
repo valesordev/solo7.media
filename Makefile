@@ -4,7 +4,7 @@
 
 BRANDS := valesordev system9studios solo7productions solo7media bashburn
 
-.PHONY: help check check-layout test-scripts install build-site-valesordev qa-browser-install qa-shots-valesordev qa-serve-valesordev bootstrap-site-valesordev preview-site-valesordev verify-preview-valesordev approve-deploy legacy-solo7-media update-agents
+.PHONY: help check check-layout test-scripts install build-site-valesordev qa-browser-install qa-shots-valesordev qa-serve-valesordev bootstrap-site-valesordev preview-site-valesordev verify-preview-valesordev approve-deploy check-proposal-ids decide-proposals publish-decided-proposals legacy-solo7-media update-agents
 
 help: ## List targets
 	@grep -hE '^[a-zA-Z0-9_%-]+:.*## ' $(MAKEFILE_LIST) | sort | \
@@ -14,12 +14,16 @@ help: ## List targets
 # .astro files, not the vitest config, so a brand with components and no config or no tests fails the gate.
 TEST_BRANDS := $(foreach b,$(BRANDS),$(if $(wildcard brands/$(b)/components/*.astro),$(b)))
 
-check: check-layout test-scripts $(addprefix test-brand-,$(TEST_BRANDS)) $(if $(wildcard sites/valesordev.com),build-site-valesordev) ## PR gate: layout checks, script tests, brand component tests, site builds
+check: check-layout check-proposal-ids test-scripts $(addprefix test-brand-,$(TEST_BRANDS)) $(if $(wildcard sites/valesordev.com),build-site-valesordev) ## PR gate: layout checks, proposal IDs, script tests, brand component tests, site builds
 
 check-layout: ## Every brand has its folder and README; package.json parses
 	@for b in $(BRANDS); do test -f brands/$$b/README.md || { echo "missing brands/$$b/README.md"; exit 1; }; done
 	@node -e 'JSON.parse(require("fs").readFileSync("package.json"))'
 	@echo "layout ok"
+
+# Proposal IDs (S7M-INF-010; convention: brands/valesordev/brand/foundation.md, "Proposal IDs").
+check-proposal-ids: ## Fail when a P<n> is used by more than one proposal mark in an adopted brand
+	node scripts/check-proposal-ids.mjs
 
 test-scripts: ## Run the tests for scripts/ (node:test, offline)
 	node --test --test-timeout=60000 'scripts/*.test.mjs'
@@ -66,6 +70,16 @@ endif
 approve-deploy: ## Approve a PR's waiting preview deploy as you: make approve-deploy PR=123 [COMMENT=...]
 	@test -n "$$PR" || (echo "usage: make approve-deploy PR=<number> [COMMENT=<review comment>]" && exit 1)
 	./scripts/approve-deploy.sh "$$PR" "$${COMMENT:-Approved via make}"
+
+# After a role:visual-designer PR merges, decide-proposals.yml runs these two. Run decide-proposals from a
+# checkout of the PR's merge commit; it only rewrites the marks of IDs checked in the PR body.
+decide-proposals: ## Mark the proposal IDs checked on a merged PR decided: make decide-proposals PR=123 [SUMMARY=file]
+	@test -n "$$PR" || (echo "usage: make decide-proposals PR=<number> [SUMMARY=<file>]" && exit 1)
+	node scripts/decide-proposals.mjs "$$PR" $${SUMMARY:+--summary "$$SUMMARY"}
+
+publish-decided-proposals: ## CI: open the follow-up PR and comment from SUMMARY (needs GH_TOKEN, GITHUB_REPOSITORY)
+	@test -n "$$SUMMARY" || (echo "usage: make publish-decided-proposals SUMMARY=<file>" && exit 1)
+	node scripts/publish-decided-proposals.mjs "$$SUMMARY"
 
 # Rendered screenshots for /brand-qa (ADR 0001 §9; runbook docs/runbooks/brand-qa-screenshots.md). Not in `make check`.
 # Pages by route (404 means /404.html); specimens by name, built from sites/<domain>/specimens/pages/<Name>.astro.
