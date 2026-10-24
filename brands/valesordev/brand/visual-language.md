@@ -21,7 +21,7 @@ Roles only. Values are set at token time against the contrast rules below.
 |---|---|---|---|
 | `paper` | page ground | neutral near-white, `[DECIDED 2026-10-08]` | not warm; the engraving's whites must match it |
 | `ink` | display and body type, wordmark, secondary link underline text | `#111111`, `[DECIDED 2026-10-08]` | `#000000` appears only inside the engraving |
-| `ink-muted` | descriptions, taglines, metadata values, the footer's license statement | mid grey near `#545454`, `[DECIDED 2026-10-08]` | the single secondary grey |
+| `ink-muted` | descriptions, taglines, metadata values, the footer's license statement (`[PROPOSED]`, S7M-VAL-017; was: footer text) | mid grey near `#545454`, `[DECIDED 2026-10-08]` | the single secondary grey |
 | `rule` | every 1px hairline and divider | light neutral grey, `[DECIDED 2026-10-08]` | not warm |
 | `accent` | primary action text and underline, row arrows, "View all projects" | one vermilion near `#C8202A`, `[DECIDED 2026-10-08]` | direction and primary action only |
 
@@ -45,7 +45,8 @@ Two families, one job each. `[DECIDED 2026-10-08]` (audit: Typography; Q2)
 
 - **Display serif** names things: wordmark, H1, subhead, section titles, project names, column titles. Nav is
   serif too, but that is `[DECIDED 2026-10-08]` (below).
-- **Monospace** explains and measures: body text, descriptions, taglines, metadata, links and CTAs, footer.
+- **Monospace** explains and measures: body text, descriptions, taglines, metadata, links and CTAs, the footer's
+  statement and links (`#footer`; was: footer).
 - No sans-serif, anywhere. No third family, no italic display, no bold display. Weight is regular throughout.
   `[DECIDED 2026-10-08]`
 - Families are open-source and self-hosted: Source Serif 4 for the display serif and Source Code Pro for the
@@ -118,7 +119,7 @@ Everything stacks in reading order, left aligned, the same column inset, the sam
 5. `ProjectRow`: name and tagline (if the list carries one); description; `TechnicalMetadata`; the arrow stays on
    the right of the name line, and a row with no repository has no arrow. Row rules stay. `[DECIDED 2026-10-09]`
 6. `Footer`: the link group stacks below the name and statement, left aligned; GitHub and Privacy share one line
-   (`#footer`, Arrangement, `[PROPOSED]`).
+   (`#footer`, Arrangement, `[PROPOSED]`; was: links stack, left aligned).
 
 ## Illustration
 Pure black ink on white, pen-and-ink survey or engraving rendering, heavy contours with fine hatch and stipple,
@@ -321,6 +322,11 @@ Not in the target. `[DECIDED 2026-10-08]` (the brief lists a Footer; the audit h
   - The license statement: the `body` role (mono, 1x), in `ink-muted`. Reason: it's a sentence, and at body size
     it reads as a plain statement. Rejected: the `value` role (0.85x makes the license read as fine print, which is
     the legal-footer look the brand refuses).
+    Narrow: below about 24rem (384px) the statement wraps to a second line, in the same role, with no new type
+    step, as `#hero` lets the subhead wrap. It is one line from 24rem up. "One-line" above means one sentence on
+    its own line, not a line that never wraps. Reason: it is 333px at body size, wider than the 272px column at
+    320px; holding it to one line would need a smaller size or `nowrap`, and `nowrap` fails reflow (WCAG 1.4.10).
+    Rejected: the `value` role to make it fit (it still wraps at 320px).
   - GitHub and Privacy: the `link` role (mono, 1x), in `ink`. Reason: links are mono (`#typography`), and `ink`
     sets them apart from the `ink-muted` statement, as the header's nav links are `ink`. Rejected: the `nav` role
     (serif, which contradicts "mono links" above), `ink-muted` links (they would read as part of the statement).
@@ -329,7 +335,7 @@ Not in the target. `[DECIDED 2026-10-08]` (the brief lists a Footer; the audit h
 - **Arrangement** (S7M-VAL-017). `[PROPOSED]`
   - The left group is two lines at both widths: the name, then the statement on the line below it. Reason: a
     colophon reads as a name with a note under it; and on one line, the name, statement, and links overrun the
-    column just above the breakpoint (about 680px of type and gaps in the 648px column at 768px). Rejected: name and
+    column just above the breakpoint (about 700px of type and gaps in the 648px column at 768px). Rejected: name and
     statement side by side when wide (it wraps near the breakpoint and looks different at each width).
   - Wide: the links share the name's baseline (the first line). Reason: as in `BrandHeader`, the name and the
     destinations sit on one line, and the statement is a note beneath the name. Rejected: the last line's baseline
