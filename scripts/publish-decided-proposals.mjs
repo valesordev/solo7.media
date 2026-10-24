@@ -37,6 +37,10 @@ function upsertComment(repo, pr, body) {
 function openFollowUp(repo, s) {
   const branch = `auto/decide-proposals-${s.pr}`;
   const [owner] = repo.split('/');
+  const pulls = json(`repos/${repo}/pulls?head=${owner}:${branch}&state=all`);
+  // A re-run after the follow-up merged: the marks are already decided on main, so point at it and stop.
+  const merged = pulls.find((p) => p.merged_at);
+  if (merged) return merged.number;
 
   // A re-run finds the branch it made: still at the merge commit (commit not made yet), or carrying its commit.
   let head = null;
@@ -57,9 +61,16 @@ function openFollowUp(repo, s) {
   } else {
     const parent = json(`repos/${repo}/git/commits/${head}`).parents?.[0]?.sha;
     if (parent !== s.mergeSha) throw new Error(`${branch} exists at ${head}, not built on the merge commit ${s.mergeSha}; delete it and re-run`);
+    // Its commit must hold exactly this run's files (Brian may have checked more boxes since the first run).
+    for (const path of s.files) {
+      const at = json(`repos/${repo}/contents/${path}?ref=${encodeURIComponent(branch)}`);
+      if (Buffer.compare(Buffer.from(at.content ?? '', 'base64'), readFileSync(path)) !== 0) {
+        throw new Error(`${branch} has ${path} as an earlier run left it, which differs from this run; close its PR, delete the branch, and re-run`);
+      }
+    }
   }
 
-  const open = json(`repos/${repo}/pulls?head=${owner}:${branch}&state=open`);
+  const open = pulls.filter((p) => p.state === 'open');
   if (open.length) return open[0].number;
   const body = [
     `Decides the proposal IDs Brian checked on #${s.pr}: ${s.decided.map((id) => `P${id}`).join(', ')}.`,

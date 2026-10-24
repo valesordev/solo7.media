@@ -82,6 +82,18 @@ test('apart from the mark, the output is byte-identical: CRLF, tabs, trailing sp
   assert.equal(Buffer.compare(Buffer.from(r.outputs.get(f.path)), Buffer.from(expected)), 0);
 });
 
+test('two checked IDs on one line (a table row): both decided', () => {
+  const f = file('brands/valesordev/references/visual-audit.md', ['| a [PROPOSED P1] | b [PROPOSED P2] |'], [1]);
+  const r = run('- [x] P1: a\n- [x] P2: b\n', [f]);
+  assert.deepEqual(r.errors, []);
+  assert.equal(r.outputs.get(f.path), `| a ${DECIDED(1)} | b ${DECIDED(2)} |`);
+});
+
+test('addedLines: an added line starting "++ " is content, not a file header', () => {
+  const diff = ['--- a/brands/v/brand/a.md', '+++ b/brands/v/brand/a.md', '@@ -0,0 +1,2 @@', '+++ plus line', '+x [PROPOSED P1]'].join('\n');
+  assert.deepEqual([...addedLines(diff)].map(([p, s]) => [p, [...s]]), [['brands/v/brand/a.md', [1, 2]]]);
+});
+
 test('self-check (AC5): a change beyond the mark is caught', () => {
   const f = file('brands/valesordev/brand/usage.md', ['A [PROPOSED P1]', 'B'], [1]);
   const decided = [{ id: 1, path: f.path, line: 1 }];

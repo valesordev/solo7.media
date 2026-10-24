@@ -32,22 +32,26 @@ export function parseCheckboxes(body) {
   return { checked, unchecked, errors };
 }
 
-// Added line numbers (in the new file) per path, from `git diff --unified=0`.
+// Added line numbers (in the new file) per path, from `git diff --unified=0`. `diff --git` opens a file
+// header and `@@` a hunk; inside a hunk every line is content, so an added "++ x" (`+++ x`) is not a header.
 export function addedLines(diff) {
   const added = new Map();
   let path = null;
+  let inHunk = false;
   let line = 0;
   for (const l of diff.split('\n')) {
-    if (l.startsWith('+++ ')) {
+    if (l.startsWith('diff --git ')) { path = null; inHunk = false; continue; }
+    const hunk = /^@@ -\d+(?:,\d+)? \+(\d+)(?:,\d+)? @@/.exec(l);
+    if (hunk) { inHunk = true; line = Number(hunk[1]); continue; }
+    if (!inHunk) {
+      if (!l.startsWith('+++ ')) continue;
       const target = l.slice(4);
       if (target.startsWith('"')) throw new Error(`quoted path in diff, not supported: ${target}`);
       path = target === '/dev/null' ? null : target.replace(/^b\//, '');
       if (path) added.set(path, added.get(path) ?? new Set());
       continue;
     }
-    const hunk = /^@@ -\d+(?:,\d+)? \+(\d+)(?:,\d+)? @@/.exec(l);
-    if (hunk) { line = Number(hunk[1]); continue; }
-    if (!path || l.startsWith('--- ')) continue;
+    if (!path) continue;
     if (l.startsWith('+')) added.get(path).add(line++);
     else if (l.startsWith(' ')) line++;
   }
@@ -105,14 +109,16 @@ export function selfCheck(files, outputs, decided, date, pr) {
   for (const [path, out] of outputs) {
     const before = files.find((f) => f.path === path).text.split('\n');
     const after = out.split('\n');
-    const subs = new Map(decided.filter((d) => d.path === path).map((d) => [d.line, d.id]));
+    // Line → the IDs decided on it (a table row can carry more than one).
+    const subs = new Map();
+    for (const d of decided.filter((x) => x.path === path)) subs.set(d.line, [...(subs.get(d.line) ?? []), d.id]);
     if (before.length !== after.length) { errors.push(`self-check: ${path} changed line count`); continue; }
     after.forEach((a, i) => {
-      const id = subs.get(i + 1);
-      const ok = id === undefined
-        ? a === before[i]
-        : a.split(decidedMark(date, pr, id)).length === 2 && a.replace(decidedMark(date, pr, id), proposedMark(id)) === before[i];
-      if (!ok) errors.push(`self-check: ${path}:${i + 1} differs beyond the mark`);
+      const ids = subs.get(i + 1) ?? [];
+      // Each decided mark appears exactly once on its line, and putting every one back gives the input line.
+      const once = ids.every((id) => a.split(decidedMark(date, pr, id)).length === 2);
+      const restored = ids.reduce((s, id) => s.replace(decidedMark(date, pr, id), proposedMark(id)), a);
+      if (!once || restored !== before[i]) errors.push(`self-check: ${path}:${i + 1} differs beyond the mark`);
     });
   }
   return errors;
@@ -150,7 +156,7 @@ function main(argv) {
   };
   const files = [];
   const errors = [];
-  for (const [path, added] of addedLines(git('diff', '--no-color', '--no-ext-diff', '--unified=0', `${sha}^1`, sha, '--', 'brands/'))) {
+  for (const [path, added] of addedLines(git('diff', '--no-color', '--no-ext-diff', '--unified=0', '--src-prefix=a/', '--dst-prefix=b/', `${sha}^1`, sha, '--', 'brands/'))) {
     const m = BRAND_MD.exec(path);
     if (!m || !added.size || !isBrandAdopted(m[1])) continue;
     const text = git('show', `${sha}:${path}`);

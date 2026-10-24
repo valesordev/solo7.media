@@ -20,7 +20,9 @@ S="$stdin" node -e 'require("fs").appendFileSync(process.env.FAKE_LOG, JSON.stri
 case "$2" in
   repos/o/r/git/ref/heads/*) [ -n "$FAKE_REF" ] || { echo "HTTP 404" >&2; exit 1; }; echo "{\\"object\\":{\\"sha\\":\\"$FAKE_REF\\"}}";;
   repos/o/r/git/commits/*) echo "{\\"parents\\":[{\\"sha\\":\\"$FAKE_PARENT\\"}]}";;
-  "repos/o/r/pulls?"*) echo "[]";;
+  repos/o/r/contents/*) echo "{\\"encoding\\":\\"base64\\",\\"content\\":\\"$FAKE_CONTENT\\"}";;
+  "repos/o/r/pulls?"*) echo "\${FAKE_PULLS:-[]}";;
+  repos/o/r/issues/42/comments) echo "$FAKE_COMMENT";;
   repos/o/r/pulls) echo '{"number":77}';;
   graphql) echo '{"data":{}}';;
   *) echo "";;
@@ -74,11 +76,40 @@ test('decided: branch at the merge commit, signed commit through GraphQL, follow
   assert.match(comment, /Decided from this PR's checked boxes: P2, in #77/);
 });
 
-test('re-run: the branch already carries its commit on the merge commit → no second commit, PR reused or opened', () => {
-  const r = publish({ decided: [2], left: [], files: ['brands/valesordev/brand/usage.md'] }, { FAKE_REF: 'b'.repeat(40), FAKE_PARENT: MERGE });
+const LOCAL = 'New rule. [DECIDED 2026-10-24, PR #42, P2]\n';
+const b64 = (s) => Buffer.from(s).toString('base64');
+
+test('re-run: the branch already carries the same commit on the merge commit → no second commit, PR opened', () => {
+  const r = publish({ decided: [2], left: [], files: ['brands/valesordev/brand/usage.md'] },
+    { FAKE_REF: 'b'.repeat(40), FAKE_PARENT: MERGE, FAKE_CONTENT: b64(LOCAL) });
   assert.equal(r.status, 0, r.stderr);
   assert.ok(!r.paths.includes('graphql'));
   assert.ok(!r.paths.includes('repos/o/r/git/refs'));
+  assert.ok(r.paths.includes('repos/o/r/pulls'));
+});
+
+test('re-run after more boxes were checked: the branch content differs → fails red, no PR, no comment', () => {
+  const r = publish({ decided: [1, 2], left: [], files: ['brands/valesordev/brand/usage.md'] },
+    { FAKE_REF: 'b'.repeat(40), FAKE_PARENT: MERGE, FAKE_CONTENT: b64('only P1 decided\n') });
+  assert.notEqual(r.status, 0);
+  assert.match(r.stderr, /differs from this run/);
+  assert.ok(!r.paths.some((p) => p === 'repos/o/r/pulls' || p.includes('/comments')));
+});
+
+test('re-run after the follow-up PR merged: no branch, commit or PR; the comment points at it', () => {
+  const r = publish({ decided: [2], left: [], files: ['brands/valesordev/brand/usage.md'] },
+    { FAKE_PULLS: '[{"number":77,"state":"closed","merged_at":"2026-10-25T00:00:00Z"}]' });
+  assert.equal(r.status, 0, r.stderr);
+  assert.ok(!r.paths.some((p) => p === 'graphql' || p === 'repos/o/r/git/refs' || p === 'repos/o/r/pulls' || p.startsWith('repos/o/r/git/ref/')));
+  assert.match(r.calls.at(-1).args.find((a) => a.startsWith('body=')), /in #77/);
+});
+
+test('re-run with the comment already there: it is updated, not duplicated', () => {
+  const r = publish({ decided: [], left: [], files: [] }, { FAKE_COMMENT: '9' });
+  assert.equal(r.status, 0, r.stderr);
+  const patch = r.calls.filter((c) => c.args.includes('PATCH'));
+  assert.deepEqual(patch.map((c) => c.args[1]), ['repos/o/r/issues/comments/9']);
+  assert.equal(r.calls.filter((c) => c.args[1] === 'repos/o/r/issues/42/comments').length, 1);
 });
 
 test('a stale branch not built on the merge commit: fails, no PR, no comment', () => {
