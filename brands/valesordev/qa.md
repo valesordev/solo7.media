@@ -13,8 +13,8 @@ wins and this file is the defect. This file adds no rule of its own.
 Status marks as in `foundation.md`. An item with no mark restates a `[DECIDED]` rule in the section it cites.
 A `[DECIDED 2026-10-14]` mark on an item is how the check is run, or a rule decided that day, recorded in the
 section it cites. The spacing clauses of items 33 and 35 are `[PROPOSED]` (issue #111), except item 33's nav-link
-gap, `[DECIDED 2026-10-24]`. Item 52's type, arrangement, and spacing clauses, and item 7's footer clause, are
-`[PROPOSED]` (S7M-VAL-017); no other item is.
+gap, `[DECIDED 2026-10-24]`; no other item is. Item 52's type, arrangement, and spacing clauses, and item 7's
+footer clause, are `[DECIDED 2026-10-24]` (Brian, PR #118).
 
 ## How to run it
 - **Theme:** light only. There is no dark theme. (`visual-language.md#color`, Themes)
@@ -48,7 +48,7 @@ gap, `[DECIDED 2026-10-24]`. Item 52's type, arrangement, and spacing clauses, a
    engraving only? (`visual-language.md#color`, `foundation.md#what-the-brand-is-made-of` item 1)
 7. Is `ink` on display and body type and the wordmark; `ink-muted` on descriptions, taglines, metadata, and the
    footer's license statement; `rule` on hairlines only? (`visual-language.md#color`, role table) The footer clause is
-   `[PROPOSED]` (S7M-VAL-017; was: footer text).
+   `[DECIDED 2026-10-24]` (PR #118; was: footer text).
 8. Is vermilion (`accent`) used only for primary action text and underline, `ProjectRow` arrows, and the
    `SectionRule` link, and never for a heading, decoration, emphasis, status, or a rule? (`visual-language.md#color`,
    `usage.md#textlink`, `usage.md#sectionrule`)
@@ -188,10 +188,10 @@ gap, `[DECIDED 2026-10-24]`. Item 52's type, arrangement, and spacing clauses, a
     the links below the statement, on one line? At 390 CSS px is the statement one line, and at 320 CSS px (item
     80's width) does it wrap onto a second line in the `body` role rather than overflow or shrink?
     (`visual-language.md#footer`, Type and colour, Arrangement)
-    `[PROPOSED]` (S7M-VAL-017)
+    `[DECIDED 2026-10-24]` (S7M-VAL-017, PR #118)
     Is the row `space.m` below the rule and followed by `space.xl` at the page end, with no added space between the
     name and statement, `space.xl` between GitHub and Privacy, wide at least `space.m` between the groups, narrow
-    `space.s` above the links, and no other value? (`visual-language.md#footer`, Spacing) `[PROPOSED]` Answered in
+    `space.s` above the links, and no other value? (`visual-language.md#footer`, Spacing) `[DECIDED 2026-10-24]` Answered in
     component source, as item 71 is. (S7M-VAL-017)
 
 ### 404
