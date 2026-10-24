@@ -62,29 +62,28 @@ describe('Footer', () => {
     expect(text).not.toMatch(/rights reserved/i);
   });
 
-  // Render output carries no styles, so the spacing steps (visual-language.md#footer, Spacing) are read from the
-  // component's <style>, every rule included, inside the media query too.
-  describe('spacing', () => {
+  // Render output carries no styles, so the spacing (visual-language.md#footer, Spacing) is read from the component's
+  // <style>, every rule included, inside the media query too. Every margin, padding, and gap in it must be one of
+  // these, so a stray or overriding declaration fails, whatever its selector or longhand.
+  it('spaces itself with the decided steps and nothing else', () => {
     const rules = styleRules(readFileSync(join(import.meta.dirname, '..', 'Footer.astro'), 'utf8'));
-    const decl = (selector: string, prop: string) =>
-      rules.filter((r) => r.selectors.includes(selector)).flatMap((r) => r.decls.filter(([p]) => p === prop).map(([, v]) => v));
-
-    it('uses only space.s, space.m, and space.xl', () => {
-      const steps = new Set(rules.flatMap((r) => r.decls.flatMap(([, v]) => v.match(/--space-[\w-]+/g) ?? [])));
-      expect([...steps].sort()).toEqual(['--space-m', '--space-s', '--space-xl']);
-    });
-
-    it('sets the row space.m below the rule and space.xl above the page end', () => {
-      expect(decl('.row', 'padding-block')).toEqual(['var(--space-m) var(--space-xl)']);
-    });
-
-    it('puts space.s between the groups when stacked and at least space.m when side by side', () => {
-      expect(decl('.row', 'gap')).toEqual(['var(--space-s) var(--space-m)']);
-    });
-
-    it('spaces GitHub and Privacy space.xl apart at both widths', () => {
-      expect(decl('nav', 'column-gap')).toEqual(['var(--space-xl)']);
-      expect(decl('nav', 'gap')).toEqual([]);
-    });
+    const spacing = rules.flatMap((r) =>
+      r.decls
+        .filter(([prop]) => /^(margin|padding|gap|row-gap|column-gap)(-|$)/.test(prop))
+        .map(([prop, value]) => [r.selectors.join(', '), prop, value]),
+    );
+    expect(spacing).toEqual([
+      // The column inset (visual-language.md#layout), not footer spacing.
+      ['.site-footer', 'padding-inline', 'var(--layout-inset)'],
+      ['.column', 'margin-inline', 'auto'],
+      // space.s between the stacked groups (narrow); at least space.m between them side by side (wide).
+      ['.row', 'gap', 'var(--space-s) var(--space-m)'],
+      // space.m below the rule; space.xl at the page end.
+      ['.row', 'padding-block', 'var(--space-m) var(--space-xl)'],
+      // No added space between the name and the statement.
+      ['p', 'margin', '0'],
+      // GitHub and Privacy space.xl apart, at both widths.
+      ['nav', 'column-gap', 'var(--space-xl)'],
+    ]);
   });
 });
