@@ -16,8 +16,8 @@ section it cites. The spacing clauses of items 33 and 35 are `[DECIDED 2026-10-2
 nav-link gap, Brian on issue #111).
 Item 52's type, arrangement, and spacing clauses, and item 7's footer clause, are `[DECIDED 2026-10-24]` (Brian on
 PR #118). Item 54's rule-above-the-H1 clause is `[DECIDED 2026-10-24]` (Brian, in session on S7M-VAL-018), and its
-"after the first" and its type and spacing clause are `[DECIDED 2026-10-24]` (Brian on PR #121). No item is
-`[PROPOSED]`.
+"after the first" and its type and spacing clause are `[DECIDED 2026-10-24]` (Brian on PR #121). Item 76's
+inline-prose exemption is `[DECIDED 2026-10-25]` (Brian, in session on S7M-VAL-018). No item is `[PROPOSED]`.
 
 ## How to run it
 - **Theme:** light only. There is no dark theme. (`visual-language.md#color`, Themes)
@@ -285,8 +285,8 @@ For `/privacy` only. The text is Brian's (`CLAUDE.md` §7); these items check th
     change and no change on visited?
     (`visual-language.md#interaction-states`, `visual-language.md#brandheader`, `visual-language.md#footer`)
 76. Is every link and arrow target at least 24 by 24 CSS px, and is the whole `ProjectRow` its link area?
-    Inline links in prose are exempt and carry no added padding. (`visual-language.md#interaction-states`)
-    `[DECIDED 2026-10-25]`
+    Links inside a sentence of prose are exempt and carry no added padding `[DECIDED 2026-10-25]` (Brian, in
+    session on S7M-VAL-018); a standalone `TextLink` on its own line is not. (`visual-language.md#interaction-states`)
 77. Are there real headings (one H1) and landmarks (`header`, `main`, `footer`), and lists marked up as lists?
     (`visual-language.md#hero`, `visual-language.md#projectrow`, WCAG 1.3.1)
 78. Is `prefers-reduced-motion` respected (nothing animates either way)? (`visual-language.md#motion`)
