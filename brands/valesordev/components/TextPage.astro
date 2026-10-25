@@ -1,0 +1,140 @@
+---
+// TextPage (visual-language.md#privacy-page-template, usage.md#privacy-page). The text page between BrandHeader and
+// Footer: one display H1, a one-line ink-muted mono subhead, the page text from the slot, then a secondary TextLink
+// home. It has no SectionRule of its own: BrandHeader's rule opens its one band. The root is <main>, so the page
+// supplies BrandHeader before it and Footer after it.
+import { HOME_HREF } from './links';
+import TextLink from './TextLink.astro';
+
+interface Props {
+  title: string;
+  subhead: string;
+}
+
+const { title, subhead } = Astro.props;
+---
+
+<main class="text-page">
+  <div class="column">
+    <h1 class="title">{title}</h1>
+    <p class="subhead">{subhead}</p>
+    <div class="text">
+      <slot />
+    </div>
+    <div class="home">
+      <TextLink href={HOME_HREF} variant="secondary">Return to the home page</TextLink>
+    </div>
+  </div>
+</main>
+
+<style>
+  .text-page {
+    padding-inline: var(--layout-inset);
+  }
+
+  /* space.2xl from BrandHeader's rule to the H1, and from the home link to the Footer's rule. */
+  .column {
+    max-inline-size: var(--layout-max-width);
+    margin-inline: auto;
+    padding-block: var(--space-2xl);
+  }
+
+  /* The H1 and the subhead are one heading: no added space between them. */
+  .title {
+    margin: 0;
+    font-family: var(--type-display-family);
+    font-size: var(--type-display-size);
+    font-weight: normal;
+    line-height: var(--type-display-line-height);
+    letter-spacing: var(--type-display-tracking);
+    color: var(--color-ink);
+  }
+
+  .subhead {
+    margin: 0;
+    font-family: var(--type-body-family);
+    font-size: var(--type-body-size);
+    line-height: var(--type-body-line-height);
+    letter-spacing: var(--type-body-tracking);
+    color: var(--color-ink-muted);
+  }
+
+  /* The slot's elements belong to the page, so Astro's scoping doesn't reach them: they're styled with :global()
+     under .text, which keeps the styles inside this <main>. space.xl from the subhead to the first section title. */
+  .text {
+    padding-block-start: var(--space-xl);
+    font-family: var(--type-body-family);
+    font-size: var(--type-body-size);
+    line-height: var(--type-body-line-height);
+    letter-spacing: var(--type-body-tracking);
+    color: var(--color-ink);
+  }
+
+  /* Section titles have no rule of their own; space.l above each after the first, none added below. */
+  .text :global(h2) {
+    margin: 0;
+    font-family: var(--type-column-title-family);
+    font-size: var(--type-column-title-size);
+    font-weight: normal;
+    line-height: var(--type-column-title-line-height);
+    letter-spacing: var(--type-column-title-tracking);
+    color: var(--color-ink);
+  }
+
+  .text :global(h2:not(:first-child)) {
+    margin-block-start: var(--space-l);
+  }
+
+  /* Running text at most layout.measure. space.s between paragraphs and lists, in either order. */
+  .text :global(p),
+  .text :global(ul) {
+    margin: 0;
+  }
+
+  .text :global(p),
+  .text :global(li) {
+    max-inline-size: var(--layout-measure);
+  }
+
+  .text :global(p + p),
+  .text :global(p + ul),
+  .text :global(ul + p),
+  .text :global(ul + ul) {
+    margin-block-start: var(--space-s);
+  }
+
+  /* Plain bullets in body type: the text indented space.m, the bullet hanging in the indent inside the column. */
+  .text :global(ul) {
+    padding-inline-start: var(--space-m);
+    list-style: disc outside;
+  }
+
+  .text :global(li + li) {
+    margin-block-start: var(--space-2xs);
+  }
+
+  /* Prose links: underlined ink, no arrow. Visited is the same as rest; hover and active thicken the underline
+     (visual-language.md#interaction-states). */
+  .text :global(a),
+  .text :global(a:visited) {
+    color: var(--color-ink);
+    text-decoration-line: underline;
+    text-decoration-thickness: var(--line-underline-width);
+    text-decoration-color: var(--color-ink);
+  }
+
+  .text :global(a:hover),
+  .text :global(a:active) {
+    text-decoration-thickness: var(--line-underline-width-hover);
+  }
+
+  .text :global(a:focus-visible) {
+    outline: var(--line-focus-width) solid var(--focus-ring);
+    outline-offset: var(--line-focus-offset);
+  }
+
+  /* space.xl from the last section to the home link. */
+  .home {
+    margin-block-start: var(--space-xl);
+  }
+</style>
