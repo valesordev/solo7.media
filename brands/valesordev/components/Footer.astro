@@ -1,0 +1,109 @@
+---
+// Footer (visual-language.md#footer, usage.md#footer). The SectionRule rule alone, then one row in two groups: at
+// left, the serif name with the mono license statement on the line below; at right, the mono links GitHub and
+// Privacy. The last element of every page, so it sets its own column: it sits beside <main>, not inside it.
+import { GITHUB_ORG_URL, PRIVACY_HREF } from './links';
+import SectionRule from './SectionRule.astro';
+---
+
+<footer class="site-footer">
+  <div class="column">
+    <SectionRule />
+    <div class="row">
+      <div class="colophon">
+        <p class="name">Valesor Development</p>
+        <p class="statement">Released under Apache-2.0 by default.</p>
+      </div>
+      <nav aria-label="Footer">
+        <a href={GITHUB_ORG_URL}>GitHub</a>
+        <a href={PRIVACY_HREF}>Privacy</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    padding-inline: var(--layout-inset);
+  }
+
+  .column {
+    max-inline-size: var(--layout-max-width);
+    margin-inline: auto;
+  }
+
+  /* space.m below the rule and space.xl at the page end. Narrow (visual-language.md#narrow-layout-mobile, item 6):
+     the links stack below the name and statement, space.s apart, left aligned. Wide, the groups are at least
+     space.m apart (the column gap). */
+  .row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-s) var(--space-m);
+    padding-block: var(--space-m) var(--space-xl);
+  }
+
+  p {
+    margin: 0;
+  }
+
+  /* The name and statement are two lines with no added space; the statement may wrap, never shrinks. */
+  .name {
+    font-family: var(--type-nav-family);
+    font-size: var(--type-nav-size);
+    line-height: var(--type-nav-line-height);
+    letter-spacing: var(--type-nav-tracking);
+    color: var(--color-ink);
+  }
+
+  .statement {
+    font-family: var(--type-body-family);
+    font-size: var(--type-body-size);
+    line-height: var(--type-body-line-height);
+    letter-spacing: var(--type-body-tracking);
+    color: var(--color-ink-muted);
+  }
+
+  /* GitHub and Privacy stay on one line, space.xl apart at both widths. */
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: var(--space-xl);
+  }
+
+  a {
+    display: inline-block;
+    min-block-size: var(--line-target-min);
+    min-inline-size: var(--line-target-min);
+    font-family: var(--type-link-family);
+    font-size: var(--type-link-size);
+    line-height: var(--type-link-line-height);
+    letter-spacing: var(--type-link-tracking);
+    color: var(--color-ink);
+    text-decoration-line: none;
+    text-decoration-color: var(--color-ink);
+  }
+
+  /* No underline at rest; hover and active draw it at 2px; visited is the same as rest
+     (visual-language.md#interaction-states). */
+  a:hover,
+  a:active {
+    text-decoration-line: underline;
+    text-decoration-thickness: var(--line-underline-width-hover);
+  }
+
+  a:focus-visible {
+    outline: var(--line-focus-width) solid var(--focus-ring);
+    outline-offset: var(--line-focus-offset);
+  }
+
+  /* 48rem is layout.breakpoint-wide: media queries can't read custom properties (tokens/tokens.json).
+     Wide: the links share the name's baseline, at the right end of the column. */
+  @media (min-width: 48rem) {
+    .row {
+      flex-direction: row;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+  }
+</style>
