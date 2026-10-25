@@ -161,8 +161,8 @@ The target shows only rest states. Decided, with the alternatives rejected:
 - **Target size:** at least 24 by 24 CSS pixels for every link and arrow (WCAG 2.2 AA, stricter than the 2.1 AA
   the repo requires); the `ProjectRow` link area is the whole row.
   `[DECIDED 2026-10-25]` (Brian, in session on S7M-VAL-018; was: no inline exception) Links inside a sentence of
-  prose are exempt, as in WCAG 2.2's own inline exception (2.5.8): their box is the line of text they sit in, with
-  no padding added. A standalone `TextLink` on its own line (the action link, a page's "Return to the home page
+  prose, including a list item's text, are exempt, as in WCAG 2.2's own inline exception (2.5.8): their size is
+  set by the line of text they sit in, with no padding added. A standalone `TextLink` on its own line (the action link, a page's "Return to the home page
   ->") is not exempt. Rejected: `padding-block` to reach 24px, which grows the focus outline over the lines above
   and below.
 

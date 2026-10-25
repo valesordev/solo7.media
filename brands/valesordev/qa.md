@@ -285,7 +285,7 @@ For `/privacy` only. The text is Brian's (`CLAUDE.md` §7); these items check th
     change and no change on visited?
     (`visual-language.md#interaction-states`, `visual-language.md#brandheader`, `visual-language.md#footer`)
 76. Is every link and arrow target at least 24 by 24 CSS px, and is the whole `ProjectRow` its link area?
-    Links inside a sentence of prose are exempt and carry no added padding `[DECIDED 2026-10-25]` (Brian, in
+    Links inside a sentence of prose, including a list item's text, are exempt and carry no added padding `[DECIDED 2026-10-25]` (Brian, in
     session on S7M-VAL-018); a standalone `TextLink` on its own line is not. (`visual-language.md#interaction-states`)
 77. Are there real headings (one H1) and landmarks (`header`, `main`, `footer`), and lists marked up as lists?
     (`visual-language.md#hero`, `visual-language.md#projectrow`, WCAG 1.3.1)
