@@ -285,7 +285,8 @@ For `/privacy` only. The text is Brian's (`CLAUDE.md` §7); these items check th
     change and no change on visited?
     (`visual-language.md#interaction-states`, `visual-language.md#brandheader`, `visual-language.md#footer`)
 76. Is every link and arrow target at least 24 by 24 CSS px, and is the whole `ProjectRow` its link area?
-    (`visual-language.md#interaction-states`)
+    Inline links in prose are exempt and carry no added padding. (`visual-language.md#interaction-states`)
+    `[DECIDED 2026-10-25]`
 77. Are there real headings (one H1) and landmarks (`header`, `main`, `footer`), and lists marked up as lists?
     (`visual-language.md#hero`, `visual-language.md#projectrow`, WCAG 1.3.1)
 78. Is `prefers-reduced-motion` respected (nothing animates either way)? (`visual-language.md#motion`)

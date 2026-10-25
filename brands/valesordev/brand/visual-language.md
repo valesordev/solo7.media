@@ -160,6 +160,9 @@ The target shows only rest states. Decided, with the alternatives rejected:
 - **Active:** the same as hover.
 - **Target size:** at least 24 by 24 CSS pixels for every link and arrow (WCAG 2.2 AA, stricter than the 2.1 AA
   the repo requires); the `ProjectRow` link area is the whole row.
+  `[DECIDED 2026-10-25]` Inline links in prose are exempt, as in WCAG 2.2's own inline exception (2.5.8): their
+  box is the line of text they sit in, with no padding added. Rejected: `padding-block` to reach 24px, which grows
+  the focus outline over the lines above and below.
 
 ## Components
 The canonical set for R1. Each states its anatomy, rules, and tokens-by-role. Usage in context, with correct and
