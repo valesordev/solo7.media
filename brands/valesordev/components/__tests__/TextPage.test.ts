@@ -29,6 +29,8 @@ const render = (slot = SAMPLE) =>
 const href = (attrs: string) => attrs.match(/\bhref="([^"]*)"/)?.[1];
 const source = readFileSync(join(import.meta.dirname, '..', 'TextPage.astro'), 'utf8');
 const style = source.match(/<style>([\s\S]*?)<\/style>/)![1];
+// Properties that space or offset a box; the spacing test lists every one of them.
+const SPACING = /^(margin|padding|gap|row-gap|column-gap|inset|top|right|bottom|left|translate|transform)(-|$)/;
 
 describe('TextPage', () => {
   it('is a <main> landmark at its root', async () => {
@@ -109,12 +111,19 @@ describe('TextPage', () => {
     expect(style).not.toMatch(/@media/);
   });
 
+  // The style tests read one scoped <style>, so there must be no other: no <style is:global>, no inline style=.
+  it('keeps every style in its one scoped <style> block', async () => {
+    expect(source.match(/<style\b[^>]*>/g)).toEqual(['<style>']);
+    expect(await render()).not.toMatch(/\sstyle=/);
+  });
+
   // Type, colour, and link states (visual-language.md#privacy-page-template, #interaction-states), read from the
-  // <style> as the spacing is: every type, colour, decoration, and outline declaration, exactly.
-  it('sets the decided type roles, colours, and prose-link states', () => {
+  // <style> as the spacing is. This and the spacing and measure tests together list every declaration, so a property
+  // none of them names (a background, a border, an opacity) fails here whatever its value.
+  it('sets the decided type roles, colours, and prose-link states, and nothing else', () => {
     const look = styleRules(source).flatMap((r) =>
       r.decls
-        .filter(([prop]) => /^(font|line-height|letter-spacing|color|text-decoration|outline|list-style)/.test(prop))
+        .filter(([prop]) => !SPACING.test(prop) && prop !== 'max-inline-size')
         .map(([prop, value]) => [r.selectors.join(', '), prop, value]),
     );
     const role = (selector: string, name: string, weight: boolean, color: string) => [
@@ -147,7 +156,7 @@ describe('TextPage', () => {
   it('spaces itself with the decided steps and nothing else', () => {
     const spacing = styleRules(source).flatMap((r) =>
       r.decls
-        .filter(([prop]) => /^(margin|padding|gap|row-gap|column-gap|inset|top|right|bottom|left|translate|transform)(-|$)/.test(prop))
+        .filter(([prop]) => SPACING.test(prop))
         .map(([prop, value]) => [r.selectors.join(', '), prop, value]),
     );
     expect(spacing).toEqual([
