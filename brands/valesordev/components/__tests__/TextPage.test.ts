@@ -111,10 +111,15 @@ describe('TextPage', () => {
     expect(style).not.toMatch(/@media/);
   });
 
-  // The style tests read one scoped <style>, so there must be no other: no <style is:global>, no inline style=.
+  // The style tests read one scoped <style>, so there must be no other way in: no <style is:global>, no inline
+  // style, no imported or linked stylesheet, no markup injected with set:html.
   it('keeps every style in its one scoped <style> block', async () => {
-    expect(source.match(/<style\b[^>]*>/g)).toEqual(['<style>']);
-    expect(await render()).not.toMatch(/\sstyle=/);
+    expect(source.match(/<style\b[^>]*>/gi)).toEqual(['<style>']);
+    expect(source).not.toMatch(/\sstyle\s*=/i);
+    expect(source).not.toMatch(/import\s[^;]*\.(css|scss|sass|less|styl)\b/);
+    expect(source).not.toMatch(/set:html|<link\b/i);
+    const html = await render();
+    expect(html).not.toMatch(/\sstyle\s*=|<style\b|<link\b/i);
   });
 
   // Type, colour, and link states (visual-language.md#privacy-page-template, #interaction-states), read from the
@@ -188,10 +193,14 @@ describe('TextPage', () => {
     ]);
   });
 
-  it('caps running text at layout.measure', () => {
-    const measure = styleRules(source).filter((r) =>
-      r.decls.some(([prop, value]) => prop === 'max-inline-size' && value === 'var(--layout-measure)'),
+  // Every max-inline-size, exactly: the column at layout.max-width, running text at layout.measure.
+  it('caps running text at layout.measure inside the content column', () => {
+    const widths = styleRules(source).flatMap((r) =>
+      r.decls.filter(([prop]) => prop === 'max-inline-size').map(([, value]) => [r.selectors.join(', '), value]),
     );
-    expect(measure.flatMap((r) => r.selectors)).toEqual(['.text :global(p)', '.text :global(li)']);
+    expect(widths).toEqual([
+      ['.column', 'var(--layout-max-width)'],
+      ['.text :global(p), .text :global(li)', 'var(--layout-measure)'],
+    ]);
   });
 });
