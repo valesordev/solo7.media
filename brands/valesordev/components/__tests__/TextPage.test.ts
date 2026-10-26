@@ -74,6 +74,10 @@ describe('TextPage', () => {
     expect(prose.map((a) => decode(a.inner))).toEqual(['Faro']);
     expect(decode(await render())).not.toContain('→');
     expect(decode(await render()).match(/->/g)).toHaveLength(1);
+    // Nor through CSS: no generated content anywhere in the component.
+    const rules = styleRules(source);
+    expect(rules.flatMap((r) => r.selectors).filter((s) => /::?(before|after|marker)\b/.test(s))).toEqual([]);
+    expect(rules.flatMap((r) => r.decls).filter(([prop]) => prop === 'content')).toEqual([]);
   });
 
   it('draws no hero, illustration, icon, table, or control of its own', async () => {
@@ -91,12 +95,50 @@ describe('TextPage', () => {
     for (const s of selectors) expect(s).not.toMatch(/^:global|^(html|body|main|header|footer|nav)\b/);
   });
 
+  // An allowlist, not a list of banned values: every declaration is built from var(--…) tokens and these keywords,
+  // so a named colour or an unlisted font name fails as surely as a hex value or a px length.
   it('uses tokens only: no colour, font, or length literal', () => {
-    const css = style.replace(/\/\*[\s\S]*?\*\//g, '');
-    expect(css).not.toMatch(/#[0-9a-f]{3,8}\b|rgba?\(|hsla?\(/i);
-    expect(css).not.toMatch(/\b\d*\.?\d+(px|rem|em|ch|vw|vh|%)\b/);
-    expect(css).not.toMatch(/Source|Georgia|serif|monospace|Menlo/i);
-    expect(css).not.toMatch(/@media/);
+    const keywords = new Set(['0', 'auto', 'normal', 'underline', 'solid', 'disc', 'outside']);
+    const literals = styleRules(source).flatMap((r) =>
+      r.decls
+        .map(([prop, value]) => [prop, value.replace(/var\(--[a-z0-9-]+\)/g, '').trim()])
+        .filter(([, rest]) => rest.split(/\s+/).some((word) => word !== '' && !keywords.has(word)))
+        .map(([prop]) => `${r.selectors.join(', ')} { ${prop} }`),
+    );
+    expect(literals).toEqual([]);
+    expect(style).not.toMatch(/@media/);
+  });
+
+  // Type, colour, and link states (visual-language.md#privacy-page-template, #interaction-states), read from the
+  // <style> as the spacing is: every type, colour, decoration, and outline declaration, exactly.
+  it('sets the decided type roles, colours, and prose-link states', () => {
+    const look = styleRules(source).flatMap((r) =>
+      r.decls
+        .filter(([prop]) => /^(font|line-height|letter-spacing|color|text-decoration|outline|list-style)/.test(prop))
+        .map(([prop, value]) => [r.selectors.join(', '), prop, value]),
+    );
+    const role = (selector: string, name: string, weight: boolean, color: string) => [
+      [selector, 'font-family', `var(--type-${name}-family)`],
+      [selector, 'font-size', `var(--type-${name}-size)`],
+      ...(weight ? [[selector, 'font-weight', 'normal']] : []),
+      [selector, 'line-height', `var(--type-${name}-line-height)`],
+      [selector, 'letter-spacing', `var(--type-${name}-tracking)`],
+      [selector, 'color', `var(--color-${color})`],
+    ];
+    expect(look).toEqual([
+      ...role('.title', 'display', true, 'ink'),
+      ...role('.subhead', 'body', false, 'ink-muted'),
+      ...role('.text', 'body', false, 'ink'),
+      ...role('.text :global(h2)', 'column-title', true, 'ink'),
+      ['.text :global(ul)', 'list-style', 'disc outside'],
+      ['.text :global(a), .text :global(a:visited)', 'color', 'var(--color-ink)'],
+      ['.text :global(a), .text :global(a:visited)', 'text-decoration-line', 'underline'],
+      ['.text :global(a), .text :global(a:visited)', 'text-decoration-thickness', 'var(--line-underline-width)'],
+      ['.text :global(a), .text :global(a:visited)', 'text-decoration-color', 'var(--color-ink)'],
+      ['.text :global(a:hover), .text :global(a:active)', 'text-decoration-thickness', 'var(--line-underline-width-hover)'],
+      ['.text :global(a:focus-visible)', 'outline', 'var(--line-focus-width) solid var(--focus-ring)'],
+      ['.text :global(a:focus-visible)', 'outline-offset', 'var(--line-focus-offset)'],
+    ]);
   });
 
   // Render output carries no styles, so the spacing (visual-language.md#privacy-page-template, Spacing) is read from
