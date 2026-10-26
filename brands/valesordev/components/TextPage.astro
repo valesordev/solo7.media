@@ -2,7 +2,8 @@
 // TextPage (visual-language.md#privacy-page-template, usage.md#privacy-page). The text page between BrandHeader and
 // Footer: one display H1, a one-line ink-muted mono subhead, the page text from the slot, then a secondary TextLink
 // home. It has no SectionRule of its own: BrandHeader's rule opens its one band. The root is <main>, so the page
-// supplies BrandHeader before it and Footer after it.
+// supplies BrandHeader before it and Footer after it. The slot takes plain <h2>, <p>, <ul>, and <a>: its prose-link
+// rule outranks TextLink's colours, so a TextLink doesn't go in the slot.
 import { HOME_HREF } from './links';
 import TextLink from './TextLink.astro';
 

@@ -142,12 +142,12 @@ describe('TextPage', () => {
   });
 
   // Render output carries no styles, so the spacing (visual-language.md#privacy-page-template, Spacing) is read from
-  // the component's <style>, every rule included. Every margin, padding, and gap in it must be one of these, so a
-  // stray or overriding declaration fails, whatever its selector or longhand.
+  // the component's <style>, every rule included. Every margin, padding, gap, and offset in it must be one of these,
+  // so a stray or overriding declaration fails, whatever its selector or longhand.
   it('spaces itself with the decided steps and nothing else', () => {
     const spacing = styleRules(source).flatMap((r) =>
       r.decls
-        .filter(([prop]) => /^(margin|padding|gap|row-gap|column-gap)(-|$)/.test(prop))
+        .filter(([prop]) => /^(margin|padding|gap|row-gap|column-gap|inset|top|right|bottom|left|translate|transform)(-|$)/.test(prop))
         .map(([prop, value]) => [r.selectors.join(', '), prop, value]),
     );
     expect(spacing).toEqual([
