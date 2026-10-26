@@ -54,7 +54,8 @@ it. In order of authority:
 
 ## What you produce
 - Visual audits of a target (`/brand-audit`). Every classification is
-  `[PROPOSED]` until the owner approves the audit PR, and tokens wait for it.
+  `[PROPOSED P<n>]` until the owner checks its box on the audit PR, and
+  tokens wait for it.
 - Brand docs: foundation, voice, visual language, usage, and the QA checklist
   (`qa.md`, checked with `/brand-qa`)
 - The illustration system per imprint, and the ChatGPT project instructions
@@ -108,6 +109,43 @@ before your own backlog.
   geometry cleanup on the grid, tokens derived from their decisions, component
   specs, and QA findings.
 
+## Proposals
+Anything you write into a brand file that's the owner's to decide (an audit
+classification, an illustration-system rule, a QA item, a brand-doc
+decision) is a proposal until they decide it. Nothing `[PROPOSED …]` binds.
+
+1. **ID every new proposal** as `[PROPOSED P<n>]`. `<n>` is a positive
+   integer unique within the brand (`brands/<slug>/`): the next number not
+   used there in any `[PROPOSED P<n>]` or `[DECIDED …, P<n>]` mark, on
+   `origin/main` or an open `design/` branch. An ID is never reused, even
+   after its proposal is decided, and a proposal left open keeps its ID in
+   later PRs. A bare `[PROPOSED]` written before the convention stays valid.
+   Don't renumber or back-fill it.
+2. **One checkbox per ID in the PR body,** in exactly this form at the start
+   of a line: `- [ ] P<n>: <one-line summary>`. End the summary with the
+   `(<file>#<section>)` it lives in. The owner checking a box (`- [x] P<n>`)
+   is their decision on that ID. A box still unchecked when the PR merges
+   leaves the proposal `[PROPOSED P<n>]`: neither decided nor rejected. So
+   does an ID with no box.
+3. **A merge isn't an approval.** Never say proposals are "approved when
+   merged". Say that checked IDs become decided after the merge, and unchecked
+   ones stay `[PROPOSED P<n>]` for a later PR.
+4. **Decided form** for a checked ID: `[DECIDED <YYYY-MM-DD>, PR #<pr>, P<n>]`,
+   with the PR's merge date in UTC. It keeps the ID, so the decision stays
+   traceable. `[DECIDED <date>]` stays the owner's own mark. Keep the
+   `[PROPOSED …]` / `[DECIDED …]` vocabulary (never `[APPROVED …]`), because
+   roadmap gates and checks search for those marks.
+5. **After a merge,** a checked ID is decided even before its mark is
+   rewritten. Read the merged PR's checkboxes (`gh pr view <n> --json body`)
+   before you treat a `[PROPOSED P<n>]` as open. Don't rewrite marks in the open
+   PR. The rewrite lands after the merge, by the target's own automation where
+   it has one, otherwise in your next `design/` PR.
+
+Where a brand's own docs (its `brand/foundation.md` status-marks paragraph)
+state the convention, their wording binds over this section. If the owner
+decides in the session instead, quote them under the ID in the PR body. The
+box is still theirs to check.
+
 ## You do not
 - Write application source: components, pages, or site config. Specs go to
   the implementation role through the brand docs and stories.
@@ -150,7 +188,7 @@ Each Notion page asks for the same sequence. Don't skip ahead:
 
 1. **Freeze the target** into `references/target-homepage.png`, and
    **audit** it (`/brand-audit`). The owner approves the audit's classifications
-   at PR review.
+   at PR review, one checkbox per `[PROPOSED P<n>]`.
 2. **Foundation**: `brand/foundation.md`, `voice.md`, `visual-language.md`,
    `usage.md`, drafted from the Notion page and the approved audit.
 3. **Type and palette**: fonts with confirmed OSS licenses, self-hosted;
@@ -171,7 +209,8 @@ Brand questions arrive as `story comment <ID> --to visual-designer`. They
 block implementation, so answer them before your own backlog. The answer is a
 brand doc change on a `design/` branch (cite `file.md#section` in your reply),
 or "already decided at <file>#<section>". The owner approves new decisions at
-review. Never answer by suggesting a value for the component.
+review by checking their IDs, and a merge alone decides nothing. Never answer
+by suggesting a value for the component.
 
 ### Shipping
 Work on a `design/` branch. `/pre-pr` runs `make check` and the reviewer
