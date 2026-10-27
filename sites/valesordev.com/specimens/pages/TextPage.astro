@@ -1,0 +1,40 @@
+---
+// TextPage specimen (S7M-VAL-018): the text page in its frame, BrandHeader before it and Footer after it, as
+// /privacy/ (S7M-VAL-012) will compose it. TextPage is the <main>, so this page uses the base layout directly rather
+// than Specimen, whose own <main> would nest. The text is placeholder, not the page's: the /privacy text is Brian's
+// (CLAUDE.md §7). It has long lines for the measure, a list after a paragraph and one after a list, and a prose link.
+import BrandHeader from '@solo7/brand-valesordev/components/BrandHeader.astro';
+import Footer from '@solo7/brand-valesordev/components/Footer.astro';
+import TextPage from '@solo7/brand-valesordev/components/TextPage.astro';
+import Base from '../../src/layouts/Base.astro';
+---
+
+<Base title="TextPage specimen · Valesor Development">
+  <BrandHeader />
+  <TextPage title="Specimen" subhead="Placeholder text set in the text page's frame.">
+    <h2>First Section</h2>
+    <p>
+      This paragraph is placeholder text, long enough to run past one line at the wide layout so the measure shows: no
+      line of running text should be longer than seventy-two characters.
+    </p>
+    <p>
+      A second paragraph follows the first, with a <a href="/">prose link</a> in it, which is underlined and has no arrow.
+    </p>
+    <ul>
+      <li>A short list item.</li>
+      <li>
+        A longer list item that wraps onto a second line at the narrow layout, so the hanging bullet and the item's
+        indent show.
+      </li>
+    </ul>
+    <h2>Second Section</h2>
+    <ul>
+      <li>A list right after a section title.</li>
+    </ul>
+    <ul>
+      <li>A list right after another list.</li>
+    </ul>
+    <p>A closing paragraph after a list.</p>
+  </TextPage>
+  <Footer />
+</Base>
