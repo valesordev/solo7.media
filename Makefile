@@ -15,6 +15,7 @@ help: ## List targets
 TEST_BRANDS := $(foreach b,$(BRANDS),$(if $(wildcard brands/$(b)/components/*.astro),$(b)))
 
 check: check-layout check-proposal-ids test-scripts $(addprefix test-brand-,$(TEST_BRANDS)) $(if $(wildcard sites/valesordev.com),build-site-valesordev) ## PR gate: layout checks, proposal IDs, script tests, brand component tests, site builds
+	@echo "deliberate failure: S7M-INF-006 AC2 red run (throwaway branch, never merge)"; exit 1
 
 check-layout: ## Every brand has its folder and README; package.json parses
 	@for b in $(BRANDS); do test -f brands/$$b/README.md || { echo "missing brands/$$b/README.md"; exit 1; }; done
